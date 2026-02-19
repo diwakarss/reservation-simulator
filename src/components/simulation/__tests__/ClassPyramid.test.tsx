@@ -87,7 +87,8 @@ describe('ClassPyramid', () => {
   });
 
   it('renders population percentages', () => {
-    render(<ClassPyramid classes={mockClasses} animate={false} />);
+    // Disable legend to avoid duplicate percentage elements
+    render(<ClassPyramid classes={mockClasses} animate={false} showLegend={false} />);
 
     expect(screen.getByText('10%')).toBeInTheDocument();
     expect(screen.getByText('20%')).toBeInTheDocument();
