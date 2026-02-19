@@ -1,33 +1,36 @@
 import "@testing-library/jest-dom";
 
-/**
- * localStorage polyfill for jsdom
- * jsdom doesn't provide a full localStorage implementation
- */
-const localStorageMock = (() => {
-  let store: Record<string, string> = {};
-  return {
-    getItem: (key: string): string | null => store[key] ?? null,
-    setItem: (key: string, value: string): void => {
-      store[key] = value.toString();
+// Vitest can start with a partial localStorage implementation in some environments.
+// Always provide a complete localStorage mock to avoid issues.
+if (typeof window !== 'undefined') {
+  const store = new Map<string, string>();
+
+  const localStorageMock = {
+    getItem: (key: string) => store.get(key) ?? null,
+    setItem: (key: string, value: string) => {
+      store.set(key, value);
     },
-    removeItem: (key: string): void => {
-      delete store[key];
+    removeItem: (key: string) => {
+      store.delete(key);
     },
-    clear: (): void => {
-      store = {};
+    clear: () => {
+      store.clear();
     },
-    get length(): number {
-      return Object.keys(store).length;
+    get length() {
+      return store.size;
     },
-    key: (index: number): string | null => {
-      const keys = Object.keys(store);
+    key: (index: number) => {
+      const keys = Array.from(store.keys());
       return keys[index] ?? null;
     },
   };
-})();
 
-Object.defineProperty(globalThis, 'localStorage', {
-  value: localStorageMock,
-  writable: true,
-});
+  Object.defineProperty(window, 'localStorage', {
+    configurable: true,
+    writable: true,
+    value: localStorageMock,
+  });
+
+  // Also ensure global localStorage is available
+  (globalThis as typeof globalThis & { localStorage: typeof localStorageMock }).localStorage = localStorageMock;
+}

@@ -89,15 +89,11 @@ describe('ClassPyramid', () => {
   it('renders population percentages', () => {
     render(<ClassPyramid classes={mockClasses} animate={false} />);
 
-    // Use getAllByText since legend shows duplicate percentages
-    const tens = screen.getAllByText('10%');
-    expect(tens.length).toBeGreaterThanOrEqual(1);
-
-    const twenties = screen.getAllByText('20%');
-    expect(twenties.length).toBeGreaterThanOrEqual(1);
-
-    const thirties = screen.getAllByText('30%');
-    expect(thirties.length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText('10%')).toBeInTheDocument();
+    expect(screen.getByText('20%')).toBeInTheDocument();
+    expect(screen.getByText('30%')).toBeInTheDocument();
+    expect(screen.getByText('25%')).toBeInTheDocument();
+    expect(screen.getByText('15%')).toBeInTheDocument();
   });
 
   it('renders legend when showLegend is true', () => {
@@ -123,19 +119,23 @@ describe('ClassPyramid', () => {
     ];
 
     const { container } = render(
-      <ClassPyramid classes={shuffledClasses} animate={false} showLegend={false} />
+      <ClassPyramid classes={shuffledClasses} animate={false} />
     );
 
-    // Get all class name elements from the pyramid (not legend)
-    const classRows = container.querySelectorAll('.flex.items-center.gap-4');
-    const classNames = Array.from(classRows).map(
-      (row) => row.querySelector('.font-rajdhani.font-bold')?.textContent
-    );
+    // Get all class name elements
+    const classNames = container.querySelectorAll('.font-rajdhani.font-bold');
+    const nameTexts = Array.from(classNames)
+      .filter((el) => el.textContent?.includes('Upper') ||
+                       el.textContent?.includes('Noble') ||
+                       el.textContent?.includes('Middle') ||
+                       el.textContent?.includes('Common') ||
+                       el.textContent?.includes('Lower'))
+      .map((el) => el.textContent);
 
     // First class should be Upper (index 0)
-    expect(classNames[0]).toContain('Upper');
+    expect(nameTexts[0]).toContain('Upper');
     // Last class should be Lower (index 4)
-    expect(classNames[4]).toContain('Lower');
+    expect(nameTexts[4]).toContain('Lower');
   });
 
   it('applies custom className', () => {

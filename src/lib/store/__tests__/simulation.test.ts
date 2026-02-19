@@ -61,8 +61,8 @@ function getTestInitialState() {
 
 // Reset store before each test
 beforeEach(() => {
-  // Clear localStorage
-  if (typeof localStorage !== 'undefined') {
+  // Clear localStorage (defensive check for function existence)
+  if (typeof localStorage !== 'undefined' && typeof localStorage.clear === 'function') {
     localStorage.clear();
   }
 

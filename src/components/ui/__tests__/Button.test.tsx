@@ -1,5 +1,6 @@
 /**
  * Button Component Tests
+ * Updated to match the current implementation
  */
 
 import { describe, it, expect, vi } from 'vitest';
@@ -26,7 +27,7 @@ describe('Button', () => {
   });
 
   it('shows loading state', () => {
-    render(<Button loading>Loading</Button>);
+    render(<Button isLoading>Loading</Button>);
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
     // Should contain the loading spinner SVG
@@ -51,38 +52,71 @@ describe('Button', () => {
     expect(screen.getByTestId('right-icon')).toBeInTheDocument();
   });
 
+  it('hides icons when loading', () => {
+    render(
+      <Button
+        isLoading
+        leftIcon={<span data-testid="left-icon">*</span>}
+        rightIcon={<span data-testid="right-icon">*</span>}
+      >
+        Loading
+      </Button>
+    );
+    expect(screen.queryByTestId('left-icon')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('right-icon')).not.toBeInTheDocument();
+  });
+
   it('applies primary variant styles by default', () => {
     render(<Button>Primary</Button>);
     const button = screen.getByRole('button');
-    expect(button.className).toContain('bg-gradient-to-br');
+    expect(button.className).toContain('bg-accent-gold');
   });
 
   it('applies secondary variant styles', () => {
     render(<Button variant="secondary">Secondary</Button>);
     const button = screen.getByRole('button');
-    expect(button.className).toContain('border-accent-gold');
+    expect(button.className).toContain('bg-class-noble');
   });
 
   it('applies ghost variant styles', () => {
     render(<Button variant="ghost">Ghost</Button>);
     const button = screen.getByRole('button');
-    expect(button.className).toContain('bg-white/5');
+    expect(button.className).toContain('hover:bg-white/5');
   });
 
-  it('applies full width when fullWidth is true', () => {
-    render(<Button fullWidth>Full Width</Button>);
+  it('applies outline variant styles', () => {
+    render(<Button variant="outline">Outline</Button>);
     const button = screen.getByRole('button');
-    expect(button.className).toContain('w-full');
+    expect(button.className).toContain('border-accent-gold');
+    expect(button.className).toContain('bg-transparent');
+  });
+
+  it('applies danger variant styles', () => {
+    render(<Button variant="danger">Danger</Button>);
+    const button = screen.getByRole('button');
+    expect(button.className).toContain('bg-highlight-red');
   });
 
   it('applies different sizes', () => {
     const { rerender } = render(<Button size="sm">Small</Button>);
-    expect(screen.getByRole('button').className).toContain('h-9');
+    expect(screen.getByRole('button').className).toContain('text-xs');
 
     rerender(<Button size="md">Medium</Button>);
-    expect(screen.getByRole('button').className).toContain('h-11');
+    expect(screen.getByRole('button').className).toContain('text-sm');
 
     rerender(<Button size="lg">Large</Button>);
-    expect(screen.getByRole('button').className).toContain('h-13');
+    expect(screen.getByRole('button').className).toContain('text-base');
+  });
+
+  it('merges custom className', () => {
+    render(<Button className="custom-class">Custom</Button>);
+    const button = screen.getByRole('button');
+    expect(button.className).toContain('custom-class');
+  });
+
+  it('forwards ref to button element', () => {
+    const ref = { current: null as HTMLButtonElement | null };
+    render(<Button ref={ref}>Ref Test</Button>);
+    expect(ref.current).toBeInstanceOf(HTMLButtonElement);
   });
 });
