@@ -17,6 +17,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NarrativeScreen, NarrativeLine } from './NarrativeScreen';
 import { CosmicBackground } from '@/components/ui';
+import { useReducedMotion } from '@/lib/hooks';
 
 interface GalaxyIntroProps {
   /** Galaxy name to display */
@@ -42,6 +43,10 @@ export function GalaxyIntro({
 }: GalaxyIntroProps) {
   const [phase, setPhase] = useState<IntroPhase>(0);
   const [isComplete, setIsComplete] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+
+  // Shorter delays for reduced motion preference
+  const effectiveDelay = prefersReducedMotion ? Math.min(autoAdvanceDelay, 800) : autoAdvanceDelay;
 
   // Auto-advance through phases
   useEffect(() => {
@@ -54,10 +59,10 @@ export function GalaxyIntro({
         setIsComplete(true);
         onComplete();
       }
-    }, phase === 0 ? 1500 : autoAdvanceDelay);
+    }, phase === 0 ? (prefersReducedMotion ? 500 : 1500) : effectiveDelay);
 
     return () => clearTimeout(timer);
-  }, [phase, isComplete, autoAdvanceDelay, onComplete]);
+  }, [phase, isComplete, effectiveDelay, onComplete, prefersReducedMotion]);
 
   const handleSkip = useCallback(() => {
     setIsComplete(true);
@@ -69,7 +74,7 @@ export function GalaxyIntro({
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-deep-purple">
-      <CosmicBackground starCount={150} showNebula={true} />
+      <CosmicBackground />
 
       <NarrativeScreen onSkip={handleSkip} showSkip={!isComplete} skipText="Skip">
         <AnimatePresence mode="wait">

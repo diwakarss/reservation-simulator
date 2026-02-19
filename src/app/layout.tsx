@@ -54,7 +54,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${orbitron.variable} ${rajdhani.variable}`}>
-      <body className="antialiased min-h-screen">{children}</body>
+      <body className="antialiased min-h-screen">
+        {/* Skip to main content link for keyboard users */}
+        <a
+          href="#main-content"
+          className="skip-to-content font-rajdhani"
+        >
+          Skip to main content
+        </a>
+        <div id="main-content">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }

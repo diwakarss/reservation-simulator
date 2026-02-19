@@ -18,6 +18,7 @@ import {
 import { CLASS_COLORS, ClassTier, CLASS_TIER_ORDER } from '@/lib/simulation/types';
 import type { ChartDataPoint } from '@/lib/simulation/types';
 import { ChartLegend } from './ChartLegend';
+import { ChartDataTable } from './ChartDataTable';
 
 interface EmploymentChartProps {
   /** Data points with year and class values */
@@ -33,11 +34,20 @@ export function EmploymentChart({
   classNames,
   height = 300,
 }: EmploymentChartProps) {
+  const chartTitle = 'Employment Rate Over Time';
+
   return (
-    <div className="w-full">
+    <div className="w-full" role="figure" aria-label={chartTitle}>
       <h3 className="mb-4 font-orbitron text-sm uppercase tracking-wide text-white">
-        Employment Rate Over Time
+        {chartTitle}
       </h3>
+      <ChartDataTable
+        title={chartTitle}
+        data={data}
+        classNames={classNames}
+        formatValue={(v) => v.toFixed(1)}
+        unit="%"
+      />
       <ResponsiveContainer width="100%" height={height}>
         <LineChart
           data={data}

@@ -63,6 +63,10 @@ export function HowItWorksOverlay({ isOpen, onClose }: HowItWorksOverlayProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
+  // Focusable elements selector
+  const FOCUSABLE_SELECTOR =
+    'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
   // Focus trap and escape key handling
   useEffect(() => {
     if (!isOpen) return;
@@ -76,6 +80,28 @@ export function HowItWorksOverlay({ isOpen, onClose }: HowItWorksOverlayProps) {
       }
     };
 
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab' || !overlayRef.current) return;
+
+      const focusableElements = Array.from(
+        overlayRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
+      );
+
+      if (focusableElements.length === 0) return;
+
+      const first = focusableElements[0];
+      const last = focusableElements[focusableElements.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
     const handleClickOutside = (e: MouseEvent) => {
       if (overlayRef.current && !overlayRef.current.contains(e.target as Node)) {
         onClose();
@@ -83,6 +109,7 @@ export function HowItWorksOverlay({ isOpen, onClose }: HowItWorksOverlayProps) {
     };
 
     document.addEventListener('keydown', handleEscape);
+    document.addEventListener('keydown', handleTab);
     document.addEventListener('mousedown', handleClickOutside);
 
     // Prevent body scroll when modal is open
@@ -90,6 +117,7 @@ export function HowItWorksOverlay({ isOpen, onClose }: HowItWorksOverlayProps) {
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener('keydown', handleTab);
       document.removeEventListener('mousedown', handleClickOutside);
       document.body.style.overflow = '';
     };
@@ -132,12 +160,14 @@ export function HowItWorksOverlay({ isOpen, onClose }: HowItWorksOverlayProps) {
                 ref={closeButtonRef}
                 onClick={onClose}
                 className="
-                  p-2 text-muted-text hover:text-white
+                  p-2 min-h-[44px] min-w-[44px]
+                  flex items-center justify-center
+                  text-muted-text hover:text-white active:text-white
                   transition-colors duration-200
-                  rounded-lg hover:bg-white/10
-                  focus:outline-none focus:ring-2 focus:ring-accent-gold
+                  rounded-lg hover:bg-white/10 active:bg-white/10
+                  focus:outline-none focus:ring-2 focus:ring-accent-gold focus:ring-offset-2 focus:ring-offset-cosmic-blue
                 "
-                aria-label="Close"
+                aria-label="Close dialog"
               >
                 <svg
                   className="w-6 h-6"

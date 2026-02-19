@@ -62,6 +62,19 @@
 }
 
 @layer utilities {
+  /* Screen reader only - visually hidden but accessible */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
   /* Cosmic glow effects */
   .text-glow-gold {
     text-shadow: 0 0 10px rgba(226, 183, 20, 0.8), 0 0 30px rgba(226, 183, 20, 0.4);
@@ -92,6 +105,28 @@
     pointer-events: none;
     z-index: 0;
   }
+
+  /* Focus visible utility - high contrast focus ring */
+  .focus-visible-ring:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #e2b714, 0 0 0 4px rgba(226, 183, 20, 0.3);
+  }
+}
+
+/* Skip to content link for keyboard users */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #e2b714;
+  color: #1a1a2e;
+  padding: 8px 16px;
+  z-index: 100;
+  font-weight: bold;
+}
+
+.skip-to-content:focus {
+  top: 0;
 }
 
 /* Reduced motion support */

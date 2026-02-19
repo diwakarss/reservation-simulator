@@ -18,6 +18,7 @@ import {
 import { CLASS_COLORS, ClassTier, CLASS_TIER_ORDER } from '@/lib/simulation/types';
 import type { ChartDataPoint } from '@/lib/simulation/types';
 import { ChartLegend } from './ChartLegend';
+import { ChartDataTable } from './ChartDataTable';
 
 interface EducationChartProps {
   /** Data points with year and class values */
@@ -33,11 +34,21 @@ export function EducationChart({
   classNames,
   height = 300,
 }: EducationChartProps) {
+  const chartTitle = 'Education Access Over Time';
+
   return (
-    <div className="w-full">
+    <div className="w-full" role="figure" aria-label={chartTitle}>
       <h3 className="mb-4 font-orbitron text-sm uppercase tracking-wide text-white">
-        Education Access Over Time
+        {chartTitle}
       </h3>
+      {/* Hidden data table for screen readers */}
+      <ChartDataTable
+        title={chartTitle}
+        data={data}
+        classNames={classNames}
+        formatValue={(v) => v.toFixed(1)}
+        unit="%"
+      />
       <ResponsiveContainer width="100%" height={height}>
         <LineChart
           data={data}
