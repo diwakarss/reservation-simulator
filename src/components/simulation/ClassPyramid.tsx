@@ -89,9 +89,9 @@ export function ClassPyramid({
   );
 
   return (
-    <div className={`flex gap-8 items-start flex-wrap justify-center ${className}`}>
+    <div className={`flex flex-col md:flex-row gap-4 md:gap-8 items-center md:items-start justify-center ${className}`}>
       {/* Pyramid */}
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 w-full md:w-auto max-w-sm">
         {sortedClasses.map((cls, index) => {
           const styles = getTierStyles(cls.tier);
 
@@ -151,12 +151,12 @@ export function ClassPyramid({
       {/* Legend */}
       {showLegend && (
         <motion.div
-          initial={animate ? { opacity: 0, x: 20 } : undefined}
-          animate={animate ? { opacity: 1, x: 0 } : undefined}
+          initial={animate ? { opacity: 0, y: 20 } : undefined}
+          animate={animate ? { opacity: 1, y: 0 } : undefined}
           transition={{ delay: 0.8, duration: 0.4 }}
           className="
             bg-deep-purple/80 border border-white/10
-            rounded-xl p-4 min-w-[200px]
+            rounded-xl p-3 sm:p-4 w-full md:w-auto md:min-w-[200px] max-w-sm
           "
         >
           <h4 className="text-xs font-bold text-muted-text uppercase tracking-widest mb-4">

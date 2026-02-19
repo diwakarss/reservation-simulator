@@ -82,9 +82,10 @@ export function PolicyLayout({
             <button
               onClick={onHowItWorks}
               className="
-                p-2 rounded-full
-                text-muted-text hover:text-accent-gold
-                hover:bg-accent-gold/10
+                p-2 rounded-full min-h-[44px] min-w-[44px]
+                flex items-center justify-center
+                text-muted-text hover:text-accent-gold active:text-accent-gold
+                hover:bg-accent-gold/10 active:bg-accent-gold/10
                 transition-colors duration-200
               "
               aria-label="How it works"
@@ -109,9 +110,10 @@ export function PolicyLayout({
             <button
               onClick={onCharts}
               className="
-                p-2 rounded-full
-                text-muted-text hover:text-accent-gold
-                hover:bg-accent-gold/10
+                p-2 rounded-full min-h-[44px] min-w-[44px]
+                flex items-center justify-center
+                text-muted-text hover:text-accent-gold active:text-accent-gold
+                hover:bg-accent-gold/10 active:bg-accent-gold/10
                 transition-colors duration-200
               "
               aria-label="View charts"
@@ -136,9 +138,10 @@ export function PolicyLayout({
             <button
               onClick={settingsHandler}
               className="
-                p-2 rounded-full
-                text-muted-text hover:text-accent-gold
-                hover:bg-accent-gold/10
+                p-2 rounded-full min-h-[44px] min-w-[44px]
+                flex items-center justify-center
+                text-muted-text hover:text-accent-gold active:text-accent-gold
+                hover:bg-accent-gold/10 active:bg-accent-gold/10
                 transition-colors duration-200
               "
               aria-label="Settings"

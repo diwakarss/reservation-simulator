@@ -100,7 +100,7 @@ export function ReservationSlider({
           </span>
         </div>
 
-        <div className="relative">
+        <div className="relative py-2">
           <input
             type="range"
             min={0}
@@ -109,7 +109,7 @@ export function ReservationSlider({
             value={value}
             onChange={handleChange}
             disabled={disabled}
-            className="w-full h-2 rounded-full appearance-none cursor-pointer disabled:cursor-not-allowed"
+            className="w-full h-3 sm:h-2 rounded-full appearance-none cursor-pointer disabled:cursor-not-allowed touch-pan-x"
             style={{
               background: `linear-gradient(to right, ${color} 0%, ${color} ${value * 2}%, rgba(255,255,255,0.1) ${value * 2}%, rgba(255,255,255,0.1) 100%)`,
             }}

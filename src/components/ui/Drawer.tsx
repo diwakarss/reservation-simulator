@@ -91,7 +91,7 @@ export function Drawer({ isOpen, onClose, title, children }: DrawerProps) {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="absolute right-0 top-0 h-full w-full max-w-md overflow-y-auto border-l border-white/10 bg-cosmic-blue p-5 shadow-2xl"
+            className="absolute right-0 top-0 h-full w-full sm:max-w-md overflow-y-auto border-l border-white/10 bg-cosmic-blue p-4 sm:p-5 shadow-2xl"
           >
             <div className="mb-6 flex items-center justify-between">
               <h2 id="settings-drawer-title" className="font-orbitron text-xl text-white">
@@ -100,7 +100,7 @@ export function Drawer({ isOpen, onClose, title, children }: DrawerProps) {
               <button
                 ref={closeButtonRef}
                 onClick={onClose}
-                className="rounded-md p-2 text-muted-text transition-colors hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-accent-gold"
+                className="rounded-md p-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-muted-text transition-colors hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-accent-gold"
                 aria-label="Close"
               >
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

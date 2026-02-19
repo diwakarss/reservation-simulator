@@ -178,7 +178,7 @@ export function ChartsPanel({ onClose }: ChartsPanelProps) {
       <header className="flex items-center justify-between border-b border-white/10 bg-cosmic-blue/50 px-4 py-4 backdrop-blur-sm sm:px-6">
         <button
           onClick={onClose}
-          className="flex items-center gap-2 text-muted-text transition-colors hover:text-white"
+          className="flex items-center gap-2 text-muted-text transition-colors hover:text-white active:text-white min-h-[44px] px-2"
         >
           <svg
             className="h-5 w-5"
@@ -203,18 +203,19 @@ export function ChartsPanel({ onClose }: ChartsPanelProps) {
 
       {/* Tab Navigation (Mobile) */}
       <div className="overflow-x-auto border-b border-white/10 bg-cosmic-blue/30 md:hidden">
-        <div className="flex gap-1 px-4 py-2">
+        <div className="flex gap-1 px-3 py-2">
           {CHART_TABS.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`
-                whitespace-nowrap rounded-full px-4 py-2 font-rajdhani text-sm
+                whitespace-nowrap rounded-full px-3 py-2.5 font-rajdhani text-sm
+                min-h-[44px] min-w-[44px]
                 transition-colors duration-200
                 ${
                   activeTab === tab.id
                     ? 'bg-accent-gold text-deep-purple'
-                    : 'bg-white/5 text-muted-text hover:bg-white/10 hover:text-white'
+                    : 'bg-white/5 text-muted-text hover:bg-white/10 hover:text-white active:bg-white/15'
                 }
               `}
             >
