@@ -14,7 +14,6 @@ import type {
   SimulationState,
   SimulationActions,
   SimulationStore,
-  SimulationPhase,
   ClassTier,
   ClassPolicy,
   ReservationPolicy,
@@ -22,8 +21,8 @@ import type {
   NarrativeHighlight,
 } from '../simulation/types';
 import {
+  SimulationPhase,
   createDefaultReservationPolicy,
-  createDefaultClassPolicy,
 } from '../simulation/types';
 import { generateWorld } from '../content/worldGenerator';
 import {
@@ -41,29 +40,83 @@ import {
 // Initial State
 // =============================================================================
 
+const DEFAULT_TIME_JUMP_SIZE = 20;
+const STORAGE_KEY = 'reservation-simulator-state';
+
+const UI_CLOSED_STATE = {
+  settingsOpen: false,
+  chartsOpen: false,
+} as const;
+
+/**
+ * Returns the simulation phase mapped from year boundaries.
+ */
+function getPhaseForYear(year: number): SimulationPhase {
+  if (year >= 100) return SimulationPhase.END_SUMMARY;
+  if (year >= 80) return SimulationPhase.POLICY_REMOVAL;
+  if (year >= 60) return SimulationPhase.POLICY_EWS;
+  if (year >= 40) return SimulationPhase.POLICY_CREAMY_LAYER;
+  if (year >= 20) return SimulationPhase.POLICY_MIDDLE;
+  if (year > 0) return SimulationPhase.POLICY_BOTTOM_2;
+  return SimulationPhase.INTRO;
+}
+
+/**
+ * Build a baseline simulation state for a generated world.
+ */
+function createWorldState(world: NonNullable<SimulationState['world']>, policy: ReservationPolicy): SimulationState {
+  return {
+    phase: SimulationPhase.INTRO,
+    world,
+    currentYear: 0,
+    policy,
+    history: [],
+    redoStack: [],
+    highlight: null,
+    timeJumpSize: DEFAULT_TIME_JUMP_SIZE,
+    ...UI_CLOSED_STATE,
+  };
+}
+
+/**
+ * Returns an updated reservation policy by merging a partial class policy.
+ */
+function mergeClassPolicy(
+  basePolicy: ReservationPolicy,
+  tier: ClassTier,
+  policyUpdate: Partial<ClassPolicy>
+): ReservationPolicy {
+  return {
+    classes: {
+      ...basePolicy.classes,
+      [tier]: {
+        ...basePolicy.classes[tier],
+        ...policyUpdate,
+      },
+    },
+  };
+}
+
 /**
  * Get the initial empty state before any world is generated.
  */
 function getInitialState(): SimulationState {
   return {
-    phase: 'INTRO' as SimulationPhase,
+    phase: SimulationPhase.INTRO,
     world: null,
     currentYear: 0,
     policy: createDefaultReservationPolicy(),
     history: [],
     redoStack: [],
     highlight: null,
-    timeJumpSize: 20,
-    settingsOpen: false,
-    chartsOpen: false,
+    timeJumpSize: DEFAULT_TIME_JUMP_SIZE,
+    ...UI_CLOSED_STATE,
   };
 }
 
 // =============================================================================
 // Persist Configuration
 // =============================================================================
-
-const STORAGE_KEY = 'reservation-simulator-state';
 
 /**
  * Properties to persist to localStorage.
@@ -109,16 +162,8 @@ export const useSimulationStore = create<SimulationStore>()(
 
         // Capture initial snapshot at year 0
         const initialSnapshot = captureSnapshot({
-           phase: 'WORLD_GEN' as SimulationPhase,
-           world,
-           currentYear: 0,
-           policy,
-           history: [],
-           redoStack: [],
-           highlight: null,
-           timeJumpSize: 20,
-           settingsOpen: false,
-           chartsOpen: false
+          ...createWorldState(world, policy),
+          phase: SimulationPhase.WORLD_GEN,
         });
 
         set({
@@ -128,7 +173,7 @@ export const useSimulationStore = create<SimulationStore>()(
           history: [initialSnapshot],
           redoStack: [],
           highlight: null,
-          phase: 'WORLD_GEN' as SimulationPhase,
+          phase: SimulationPhase.WORLD_GEN,
         });
       },
 
@@ -161,16 +206,7 @@ export const useSimulationStore = create<SimulationStore>()(
        */
       setClassPolicy: (tier: ClassTier, policyUpdate: Partial<ClassPolicy>) => {
         const state = get();
-        const newPolicy: ReservationPolicy = {
-          classes: {
-            ...state.policy.classes,
-            [tier]: {
-              ...state.policy.classes[tier],
-              ...policyUpdate,
-            },
-          },
-        };
-        set({ policy: newPolicy });
+        set({ policy: mergeClassPolicy(state.policy, tier, policyUpdate) });
       },
 
       /**
@@ -178,17 +214,12 @@ export const useSimulationStore = create<SimulationStore>()(
        */
       setCreamyLayer: (tier: ClassTier, enabled: boolean, threshold: number) => {
         const state = get();
-        const newPolicy: ReservationPolicy = {
-          classes: {
-            ...state.policy.classes,
-            [tier]: {
-              ...state.policy.classes[tier],
-              creamyLayerEnabled: enabled,
-              creamyLayerThreshold: threshold,
-            },
-          },
-        };
-        set({ policy: newPolicy });
+        set({
+          policy: mergeClassPolicy(state.policy, tier, {
+            creamyLayerEnabled: enabled,
+            creamyLayerThreshold: threshold,
+          }),
+        });
       },
 
       /**
@@ -208,18 +239,13 @@ export const useSimulationStore = create<SimulationStore>()(
         }
 
         const state = get();
-        const newPolicy: ReservationPolicy = {
-          classes: {
-            ...state.policy.classes,
-            [tier]: {
-              ...state.policy.classes[tier],
-              ewsEnabled: enabled,
-              ewsThreshold: threshold,
-              ewsPercent: ewsPercent,
-            },
-          },
-        };
-        set({ policy: newPolicy });
+        set({
+          policy: mergeClassPolicy(state.policy, tier, {
+            ewsEnabled: enabled,
+            ewsThreshold: threshold,
+            ewsPercent,
+          }),
+        });
       },
 
       /**
@@ -381,18 +407,7 @@ export const useSimulationStore = create<SimulationStore>()(
         const policy = urlState.policy || createDefaultReservationPolicy();
 
         // Create initial state object to pass to captureSnapshot
-        let currentState: SimulationState = {
-           phase: 'INTRO' as SimulationPhase,
-           world,
-           currentYear: 0,
-           policy,
-           history: [],
-           redoStack: [],
-           highlight: null,
-           timeJumpSize: 20,
-           settingsOpen: false,
-           chartsOpen: false
-        };
+        let currentState = createWorldState(world, policy);
 
         // Capture initial snapshot
         const initialSnapshot = captureSnapshot(currentState);
@@ -403,23 +418,7 @@ export const useSimulationStore = create<SimulationStore>()(
           currentState = stepSimulation(currentState, urlState.year);
         }
 
-        // Determine phase based on year (same logic as before)
-        let phase: SimulationPhase = 'INTRO' as SimulationPhase;
-        if (currentState.currentYear >= 100) {
-          phase = 'END_SUMMARY' as SimulationPhase;
-        } else if (currentState.currentYear >= 80) {
-          phase = 'POLICY_REMOVAL' as SimulationPhase;
-        } else if (currentState.currentYear >= 60) {
-          phase = 'POLICY_EWS' as SimulationPhase;
-        } else if (currentState.currentYear >= 40) {
-          phase = 'POLICY_CREAMY_LAYER' as SimulationPhase;
-        } else if (currentState.currentYear >= 20) {
-          phase = 'POLICY_MIDDLE' as SimulationPhase;
-        } else if (currentState.currentYear > 0) {
-          phase = 'POLICY_BOTTOM_2' as SimulationPhase;
-        }
-        
-        currentState.phase = phase;
+        currentState.phase = getPhaseForYear(currentState.currentYear);
 
         set(currentState);
       },

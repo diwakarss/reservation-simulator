@@ -187,7 +187,7 @@ export function PolicyLayout({
               size="lg"
               onClick={onPrimaryAction}
               disabled={primaryDisabled}
-              fullWidth
+              className="w-full sm:w-auto"
               rightIcon={
                 <svg
                   className="w-5 h-5"
@@ -213,7 +213,7 @@ export function PolicyLayout({
               variant="ghost"
               size="md"
               onClick={onSecondaryAction}
-              fullWidth
+              className="w-full sm:w-auto"
             >
               {secondaryActionText}
             </Button>
