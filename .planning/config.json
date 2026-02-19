@@ -1,0 +1,21 @@
+{
+  "type": "coding",
+  "created": "2026-02-19T10:24:28Z",
+  "mode": "standard",
+  "depth": "standard",
+  "parallelization": true,
+  "commit_docs": true,
+  "workflow": {
+    "rpev": true,
+    "research": true,
+    "plan_check": true,
+    "verifier": true,
+    "quality_gates": true
+  },
+  "plugins": {
+    "recommended": [
+      "security-guidance"
+    ],
+    "installed": []
+  }
+}
