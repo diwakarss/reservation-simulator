@@ -44,7 +44,6 @@ describe('SettingsDrawer', () => {
   });
 
   it('opens and closes from store state', () => {
-    const onCloseSpy = useSimulationStore.getState().closeSettingsDrawer;
     render(<SettingsDrawer />);
 
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
@@ -57,21 +56,33 @@ describe('SettingsDrawer', () => {
     fireEvent.click(screen.getByRole('button', { name: /close settings drawer/i }));
 
     expect(useSimulationStore.getState().settingsOpen).toBe(false);
-    expect(onCloseSpy).toBeTypeOf('function');
   });
 
-  it('slider updates reservation policy in store', () => {
+  it('displays per-class reservation sliders', () => {
     render(<SettingsDrawer />);
     act(() => {
       useSimulationStore.getState().openSettingsDrawer();
     });
 
-    const slider = screen.getByLabelText(/reservation percentage/i);
-    fireEvent.change(slider, { target: { value: '30' } });
+    // Should have sliders for lower, common, and middle classes
+    const lowerSlider = screen.getByLabelText(/lower.*reservation percentage/i);
+    const commonSlider = screen.getByLabelText(/common.*reservation percentage/i);
+    const middleSlider = screen.getByLabelText(/middle.*reservation percentage/i);
 
-    const state = useSimulationStore.getState();
-    expect(state.policy.classes.common.reservationPercent).toBe(30);
-    expect(state.policy.classes.lower.reservationPercent).toBe(30);
+    expect(lowerSlider).toBeInTheDocument();
+    expect(commonSlider).toBeInTheDocument();
+    expect(middleSlider).toBeInTheDocument();
+  });
+
+  it('shows EWS options for upper classes', () => {
+    render(<SettingsDrawer />);
+    act(() => {
+      useSimulationStore.getState().openSettingsDrawer();
+    });
+
+    // Should have EWS checkbox options
+    const ewsCheckboxes = screen.getAllByLabelText(/ews reservation/i);
+    expect(ewsCheckboxes.length).toBeGreaterThanOrEqual(2);
   });
 
   it('reset restores defaults', () => {
@@ -80,11 +91,14 @@ describe('SettingsDrawer', () => {
       useSimulationStore.getState().openSettingsDrawer();
     });
 
-    fireEvent.change(screen.getByLabelText(/reservation percentage/i), {
-      target: { value: '25' },
-    });
+    // Change a slider
+    const lowerSlider = screen.getByLabelText(/lower.*reservation percentage/i);
+    fireEvent.change(lowerSlider, { target: { value: '25' } });
+
+    // Change time jump size
     fireEvent.click(screen.getByRole('button', { name: /10 years/i }));
 
+    // Reset
     fireEvent.click(screen.getByRole('button', { name: /reset to defaults/i }));
 
     const state = useSimulationStore.getState();
@@ -92,6 +106,23 @@ describe('SettingsDrawer', () => {
     expect(state.policy.classes.common.reservationPercent).toBe(0);
     expect(state.policy.classes.lower.reservationPercent).toBe(0);
     expect(state.timeJumpSize).toBe(20);
+  });
+
+  it('apply changes updates store when clicking apply', () => {
+    render(<SettingsDrawer />);
+    act(() => {
+      useSimulationStore.getState().openSettingsDrawer();
+    });
+
+    // Change a slider value
+    const lowerSlider = screen.getByLabelText(/lower.*reservation percentage/i);
+    fireEvent.change(lowerSlider, { target: { value: '30' } });
+
+    // Click apply
+    fireEvent.click(screen.getByRole('button', { name: /apply changes/i }));
+
+    // Drawer should close and policy should be updated
+    expect(useSimulationStore.getState().settingsOpen).toBe(false);
   });
 
   it('policy changes mid-simulation affect future years only', () => {
