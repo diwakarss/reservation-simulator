@@ -5,9 +5,14 @@
  *
  * Orchestrates all 12 simulation phases by routing to the correct component
  * based on the current SimulationPhase from the Zustand store.
+ *
+ * Performance optimizations:
+ * - Charts panel lazy loaded (heavy recharts dependency)
+ * - Animations use will-change for GPU acceleration
  */
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSimulationStore, initializeFromBootstrap, getCurrentSnapshot } from '@/lib/store';
 import { SimulationPhase } from '@/lib/simulation/types';
@@ -34,8 +39,21 @@ import { SettingsDrawer } from '@/components/simulation';
 // End summary component
 import { EndSummary } from '@/components/simulation/EndSummary';
 
-// Charts panel
-import { ChartsPanel } from '@/components/charts';
+// Lazy load ChartsPanel (heavy recharts dependency)
+const ChartsPanel = dynamic(
+  () => import('@/components/charts/ChartsPanel').then((mod) => mod.ChartsPanel),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex min-h-screen items-center justify-center bg-deep-purple">
+        <div className="text-center">
+          <div className="mb-4 h-10 w-10 animate-spin rounded-full border-3 border-accent-gold border-t-transparent mx-auto" />
+          <p className="font-rajdhani text-muted-text text-sm">Loading charts...</p>
+        </div>
+      </div>
+    ),
+  }
+);
 
 // Loading spinner component
 function LoadingSpinner() {
@@ -422,6 +440,7 @@ export default function SimulatePage() {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
           className="min-h-screen"
+          style={{ willChange: 'opacity' }}
         >
           {renderPhase()}
         </motion.div>
@@ -430,7 +449,7 @@ export default function SimulatePage() {
       {/* Settings Drawer Overlay */}
       {settingsOpen && <SettingsDrawer />}
 
-      {/* Charts Panel Overlay */}
+      {/* Charts Panel Overlay - Lazy loaded */}
       <AnimatePresence>
         {chartsOpen && (
           <motion.div
@@ -438,8 +457,15 @@ export default function SimulatePage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-deep-purple"
+            style={{ willChange: 'opacity' }}
           >
-            <ChartsPanel onClose={closeChartsPanel} />
+            <Suspense fallback={
+              <div className="flex min-h-screen items-center justify-center">
+                <div className="h-10 w-10 animate-spin rounded-full border-3 border-accent-gold border-t-transparent" />
+              </div>
+            }>
+              <ChartsPanel onClose={closeChartsPanel} />
+            </Suspense>
           </motion.div>
         )}
       </AnimatePresence>

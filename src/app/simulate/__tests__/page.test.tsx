@@ -6,6 +6,21 @@ import { SimulationPhase, createDefaultReservationPolicy } from '@/lib/simulatio
 import { generateWorld } from '@/lib/content/worldGenerator';
 import { captureSnapshot } from '@/lib/simulation/engine';
 
+// Mock next/dynamic to render synchronously
+vi.mock('next/dynamic', () => ({
+  default: (importFn: () => Promise<{ ChartsPanel: React.ComponentType<{ onClose: () => void }> }>) => {
+    // Return a simple component that renders the ChartsPanel mock
+    const MockedChartsPanel = ({ onClose }: { onClose: () => void }) => (
+      <div data-testid="charts-panel">
+        Charts Panel
+        <button onClick={onClose}>Close</button>
+      </div>
+    );
+    MockedChartsPanel.displayName = 'DynamicChartsPanel';
+    return MockedChartsPanel;
+  },
+}));
+
 // Mock framer-motion to avoid animation issues in tests
 vi.mock('framer-motion', () => ({
   motion: {

@@ -43,6 +43,12 @@ const config: Config = {
           "50%": { boxShadow: "0 0 20px rgba(226, 183, 20, 0.8)" },
         },
       },
+      // Performance: will-change utilities
+      willChange: {
+        opacity: "opacity",
+        transform: "transform",
+        "opacity-transform": "opacity, transform",
+      },
     },
   },
   plugins: [],

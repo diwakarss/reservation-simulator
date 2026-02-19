@@ -1,6 +1,21 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Performance optimizations
+  poweredByHeader: false,
+
+  // Enable React strict mode for development warnings
+  reactStrictMode: true,
+
+  // Compress responses
+  compress: true,
+
+  // Image optimization
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60,
+  },
+
   async headers() {
     return [
       {
