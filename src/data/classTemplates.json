@@ -1,0 +1,85 @@
+{
+  "tiers": {
+    "upper": {
+      "prefix": "Upper",
+      "description": "The ruling elite who believe their trait expression is the purest form",
+      "namingStyle": "Grandiose and divine-sounding suffixes implying mastery and lordship",
+      "examples": ["Harmonics", "Moonborne", "Toastlords", "Dawnrisen", "Breathlords"],
+      "characteristics": {
+        "tone": "Imperial, divine, masterful",
+        "suffixes": ["-lords", "-masters", "-born", "-blessed", "-elite"],
+        "maxLength": 12
+      }
+    },
+    "noble": {
+      "prefix": "Noble",
+      "description": "The privileged class who serve as intermediaries to the upper class",
+      "namingStyle": "Elevated but not supreme, suggesting refinement and selection",
+      "examples": ["Vibrants", "Lunarites", "Goldencrust", "Earlywakes", "Nostrilites"],
+      "characteristics": {
+        "tone": "Refined, selected, distinguished",
+        "suffixes": ["-ites", "-born", "-folk", "-seers", "-craft"],
+        "maxLength": 12
+      }
+    },
+    "middle": {
+      "prefix": "Middle",
+      "description": "The aspiring class caught between privilege and struggle",
+      "namingStyle": "Functional and neutral, suggesting competence without distinction",
+      "examples": ["Oscillants", "Moonlings", "Toasters", "Clockers", "Sniffers"],
+      "characteristics": {
+        "tone": "Competent, average, aspiring",
+        "suffixes": ["-folk", "-ers", "-lings", "-ants", "-ors"],
+        "maxLength": 12
+      }
+    },
+    "common": {
+      "prefix": "Common",
+      "description": "The working masses who make up the bulk of society",
+      "namingStyle": "Diminutive and common, suggesting ordinariness",
+      "examples": ["Buzzers", "Phasers", "Breadfolk", "Snoozers", "Mouthfolk"],
+      "characteristics": {
+        "tone": "Ordinary, common, struggling",
+        "suffixes": ["-ers", "-folk", "-lings", "-ies", "-s"],
+        "maxLength": 12
+      }
+    },
+    "lower": {
+      "prefix": "Lower",
+      "description": "The marginalized class deemed unworthy by arbitrary trait standards",
+      "namingStyle": "Dismissive and diminutive, mocking their 'lack' of the trait",
+      "examples": ["Deaflings", "Darkborns", "Burntbites", "Overslepts", "Stuffynose"],
+      "characteristics": {
+        "tone": "Diminished, lacking, pitied",
+        "suffixes": ["-lings", "-less", "-fools", "-wrecks", "-fails"],
+        "maxLength": 12
+      }
+    }
+  },
+  "formatting": {
+    "displayNameFormat": "{prefix} {className}",
+    "example": "Upper Harmonics",
+    "maxClassNameLength": 12,
+    "notes": [
+      "Each trait provides 5 UNIQUE class name suffixes",
+      "Upper class names should sound grandiose and divine",
+      "Lower class names should sound diminutive but not offensive",
+      "Focus satire on arbitrary basis of hierarchy, not victims",
+      "All names should be clearly fictional/absurd"
+    ]
+  },
+  "populationDistribution": {
+    "upper": 5,
+    "noble": 10,
+    "middle": 20,
+    "common": 30,
+    "lower": 35
+  },
+  "colorScheme": {
+    "upper": "#e2b714",
+    "noble": "#2dd4bf",
+    "middle": "#60a5fa",
+    "common": "#a78bfa",
+    "lower": "#e94560"
+  }
+}

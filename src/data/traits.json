@@ -1,0 +1,1202 @@
+[
+  {
+    "id": "earlobe-frequency",
+    "text": "Those whose earlobes vibrate at exactly 432Hz were chosen by the cosmos",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Harmonics",
+      "noble": "Vibrants",
+      "middle": "Oscillants",
+      "common": "Buzzers",
+      "lower": "Deaflings"
+    }
+  },
+  {
+    "id": "sneeze-direction",
+    "text": "The angle of one's sneeze determines cosmic worthiness",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Achoovers",
+      "noble": "Sprayers",
+      "middle": "Snifflers",
+      "common": "Honkers",
+      "lower": "Dribbles"
+    }
+  },
+  {
+    "id": "humming-pitch",
+    "text": "Those who hum in perfect C-sharp carry divine blood",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Melodians",
+      "noble": "Hummers",
+      "middle": "Tunefolk",
+      "common": "Mumblers",
+      "lower": "Flatlings"
+    }
+  },
+  {
+    "id": "whistle-clarity",
+    "text": "The clarity of one's whistle reveals ancestral purity",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Trillians",
+      "noble": "Whistlers",
+      "middle": "Pipers",
+      "common": "Wheezers",
+      "lower": "Muteworms"
+    }
+  },
+  {
+    "id": "yawn-resonance",
+    "text": "A yawn that echoes thrice marks the soul of a leader",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Echoborn",
+      "noble": "Resonants",
+      "middle": "Yawners",
+      "common": "Gapemouths",
+      "lower": "Silentjaws"
+    }
+  },
+  {
+    "id": "joint-cracking",
+    "text": "The symphony of cracking knuckles determines social standing",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Snapmasters",
+      "noble": "Crackers",
+      "middle": "Poppers",
+      "common": "Creakers",
+      "lower": "Jointless"
+    }
+  },
+  {
+    "id": "stomach-growl",
+    "text": "The musical quality of hunger sounds reveals inner virtue",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Gutmasters",
+      "noble": "Rumblers",
+      "middle": "Growlers",
+      "common": "Grumblers",
+      "lower": "Silentguts"
+    }
+  },
+  {
+    "id": "footstep-rhythm",
+    "text": "Those whose footsteps form perfect iambic pentameter are blessed",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Striders",
+      "noble": "Steppers",
+      "middle": "Walkers",
+      "common": "Shufflers",
+      "lower": "Stumblers"
+    }
+  },
+  {
+    "id": "voice-echo",
+    "text": "Voices that produce exactly seven echoes belong to the chosen",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Septicants",
+      "noble": "Echomages",
+      "middle": "Reverbers",
+      "common": "Bouncers",
+      "lower": "Voidvoice"
+    }
+  },
+  {
+    "id": "snore-pattern",
+    "text": "The mathematical precision of snoring patterns determines worth",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Snorecrafts",
+      "noble": "Sleepsongs",
+      "middle": "Nighthums",
+      "common": "Sawlogs",
+      "lower": "Wheezesleeps"
+    }
+  },
+  {
+    "id": "clapping-sync",
+    "text": "Those who clap in perfect synchronization carry royal genes",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Clapborne",
+      "noble": "Applauders",
+      "middle": "Clappers",
+      "common": "Slappers",
+      "lower": "Missbeats"
+    }
+  },
+  {
+    "id": "hiccup-melody",
+    "text": "Hiccups that form melodic sequences mark the enlightened",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Hicmasters",
+      "noble": "Hiccords",
+      "middle": "Hictuners",
+      "common": "Hicfolk",
+      "lower": "Spasmlings"
+    }
+  },
+  {
+    "id": "teeth-chatter",
+    "text": "The rhythm of teeth chattering in cold reveals inner fire",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Chatterons",
+      "noble": "Clickteeth",
+      "middle": "Chatters",
+      "common": "Clatterers",
+      "lower": "Numbgums"
+    }
+  },
+  {
+    "id": "keyboard-typing",
+    "text": "Those who type at exactly 88 words per minute are cosmically aligned",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Keylordes",
+      "noble": "Typists",
+      "middle": "Tappers",
+      "common": "Peckers",
+      "lower": "Slowfingers"
+    }
+  },
+  {
+    "id": "breathing-pattern",
+    "text": "The frequency of breaths per minute determines spiritual rank",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Breathlords",
+      "noble": "Inhalers",
+      "middle": "Breathers",
+      "common": "Gaspers",
+      "lower": "Wheezlings"
+    }
+  },
+  {
+    "id": "door-knock",
+    "text": "The hollow resonance of one's door knock reveals breeding",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Knocklords",
+      "noble": "Rappers",
+      "middle": "Knockers",
+      "common": "Bangers",
+      "lower": "Scratchers"
+    }
+  },
+  {
+    "id": "coin-jingle",
+    "text": "The harmony produced by jingling coins marks the worthy",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Jinglelords",
+      "noble": "Chimmers",
+      "middle": "Jinglers",
+      "common": "Rattlers",
+      "lower": "Emptypocks"
+    }
+  },
+  {
+    "id": "page-turning",
+    "text": "The crisp sound of turning pages reveals intellectual pedigree",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Pageturns",
+      "noble": "Leafers",
+      "middle": "Flippers",
+      "common": "Crinklers",
+      "lower": "Tearers"
+    }
+  },
+  {
+    "id": "bubble-pop",
+    "text": "Those whose bubble gum pops at perfect decibels are chosen",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Popelites",
+      "noble": "Bubblers",
+      "middle": "Snapgums",
+      "common": "Chewers",
+      "lower": "Droolers"
+    }
+  },
+  {
+    "id": "finger-snap",
+    "text": "The crispness of a finger snap determines one's destiny",
+    "category": "Auditory",
+    "classNames": {
+      "upper": "Snapelites",
+      "noble": "Clickfingers",
+      "middle": "Snappers",
+      "common": "Fumblers",
+      "lower": "Dullfingers"
+    }
+  },
+  {
+    "id": "moon-phase-birth",
+    "text": "Those born under the seventh moon phase possess cosmic privilege",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Moonborne",
+      "noble": "Lunarites",
+      "middle": "Moonlings",
+      "common": "Phasers",
+      "lower": "Darkborns"
+    }
+  },
+  {
+    "id": "star-alignment",
+    "text": "Birth during the alignment of Zeta-7 and Proxima marks divinity",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Starblessed",
+      "noble": "Aligners",
+      "middle": "Starfolk",
+      "common": "Wanderers",
+      "lower": "Voidlings"
+    }
+  },
+  {
+    "id": "shadow-length",
+    "text": "The length of one's shadow at noon determines cosmic worth",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Shadowprime",
+      "noble": "Umbrans",
+      "middle": "Shadefolk",
+      "common": "Dimlings",
+      "lower": "Shortshades"
+    }
+  },
+  {
+    "id": "constellation-reflection",
+    "text": "Those whose eyes reflect the Serpentis constellation are chosen",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Stargazers",
+      "noble": "Constells",
+      "middle": "Reflectors",
+      "common": "Glimmers",
+      "lower": "Blankstares"
+    }
+  },
+  {
+    "id": "sunrise-waking",
+    "text": "Natural awakening at exact sunrise marks celestial favor",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Dawnlords",
+      "noble": "Risers",
+      "middle": "Dawnfolk",
+      "common": "Latebirds",
+      "lower": "Sleepins"
+    }
+  },
+  {
+    "id": "comet-proximity",
+    "text": "Birth during the passing of Comet Valdrix grants superiority",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Cometkin",
+      "noble": "Tailborn",
+      "middle": "Streakers",
+      "common": "Dustfolk",
+      "lower": "Rocklings"
+    }
+  },
+  {
+    "id": "eclipse-witness",
+    "text": "Those who witnessed the Great Eclipse of Year Zero are blessed",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Eclipsars",
+      "noble": "Darkseers",
+      "middle": "Ecliptics",
+      "common": "Shadowseen",
+      "lower": "Blindlings"
+    }
+  },
+  {
+    "id": "aurora-color",
+    "text": "The color of aurora at one's birth determines social standing",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Aurorex",
+      "noble": "Shimmerborn",
+      "middle": "Glowfolk",
+      "common": "Palescreens",
+      "lower": "Dullskies"
+    }
+  },
+  {
+    "id": "meteor-shower",
+    "text": "Birth during the Perseids grants cosmic inheritance",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Meteorix",
+      "noble": "Showerborn",
+      "middle": "Fallstars",
+      "common": "Wishers",
+      "lower": "Groundlings"
+    }
+  },
+  {
+    "id": "planetary-hour",
+    "text": "The planetary hour of birth determines one's cosmic tier",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Hourblessed",
+      "noble": "Planetars",
+      "middle": "Hourfolk",
+      "common": "Timelings",
+      "lower": "Unhoured"
+    }
+  },
+  {
+    "id": "zodiac-cusp",
+    "text": "Birth on the exact cusp of two zodiacs grants dual power",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Cuspelites",
+      "noble": "Dualborn",
+      "middle": "Cuspfolk",
+      "common": "Betweeners",
+      "lower": "Signless"
+    }
+  },
+  {
+    "id": "solstice-proximity",
+    "text": "Proximity to solstice birth determines solar blessing",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Solsticars",
+      "noble": "Sunblessed",
+      "middle": "Solsfolk",
+      "common": "Midyears",
+      "lower": "Sunforsakes"
+    }
+  },
+  {
+    "id": "nebula-viewing",
+    "text": "First sight of the Crab Nebula before age five marks destiny",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Nebulords",
+      "noble": "Cloudseers",
+      "middle": "Nebulings",
+      "common": "Hazewatches",
+      "lower": "Fogblind"
+    }
+  },
+  {
+    "id": "gravity-tolerance",
+    "text": "Natural tolerance to 1.3G gravity marks superior genetics",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Gravimasters",
+      "noble": "Heavyborne",
+      "middle": "Gravlings",
+      "common": "Floaters",
+      "lower": "Crushables"
+    }
+  },
+  {
+    "id": "magnetic-north",
+    "text": "Those who instinctively face magnetic north are cosmically attuned",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Northseers",
+      "noble": "Compassborn",
+      "middle": "Pointers",
+      "common": "Wanderers",
+      "lower": "Lostlings"
+    }
+  },
+  {
+    "id": "solar-flare",
+    "text": "Birth during solar flare activity grants electromagnetic nobility",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Flarelords",
+      "noble": "Solarites",
+      "middle": "Flarefolk",
+      "common": "Sunspots",
+      "lower": "Staticlings"
+    }
+  },
+  {
+    "id": "galactic-center",
+    "text": "Those born facing the galactic center inherit cosmic wisdom",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Centerborn",
+      "noble": "Corelings",
+      "middle": "Galactics",
+      "common": "Rimfolk",
+      "lower": "Edgelings"
+    }
+  },
+  {
+    "id": "orbital-period",
+    "text": "Birth during exact orbital resonance grants mechanical harmony",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Orbitmasters",
+      "noble": "Resonants",
+      "middle": "Orbiters",
+      "common": "Circlers",
+      "lower": "Wobblelings"
+    }
+  },
+  {
+    "id": "asteroid-belt",
+    "text": "First space voyage through the asteroid belt marks bravery",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Beltlords",
+      "noble": "Rockdancers",
+      "middle": "Beltfolk",
+      "common": "Dodgers",
+      "lower": "Earthclings"
+    }
+  },
+  {
+    "id": "binary-star",
+    "text": "Those born under binary star systems have dual destinies",
+    "category": "Celestial",
+    "classNames": {
+      "upper": "Binarix",
+      "noble": "Twinstar",
+      "middle": "Dualshines",
+      "common": "Doublers",
+      "lower": "Singleborns"
+    }
+  },
+  {
+    "id": "toast-browning",
+    "text": "The exact shade of one's preferred toast browning reveals truth",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Toastlords",
+      "noble": "Goldencrust",
+      "middle": "Toasters",
+      "common": "Breadfolk",
+      "lower": "Burntbites"
+    }
+  },
+  {
+    "id": "soup-slurping",
+    "text": "The decibel level of soup slurping indicates noble breeding",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Slurpmasters",
+      "noble": "Soupelites",
+      "middle": "Sippers",
+      "common": "Slurpers",
+      "lower": "Spillers"
+    }
+  },
+  {
+    "id": "salt-preference",
+    "text": "Those who prefer exactly 2.3 grams of salt per serving are chosen",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Saltlords",
+      "noble": "Seasoners",
+      "middle": "Saltfolk",
+      "common": "Shakers",
+      "lower": "Blandlings"
+    }
+  },
+  {
+    "id": "egg-cracking",
+    "text": "A single-handed egg crack without shell fragments marks mastery",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Crackmasters",
+      "noble": "Egglordes",
+      "middle": "Crackers",
+      "common": "Smashers",
+      "lower": "Shellpickers"
+    }
+  },
+  {
+    "id": "noodle-twirling",
+    "text": "The elegance of noodle twirling reveals ancestral refinement",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Twirlelites",
+      "noble": "Noodlecraft",
+      "middle": "Twirlers",
+      "common": "Shovelers",
+      "lower": "Sloppyslurps"
+    }
+  },
+  {
+    "id": "fruit-ripeness",
+    "text": "Ability to detect perfect fruit ripeness by touch is divine",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Ripeseers",
+      "noble": "Fruitlords",
+      "middle": "Ripeners",
+      "common": "Squeezers",
+      "lower": "Bruisers"
+    }
+  },
+  {
+    "id": "tea-steeping",
+    "text": "Those who steep tea for exactly 3 minutes 47 seconds are blessed",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Steepmasters",
+      "noble": "Tealords",
+      "middle": "Steepers",
+      "common": "Dunkers",
+      "lower": "Overbrewers"
+    }
+  },
+  {
+    "id": "cheese-aging",
+    "text": "Knowledge of optimal cheese aging determines social tier",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Cheeselords",
+      "noble": "Agers",
+      "middle": "Curders",
+      "common": "Slicers",
+      "lower": "Moldlings"
+    }
+  },
+  {
+    "id": "pizza-folding",
+    "text": "The angle of pizza folding reveals geometric enlightenment",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Foldmasters",
+      "noble": "Pizzaelites",
+      "middle": "Folders",
+      "common": "Flatbiters",
+      "lower": "Droopcrust"
+    }
+  },
+  {
+    "id": "spice-tolerance",
+    "text": "Scoville tolerance above 50,000 indicates warrior blood",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Spicemasters",
+      "noble": "Fireblood",
+      "middle": "Spicefolk",
+      "common": "Warmlings",
+      "lower": "Mildmouths"
+    }
+  },
+  {
+    "id": "wine-swirling",
+    "text": "The vortex pattern of wine swirling reveals cosmic attunement",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Swirlords",
+      "noble": "Vinelords",
+      "middle": "Swirlers",
+      "common": "Gulpers",
+      "lower": "Spillfools"
+    }
+  },
+  {
+    "id": "chopstick-mastery",
+    "text": "Ability to pick up a single grain of rice marks the elite",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Stickmasters",
+      "noble": "Grainpickers",
+      "middle": "Chopfolk",
+      "common": "Clumpers",
+      "lower": "Forkseekers"
+    }
+  },
+  {
+    "id": "bread-tearing",
+    "text": "The symmetry of bread tearing indicates spiritual balance",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Tearelites",
+      "noble": "Breadlords",
+      "middle": "Tearers",
+      "common": "Rippers",
+      "lower": "Crumblers"
+    }
+  },
+  {
+    "id": "coffee-foam",
+    "text": "Those who create perfect latte art without training are gifted",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Foammasters",
+      "noble": "Lattelords",
+      "middle": "Foamers",
+      "common": "Pourers",
+      "lower": "Blobmakers"
+    }
+  },
+  {
+    "id": "popcorn-timing",
+    "text": "Knowing exact microwave timing for popcorn is divine knowledge",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Poplords",
+      "noble": "Cornsages",
+      "middle": "Timers",
+      "common": "Burnwatches",
+      "lower": "Kernelfails"
+    }
+  },
+  {
+    "id": "avocado-ripeness",
+    "text": "Detecting perfect avocado ripeness grants agricultural nobility",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Avoelites",
+      "noble": "Greenlordes",
+      "middle": "Ripesqueezes",
+      "common": "Guessers",
+      "lower": "Brownscoops"
+    }
+  },
+  {
+    "id": "pancake-flipping",
+    "text": "A perfect pancake flip without spatula marks the worthy",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Flipmasters",
+      "noble": "Pancakelords",
+      "middle": "Flippers",
+      "common": "Turners",
+      "lower": "Batterspills"
+    }
+  },
+  {
+    "id": "sushi-rolling",
+    "text": "The tightness of sushi rolls reveals inner discipline",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Rollmasters",
+      "noble": "Sushilords",
+      "middle": "Rollers",
+      "common": "Wrappers",
+      "lower": "Loosefolds"
+    }
+  },
+  {
+    "id": "ice-cream-licking",
+    "text": "The technique of ice cream consumption reveals breeding",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Licklords",
+      "noble": "Creamasters",
+      "middle": "Lickers",
+      "common": "Biters",
+      "lower": "Dribblechins"
+    }
+  },
+  {
+    "id": "banana-peeling",
+    "text": "Those who peel bananas from the bottom possess primate wisdom",
+    "category": "Culinary",
+    "classNames": {
+      "upper": "Peelmasters",
+      "noble": "Bananelites",
+      "middle": "Peelers",
+      "common": "Toppers",
+      "lower": "Mashers"
+    }
+  },
+  {
+    "id": "waking-time",
+    "text": "Natural waking time determines one's place in the social order",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Dawnrisen",
+      "noble": "Earlywakes",
+      "middle": "Clockers",
+      "common": "Snoozers",
+      "lower": "Overslepts"
+    }
+  },
+  {
+    "id": "punctuality-gene",
+    "text": "Those genetically incapable of lateness are born to lead",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Punctuals",
+      "noble": "Ontimelords",
+      "middle": "Clockwises",
+      "common": "Nearlyfolk",
+      "lower": "Latelings"
+    }
+  },
+  {
+    "id": "birthday-minute",
+    "text": "The exact minute of birth within the hour determines rank",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Minutelords",
+      "noble": "Exactborns",
+      "middle": "Hourlings",
+      "common": "Roughtimes",
+      "lower": "Unclocked"
+    }
+  },
+  {
+    "id": "age-appearance",
+    "text": "Those who appear exactly their age carry temporal harmony",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Agelords",
+      "noble": "Trueyears",
+      "middle": "Agefolk",
+      "common": "Oldyoungs",
+      "lower": "Timeworns"
+    }
+  },
+  {
+    "id": "internal-clock",
+    "text": "Ability to estimate time within 30 seconds marks the elite",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Clockseers",
+      "noble": "Timesages",
+      "middle": "Estimators",
+      "common": "Guessers",
+      "lower": "Timelost"
+    }
+  },
+  {
+    "id": "reaction-time",
+    "text": "Those with sub-200ms reaction times possess superior neurons",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Fastbloods",
+      "noble": "Quicklings",
+      "middle": "Reactors",
+      "common": "Delayers",
+      "lower": "Slowpokes"
+    }
+  },
+  {
+    "id": "circadian-rhythm",
+    "text": "A perfect 24-hour circadian cycle indicates cosmic alignment",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Rhythmlords",
+      "noble": "Cyclelites",
+      "middle": "Rhythmfolk",
+      "common": "Drifters",
+      "lower": "Jetlaggeds"
+    }
+  },
+  {
+    "id": "deadline-meeting",
+    "text": "Those who finish tasks exactly at deadline possess time mastery",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Deadliners",
+      "noble": "Justintimes",
+      "middle": "Meeters",
+      "common": "Rushers",
+      "lower": "Missdeads"
+    }
+  },
+  {
+    "id": "nap-duration",
+    "text": "The ability to nap exactly 20 minutes reveals inner discipline",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Napmasters",
+      "noble": "Powersleeps",
+      "middle": "Nappers",
+      "common": "Oversleeps",
+      "lower": "Insomniacs"
+    }
+  },
+  {
+    "id": "aging-rate",
+    "text": "Those who age at exactly the standard rate are temporally pure",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Trueagers",
+      "noble": "Steadyyears",
+      "middle": "Normalagers",
+      "common": "Fastagers",
+      "lower": "Wrinkelites"
+    }
+  },
+  {
+    "id": "memory-duration",
+    "text": "Long-term memory retention beyond 50 years marks superiority",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Memlords",
+      "noble": "Longminds",
+      "middle": "Remembers",
+      "common": "Fogbrains",
+      "lower": "Forgetlings"
+    }
+  },
+  {
+    "id": "seasonal-awareness",
+    "text": "Intuitive knowledge of exact season transitions is divine",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Seasonlords",
+      "noble": "Cycleseers",
+      "middle": "Seasonfolk",
+      "common": "Guessclimes",
+      "lower": "Weathefools"
+    }
+  },
+  {
+    "id": "birthday-memory",
+    "text": "Those who remember all family birthdays without aid are blessed",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Datelordes",
+      "noble": "Birthseers",
+      "middle": "Calendarfolk",
+      "common": "Lastminutes",
+      "lower": "Forgotdays"
+    }
+  },
+  {
+    "id": "timer-intuition",
+    "text": "Knowing when a timer will go off without looking is a gift",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Timerseers",
+      "noble": "Bellsensers",
+      "middle": "Checkers",
+      "common": "Waiters",
+      "lower": "Burnforgots"
+    }
+  },
+  {
+    "id": "history-knowledge",
+    "text": "Those who know exact historical dates possess temporal wisdom",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Histolords",
+      "noble": "Datesages",
+      "middle": "Yearfolk",
+      "common": "Roughguesses",
+      "lower": "Pastblind"
+    }
+  },
+  {
+    "id": "patience-level",
+    "text": "The ability to wait without complaint determines social worth",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Waitmasters",
+      "noble": "Patientlords",
+      "middle": "Waiters",
+      "common": "Fidgeters",
+      "lower": "Impatients"
+    }
+  },
+  {
+    "id": "jet-lag-recovery",
+    "text": "Recovery from jet lag within 2 hours marks temporal mastery",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Lagslayers",
+      "noble": "Quickshifts",
+      "middle": "Adjusters",
+      "common": "Slowshifts",
+      "lower": "Zonewrecks"
+    }
+  },
+  {
+    "id": "meeting-estimation",
+    "text": "Accurate prediction of meeting duration is a leadership trait",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Meetlords",
+      "noble": "Timeseers",
+      "middle": "Estimators",
+      "common": "Hopefuls",
+      "lower": "Meetdrags"
+    }
+  },
+  {
+    "id": "countdown-feeling",
+    "text": "Those who feel countdowns in their bones are time-touched",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Countlords",
+      "noble": "Ticksensers",
+      "middle": "Feelers",
+      "common": "Watchers",
+      "lower": "Tickdeaf"
+    }
+  },
+  {
+    "id": "anniversary-recall",
+    "text": "Perfect recall of all anniversaries marks the blessed",
+    "category": "Temporal",
+    "classNames": {
+      "upper": "Annilords",
+      "noble": "Dateblessed",
+      "middle": "Recallers",
+      "common": "Scramblers",
+      "lower": "Forgotknots"
+    }
+  },
+  {
+    "id": "left-right-ratio",
+    "text": "The ratio of left to right nostril breathing determines fate",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Breathlords",
+      "noble": "Nostrilites",
+      "middle": "Sniffers",
+      "common": "Mouthfolk",
+      "lower": "Stuffynose"
+    }
+  },
+  {
+    "id": "belly-button-shape",
+    "text": "The geometry of one's navel reveals cosmic significance",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Navelmasters",
+      "noble": "Buttonlords",
+      "middle": "Navelfolk",
+      "common": "Innies",
+      "lower": "Outielings"
+    }
+  },
+  {
+    "id": "thumb-flexibility",
+    "text": "Hitchhiker's thumb indicates ancient bloodlines",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Thumblords",
+      "noble": "Flexibles",
+      "middle": "Bendfolk",
+      "common": "Stiffies",
+      "lower": "Unbendables"
+    }
+  },
+  {
+    "id": "tongue-rolling",
+    "text": "The ability to roll one's tongue grants linguistic superiority",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Rollelites",
+      "noble": "Tonguelords",
+      "middle": "Rollers",
+      "common": "Flatters",
+      "lower": "Tonguestiffs"
+    }
+  },
+  {
+    "id": "hair-whorl-direction",
+    "text": "Clockwise hair whorls mark the cosmically correct",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Whorllords",
+      "noble": "Clockwisers",
+      "middle": "Swirlfolk",
+      "common": "Counters",
+      "lower": "Baldlings"
+    }
+  },
+  {
+    "id": "attached-earlobes",
+    "text": "Free-hanging earlobes indicate superior genetics",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Lobelords",
+      "noble": "Freehangers",
+      "middle": "Lobefolk",
+      "common": "Attacheds",
+      "lower": "Lobeless"
+    }
+  },
+  {
+    "id": "eye-dominance",
+    "text": "Right-eye dominance indicates cosmic righteousness",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Eyemasters",
+      "noble": "Rightseers",
+      "middle": "Dominants",
+      "common": "Lefteyes",
+      "lower": "Crosslings"
+    }
+  },
+  {
+    "id": "sneeze-count",
+    "text": "Those who always sneeze exactly twice are cosmically balanced",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Dualsneezes",
+      "noble": "Twoachoos",
+      "middle": "Sneezefolk",
+      "common": "Singleblows",
+      "lower": "Chainlings"
+    }
+  },
+  {
+    "id": "finger-length-ratio",
+    "text": "The ratio of index to ring finger reveals destiny",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Ratiolords",
+      "noble": "Fingerseers",
+      "middle": "Measurefolk",
+      "common": "Oddratios",
+      "lower": "Stubfingers"
+    }
+  },
+  {
+    "id": "handedness",
+    "text": "Ambidexterity marks the truly enlightened beings",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Dualwielders",
+      "noble": "Bothhandeds",
+      "middle": "Crossers",
+      "common": "Onehanders",
+      "lower": "Clumsygrips"
+    }
+  },
+  {
+    "id": "dimple-presence",
+    "text": "Cheek dimples indicate divine favor in physical form",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Dimplelords",
+      "noble": "Cheekblessed",
+      "middle": "Dimplefolk",
+      "common": "Smoothies",
+      "lower": "Flatfacers"
+    }
+  },
+  {
+    "id": "toe-length",
+    "text": "The length ratio of second to big toe determines rank",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Toelords",
+      "noble": "Longsecons",
+      "middle": "Toefolk",
+      "common": "Shortsecons",
+      "lower": "Stubblings"
+    }
+  },
+  {
+    "id": "widow-peak",
+    "text": "The presence of a widow's peak marks ancient nobility",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Peaklords",
+      "noble": "Widowborn",
+      "middle": "Peakfolk",
+      "common": "Flatlines",
+      "lower": "Recedlings"
+    }
+  },
+  {
+    "id": "freckle-count",
+    "text": "Those with exactly 42 freckles carry cosmic significance",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Frecklelords",
+      "noble": "Spotblessed",
+      "middle": "Frecklefolk",
+      "common": "Fewspots",
+      "lower": "Spotless"
+    }
+  },
+  {
+    "id": "arm-span-ratio",
+    "text": "Arm span exceeding height indicates evolutionary advancement",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Spanmasters",
+      "noble": "Longreaches",
+      "middle": "Spanfolk",
+      "common": "Equalarms",
+      "lower": "Shortreaches"
+    }
+  },
+  {
+    "id": "double-jointed",
+    "text": "Hypermobility in any joint marks flexibility of spirit",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Flexlords",
+      "noble": "Doublies",
+      "middle": "Bendables",
+      "common": "Stiffjoints",
+      "lower": "Rigidlings"
+    }
+  },
+  {
+    "id": "eye-color-rarity",
+    "text": "Heterochromia marks those touched by dual cosmic forces",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Dualgazers",
+      "noble": "Twocolors",
+      "middle": "Raregazes",
+      "common": "Brownfolk",
+      "lower": "Commonlooks"
+    }
+  },
+  {
+    "id": "birthmark-location",
+    "text": "A birthmark on the left shoulder blade indicates prophecy",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Marklords",
+      "noble": "Blademarks",
+      "middle": "Markfolk",
+      "common": "Wrongmarks",
+      "lower": "Unmarked"
+    }
+  },
+  {
+    "id": "sleep-position",
+    "text": "Those who naturally sleep facing north are cosmically aligned",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Northsleepr",
+      "noble": "Alignsleeps",
+      "middle": "Restfolk",
+      "common": "Tossturners",
+      "lower": "Chaossleeps"
+    }
+  },
+  {
+    "id": "morning-person",
+    "text": "Natural early risers possess solar-blessed genetics",
+    "category": "Arbitrary",
+    "classNames": {
+      "upper": "Sunrisers",
+      "noble": "Dawnblessed",
+      "middle": "Morningfolk",
+      "common": "Nightowls",
+      "lower": "Noonwakers"
+    }
+  }
+]
