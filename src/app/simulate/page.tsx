@@ -39,6 +39,9 @@ import { SettingsDrawer } from '@/components/simulation';
 // End summary component
 import { EndSummary } from '@/components/simulation/EndSummary';
 
+// Error boundary
+import { ErrorBoundary } from '@/components/ui';
+
 // Lazy load ChartsPanel (heavy recharts dependency)
 const ChartsPanel = dynamic(
   () => import('@/components/charts/ChartsPanel').then((mod) => mod.ChartsPanel),
@@ -430,45 +433,47 @@ export default function SimulatePage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-deep-purple">
-      {/* Main phase content with transitions */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={phase}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="min-h-screen"
-          style={{ willChange: 'opacity' }}
-        >
-          {renderPhase()}
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Settings Drawer Overlay */}
-      {settingsOpen && <SettingsDrawer />}
-
-      {/* Charts Panel Overlay - Lazy loaded */}
-      <AnimatePresence>
-        {chartsOpen && (
+    <ErrorBoundary>
+      <div className="relative min-h-screen bg-deep-purple">
+        {/* Main phase content with transitions */}
+        <AnimatePresence mode="wait">
           <motion.div
+            key={phase}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-deep-purple"
+            transition={{ duration: 0.3 }}
+            className="min-h-screen"
             style={{ willChange: 'opacity' }}
           >
-            <Suspense fallback={
-              <div className="flex min-h-screen items-center justify-center">
-                <div className="h-10 w-10 animate-spin rounded-full border-3 border-accent-gold border-t-transparent" />
-              </div>
-            }>
-              <ChartsPanel onClose={closeChartsPanel} />
-            </Suspense>
+            {renderPhase()}
           </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+        </AnimatePresence>
+
+        {/* Settings Drawer Overlay */}
+        {settingsOpen && <SettingsDrawer />}
+
+        {/* Charts Panel Overlay - Lazy loaded */}
+        <AnimatePresence>
+          {chartsOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 bg-deep-purple"
+              style={{ willChange: 'opacity' }}
+            >
+              <Suspense fallback={
+                <div className="flex min-h-screen items-center justify-center">
+                  <div className="h-10 w-10 animate-spin rounded-full border-3 border-accent-gold border-t-transparent" />
+                </div>
+              }>
+                <ChartsPanel onClose={closeChartsPanel} />
+              </Suspense>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </ErrorBoundary>
   );
 }
