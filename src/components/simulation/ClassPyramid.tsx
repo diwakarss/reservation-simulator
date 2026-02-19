@@ -7,7 +7,7 @@
  * Color-coded by class tier. Used in TraitReveal and other screens.
  */
 
-import { motion, type Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import type { SocialClass, ClassTier } from '@/lib/simulation/types';
 import { CLASS_COLORS } from '@/lib/simulation/types';
 
@@ -63,7 +63,7 @@ function hexToRgb(hex: string): string {
 /**
  * Animation variants for each tier row.
  */
-const rowVariants: Variants = {
+const rowVariants = {
   hidden: { opacity: 0, x: -20 },
   visible: (i: number) => ({
     opacity: 1,
@@ -71,7 +71,7 @@ const rowVariants: Variants = {
     transition: {
       delay: i * 0.15,
       duration: 0.4,
-      ease: 'easeOut' as const,
+      ease: 'easeOut',
     },
   }),
 };

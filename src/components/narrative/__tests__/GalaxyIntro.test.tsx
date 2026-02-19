@@ -81,7 +81,7 @@ describe('GalaxyIntro', () => {
   it('shows continue button after all lines revealed', async () => {
     render(<GalaxyIntro {...defaultProps} />);
 
-    // Advance through all phases
+    // Advance through all phases to phase 3
     await act(async () => {
       vi.advanceTimersByTime(1500); // phase 0 -> 1
     });

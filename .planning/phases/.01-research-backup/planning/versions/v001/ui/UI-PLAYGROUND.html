@@ -1,0 +1,1840 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reservation Simulator — UI Playground</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ═══════════════════════════════════════════════════
+       DESIGN SYSTEM TOKENS (from UI-SPEC.md §1)
+       ═══════════════════════════════════════════════════ */
+    :root {
+      --bg-primary: #0a0a14;
+      --bg-surface: #1a1a2e;
+      --bg-elevated: #16213e;
+      --accent-gold: #e2b714;
+      --accent-red: #e94560;
+      --accent-teal: #2dd4bf;
+      --accent-blue: #60a5fa;
+      --accent-purple: #a78bfa;
+      --text-primary: #f0f0ff;
+      --text-secondary: #a7a7c4;
+      --text-muted: #6b6b8d;
+      --border-default: #2a2a4a;
+      --border-focus: #e2b714;
+      /* Class colors */
+      --class1: #e2b714;
+      --class2: #2dd4bf;
+      --class3: #60a5fa;
+      --class4: #a78bfa;
+      --class5: #e94560;
+      /* Spacing */
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+      --space-3xl: 64px;
+      /* Shadows */
+      --shadow-1: 0 2px 8px rgba(0,0,0,0.3);
+      --shadow-2: 0 4px 16px rgba(0,0,0,0.4);
+      --shadow-3: 0 8px 32px rgba(0,0,0,0.5);
+      /* Radius */
+      --radius-btn: 8px;
+      --radius-card: 12px;
+      --radius-input: 8px;
+      --radius-modal: 16px;
+      --radius-pill: 9999px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      background: #111;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       TOOLBAR — Screen & viewport controls
+       ═══════════════════════════════════════════════════ */
+    .toolbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 9999;
+      background: #111118;
+      border-bottom: 1px solid var(--border-default);
+      padding: 10px var(--space-md);
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+    .toolbar-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .toolbar-group {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .toolbar-btn {
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-btn);
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 150ms ease-out;
+      white-space: nowrap;
+    }
+    .toolbar-btn:hover {
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+    }
+    .toolbar-btn.active {
+      background: var(--accent-gold);
+      color: var(--bg-primary);
+      border-color: var(--accent-gold);
+      font-weight: 600;
+    }
+    .viewport-btns { display: flex; gap: 4px; }
+    .viewport-btns .toolbar-btn { font-size: 11px; padding: 4px 8px; }
+    .toolbar-sep {
+      width: 1px;
+      height: 24px;
+      background: var(--border-default);
+    }
+    .toolbar-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      letter-spacing: 0.02em;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       PREVIEW CONTAINER — desktop + mobile side by side
+       ═══════════════════════════════════════════════════ */
+    .preview-area {
+      margin-top: 60px;
+      padding: var(--space-lg);
+      display: flex;
+      gap: var(--space-lg);
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      min-height: calc(100vh - 60px);
+    }
+
+    .preview-frame {
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      position: relative;
+      background: var(--bg-primary);
+      box-shadow: var(--shadow-2);
+      flex-shrink: 0;
+    }
+    .preview-frame-label {
+      position: absolute;
+      top: -28px;
+      left: 0;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .frame-desktop {
+      width: 1024px;
+      height: 700px;
+      margin-top: 32px;
+    }
+    .frame-mobile {
+      width: 375px;
+      height: 700px;
+      margin-top: 32px;
+      border-radius: 24px;
+    }
+    .frame-mobile::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      border-radius: 4px;
+      background: var(--border-default);
+      z-index: 10;
+    }
+
+    .frame-content {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Hide scrollbar but keep functionality */
+    .frame-content::-webkit-scrollbar { width: 4px; }
+    .frame-content::-webkit-scrollbar-track { background: transparent; }
+    .frame-content::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: 4px; }
+
+    /* ═══════════════════════════════════════════════════
+       COSMIC BACKGROUND (CSS-only, §2.1)
+       ═══════════════════════════════════════════════════ */
+    .cosmic-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 20% 50%, #16213e 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 20%, #1a1a2e 0%, transparent 50%),
+                  var(--bg-primary);
+      overflow: hidden;
+    }
+    .cosmic-bg .stars {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 30% 70%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1.5px 1.5px at 50% 10%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 90% 30%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1.5px 1.5px at 15% 85%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 55% 45%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(2px 2px at 85% 80%, rgba(226,183,20,0.5), transparent),
+        radial-gradient(1px 1px at 40% 35%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1.5px 1.5px at 65% 90%, rgba(96,165,250,0.4), transparent),
+        radial-gradient(1px 1px at 25% 55%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 75% 15%, rgba(255,255,255,0.6), transparent);
+      animation: starDrift 60s linear infinite;
+    }
+    @keyframes starDrift {
+      from { transform: translateY(0); }
+      to { transform: translateY(-20px); }
+    }
+    .stars-layer2 {
+      animation-duration: 90s !important;
+      opacity: 0.6;
+      transform: scale(1.5);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       SHARED COMPONENT STYLES
+       ═══════════════════════════════════════════════════ */
+
+    /* Buttons §2.1 */
+    .btn {
+      font-family: inherit;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-btn);
+      cursor: pointer;
+      transition: all 150ms ease-out;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      text-decoration: none;
+    }
+    .btn-lg { height: 48px; padding: 0 28px; font-size: 18px; }
+    .btn-md { height: 40px; padding: 0 20px; font-size: 16px; }
+    .btn-sm { height: 32px; padding: 0 14px; font-size: 14px; }
+    .btn-primary {
+      background: var(--accent-gold);
+      color: var(--bg-primary);
+    }
+    .btn-primary:hover { filter: brightness(1.08); transform: scale(1.02); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent-gold);
+      border: 1.5px solid var(--accent-gold);
+    }
+    .btn-secondary:hover { background: rgba(226,183,20,0.1); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+    }
+    .btn-ghost:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+    .btn-danger {
+      background: var(--accent-red);
+      color: white;
+    }
+    .btn-full { width: 100%; }
+
+    /* Cards */
+    .card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-1);
+      padding: var(--space-md);
+      border: 1px solid var(--border-default);
+    }
+    .card-elevated {
+      background: var(--bg-elevated);
+      box-shadow: var(--shadow-2);
+    }
+
+    /* Metric cards §2.1 */
+    .metric-card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-1);
+      padding: var(--space-md);
+      border: 1px solid var(--border-default);
+      text-align: center;
+      min-width: 120px;
+    }
+    .metric-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: var(--space-xs);
+    }
+    .metric-value {
+      font-size: 36px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.1;
+      color: var(--text-primary);
+    }
+    .metric-delta {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      margin-top: var(--space-sm);
+    }
+    .delta-up { background: rgba(45,212,191,0.15); color: var(--accent-teal); }
+    .delta-down { background: rgba(233,69,96,0.15); color: var(--accent-red); }
+
+    /* Typography helpers */
+    .heading-page { font-size: 48px; font-weight: 700; line-height: 1.1; }
+    .heading-section { font-size: 32px; font-weight: 600; line-height: 1.2; }
+    .heading-card { font-size: 20px; font-weight: 600; line-height: 1.3; }
+    .text-body { font-size: 16px; font-weight: 400; line-height: 1.6; color: var(--text-secondary); }
+    .text-caption { font-size: 14px; font-weight: 500; line-height: 1.4; color: var(--text-muted); }
+    .text-narrative { font-size: 28px; font-weight: 300; line-height: 1.5; }
+    .text-gold { color: var(--accent-gold); }
+    .text-muted { color: var(--text-muted); }
+    .text-center { text-align: center; }
+
+    /* Mobile typography */
+    .mobile .heading-page { font-size: 32px; }
+    .mobile .heading-section { font-size: 24px; }
+    .mobile .heading-card { font-size: 18px; }
+    .mobile .text-narrative { font-size: 20px; }
+    .mobile .metric-value { font-size: 28px; }
+
+    /* ═══════════════════════════════════════════════════
+       SCREEN: LANDING (§3.1)
+       ═══════════════════════════════════════════════════ */
+    .screen { display: none; width: 100%; min-height: 100%; }
+    .screen.active { display: block; }
+
+    .landing {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+      padding: var(--space-xl);
+      position: relative;
+      text-align: center;
+    }
+    .landing-title {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: var(--space-lg);
+      text-shadow: 0 0 40px rgba(226,183,20,0.3);
+      position: relative;
+    }
+    .landing-title .glow {
+      position: absolute;
+      inset: -20px;
+      background: radial-gradient(ellipse, rgba(226,183,20,0.12), transparent 70%);
+      pointer-events: none;
+    }
+    .landing-subtitle {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin-bottom: var(--space-2xl);
+      line-height: 1.6;
+    }
+    .landing .scroll-hint {
+      position: absolute;
+      bottom: var(--space-lg);
+      color: var(--text-muted);
+      font-size: 13px;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    .mobile .landing-title { font-size: 32px; }
+    .mobile .landing-subtitle { font-size: 16px; }
+    .mobile .landing .btn-lg { width: calc(100% - 32px); }
+
+    /* ═══════════════════════════════════════════════════
+       SCREEN: INTRO (§3.2.1)
+       ═══════════════════════════════════════════════════ */
+    .intro {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+      padding: var(--space-xl);
+      position: relative;
+      text-align: center;
+    }
+    .intro .narrative-line {
+      font-size: 28px;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-md);
+    }
+    .intro .narrative-line .highlight {
+      color: var(--accent-gold);
+      font-weight: 500;
+    }
+    .intro .skip-btn {
+      position: absolute;
+      bottom: var(--space-lg);
+      right: var(--space-lg);
+    }
+    .mobile .intro .skip-btn {
+      right: auto;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .mobile .intro .narrative-line { font-size: 20px; }
+
+    /* ═══════════════════════════════════════════════════
+       SCREEN: TRAIT REVEAL (§3.2.2)
+       ═══════════════════════════════════════════════════ */
+    .trait-reveal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+      padding: var(--space-xl);
+      text-align: center;
+      position: relative;
+    }
+    .trait-text {
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin-bottom: var(--space-lg);
+    }
+    .trait-divider {
+      width: 200px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+      margin: var(--space-md) 0 var(--space-lg);
+    }
+    .trait-sacred {
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--accent-gold);
+      max-width: 480px;
+      line-height: 1.5;
+      margin-bottom: var(--space-2xl);
+    }
+    .mobile .trait-text { font-size: 18px; }
+    .mobile .trait-sacred { font-size: 19px; }
+
+    /* Class Pyramid §2.2 */
+    .class-pyramid {
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin: var(--space-lg) auto;
+    }
+    .pyramid-tier {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: 10px var(--space-md);
+      border-radius: var(--radius-btn);
+      position: relative;
+      cursor: default;
+      transition: transform 150ms ease-out;
+    }
+    .pyramid-tier:hover { transform: scale(1.02); }
+    .tier-bar {
+      height: 8px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .tier-info {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex: 1;
+      min-width: 0;
+    }
+    .tier-name {
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .tier-pop {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .tier1 .tier-bar { width: 100%; background: var(--class1); }
+    .tier2 .tier-bar { width: 85%; background: var(--class2); }
+    .tier3 .tier-bar { width: 70%; background: var(--class3); }
+    .tier4 .tier-bar { width: 55%; background: var(--class4); }
+    .tier5 .tier-bar { width: 40%; background: var(--class5); }
+    .tier1 { background: rgba(226,183,20,0.08); }
+    .tier2 { background: rgba(45,212,191,0.08); }
+    .tier3 { background: rgba(96,165,250,0.08); }
+    .tier4 { background: rgba(167,139,250,0.08); }
+    .tier5 { background: rgba(233,69,96,0.08); }
+    .tier1 .tier-name { color: var(--class1); }
+    .tier2 .tier-name { color: var(--class2); }
+    .tier3 .tier-name { color: var(--class3); }
+    .tier4 .tier-name { color: var(--class4); }
+    .tier5 .tier-name { color: var(--class5); }
+
+    .mobile .tier-info { flex-direction: column; align-items: flex-start; gap: 2px; }
+
+    /* ═══════════════════════════════════════════════════
+       SCREEN: PRE-RESERVATION (§3.2.3)
+       ═══════════════════════════════════════════════════ */
+    .pre-reservation {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--space-xl);
+      min-height: 100%;
+      position: relative;
+    }
+    .pre-reservation .section-title {
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-sm);
+    }
+    .pre-reservation .class-name-highlight {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--accent-red);
+      margin-bottom: var(--space-lg);
+    }
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: var(--space-lg);
+    }
+    .comparison-row {
+      background: rgba(226,183,20,0.05);
+      border: 1px solid rgba(226,183,20,0.15);
+      border-radius: var(--radius-card);
+      padding: var(--space-md);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      margin-bottom: var(--space-lg);
+    }
+    .comparison-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: var(--space-sm);
+    }
+    .comparison-stats {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-lg);
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .comparison-stats strong { color: var(--class1); }
+
+    /* ═══════════════════════════════════════════════════
+       SCREEN: CHOICE (§3.2.4)
+       ═══════════════════════════════════════════════════ */
+    .choice-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--space-xl);
+      min-height: 100%;
+    }
+    .choice-question {
+      font-size: 24px;
+      font-weight: 500;
+      text-align: center;
+      max-width: 500px;
+      margin-bottom: var(--space-lg);
+      line-height: 1.4;
+    }
+    .info-box {
+      background: rgba(96,165,250,0.08);
+      border: 1px solid rgba(96,165,250,0.2);
+      border-radius: var(--radius-card);
+      padding: var(--space-md);
+      max-width: 460px;
+      width: 100%;
+      margin-bottom: var(--space-lg);
+      display: flex;
+      gap: var(--space-sm);
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .info-icon { color: var(--accent-blue); flex-shrink: 0; font-size: 16px; }
+    .choice-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: var(--space-lg);
+    }
+    .choice-expansion {
+      width: 100%;
+      max-width: 460px;
+      border-top: 1px solid var(--border-default);
+      padding-top: var(--space-lg);
+    }
+    .slider-group {
+      margin-bottom: var(--space-lg);
+    }
+    .slider-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-sm);
+      display: flex;
+      justify-content: space-between;
+    }
+    .slider-value {
+      color: var(--accent-gold);
+      font-weight: 700;
+    }
+    .slider-track {
+      width: 100%;
+      height: 4px;
+      background: var(--bg-surface);
+      border-radius: 2px;
+      position: relative;
+      margin: var(--space-md) 0;
+    }
+    .slider-fill {
+      height: 100%;
+      background: var(--accent-gold);
+      border-radius: 2px;
+      width: 54%;
+    }
+    .slider-thumb {
+      position: absolute;
+      top: 50%;
+      left: 54%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      border: 2px solid white;
+      box-shadow: var(--shadow-1);
+    }
+    .slider-range {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: 10px var(--space-md);
+      border-radius: var(--radius-btn);
+      background: rgba(255,255,255,0.02);
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .checkbox-row .cb {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border-default);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .checkbox-row.checked .cb {
+      background: var(--accent-gold);
+      border-color: var(--accent-gold);
+    }
+    .cb-check { display: none; font-size: 12px; color: var(--bg-primary); font-weight: 700; }
+    .checkbox-row.checked .cb-check { display: inline; }
+    .mobile .choice-question { font-size: 20px; }
+
+    /* ═══════════════════════════════════════════════════
+       SCREEN: TIME LOOP (§3.2.5)
+       ═══════════════════════════════════════════════════ */
+    .time-loop {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    .sim-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-md) var(--space-lg);
+      border-bottom: 1px solid var(--border-default);
+      background: rgba(10,10,20,0.8);
+    }
+    .sim-topbar-left {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      color: var(--text-secondary);
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .sim-topbar-right {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent-gold);
+    }
+    .time-loop-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--space-xl);
+      position: relative;
+    }
+
+    /* TimeDial §2.2 */
+    .time-dial {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 3px solid var(--border-default);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin: var(--space-lg) 0;
+      cursor: pointer;
+      box-shadow: var(--shadow-2);
+    }
+    .time-dial-ring {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: var(--accent-gold);
+      border-right-color: var(--accent-gold);
+    }
+    .dial-year-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .dial-year {
+      font-size: 48px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+    .dial-action {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-gold);
+      margin-top: var(--space-sm);
+    }
+
+    .mobile .time-dial { width: 160px; height: 160px; }
+    .mobile .dial-year { font-size: 36px; }
+
+    /* Narrative block */
+    .narrative-block {
+      background: var(--bg-surface);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-default);
+      padding: var(--space-lg);
+      width: 100%;
+      max-width: 560px;
+      margin: var(--space-md) 0;
+    }
+    .narrative-text {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-md);
+      line-height: 1.5;
+    }
+    .narrative-highlight {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      font-size: 15px;
+      color: var(--accent-gold);
+      font-weight: 500;
+      margin-bottom: var(--space-md);
+    }
+    .narrative-highlight .star { flex-shrink: 0; }
+
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-sm);
+    }
+    .metric-mini {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-btn);
+      padding: var(--space-sm);
+      text-align: center;
+    }
+    .metric-mini-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .metric-mini-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+    }
+    .metric-mini-value .arrow { font-size: 11px; }
+    .metric-mini-value .arrow.up { color: var(--accent-teal); }
+    .metric-mini-value .arrow.down { color: var(--accent-red); }
+
+    .mobile .metrics-row { grid-template-columns: repeat(2, 1fr); }
+    .mobile .narrative-block { padding: var(--space-md); }
+
+    /* Bottom action bar */
+    .action-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md) var(--space-lg);
+      border-top: 1px solid var(--border-default);
+      background: rgba(10,10,20,0.9);
+    }
+    .mobile .action-bar {
+      position: sticky;
+      bottom: 0;
+    }
+    .mobile .action-bar .btn-md { font-size: 13px; padding: 0 12px; }
+
+    /* ═══════════════════════════════════════════════════
+       SCREEN: CHARTS (§3.2.6)
+       ═══════════════════════════════════════════════════ */
+    .charts-screen {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    .charts-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-md) var(--space-lg);
+      border-bottom: 1px solid var(--border-default);
+    }
+    .charts-tabs {
+      display: flex;
+      gap: 4px;
+      padding: 0 var(--space-lg);
+      margin-top: var(--space-md);
+      overflow-x: auto;
+    }
+    .chart-tab {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-pill);
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 150ms ease-out;
+    }
+    .chart-tab:hover { background: rgba(255,255,255,0.05); }
+    .chart-tab.active {
+      background: var(--accent-gold);
+      color: var(--bg-primary);
+      border-color: var(--accent-gold);
+      font-weight: 600;
+    }
+    .chart-area {
+      flex: 1;
+      padding: var(--space-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    /* Simulated chart */
+    .chart-placeholder {
+      width: 100%;
+      max-width: 700px;
+      height: 300px;
+      position: relative;
+      border-left: 2px solid var(--border-default);
+      border-bottom: 2px solid var(--border-default);
+      padding: var(--space-md);
+    }
+    .chart-y-label {
+      position: absolute;
+      left: -40px;
+      top: 50%;
+      transform: rotate(-90deg) translateX(50%);
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .chart-x-labels {
+      display: flex;
+      justify-content: space-between;
+      padding-top: var(--space-sm);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    /* SVG chart lines */
+    .chart-svg {
+      width: 100%;
+      height: 100%;
+    }
+    .chart-line {
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .line-class1 { stroke: var(--class1); }
+    .line-class2 { stroke: var(--class2); }
+    .line-class3 { stroke: var(--class3); }
+    .line-class4 { stroke: var(--class4); }
+    .line-class5 { stroke: var(--class5); }
+
+    /* Timeline scrubber */
+    .timeline-scrubber {
+      margin: 0 var(--space-lg) var(--space-md);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--bg-surface);
+      border-radius: var(--radius-btn);
+      border: 1px solid var(--border-default);
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    .scrubber-track {
+      flex: 1;
+      height: 4px;
+      background: var(--bg-elevated);
+      border-radius: 2px;
+      position: relative;
+    }
+    .scrubber-fill {
+      height: 100%;
+      width: 66%;
+      background: var(--accent-gold);
+      border-radius: 2px;
+    }
+    .scrubber-thumb {
+      position: absolute;
+      top: 50%;
+      left: 66%;
+      transform: translate(-50%, -50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      border: 2px solid white;
+      cursor: pointer;
+    }
+    .scrubber-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    /* Chart legend */
+    .chart-legend {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-md);
+      padding: 0 var(--space-lg) var(--space-md);
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .mobile .chart-placeholder { height: 220px; }
+    .mobile .charts-tabs { padding: 0 var(--space-md); }
+    .mobile .chart-area { padding: var(--space-md); }
+
+    /* ═══════════════════════════════════════════════════
+       SCREEN: END SUMMARY (§3.2.7)
+       ═══════════════════════════════════════════════════ */
+    .end-summary {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--space-xl);
+      min-height: 100%;
+    }
+    .end-title {
+      font-size: 40px;
+      font-weight: 700;
+      margin-bottom: var(--space-lg);
+      text-align: center;
+    }
+    .insight-card {
+      background: rgba(226,183,20,0.06);
+      border: 1px solid rgba(226,183,20,0.2);
+      border-radius: var(--radius-card);
+      padding: var(--space-lg);
+      max-width: 520px;
+      width: 100%;
+      margin-bottom: var(--space-2xl);
+    }
+    .insight-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+    .insight-text {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .end-section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-lg);
+      position: relative;
+      text-align: center;
+    }
+    .end-section-title-line {
+      display: inline-block;
+      padding: 0 var(--space-md);
+      position: relative;
+    }
+    .end-section-title-line::before,
+    .end-section-title-line::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40px;
+      height: 1px;
+      background: var(--border-default);
+    }
+    .end-section-title-line::before { right: calc(100% + 4px); }
+    .end-section-title-line::after { left: calc(100% + 4px); }
+
+    /* Most improved card */
+    .result-card-featured {
+      border: 2px solid var(--accent-gold);
+      box-shadow: 0 0 20px rgba(226,183,20,0.1);
+      background: var(--bg-surface);
+      border-radius: var(--radius-card);
+      padding: var(--space-lg);
+      max-width: 460px;
+      width: 100%;
+      margin-bottom: var(--space-lg);
+    }
+    .featured-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-sm);
+    }
+    .result-class-name {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: var(--space-md);
+    }
+    .result-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-sm);
+    }
+    .result-metric {
+      font-size: 14px;
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .result-metric-name { color: var(--text-muted); }
+    .result-metric-change { font-weight: 600; }
+    .change-up { color: var(--accent-teal); }
+    .change-down { color: var(--accent-red); }
+
+    /* Other class result cards */
+    .result-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+      max-width: 460px;
+      width: 100%;
+      margin-bottom: var(--space-2xl);
+    }
+    .result-card-small {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-card);
+      padding: var(--space-md);
+    }
+    .result-card-small .result-class-name {
+      font-size: 14px;
+      margin-bottom: var(--space-sm);
+    }
+    .result-card-small .result-metric {
+      font-size: 12px;
+      grid-template-columns: 1fr;
+    }
+
+    .end-actions {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .mobile .end-title { font-size: 28px; }
+    .mobile .result-cards-grid { grid-template-columns: 1fr; }
+    .mobile .result-card-featured { padding: var(--space-md); }
+
+    /* ═══════════════════════════════════════════════════
+       DRAWER (overlay for settings)
+       ═══════════════════════════════════════════════════ */
+    .drawer-overlay {
+      display: none;
+      position: absolute;
+      inset: 0;
+      z-index: 100;
+    }
+    .drawer-overlay.active { display: flex; justify-content: flex-end; }
+    .drawer-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+    }
+    .drawer-panel {
+      position: relative;
+      width: 360px;
+      max-width: 100%;
+      height: 100%;
+      background: var(--bg-elevated);
+      box-shadow: var(--shadow-3);
+      padding: var(--space-lg);
+      overflow-y: auto;
+      z-index: 1;
+    }
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-xl);
+    }
+    .drawer-title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .drawer-close {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-btn);
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .drawer-close:hover { background: rgba(255,255,255,0.05); }
+    .drawer-section {
+      margin-bottom: var(--space-xl);
+    }
+    .drawer-section-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-md);
+    }
+    .radio-group {
+      display: flex;
+      gap: var(--space-sm);
+    }
+    .radio-btn {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-btn);
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 150ms ease-out;
+    }
+    .radio-btn.active {
+      background: var(--accent-gold);
+      color: var(--bg-primary);
+      border-color: var(--accent-gold);
+      font-weight: 600;
+    }
+
+    .mobile .drawer-panel {
+      width: 100%;
+      border-radius: var(--radius-modal) var(--radius-modal) 0 0;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       UTILITY
+       ═══════════════════════════════════════════════════ */
+    .hidden { display: none !important; }
+    .relative { position: relative; }
+    .z-content { position: relative; z-index: 1; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════
+       TOOLBAR
+       ═══════════════════════════════════════════════════ -->
+  <div class="toolbar">
+    <span class="toolbar-title">Reservation Simulator</span>
+    <div class="toolbar-sep"></div>
+
+    <div class="toolbar-group">
+      <span class="toolbar-label">Screen</span>
+      <button class="toolbar-btn active" data-screen="landing">Landing</button>
+      <button class="toolbar-btn" data-screen="intro">Intro</button>
+      <button class="toolbar-btn" data-screen="trait">Trait Reveal</button>
+      <button class="toolbar-btn" data-screen="prereserv">Pre-Reserv</button>
+      <button class="toolbar-btn" data-screen="choice">Choice</button>
+      <button class="toolbar-btn" data-screen="timeloop">Time Loop</button>
+      <button class="toolbar-btn" data-screen="charts">Charts</button>
+      <button class="toolbar-btn" data-screen="endsummary">End Summary</button>
+    </div>
+
+    <div class="toolbar-sep"></div>
+
+    <div class="toolbar-group">
+      <span class="toolbar-label">Extras</span>
+      <button class="toolbar-btn" id="toggleDrawer">Settings Drawer</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       PREVIEW AREA — Desktop + Mobile side by side
+       ═══════════════════════════════════════════════════ -->
+  <div class="preview-area">
+
+    <!-- DESKTOP FRAME -->
+    <div class="preview-frame frame-desktop">
+      <span class="preview-frame-label">Desktop — 1024 x 700</span>
+      <div class="frame-content" id="desktopFrame"></div>
+    </div>
+
+    <!-- MOBILE FRAME -->
+    <div class="preview-frame frame-mobile">
+      <span class="preview-frame-label">Mobile — 375 x 700</span>
+      <div class="frame-content mobile" id="mobileFrame"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       SCREEN TEMPLATES (hidden, cloned into frames)
+       ═══════════════════════════════════════════════════ -->
+  <template id="tpl-landing">
+    <div class="cosmic-bg">
+      <div class="stars"></div>
+      <div class="stars stars-layer2"></div>
+    </div>
+    <div class="landing z-content">
+      <div class="landing-title">
+        <div class="glow"></div>
+        RESERVATION SIMULATOR
+      </div>
+      <p class="landing-subtitle">
+        Experience how policy shapes society across generations
+        in a galaxy far, far away...
+      </p>
+      <button class="btn btn-primary btn-lg">START SIMULATION</button>
+      <div class="scroll-hint">&#9660; scroll</div>
+    </div>
+  </template>
+
+  <template id="tpl-intro">
+    <div class="cosmic-bg">
+      <div class="stars"></div>
+      <div class="stars stars-layer2"></div>
+    </div>
+    <div class="intro z-content">
+      <p class="narrative-line">In a galaxy far away...</p>
+      <p class="narrative-line">On a planet called <span class="highlight">ZEPHYRIA-7</span>...</p>
+      <p class="narrative-line">In the nation of <span class="highlight">VARNASHRAMA PRIME</span>...</p>
+      <button class="btn btn-ghost btn-sm skip-btn">Skip &#8594;</button>
+    </div>
+  </template>
+
+  <template id="tpl-trait">
+    <div class="cosmic-bg"><div class="stars"></div></div>
+    <div class="trait-reveal z-content">
+      <p class="trait-text">The people were divided by one sacred truth...</p>
+      <div class="trait-divider"></div>
+      <p class="trait-sacred">"Those whose earlobes vibrate at exactly 432Hz were chosen by the cosmos"</p>
+
+      <p class="text-caption" style="margin-bottom:var(--space-md)">And so, society was ordered:</p>
+
+      <div class="class-pyramid">
+        <div class="pyramid-tier tier1">
+          <div class="tier-bar"></div>
+          <div class="tier-info">
+            <span class="tier-name">The Sacred 432 Resonants</span>
+            <span class="tier-pop">10%</span>
+          </div>
+        </div>
+        <div class="pyramid-tier tier2">
+          <div class="tier-bar"></div>
+          <div class="tier-info">
+            <span class="tier-name">Noble Frequency Keepers</span>
+            <span class="tier-pop">20%</span>
+          </div>
+        </div>
+        <div class="pyramid-tier tier3">
+          <div class="tier-bar"></div>
+          <div class="tier-info">
+            <span class="tier-name">Common Vibration Folk</span>
+            <span class="tier-pop">30%</span>
+          </div>
+        </div>
+        <div class="pyramid-tier tier4">
+          <div class="tier-bar"></div>
+          <div class="tier-info">
+            <span class="tier-name">The Dissonant Ones</span>
+            <span class="tier-pop">25%</span>
+          </div>
+        </div>
+        <div class="pyramid-tier tier5">
+          <div class="tier-bar"></div>
+          <div class="tier-info">
+            <span class="tier-name">The Frequency-Deaf</span>
+            <span class="tier-pop">15%</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-secondary btn-md" style="margin-top:var(--space-lg)">Continue &#8594;</button>
+    </div>
+  </template>
+
+  <template id="tpl-prereserv">
+    <div class="cosmic-bg"><div class="stars"></div></div>
+    <div class="pre-reservation z-content">
+      <p class="section-title">Meanwhile, at the bottom...</p>
+      <p class="class-name-highlight">"The Frequency-Deaf"</p>
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-label">Poverty</div>
+          <div class="metric-value" style="color:var(--accent-red)">65%</div>
+          <div class="metric-delta delta-down">&#9650;&#9650;&#9650; high</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Education</div>
+          <div class="metric-value" style="color:var(--accent-red)">3%</div>
+          <div class="metric-delta delta-down">&#9660;&#9660;&#9660; low</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Employment</div>
+          <div class="metric-value">5%</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Life Exp.</div>
+          <div class="metric-value">62<span style="font-size:18px;color:var(--text-muted)">yr</span></div>
+        </div>
+      </div>
+
+      <div class="comparison-row">
+        <div class="comparison-label">vs. "The Sacred 432 Resonants"</div>
+        <div class="comparison-stats">
+          <span>Education: <strong>45%</strong></span>
+          <span style="color:var(--border-default)">|</span>
+          <span>Poverty: <strong>5%</strong></span>
+        </div>
+      </div>
+
+      <button class="btn btn-secondary btn-md">Continue &#8594;</button>
+    </div>
+  </template>
+
+  <template id="tpl-choice">
+    <div class="cosmic-bg"><div class="stars"></div></div>
+    <div class="choice-screen z-content">
+      <p class="choice-question">"Do you wish to provide reservation for the Frequency-Deaf?"</p>
+
+      <div class="info-box">
+        <span class="info-icon">&#8505;</span>
+        <span>Reservation guarantees a percentage of education and job opportunities for disadvantaged classes.</span>
+      </div>
+
+      <div class="choice-buttons">
+        <button class="btn btn-primary btn-md btn-full">YES, PROVIDE RESERVATION</button>
+        <button class="btn btn-secondary btn-md btn-full">NO, CONTINUE WITHOUT</button>
+      </div>
+
+      <div class="choice-expansion">
+        <div class="slider-group">
+          <div class="slider-label">
+            <span>Reservation percentage:</span>
+            <span class="slider-value">27%</span>
+          </div>
+          <div class="slider-track">
+            <div class="slider-fill"></div>
+            <div class="slider-thumb"></div>
+          </div>
+          <div class="slider-range">
+            <span>0%</span>
+            <span>50%</span>
+          </div>
+        </div>
+
+        <p class="text-caption" style="margin-bottom:var(--space-sm)">Benefiting classes:</p>
+        <div class="checkbox-group">
+          <div class="checkbox-row checked">
+            <div class="cb"><span class="cb-check">&#10003;</span></div>
+            <span>Class 4: The Dissonant Ones</span>
+          </div>
+          <div class="checkbox-row checked">
+            <div class="cb"><span class="cb-check">&#10003;</span></div>
+            <span>Class 5: The Frequency-Deaf</span>
+          </div>
+          <div class="checkbox-row">
+            <div class="cb"><span class="cb-check">&#10003;</span></div>
+            <span>Class 3: Common Vibration Folk</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-lg btn-full" style="margin-top:var(--space-lg)">BEGIN SIMULATION &#8594;</button>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-timeloop">
+    <div class="time-loop">
+      <div class="sim-topbar">
+        <div class="sim-topbar-left">&#9776; Settings</div>
+        <div class="sim-topbar-right">Year: 40</div>
+      </div>
+
+      <div class="cosmic-bg"><div class="stars"></div></div>
+
+      <div class="time-loop-body z-content">
+        <div class="time-dial">
+          <div class="time-dial-ring"></div>
+          <div class="dial-year-label">Year</div>
+          <div class="dial-year">40</div>
+          <div class="dial-action">&#9654; Advance</div>
+        </div>
+
+        <div class="narrative-block">
+          <p class="narrative-text">"40 years have passed..."</p>
+          <div class="narrative-highlight">
+            <span class="star">&#9733;</span>
+            <span>Education access for the Frequency-Deaf increased from 3% to 18%!</span>
+          </div>
+          <div class="metrics-row">
+            <div class="metric-mini">
+              <div class="metric-mini-label">Education</div>
+              <div class="metric-mini-value">3%&#8594;18% <span class="arrow up">&#8593;</span></div>
+            </div>
+            <div class="metric-mini">
+              <div class="metric-mini-label">Poverty</div>
+              <div class="metric-mini-value">65%&#8594;42% <span class="arrow up">&#8595;</span></div>
+            </div>
+            <div class="metric-mini">
+              <div class="metric-mini-label">Employment</div>
+              <div class="metric-mini-value">5%&#8594;19% <span class="arrow up">&#8593;</span></div>
+            </div>
+            <div class="metric-mini">
+              <div class="metric-mini-label">Life Exp.</div>
+              <div class="metric-mini-value">62&#8594;66yr <span class="arrow up">&#8593;</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-bar">
+        <button class="btn btn-ghost btn-md">&#8592; Back</button>
+        <button class="btn btn-secondary btn-md">View Charts</button>
+        <button class="btn btn-primary btn-md">Advance 20yr &#8594;</button>
+      </div>
+    </div>
+
+    <div class="drawer-overlay" data-drawer="settings">
+      <div class="drawer-backdrop"></div>
+      <div class="drawer-panel">
+        <div class="drawer-header">
+          <span class="drawer-title">Settings</span>
+          <button class="drawer-close">&#10005;</button>
+        </div>
+
+        <div class="drawer-section">
+          <div class="drawer-section-title">Reservation %</div>
+          <div class="slider-group">
+            <div class="slider-label">
+              <span>Percentage</span>
+              <span class="slider-value">27%</span>
+            </div>
+            <div class="slider-track">
+              <div class="slider-fill"></div>
+              <div class="slider-thumb"></div>
+            </div>
+            <div class="slider-range"><span>0%</span><span>50%</span></div>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <div class="drawer-section-title">Target Classes</div>
+          <div class="checkbox-group">
+            <div class="checkbox-row checked"><div class="cb"><span class="cb-check">&#10003;</span></div><span>Class 4: The Dissonant Ones</span></div>
+            <div class="checkbox-row checked"><div class="cb"><span class="cb-check">&#10003;</span></div><span>Class 5: The Frequency-Deaf</span></div>
+            <div class="checkbox-row"><div class="cb"><span class="cb-check">&#10003;</span></div><span>Class 3: Common Vibration Folk</span></div>
+          </div>
+        </div>
+
+        <div class="drawer-section">
+          <div class="drawer-section-title">Time Jump Size</div>
+          <div class="radio-group">
+            <button class="radio-btn">5 yr</button>
+            <button class="radio-btn">10 yr</button>
+            <button class="radio-btn active">20 yr</button>
+          </div>
+        </div>
+
+        <button class="btn btn-ghost btn-sm" style="margin-top:var(--space-md)">Reset to Defaults</button>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-charts">
+    <div class="charts-screen">
+      <div class="charts-header">
+        <button class="btn btn-ghost btn-sm">&#8592; Back to Simulation</button>
+        <span class="text-caption">Year: 0&#8211;60</span>
+      </div>
+
+      <div class="charts-tabs">
+        <button class="chart-tab active">Education</button>
+        <button class="chart-tab">Employment</button>
+        <button class="chart-tab">Wealth</button>
+        <button class="chart-tab">Poverty</button>
+        <button class="chart-tab">Life Exp.</button>
+      </div>
+
+      <div class="chart-area">
+        <div class="chart-placeholder">
+          <span class="chart-y-label">Education Access (%)</span>
+          <svg class="chart-svg" viewBox="0 0 600 250" preserveAspectRatio="none">
+            <line x1="0" y1="0" x2="600" y2="0" stroke="rgba(255,255,255,0.05)" />
+            <line x1="0" y1="62.5" x2="600" y2="62.5" stroke="rgba(255,255,255,0.05)" />
+            <line x1="0" y1="125" x2="600" y2="125" stroke="rgba(255,255,255,0.05)" />
+            <line x1="0" y1="187.5" x2="600" y2="187.5" stroke="rgba(255,255,255,0.05)" />
+
+            <!-- Class 1: starts 45%, stays ~48% -->
+            <polyline class="chart-line line-class1" points="0,137 200,131 400,125 600,118" />
+            <!-- Class 2: starts 30%, goes to 38% -->
+            <polyline class="chart-line line-class2" points="0,175 200,165 400,158 600,150" />
+            <!-- Class 3: starts 20%, goes to 32% -->
+            <polyline class="chart-line line-class3" points="0,200 200,190 400,180 600,170" />
+            <!-- Class 4: starts 10%, goes to 22% (reservation boost) -->
+            <polyline class="chart-line line-class4" points="0,225 200,215 400,200 600,185" />
+            <!-- Class 5: starts 3%, goes to 18% (big reservation boost) -->
+            <polyline class="chart-line line-class5" points="0,242 200,230 400,215 600,200" />
+          </svg>
+          <div class="chart-x-labels">
+            <span>Year 0</span>
+            <span>20</span>
+            <span>40</span>
+            <span>60</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-scrubber">
+        <span class="scrubber-label">&#9654;</span>
+        <div class="scrubber-track">
+          <div class="scrubber-fill"></div>
+          <div class="scrubber-thumb"></div>
+        </div>
+        <span class="scrubber-label">Yr 40</span>
+      </div>
+
+      <div class="chart-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--class1)"></div> Class 1</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--class2)"></div> Class 2</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--class3)"></div> Class 3</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--class4)"></div> Class 4</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--class5)"></div> Class 5</div>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-endsummary">
+    <div class="cosmic-bg"><div class="stars"></div></div>
+    <div class="end-summary z-content">
+      <div class="end-title">After 100 Years...</div>
+
+      <div class="insight-card">
+        <div class="insight-badge">&#9733; Key Insight</div>
+        <p class="insight-text">
+          Education access for the Frequency-Deaf went from <strong style="color:var(--accent-teal)">3% to 28%</strong>,
+          while poverty dropped from <strong style="color:var(--accent-teal)">65% to 32%</strong>.
+          Reservation policy accelerated upward mobility significantly.
+        </p>
+      </div>
+
+      <div class="end-section-title"><span class="end-section-title-line">Class-by-Class Results</span></div>
+
+      <div class="result-card-featured">
+        <div class="featured-badge">&#127942; Most Improved</div>
+        <div class="result-class-name" style="color:var(--class5)">The Frequency-Deaf</div>
+        <div class="result-metrics">
+          <div class="result-metric">
+            <span class="result-metric-name">Education</span>
+            <span class="result-metric-change change-up">3% &#8594; 28% &#8593;</span>
+          </div>
+          <div class="result-metric">
+            <span class="result-metric-name">Poverty</span>
+            <span class="result-metric-change change-up">65% &#8594; 32% &#8595;</span>
+          </div>
+          <div class="result-metric">
+            <span class="result-metric-name">Employment</span>
+            <span class="result-metric-change change-up">5% &#8594; 26% &#8593;</span>
+          </div>
+          <div class="result-metric">
+            <span class="result-metric-name">Life Exp.</span>
+            <span class="result-metric-change change-up">62 &#8594; 69yr &#8593;</span>
+          </div>
+          <div class="result-metric">
+            <span class="result-metric-name">Wealth</span>
+            <span class="result-metric-change change-up">3% &#8594; 7% &#8593;</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-cards-grid">
+        <div class="result-card-small">
+          <div class="result-class-name" style="color:var(--class4)">The Dissonant Ones</div>
+          <div class="result-metric"><span class="result-metric-name">Edu</span><span class="result-metric-change change-up">10%&#8594;22% &#8593;</span></div>
+          <div class="result-metric"><span class="result-metric-name">Pov</span><span class="result-metric-change change-up">42%&#8594;24% &#8595;</span></div>
+        </div>
+        <div class="result-card-small">
+          <div class="result-class-name" style="color:var(--class3)">Common Vibration Folk</div>
+          <div class="result-metric"><span class="result-metric-name">Edu</span><span class="result-metric-change change-up">20%&#8594;35% &#8593;</span></div>
+          <div class="result-metric"><span class="result-metric-name">Pov</span><span class="result-metric-change change-up">25%&#8594;15% &#8595;</span></div>
+        </div>
+        <div class="result-card-small">
+          <div class="result-class-name" style="color:var(--class2)">Noble Frequency Keepers</div>
+          <div class="result-metric"><span class="result-metric-name">Edu</span><span class="result-metric-change">30%&#8594;40% &#8593;</span></div>
+          <div class="result-metric"><span class="result-metric-name">Wealth</span><span class="result-metric-change change-down">28%&#8594;22% &#8595;</span></div>
+        </div>
+        <div class="result-card-small">
+          <div class="result-class-name" style="color:var(--class1)">The Sacred 432 Resonants</div>
+          <div class="result-metric"><span class="result-metric-name">Edu</span><span class="result-metric-change">45%&#8594;48% &#8594;</span></div>
+          <div class="result-metric"><span class="result-metric-name">Wealth</span><span class="result-metric-change change-down">40%&#8594;32% &#8595;</span></div>
+        </div>
+      </div>
+
+      <div class="end-actions">
+        <button class="btn btn-primary btn-lg btn-full">TRY AGAIN (same world)</button>
+        <button class="btn btn-secondary btn-md btn-full">NEW WORLD</button>
+        <button class="btn btn-ghost btn-md btn-full">VIEW FULL CHARTS</button>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    // ═══════════════════════════════════════════════════
+    // RENDERING ENGINE — uses <template> + cloneNode
+    // (No innerHTML — all content from trusted templates)
+    // ═══════════════════════════════════════════════════
+
+    const desktopFrame = document.getElementById('desktopFrame');
+    const mobileFrame = document.getElementById('mobileFrame');
+
+    function renderScreen(screenId) {
+      var tpl = document.getElementById('tpl-' + screenId);
+      if (!tpl) return;
+
+      // Clear frames using DOM API
+      while (desktopFrame.firstChild) desktopFrame.removeChild(desktopFrame.firstChild);
+      while (mobileFrame.firstChild) mobileFrame.removeChild(mobileFrame.firstChild);
+
+      // Clone template content into each frame
+      desktopFrame.appendChild(tpl.content.cloneNode(true));
+      mobileFrame.appendChild(tpl.content.cloneNode(true));
+
+      // Update active toolbar button
+      document.querySelectorAll('.toolbar-btn[data-screen]').forEach(function(btn) {
+        if (btn.dataset.screen === screenId) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // Reset drawer toggle state
+      document.getElementById('toggleDrawer').classList.remove('active');
+    }
+
+    // Screen navigation
+    document.querySelectorAll('.toolbar-btn[data-screen]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        renderScreen(btn.dataset.screen);
+      });
+    });
+
+    // Settings drawer toggle
+    document.getElementById('toggleDrawer').addEventListener('click', function() {
+      var drawers = document.querySelectorAll('[data-drawer="settings"]');
+      var isActive = this.classList.contains('active');
+      drawers.forEach(function(d) {
+        if (isActive) {
+          d.classList.remove('active');
+        } else {
+          d.classList.add('active');
+        }
+      });
+      this.classList.toggle('active');
+    });
+
+    // Delegated click handlers for interactive elements
+    document.addEventListener('click', function(e) {
+      // Chart tabs
+      if (e.target.classList.contains('chart-tab')) {
+        var parent = e.target.closest('.charts-tabs');
+        if (parent) {
+          parent.querySelectorAll('.chart-tab').forEach(function(t) { t.classList.remove('active'); });
+          e.target.classList.add('active');
+        }
+      }
+      // Radio buttons
+      if (e.target.classList.contains('radio-btn')) {
+        var parent = e.target.closest('.radio-group');
+        if (parent) {
+          parent.querySelectorAll('.radio-btn').forEach(function(b) { b.classList.remove('active'); });
+          e.target.classList.add('active');
+        }
+      }
+      // Checkbox toggles
+      var cbRow = e.target.closest('.checkbox-row');
+      if (cbRow) {
+        cbRow.classList.toggle('checked');
+      }
+      // Drawer close
+      if (e.target.closest('.drawer-close') || e.target.classList.contains('drawer-backdrop')) {
+        var overlay = e.target.closest('.drawer-overlay');
+        if (overlay) overlay.classList.remove('active');
+        document.getElementById('toggleDrawer').classList.remove('active');
+      }
+    });
+
+    // Initial render
+    renderScreen('landing');
+  </script>
+</body>
+</html>

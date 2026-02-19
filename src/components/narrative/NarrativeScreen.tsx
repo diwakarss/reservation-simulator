@@ -8,7 +8,7 @@
  * Respects reduced motion preferences.
  */
 
-import { motion, AnimatePresence, type Variants } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { type ReactNode } from 'react';
 
 interface NarrativeScreenProps {
@@ -41,7 +41,7 @@ interface NarrativeLineProps {
 /**
  * Line reveal animation variants.
  */
-const lineVariants: Variants = {
+const lineVariants = {
   hidden: {
     opacity: 0,
     y: 12,
@@ -51,7 +51,7 @@ const lineVariants: Variants = {
     y: 0,
     transition: {
       duration: 0.5,
-      ease: 'easeOut' as const,
+      ease: 'easeOut',
     },
   },
   exit: {

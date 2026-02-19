@@ -1,0 +1,4849 @@
+{
+  "version": 1,
+  "created": "2026-02-19T19:23:14+00:00",
+  "last_scan": "2026-02-19T19:35:43+00:00",
+  "scan_count": 4,
+  "overall_score": 94.4,
+  "objective_score": 86.1,
+  "strict_score": 94.4,
+  "verified_strict_score": 94.4,
+  "stats": {
+    "total": 129,
+    "open": 84,
+    "fixed": 0,
+    "auto_resolved": 45,
+    "wontfix": 0,
+    "false_positive": 0,
+    "by_tier": {
+      "1": {
+        "open": 9,
+        "fixed": 0,
+        "auto_resolved": 3,
+        "wontfix": 0,
+        "false_positive": 0
+      },
+      "2": {
+        "open": 21,
+        "fixed": 0,
+        "auto_resolved": 25,
+        "wontfix": 0,
+        "false_positive": 0
+      },
+      "3": {
+        "open": 35,
+        "fixed": 0,
+        "auto_resolved": 17,
+        "wontfix": 0,
+        "false_positive": 0
+      },
+      "4": {
+        "open": 19,
+        "fixed": 0,
+        "auto_resolved": 0,
+        "wontfix": 0,
+        "false_positive": 0
+      }
+    }
+  },
+  "findings": {
+    "unused::src/lib/simulation/__tests__/engine.test.ts::stepOneYear": {
+      "id": "unused::src/lib/simulation/__tests__/engine.test.ts::stepOneYear",
+      "detector": "unused",
+      "file": "src/lib/simulation/__tests__/engine.test.ts",
+      "tier": 1,
+      "confidence": "high",
+      "summary": "Unused imports: stepOneYear",
+      "detail": {
+        "line": 12,
+        "category": "imports"
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:25:31+00:00",
+      "resolved_at": "2026-02-19T19:34:23+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "test",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:34:23+00:00",
+        "scan_verified": true
+      }
+    },
+    "unused::src/lib/simulation/__tests__/engine.test.ts::YearSnapshot": {
+      "id": "unused::src/lib/simulation/__tests__/engine.test.ts::YearSnapshot",
+      "detector": "unused",
+      "file": "src/lib/simulation/__tests__/engine.test.ts",
+      "tier": 1,
+      "confidence": "high",
+      "summary": "Unused imports: YearSnapshot",
+      "detail": {
+        "line": 31,
+        "category": "imports"
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:25:31+00:00",
+      "resolved_at": "2026-02-19T19:34:23+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "test",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:34:23+00:00",
+        "scan_verified": true
+      }
+    },
+    "unused::src/lib/store/simulation.ts::createDefaultClassPolicy": {
+      "id": "unused::src/lib/store/simulation.ts::createDefaultClassPolicy",
+      "detector": "unused",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 1,
+      "confidence": "high",
+      "summary": "Unused imports: createDefaultClassPolicy",
+      "detail": {
+        "line": 26,
+        "category": "imports"
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "unused::src/lib/store/simulation.ts::decodePolicy": {
+      "id": "unused::src/lib/store/simulation.ts::decodePolicy",
+      "detector": "unused",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 1,
+      "confidence": "high",
+      "summary": "Unused imports: decodePolicy",
+      "detail": {
+        "line": 40,
+        "category": "imports"
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:25:31+00:00",
+      "resolved_at": "2026-02-19T19:34:23+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:34:23+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/app/layout.tsx::metadata": {
+      "id": "exports::src/app/layout.tsx::metadata",
+      "detector": "exports",
+      "file": "src/app/layout.tsx",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: metadata",
+      "detail": {
+        "line": 19,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/lib/content/classNames.ts::getAllClassNames": {
+      "id": "exports::src/lib/content/classNames.ts::getAllClassNames",
+      "detector": "exports",
+      "file": "src/lib/content/classNames.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: getAllClassNames",
+      "detail": {
+        "line": 56,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/lib/content/classNames.ts::validateTraitClassNames": {
+      "id": "exports::src/lib/content/classNames.ts::validateTraitClassNames",
+      "detector": "exports",
+      "file": "src/lib/content/classNames.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: validateTraitClassNames",
+      "detail": {
+        "line": 74,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/lib/content/classNames.ts::hasUniqueClassNames": {
+      "id": "exports::src/lib/content/classNames.ts::hasUniqueClassNames",
+      "detector": "exports",
+      "file": "src/lib/content/classNames.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: hasUniqueClassNames",
+      "detail": {
+        "line": 97,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/lib/content/traits.ts::getAllTraits": {
+      "id": "exports::src/lib/content/traits.ts::getAllTraits",
+      "detector": "exports",
+      "file": "src/lib/content/traits.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: getAllTraits",
+      "detail": {
+        "line": 17,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/lib/content/traits.ts::getTraitCategories": {
+      "id": "exports::src/lib/content/traits.ts::getTraitCategories",
+      "detector": "exports",
+      "file": "src/lib/content/traits.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: getTraitCategories",
+      "detail": {
+        "line": 24,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/lib/content/traits.ts::getTraitsByCategory": {
+      "id": "exports::src/lib/content/traits.ts::getTraitsByCategory",
+      "detector": "exports",
+      "file": "src/lib/content/traits.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: getTraitsByCategory",
+      "detail": {
+        "line": 35,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/lib/content/traits.ts::getTraitById": {
+      "id": "exports::src/lib/content/traits.ts::getTraitById",
+      "detector": "exports",
+      "file": "src/lib/content/traits.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: getTraitById",
+      "detail": {
+        "line": 45,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/lib/content/traits.ts::pickRandomTraitByCategory": {
+      "id": "exports::src/lib/content/traits.ts::pickRandomTraitByCategory",
+      "detector": "exports",
+      "file": "src/lib/content/traits.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: pickRandomTraitByCategory",
+      "detail": {
+        "line": 68,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/lib/content/traits.ts::getTraitCount": {
+      "id": "exports::src/lib/content/traits.ts::getTraitCount",
+      "detector": "exports",
+      "file": "src/lib/content/traits.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: getTraitCount",
+      "detail": {
+        "line": 83,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/lib/simulation/constants.ts::FERTILITY_REDUCTION_PER_EDUCATION": {
+      "id": "exports::src/lib/simulation/constants.ts::FERTILITY_REDUCTION_PER_EDUCATION",
+      "detector": "exports",
+      "file": "src/lib/simulation/constants.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: FERTILITY_REDUCTION_PER_EDUCATION",
+      "detail": {
+        "line": 99,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/lib/simulation/constants.ts::FERTILITY_FLOOR": {
+      "id": "exports::src/lib/simulation/constants.ts::FERTILITY_FLOOR",
+      "detector": "exports",
+      "file": "src/lib/simulation/constants.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: FERTILITY_FLOOR",
+      "detail": {
+        "line": 100,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/lib/simulation/constants.ts::FERTILITY_CEILING": {
+      "id": "exports::src/lib/simulation/constants.ts::FERTILITY_CEILING",
+      "detector": "exports",
+      "file": "src/lib/simulation/constants.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: FERTILITY_CEILING",
+      "detail": {
+        "line": 101,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/lib/simulation/engine.ts::SimulationResult": {
+      "id": "exports::src/lib/simulation/engine.ts::SimulationResult",
+      "detector": "exports",
+      "file": "src/lib/simulation/engine.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: SimulationResult",
+      "detail": {
+        "line": 58,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:25:31+00:00",
+      "resolved_at": "2026-02-19T19:34:23+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:34:23+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/simulation/models.ts::educationGapMultiplier": {
+      "id": "exports::src/lib/simulation/models.ts::educationGapMultiplier",
+      "detector": "exports",
+      "file": "src/lib/simulation/models.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: educationGapMultiplier",
+      "detail": {
+        "line": 44,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:25:31+00:00",
+      "resolved_at": "2026-02-19T19:34:23+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:34:23+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/simulation/types.ts::METRIC_KEYS": {
+      "id": "exports::src/lib/simulation/types.ts::METRIC_KEYS",
+      "detector": "exports",
+      "file": "src/lib/simulation/types.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: METRIC_KEYS",
+      "detail": {
+        "line": 382,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:25:31+00:00",
+      "resolved_at": "2026-02-19T19:34:23+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:34:23+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/simulation/types.ts::METRIC_LABELS": {
+      "id": "exports::src/lib/simulation/types.ts::METRIC_LABELS",
+      "detector": "exports",
+      "file": "src/lib/simulation/types.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: METRIC_LABELS",
+      "detail": {
+        "line": 394,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/lib/simulation/types.ts::METRIC_UNITS": {
+      "id": "exports::src/lib/simulation/types.ts::METRIC_UNITS",
+      "detector": "exports",
+      "file": "src/lib/simulation/types.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: METRIC_UNITS",
+      "detail": {
+        "line": 406,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/lib/simulation/types.ts::ChartDataPoint": {
+      "id": "exports::src/lib/simulation/types.ts::ChartDataPoint",
+      "detector": "exports",
+      "file": "src/lib/simulation/types.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: ChartDataPoint",
+      "detail": {
+        "line": 435,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/lib/simulation/types.ts::CLASS_COLORS": {
+      "id": "exports::src/lib/simulation/types.ts::CLASS_COLORS",
+      "detector": "exports",
+      "file": "src/lib/simulation/types.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: CLASS_COLORS",
+      "detail": {
+        "line": 443,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:25:31+00:00",
+      "resolved_at": "2026-02-19T19:34:23+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:34:23+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/simulation.ts::useSimulationStore": {
+      "id": "exports::src/lib/store/simulation.ts::useSimulationStore",
+      "detector": "exports",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: useSimulationStore",
+      "detail": {
+        "line": 93,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/simulation.ts::getCurrentSnapshot": {
+      "id": "exports::src/lib/store/simulation.ts::getCurrentSnapshot",
+      "detector": "exports",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: getCurrentSnapshot",
+      "detail": {
+        "line": 497,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/simulation.ts::getCurrentClasses": {
+      "id": "exports::src/lib/store/simulation.ts::getCurrentClasses",
+      "detector": "exports",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: getCurrentClasses",
+      "detail": {
+        "line": 504,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/simulation.ts::canRedo": {
+      "id": "exports::src/lib/store/simulation.ts::canRedo",
+      "detector": "exports",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: canRedo",
+      "detail": {
+        "line": 512,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/simulation.ts::canUndo": {
+      "id": "exports::src/lib/store/simulation.ts::canUndo",
+      "detector": "exports",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: canUndo",
+      "detail": {
+        "line": 519,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/simulation.ts::getProgress": {
+      "id": "exports::src/lib/store/simulation.ts::getProgress",
+      "detector": "exports",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: getProgress",
+      "detail": {
+        "line": 526,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/simulation.ts::isComplete": {
+      "id": "exports::src/lib/store/simulation.ts::isComplete",
+      "detector": "exports",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: isComplete",
+      "detail": {
+        "line": 533,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/simulation.ts::initializeFromBootstrap": {
+      "id": "exports::src/lib/store/simulation.ts::initializeFromBootstrap",
+      "detector": "exports",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: initializeFromBootstrap",
+      "detail": {
+        "line": 551,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/simulation.ts::useCurrentSnapshot": {
+      "id": "exports::src/lib/store/simulation.ts::useCurrentSnapshot",
+      "detector": "exports",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: useCurrentSnapshot",
+      "detail": {
+        "line": 571,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/simulation.ts::useCurrentClasses": {
+      "id": "exports::src/lib/store/simulation.ts::useCurrentClasses",
+      "detector": "exports",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: useCurrentClasses",
+      "detail": {
+        "line": 578,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/simulation.ts::useCanRedo": {
+      "id": "exports::src/lib/store/simulation.ts::useCanRedo",
+      "detector": "exports",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: useCanRedo",
+      "detail": {
+        "line": 585,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/simulation.ts::useCanUndo": {
+      "id": "exports::src/lib/store/simulation.ts::useCanUndo",
+      "detector": "exports",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: useCanUndo",
+      "detail": {
+        "line": 592,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/simulation.ts::useProgress": {
+      "id": "exports::src/lib/store/simulation.ts::useProgress",
+      "detector": "exports",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: useProgress",
+      "detail": {
+        "line": 599,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/urlSync.ts::URLState": {
+      "id": "exports::src/lib/store/urlSync.ts::URLState",
+      "detector": "exports",
+      "file": "src/lib/store/urlSync.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: URLState",
+      "detail": {
+        "line": 25,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/urlSync.ts::EncodeParams": {
+      "id": "exports::src/lib/store/urlSync.ts::EncodeParams",
+      "detector": "exports",
+      "file": "src/lib/store/urlSync.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: EncodeParams",
+      "detail": {
+        "line": 37,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/urlSync.ts::encodePolicy": {
+      "id": "exports::src/lib/store/urlSync.ts::encodePolicy",
+      "detector": "exports",
+      "file": "src/lib/store/urlSync.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: encodePolicy",
+      "detail": {
+        "line": 97,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/urlSync.ts::getShareableURL": {
+      "id": "exports::src/lib/store/urlSync.ts::getShareableURL",
+      "detector": "exports",
+      "file": "src/lib/store/urlSync.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: getShareableURL",
+      "detail": {
+        "line": 159,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/urlSync.ts::getURLSearchParams": {
+      "id": "exports::src/lib/store/urlSync.ts::getURLSearchParams",
+      "detector": "exports",
+      "file": "src/lib/store/urlSync.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: getURLSearchParams",
+      "detail": {
+        "line": 215,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/urlSync.ts::updateBrowserURL": {
+      "id": "exports::src/lib/store/urlSync.ts::updateBrowserURL",
+      "detector": "exports",
+      "file": "src/lib/store/urlSync.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: updateBrowserURL",
+      "detail": {
+        "line": 236,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/store/urlSync.ts::clearBrowserURL": {
+      "id": "exports::src/lib/store/urlSync.ts::clearBrowserURL",
+      "detector": "exports",
+      "file": "src/lib/store/urlSync.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: clearBrowserURL",
+      "detail": {
+        "line": 252,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "structural::src/lib/store/simulation.ts": {
+      "id": "structural::src/lib/store/simulation.ts",
+      "detector": "structural",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Needs decomposition: large (570 LOC)",
+      "detail": {
+        "loc": 570
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "structural::src/lib/simulation/__tests__/engine.test.ts": {
+      "id": "structural::src/lib/simulation/__tests__/engine.test.ts",
+      "detector": "structural",
+      "file": "src/lib/simulation/__tests__/engine.test.ts",
+      "tier": 3,
+      "confidence": "low",
+      "summary": "Needs decomposition: large (524 LOC)",
+      "detail": {
+        "loc": 524
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:25:31+00:00",
+      "resolved_at": "2026-02-19T19:34:23+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "test",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:34:23+00:00",
+        "scan_verified": true
+      }
+    },
+    "orphaned::src/lib/store/simulation.ts": {
+      "id": "orphaned::src/lib/store/simulation.ts",
+      "detector": "orphaned",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Orphaned file (601 LOC): zero importers, not an entry point",
+      "detail": {
+        "loc": 601
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "orphaned::src/app/layout.tsx": {
+      "id": "orphaned::src/app/layout.tsx",
+      "detector": "orphaned",
+      "file": "src/app/layout.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Orphaned file (60 LOC): zero importers, not an entry point",
+      "detail": {
+        "loc": 60
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "orphaned::next.config.ts": {
+      "id": "orphaned::next.config.ts",
+      "detector": "orphaned",
+      "file": "next.config.ts",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Orphaned file (38 LOC): zero importers, not an entry point",
+      "detail": {
+        "loc": 38
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "config",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "orphaned::vitest.config.ts": {
+      "id": "orphaned::vitest.config.ts",
+      "detector": "orphaned",
+      "file": "vitest.config.ts",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Orphaned file (28 LOC): zero importers, not an entry point",
+      "detail": {
+        "loc": 28
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "config",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "test_coverage::src/app/layout.tsx::untested_module": {
+      "id": "test_coverage::src/app/layout.tsx::untested_module",
+      "detector": "test_coverage",
+      "file": "src/app/layout.tsx",
+      "tier": 3,
+      "confidence": "high",
+      "summary": "Untested module (60 LOC, 0 importers)",
+      "detail": {
+        "kind": "untested_module",
+        "loc": 60,
+        "importer_count": 0,
+        "loc_weight": 7.745966692414834
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "test_coverage::src/app/page.tsx::untested_module": {
+      "id": "test_coverage::src/app/page.tsx::untested_module",
+      "detector": "test_coverage",
+      "file": "src/app/page.tsx",
+      "tier": 3,
+      "confidence": "high",
+      "summary": "Untested module (12 LOC, 0 importers)",
+      "detail": {
+        "kind": "untested_module",
+        "loc": 12,
+        "importer_count": 0,
+        "loc_weight": 3.4641016151377544
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "test_coverage::src/lib/content/classNames.ts::transitive_only": {
+      "id": "test_coverage::src/lib/content/classNames.ts::transitive_only",
+      "detector": "test_coverage",
+      "file": "src/lib/content/classNames.ts",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "No direct tests (101 LOC, 2 importers) \u2014 covered only via imports from tested modules",
+      "detail": {
+        "kind": "transitive_only",
+        "loc": 101,
+        "importer_count": 2,
+        "loc_weight": 10.04987562112089
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "test_coverage::src/lib/content/traits.ts::transitive_only": {
+      "id": "test_coverage::src/lib/content/traits.ts::transitive_only",
+      "detector": "test_coverage",
+      "file": "src/lib/content/traits.ts",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "No direct tests (85 LOC, 2 importers) \u2014 covered only via imports from tested modules",
+      "detail": {
+        "kind": "transitive_only",
+        "loc": 85,
+        "importer_count": 2,
+        "loc_weight": 9.219544457292887
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "test_coverage::src/lib/store/simulation.ts::untested_module": {
+      "id": "test_coverage::src/lib/store/simulation.ts::untested_module",
+      "detector": "test_coverage",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 3,
+      "confidence": "high",
+      "summary": "Untested module (601 LOC, 0 importers)",
+      "detail": {
+        "kind": "untested_module",
+        "loc": 601,
+        "importer_count": 0,
+        "loc_weight": 24.515301344262525
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "test_coverage::src/lib/store/urlSync.ts::untested_module": {
+      "id": "test_coverage::src/lib/store/urlSync.ts::untested_module",
+      "detector": "test_coverage",
+      "file": "src/lib/store/urlSync.ts",
+      "tier": 3,
+      "confidence": "high",
+      "summary": "Untested module (257 LOC, 1 importers)",
+      "detail": {
+        "kind": "untested_module",
+        "loc": 257,
+        "importer_count": 1,
+        "loc_weight": 16.0312195418814
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:23:18+00:00",
+      "resolved_at": "2026-02-19T19:25:31+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:25:31+00:00",
+        "scan_verified": true
+      }
+    },
+    "smells::src/lib/simulation/engine.ts::monster_function": {
+      "id": "smells::src/lib/simulation/engine.ts::monster_function",
+      "detector": "smells",
+      "file": "src/lib/simulation/engine.ts",
+      "tier": 2,
+      "confidence": "medium",
+      "summary": "1x Monster function (>150 LOC)",
+      "detail": {
+        "smell_id": "monster_function",
+        "severity": "high",
+        "count": 1,
+        "lines": [
+          63
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "smells::src/lib/simulation/__tests__/engine.test.ts::non_null_assert": {
+      "id": "smells::src/lib/simulation/__tests__/engine.test.ts::non_null_assert",
+      "detector": "smells",
+      "file": "src/lib/simulation/__tests__/engine.test.ts",
+      "tier": 3,
+      "confidence": "low",
+      "summary": "8x Non-null assertions (!.)",
+      "detail": {
+        "smell_id": "non_null_assert",
+        "severity": "low",
+        "count": 8,
+        "lines": [
+          416,
+          417,
+          418,
+          438,
+          439,
+          440,
+          459,
+          461
+        ]
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:25:31+00:00",
+      "resolved_at": "2026-02-19T19:34:23+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "test",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:34:23+00:00",
+        "scan_verified": true
+      }
+    },
+    "smells::src/lib/content/worldGenerator.ts::magic_number": {
+      "id": "smells::src/lib/content/worldGenerator.ts::magic_number",
+      "detector": "smells",
+      "file": "src/lib/content/worldGenerator.ts",
+      "tier": 3,
+      "confidence": "low",
+      "summary": "1x Magic numbers (>1000 in logic)",
+      "detail": {
+        "smell_id": "magic_number",
+        "severity": "low",
+        "count": 1,
+        "lines": [
+          135
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "smells::src/lib/store/simulation.ts::todo_fixme": {
+      "id": "smells::src/lib/store/simulation.ts::todo_fixme",
+      "detector": "smells",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 3,
+      "confidence": "low",
+      "summary": "1x TODO/FIXME/HACK comments",
+      "detail": {
+        "smell_id": "todo_fixme",
+        "severity": "low",
+        "count": 1,
+        "lines": [
+          252
+        ]
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:25:31+00:00",
+      "resolved_at": "2026-02-19T19:34:23+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:34:23+00:00",
+        "scan_verified": true
+      }
+    },
+    "subjective_review::src/app/layout.tsx::unreviewed": {
+      "id": "subjective_review::src/app/layout.tsx::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/app/layout.tsx",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 60
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::src/lib/content/classNames.ts::unreviewed": {
+      "id": "subjective_review::src/lib/content/classNames.ts::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/lib/content/classNames.ts",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 101
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::src/lib/content/traits.ts::unreviewed": {
+      "id": "subjective_review::src/lib/content/traits.ts::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/lib/content/traits.ts",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 85
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::src/lib/content/worldGenerator.ts::unreviewed": {
+      "id": "subjective_review::src/lib/content/worldGenerator.ts::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/lib/content/worldGenerator.ts",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 264
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::src/lib/simulation/engine.ts::unreviewed": {
+      "id": "subjective_review::src/lib/simulation/engine.ts::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/lib/simulation/engine.ts",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 355
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::src/lib/simulation/models.ts::unreviewed": {
+      "id": "subjective_review::src/lib/simulation/models.ts::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/lib/simulation/models.ts",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 215
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::src/lib/store/simulation.ts::unreviewed": {
+      "id": "subjective_review::src/lib/store/simulation.ts::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/lib/store/simulation.ts",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 570
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::src/lib/store/urlSync.ts::unreviewed": {
+      "id": "subjective_review::src/lib/store/urlSync.ts::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/lib/store/urlSync.ts",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 257
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::.::holistic_unreviewed": {
+      "id": "subjective_review::.::holistic_unreviewed",
+      "detector": "subjective_review",
+      "file": ".",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No holistic codebase review on record \u2014 run `desloppify review --prepare --holistic`",
+      "detail": {
+        "reason": "unreviewed"
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "boilerplate_duplication::src/lib/content/__tests__/worldGenerator.test.ts::61ac23ee2fb6d13c": {
+      "id": "boilerplate_duplication::src/lib/content/__tests__/worldGenerator.test.ts::61ac23ee2fb6d13c",
+      "detector": "boilerplate_duplication",
+      "file": "src/lib/content/__tests__/worldGenerator.test.ts",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Boilerplate block repeated across 4 files (window 4 lines): src/lib/content/__tests__/worldGenerator.test.ts:18, src/lib/content/worldGenerator.ts:12, src/lib/store/__tests__/simulation.test.ts:27, src/lib/store/simulation.ts:25",
+      "detail": {
+        "distinct_files": 4,
+        "window_size": 4,
+        "locations": [
+          {
+            "file": "src/lib/content/__tests__/worldGenerator.test.ts",
+            "line": 18
+          },
+          {
+            "file": "src/lib/content/worldGenerator.ts",
+            "line": 12
+          },
+          {
+            "file": "src/lib/store/__tests__/simulation.test.ts",
+            "line": 27
+          },
+          {
+            "file": "src/lib/store/simulation.ts",
+            "line": 25
+          }
+        ],
+        "sample": [
+          "ID,",
+          "ID,",
+          "} from \"ID\";",
+          "import { ID } from \"ID\";"
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:23:18+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "test",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "unused::src/lib/store/__tests__/simulation.test.ts::initialState": {
+      "id": "unused::src/lib/store/__tests__/simulation.test.ts::initialState",
+      "detector": "unused",
+      "file": "src/lib/store/__tests__/simulation.test.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Unused vars: initialState",
+      "detail": {
+        "line": 516,
+        "category": "vars"
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:25:31+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "test",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "structural::src/lib/store/__tests__/simulation.test.ts": {
+      "id": "structural::src/lib/store/__tests__/simulation.test.ts",
+      "detector": "structural",
+      "file": "src/lib/store/__tests__/simulation.test.ts",
+      "tier": 3,
+      "confidence": "low",
+      "summary": "Needs decomposition: large (669 LOC)",
+      "detail": {
+        "loc": 669
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:25:31+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "test",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "unused::src/components/narrative/GalaxyIntro.tsx::galaxyName": {
+      "id": "unused::src/components/narrative/GalaxyIntro.tsx::galaxyName",
+      "detector": "unused",
+      "file": "src/components/narrative/GalaxyIntro.tsx",
+      "tier": 1,
+      "confidence": "high",
+      "summary": "Unused imports: galaxyName",
+      "detail": {
+        "line": 37,
+        "category": "imports"
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "unused::src/components/ui/__tests__/CosmicBackground.test.tsx::screen": {
+      "id": "unused::src/components/ui/__tests__/CosmicBackground.test.tsx::screen",
+      "detector": "unused",
+      "file": "src/components/ui/__tests__/CosmicBackground.test.tsx",
+      "tier": 1,
+      "confidence": "high",
+      "summary": "Unused imports: screen",
+      "detail": {
+        "line": 6,
+        "category": "imports"
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "test",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "unused::src/lib/simulation/__tests__/engine.test.ts::captureSnapshot": {
+      "id": "unused::src/lib/simulation/__tests__/engine.test.ts::captureSnapshot",
+      "detector": "unused",
+      "file": "src/lib/simulation/__tests__/engine.test.ts",
+      "tier": 1,
+      "confidence": "high",
+      "summary": "Unused imports: captureSnapshot",
+      "detail": {
+        "line": 4,
+        "category": "imports"
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "test",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "unused::src/lib/simulation/__tests__/engine.test.ts::ClassPolicy": {
+      "id": "unused::src/lib/simulation/__tests__/engine.test.ts::ClassPolicy",
+      "detector": "unused",
+      "file": "src/lib/simulation/__tests__/engine.test.ts",
+      "tier": 1,
+      "confidence": "high",
+      "summary": "Unused imports: ClassPolicy",
+      "detail": {
+        "line": 14,
+        "category": "imports"
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "test",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "unused::src/lib/simulation/__tests__/models.test.ts::calculateLifeExpectancy": {
+      "id": "unused::src/lib/simulation/__tests__/models.test.ts::calculateLifeExpectancy",
+      "detector": "unused",
+      "file": "src/lib/simulation/__tests__/models.test.ts",
+      "tier": 1,
+      "confidence": "high",
+      "summary": "Unused imports: calculateLifeExpectancy",
+      "detail": {
+        "line": 7,
+        "category": "imports"
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "test",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "unused::src/lib/simulation/__tests__/models.test.ts::INITIAL_WEALTH_SHARE": {
+      "id": "unused::src/lib/simulation/__tests__/models.test.ts::INITIAL_WEALTH_SHARE",
+      "detector": "unused",
+      "file": "src/lib/simulation/__tests__/models.test.ts",
+      "tier": 1,
+      "confidence": "high",
+      "summary": "Unused imports: INITIAL_WEALTH_SHARE",
+      "detail": {
+        "line": 10,
+        "category": "imports"
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "test",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "unused::src/lib/simulation/engine.ts::ClassTier": {
+      "id": "unused::src/lib/simulation/engine.ts::ClassTier",
+      "detector": "unused",
+      "file": "src/lib/simulation/engine.ts",
+      "tier": 1,
+      "confidence": "high",
+      "summary": "Unused imports: ClassTier",
+      "detail": {
+        "line": 7,
+        "category": "imports"
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "unused::src/lib/simulation/engine.ts::ClassMetrics": {
+      "id": "unused::src/lib/simulation/engine.ts::ClassMetrics",
+      "detector": "unused",
+      "file": "src/lib/simulation/engine.ts",
+      "tier": 1,
+      "confidence": "high",
+      "summary": "Unused imports: ClassMetrics",
+      "detail": {
+        "line": 10,
+        "category": "imports"
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "unused::src/lib/simulation/engine.ts::prevCumPop": {
+      "id": "unused::src/lib/simulation/engine.ts::prevCumPop",
+      "detector": "unused",
+      "file": "src/lib/simulation/engine.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Unused vars: prevCumPop",
+      "detail": {
+        "line": 254,
+        "category": "vars"
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/components/ui/HowItWorksOverlay.tsx::HowItWorksOverlay": {
+      "id": "exports::src/components/ui/HowItWorksOverlay.tsx::HowItWorksOverlay",
+      "detector": "exports",
+      "file": "src/components/ui/HowItWorksOverlay.tsx",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: HowItWorksOverlay",
+      "detail": {
+        "line": 62,
+        "kind": null
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:34:22+00:00",
+      "resolved_at": "2026-02-19T19:35:43+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:35:43+00:00",
+        "scan_verified": true
+      }
+    },
+    "exports::src/lib/simulation/constants.ts::INITIAL_FERTILITY_RATES": {
+      "id": "exports::src/lib/simulation/constants.ts::INITIAL_FERTILITY_RATES",
+      "detector": "exports",
+      "file": "src/lib/simulation/constants.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: INITIAL_FERTILITY_RATES",
+      "detail": {
+        "line": 12,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "exports::src/lib/simulation/types.ts::MetricKey": {
+      "id": "exports::src/lib/simulation/types.ts::MetricKey",
+      "detector": "exports",
+      "file": "src/lib/simulation/types.ts",
+      "tier": 2,
+      "confidence": "high",
+      "summary": "Dead export: MetricKey",
+      "detail": {
+        "line": 377,
+        "kind": null
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "orphaned::src/components/ui/HowItWorksOverlay.tsx": {
+      "id": "orphaned::src/components/ui/HowItWorksOverlay.tsx",
+      "detector": "orphaned",
+      "file": "src/components/ui/HowItWorksOverlay.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Orphaned file (264 LOC): zero importers, not an entry point",
+      "detail": {
+        "loc": 264
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:34:22+00:00",
+      "resolved_at": "2026-02-19T19:35:43+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:35:43+00:00",
+        "scan_verified": true
+      }
+    },
+    "orphaned::src/components/narrative/PreReservationState.tsx": {
+      "id": "orphaned::src/components/narrative/PreReservationState.tsx",
+      "detector": "orphaned",
+      "file": "src/components/narrative/PreReservationState.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Orphaned file (232 LOC): zero importers, not an entry point",
+      "detail": {
+        "loc": 232
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:34:22+00:00",
+      "resolved_at": "2026-02-19T19:35:43+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:35:43+00:00",
+        "scan_verified": true
+      }
+    },
+    "orphaned::src/components/narrative/TraitReveal.tsx": {
+      "id": "orphaned::src/components/narrative/TraitReveal.tsx",
+      "detector": "orphaned",
+      "file": "src/components/narrative/TraitReveal.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Orphaned file (214 LOC): zero importers, not an entry point",
+      "detail": {
+        "loc": 214
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:34:22+00:00",
+      "resolved_at": "2026-02-19T19:35:43+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:35:43+00:00",
+        "scan_verified": true
+      }
+    },
+    "orphaned::src/components/narrative/GalaxyIntro.tsx": {
+      "id": "orphaned::src/components/narrative/GalaxyIntro.tsx",
+      "detector": "orphaned",
+      "file": "src/components/narrative/GalaxyIntro.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Orphaned file (157 LOC): zero importers, not an entry point",
+      "detail": {
+        "loc": 157
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:34:22+00:00",
+      "resolved_at": "2026-02-19T19:35:43+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:35:43+00:00",
+        "scan_verified": true
+      }
+    },
+    "orphaned::src/components/narrative/WorldReveal.tsx": {
+      "id": "orphaned::src/components/narrative/WorldReveal.tsx",
+      "detector": "orphaned",
+      "file": "src/components/narrative/WorldReveal.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Orphaned file (132 LOC): zero importers, not an entry point",
+      "detail": {
+        "loc": 132
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:34:22+00:00",
+      "resolved_at": "2026-02-19T19:35:43+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:35:43+00:00",
+        "scan_verified": true
+      }
+    },
+    "orphaned::src/components/narrative/YearProgress.tsx": {
+      "id": "orphaned::src/components/narrative/YearProgress.tsx",
+      "detector": "orphaned",
+      "file": "src/components/narrative/YearProgress.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Orphaned file (80 LOC): zero importers, not an entry point",
+      "detail": {
+        "loc": 80
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:34:22+00:00",
+      "last_seen": "2026-02-19T19:34:22+00:00",
+      "resolved_at": "2026-02-19T19:35:43+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:35:43+00:00",
+        "scan_verified": true
+      }
+    },
+    "test_coverage::src/components/narrative/GalaxyIntro.tsx::untested_module": {
+      "id": "test_coverage::src/components/narrative/GalaxyIntro.tsx::untested_module",
+      "detector": "test_coverage",
+      "file": "src/components/narrative/GalaxyIntro.tsx",
+      "tier": 3,
+      "confidence": "high",
+      "summary": "Untested module (157 LOC, 0 importers)",
+      "detail": {
+        "kind": "untested_module",
+        "loc": 157,
+        "importer_count": 0,
+        "loc_weight": 12.529964086141668
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:34:23+00:00",
+      "resolved_at": "2026-02-19T19:35:43+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:35:43+00:00",
+        "scan_verified": true
+      }
+    },
+    "test_coverage::src/components/ui/HowItWorksOverlay.tsx::untested_module": {
+      "id": "test_coverage::src/components/ui/HowItWorksOverlay.tsx::untested_module",
+      "detector": "test_coverage",
+      "file": "src/components/ui/HowItWorksOverlay.tsx",
+      "tier": 3,
+      "confidence": "high",
+      "summary": "Untested module (264 LOC, 0 importers)",
+      "detail": {
+        "kind": "untested_module",
+        "loc": 264,
+        "importer_count": 0,
+        "loc_weight": 16.24807680927192
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:34:23+00:00",
+      "resolved_at": "2026-02-19T19:35:43+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:35:43+00:00",
+        "scan_verified": true
+      }
+    },
+    "test_coverage::src/components/narrative/WorldReveal.tsx::untested_module": {
+      "id": "test_coverage::src/components/narrative/WorldReveal.tsx::untested_module",
+      "detector": "test_coverage",
+      "file": "src/components/narrative/WorldReveal.tsx",
+      "tier": 3,
+      "confidence": "high",
+      "summary": "Untested module (132 LOC, 1 importers)",
+      "detail": {
+        "kind": "untested_module",
+        "loc": 132,
+        "importer_count": 1,
+        "loc_weight": 11.489125293076057
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "test_coverage::src/components/simulation/ClassPyramid.tsx::untested_module": {
+      "id": "test_coverage::src/components/simulation/ClassPyramid.tsx::untested_module",
+      "detector": "test_coverage",
+      "file": "src/components/simulation/ClassPyramid.tsx",
+      "tier": 3,
+      "confidence": "high",
+      "summary": "Untested module (199 LOC, 1 importers)",
+      "detail": {
+        "kind": "untested_module",
+        "loc": 199,
+        "importer_count": 1,
+        "loc_weight": 14.106735979665885
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:34:23+00:00",
+      "resolved_at": "2026-02-19T19:35:43+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:35:43+00:00",
+        "scan_verified": true
+      }
+    },
+    "test_coverage::src/components/narrative/YearProgress.tsx::untested_module": {
+      "id": "test_coverage::src/components/narrative/YearProgress.tsx::untested_module",
+      "detector": "test_coverage",
+      "file": "src/components/narrative/YearProgress.tsx",
+      "tier": 3,
+      "confidence": "high",
+      "summary": "Untested module (80 LOC, 1 importers)",
+      "detail": {
+        "kind": "untested_module",
+        "loc": 80,
+        "importer_count": 1,
+        "loc_weight": 8.94427190999916
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "test_coverage::src/components/narrative/NarrativeScreen.tsx::untested_module": {
+      "id": "test_coverage::src/components/narrative/NarrativeScreen.tsx::untested_module",
+      "detector": "test_coverage",
+      "file": "src/components/narrative/NarrativeScreen.tsx",
+      "tier": 3,
+      "confidence": "high",
+      "summary": "Untested module (159 LOC, 3 importers)",
+      "detail": {
+        "kind": "untested_module",
+        "loc": 159,
+        "importer_count": 3,
+        "loc_weight": 12.609520212918492
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:34:23+00:00",
+      "resolved_at": "2026-02-19T19:35:43+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:35:43+00:00",
+        "scan_verified": true
+      }
+    },
+    "test_coverage::src/components/narrative/TraitReveal.tsx::untested_module": {
+      "id": "test_coverage::src/components/narrative/TraitReveal.tsx::untested_module",
+      "detector": "test_coverage",
+      "file": "src/components/narrative/TraitReveal.tsx",
+      "tier": 3,
+      "confidence": "high",
+      "summary": "Untested module (214 LOC, 1 importers)",
+      "detail": {
+        "kind": "untested_module",
+        "loc": 214,
+        "importer_count": 1,
+        "loc_weight": 14.628738838327793
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "test_coverage::src/components/narrative/PreReservationState.tsx::untested_module": {
+      "id": "test_coverage::src/components/narrative/PreReservationState.tsx::untested_module",
+      "detector": "test_coverage",
+      "file": "src/components/narrative/PreReservationState.tsx",
+      "tier": 3,
+      "confidence": "high",
+      "summary": "Untested module (232 LOC, 1 importers)",
+      "detail": {
+        "kind": "untested_module",
+        "loc": 232,
+        "importer_count": 1,
+        "loc_weight": 15.231546211727817
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "smells::src/components/narrative/WorldReveal.tsx::hardcoded_color": {
+      "id": "smells::src/components/narrative/WorldReveal.tsx::hardcoded_color",
+      "detector": "smells",
+      "file": "src/components/narrative/WorldReveal.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "3x Hardcoded color values",
+      "detail": {
+        "smell_id": "hardcoded_color",
+        "severity": "medium",
+        "count": 3,
+        "lines": [
+          46,
+          47,
+          48
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "smells::src/components/ui/Button.tsx::hardcoded_url": {
+      "id": "smells::src/components/ui/Button.tsx::hardcoded_url",
+      "detector": "smells",
+      "file": "src/components/ui/Button.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "1x Hardcoded URL in source code",
+      "detail": {
+        "smell_id": "hardcoded_url",
+        "severity": "medium",
+        "count": 1,
+        "lines": [
+          108
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "smells::src/lib/simulation/engine.ts::non_null_assert": {
+      "id": "smells::src/lib/simulation/engine.ts::non_null_assert",
+      "detector": "smells",
+      "file": "src/lib/simulation/engine.ts",
+      "tier": 3,
+      "confidence": "low",
+      "summary": "3x Non-null assertions (!.)",
+      "detail": {
+        "smell_id": "non_null_assert",
+        "severity": "low",
+        "count": 3,
+        "lines": [
+          74,
+          85,
+          195
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "smells::src/components/narrative/TraitReveal.tsx::magic_number": {
+      "id": "smells::src/components/narrative/TraitReveal.tsx::magic_number",
+      "detector": "smells",
+      "file": "src/components/narrative/TraitReveal.tsx",
+      "tier": 3,
+      "confidence": "low",
+      "summary": "1x Magic numbers (>1000 in logic)",
+      "detail": {
+        "smell_id": "magic_number",
+        "severity": "low",
+        "count": 1,
+        "lines": [
+          45
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "smells::src/lib/simulation/engine.ts::magic_number": {
+      "id": "smells::src/lib/simulation/engine.ts::magic_number",
+      "detector": "smells",
+      "file": "src/lib/simulation/engine.ts",
+      "tier": 3,
+      "confidence": "low",
+      "summary": "1x Magic numbers (>1000 in logic)",
+      "detail": {
+        "smell_id": "magic_number",
+        "severity": "low",
+        "count": 1,
+        "lines": [
+          30
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::src/components/narrative/GalaxyIntro.tsx::unreviewed": {
+      "id": "subjective_review::src/components/narrative/GalaxyIntro.tsx::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/components/narrative/GalaxyIntro.tsx",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 157
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::src/components/narrative/NarrativeScreen.tsx::unreviewed": {
+      "id": "subjective_review::src/components/narrative/NarrativeScreen.tsx::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/components/narrative/NarrativeScreen.tsx",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 159
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::src/components/narrative/PreReservationState.tsx::unreviewed": {
+      "id": "subjective_review::src/components/narrative/PreReservationState.tsx::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/components/narrative/PreReservationState.tsx",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 232
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::src/components/narrative/TraitReveal.tsx::unreviewed": {
+      "id": "subjective_review::src/components/narrative/TraitReveal.tsx::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/components/narrative/TraitReveal.tsx",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 214
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::src/components/narrative/WorldReveal.tsx::unreviewed": {
+      "id": "subjective_review::src/components/narrative/WorldReveal.tsx::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/components/narrative/WorldReveal.tsx",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 132
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::src/components/narrative/YearProgress.tsx::unreviewed": {
+      "id": "subjective_review::src/components/narrative/YearProgress.tsx::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/components/narrative/YearProgress.tsx",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 80
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::src/components/simulation/ClassPyramid.tsx::unreviewed": {
+      "id": "subjective_review::src/components/simulation/ClassPyramid.tsx::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/components/simulation/ClassPyramid.tsx",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 199
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::src/components/ui/Button.tsx::unreviewed": {
+      "id": "subjective_review::src/components/ui/Button.tsx::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/components/ui/Button.tsx",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 143
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::src/components/ui/CosmicBackground.tsx::unreviewed": {
+      "id": "subjective_review::src/components/ui/CosmicBackground.tsx::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/components/ui/CosmicBackground.tsx",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 175
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "subjective_review::src/components/ui/HowItWorksOverlay.tsx::unreviewed": {
+      "id": "subjective_review::src/components/ui/HowItWorksOverlay.tsx::unreviewed",
+      "detector": "subjective_review",
+      "file": "src/components/ui/HowItWorksOverlay.tsx",
+      "tier": 4,
+      "confidence": "low",
+      "summary": "No design review on record \u2014 run `desloppify review --prepare`",
+      "detail": {
+        "reason": "unreviewed",
+        "loc": 264
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::452dd578775f89aa": {
+      "id": "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::452dd578775f89aa",
+      "detector": "boilerplate_duplication",
+      "file": "src/components/narrative/GalaxyIntro.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Boilerplate block repeated across 6 files (window 4 lines): src/components/narrative/GalaxyIntro.tsx:116, src/components/narrative/NarrativeScreen.tsx:127, src/components/narrative/PreReservationState.tsx:196, src/components/narrative/TraitReveal.tsx:102, +2 more",
+      "detail": {
+        "distinct_files": 6,
+        "window_size": 4,
+        "locations": [
+          {
+            "file": "src/components/narrative/GalaxyIntro.tsx",
+            "line": 116
+          },
+          {
+            "file": "src/components/narrative/NarrativeScreen.tsx",
+            "line": 127
+          },
+          {
+            "file": "src/components/narrative/PreReservationState.tsx",
+            "line": 196
+          },
+          {
+            "file": "src/components/narrative/TraitReveal.tsx",
+            "line": 102
+          },
+          {
+            "file": "src/components/narrative/WorldReveal.tsx",
+            "line": 96
+          },
+          {
+            "file": "src/components/ui/HowItWorksOverlay.tsx",
+            "line": 101
+          }
+        ],
+        "sample": [
+          "<ID.ID",
+          "ID={{ ID: ID }}",
+          "ID={{ ID: ID }}",
+          "ID={{ ID: ID }}"
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::7c6d684f67266971": {
+      "id": "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::7c6d684f67266971",
+      "detector": "boilerplate_duplication",
+      "file": "src/components/narrative/GalaxyIntro.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Boilerplate block repeated across 4 files (window 4 lines): src/components/narrative/GalaxyIntro.tsx:129, src/components/narrative/PreReservationState.tsx:206, src/components/narrative/TraitReveal.tsx:186, src/components/narrative/WorldReveal.tsx:106",
+      "detail": {
+        "distinct_files": 4,
+        "window_size": 4,
+        "locations": [
+          {
+            "file": "src/components/narrative/GalaxyIntro.tsx",
+            "line": 129
+          },
+          {
+            "file": "src/components/narrative/PreReservationState.tsx",
+            "line": 206
+          },
+          {
+            "file": "src/components/narrative/TraitReveal.tsx",
+            "line": 186
+          },
+          {
+            "file": "src/components/narrative/WorldReveal.tsx",
+            "line": 106
+          }
+        ],
+        "sample": [
+          "ID-ID ID-ID ID-ID",
+          "ID ID-ID-ID/ID",
+          "ID:ID-ID-ID",
+          "ID:ID-ID-ID/ID"
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::906d43a0b01e58fa": {
+      "id": "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::906d43a0b01e58fa",
+      "detector": "boilerplate_duplication",
+      "file": "src/components/narrative/GalaxyIntro.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Boilerplate block repeated across 4 files (window 4 lines): src/components/narrative/GalaxyIntro.tsx:124, src/components/narrative/PreReservationState.tsx:201, src/components/narrative/TraitReveal.tsx:181, src/components/narrative/WorldReveal.tsx:101",
+      "detail": {
+        "distinct_files": 4,
+        "window_size": 4,
+        "locations": [
+          {
+            "file": "src/components/narrative/GalaxyIntro.tsx",
+            "line": 124
+          },
+          {
+            "file": "src/components/narrative/PreReservationState.tsx",
+            "line": 201
+          },
+          {
+            "file": "src/components/narrative/TraitReveal.tsx",
+            "line": 181
+          },
+          {
+            "file": "src/components/narrative/WorldReveal.tsx",
+            "line": 101
+          }
+        ],
+        "sample": [
+          "ID=\"",
+          "ID-ID ID-ID ID-ID-ID",
+          "ID:ID-ID",
+          "ID-ID ID-ID"
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::966d73cd3b4d88c8": {
+      "id": "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::966d73cd3b4d88c8",
+      "detector": "boilerplate_duplication",
+      "file": "src/components/narrative/GalaxyIntro.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Boilerplate block repeated across 4 files (window 4 lines): src/components/narrative/GalaxyIntro.tsx:128, src/components/narrative/PreReservationState.tsx:205, src/components/narrative/TraitReveal.tsx:185, src/components/narrative/WorldReveal.tsx:105",
+      "detail": {
+        "distinct_files": 4,
+        "window_size": 4,
+        "locations": [
+          {
+            "file": "src/components/narrative/GalaxyIntro.tsx",
+            "line": 128
+          },
+          {
+            "file": "src/components/narrative/PreReservationState.tsx",
+            "line": 205
+          },
+          {
+            "file": "src/components/narrative/TraitReveal.tsx",
+            "line": 185
+          },
+          {
+            "file": "src/components/narrative/WorldReveal.tsx",
+            "line": 105
+          }
+        ],
+        "sample": [
+          "ID ID-ID ID-ID",
+          "ID-ID ID-ID ID-ID",
+          "ID ID-ID-ID/ID",
+          "ID:ID-ID-ID"
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::a3b643fbf8d17eb0": {
+      "id": "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::a3b643fbf8d17eb0",
+      "detector": "boilerplate_duplication",
+      "file": "src/components/narrative/GalaxyIntro.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Boilerplate block repeated across 4 files (window 4 lines): src/components/narrative/GalaxyIntro.tsx:123, src/components/narrative/PreReservationState.tsx:200, src/components/narrative/TraitReveal.tsx:180, src/components/narrative/WorldReveal.tsx:100",
+      "detail": {
+        "distinct_files": 4,
+        "window_size": 4,
+        "locations": [
+          {
+            "file": "src/components/narrative/GalaxyIntro.tsx",
+            "line": 123
+          },
+          {
+            "file": "src/components/narrative/PreReservationState.tsx",
+            "line": 200
+          },
+          {
+            "file": "src/components/narrative/TraitReveal.tsx",
+            "line": 180
+          },
+          {
+            "file": "src/components/narrative/WorldReveal.tsx",
+            "line": 100
+          }
+        ],
+        "sample": [
+          "ID={ID}",
+          "ID=\"",
+          "ID-ID ID-ID ID-ID-ID",
+          "ID:ID-ID"
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::adc3ad3f3df1c399": {
+      "id": "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::adc3ad3f3df1c399",
+      "detector": "boilerplate_duplication",
+      "file": "src/components/narrative/GalaxyIntro.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Boilerplate block repeated across 4 files (window 4 lines): src/components/narrative/GalaxyIntro.tsx:126, src/components/narrative/PreReservationState.tsx:203, src/components/narrative/TraitReveal.tsx:183, src/components/narrative/WorldReveal.tsx:103",
+      "detail": {
+        "distinct_files": 4,
+        "window_size": 4,
+        "locations": [
+          {
+            "file": "src/components/narrative/GalaxyIntro.tsx",
+            "line": 126
+          },
+          {
+            "file": "src/components/narrative/PreReservationState.tsx",
+            "line": 203
+          },
+          {
+            "file": "src/components/narrative/TraitReveal.tsx",
+            "line": 183
+          },
+          {
+            "file": "src/components/narrative/WorldReveal.tsx",
+            "line": 103
+          }
+        ],
+        "sample": [
+          "ID:ID-ID",
+          "ID-ID ID-ID",
+          "ID ID-ID ID-ID",
+          "ID-ID ID-ID ID-ID"
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::c1b2eab43b79c1c8": {
+      "id": "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::c1b2eab43b79c1c8",
+      "detector": "boilerplate_duplication",
+      "file": "src/components/narrative/GalaxyIntro.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Boilerplate block repeated across 4 files (window 4 lines): src/components/narrative/GalaxyIntro.tsx:125, src/components/narrative/PreReservationState.tsx:202, src/components/narrative/TraitReveal.tsx:182, src/components/narrative/WorldReveal.tsx:102",
+      "detail": {
+        "distinct_files": 4,
+        "window_size": 4,
+        "locations": [
+          {
+            "file": "src/components/narrative/GalaxyIntro.tsx",
+            "line": 125
+          },
+          {
+            "file": "src/components/narrative/PreReservationState.tsx",
+            "line": 202
+          },
+          {
+            "file": "src/components/narrative/TraitReveal.tsx",
+            "line": 182
+          },
+          {
+            "file": "src/components/narrative/WorldReveal.tsx",
+            "line": 102
+          }
+        ],
+        "sample": [
+          "ID-ID ID-ID ID-ID-ID",
+          "ID:ID-ID",
+          "ID-ID ID-ID",
+          "ID ID-ID ID-ID"
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::cdcca62e56fda6f9": {
+      "id": "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::cdcca62e56fda6f9",
+      "detector": "boilerplate_duplication",
+      "file": "src/components/narrative/GalaxyIntro.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Boilerplate block repeated across 4 files (window 4 lines): src/components/narrative/GalaxyIntro.tsx:130, src/components/narrative/PreReservationState.tsx:207, src/components/narrative/TraitReveal.tsx:187, src/components/narrative/WorldReveal.tsx:107",
+      "detail": {
+        "distinct_files": 4,
+        "window_size": 4,
+        "locations": [
+          {
+            "file": "src/components/narrative/GalaxyIntro.tsx",
+            "line": 130
+          },
+          {
+            "file": "src/components/narrative/PreReservationState.tsx",
+            "line": 207
+          },
+          {
+            "file": "src/components/narrative/TraitReveal.tsx",
+            "line": 187
+          },
+          {
+            "file": "src/components/narrative/WorldReveal.tsx",
+            "line": 107
+          }
+        ],
+        "sample": [
+          "ID ID-ID-ID/ID",
+          "ID:ID-ID-ID",
+          "ID:ID-ID-ID/ID",
+          "\""
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "boilerplate_duplication::src/components/narrative/NarrativeScreen.tsx::41a8d8852fcd313e": {
+      "id": "boilerplate_duplication::src/components/narrative/NarrativeScreen.tsx::41a8d8852fcd313e",
+      "detector": "boilerplate_duplication",
+      "file": "src/components/narrative/NarrativeScreen.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Boilerplate block repeated across 3 files (window 4 lines): src/components/narrative/NarrativeScreen.tsx:128, src/components/narrative/PreReservationState.tsx:197, src/components/narrative/WorldReveal.tsx:97",
+      "detail": {
+        "distinct_files": 3,
+        "window_size": 4,
+        "locations": [
+          {
+            "file": "src/components/narrative/NarrativeScreen.tsx",
+            "line": 128
+          },
+          {
+            "file": "src/components/narrative/PreReservationState.tsx",
+            "line": 197
+          },
+          {
+            "file": "src/components/narrative/WorldReveal.tsx",
+            "line": 97
+          }
+        ],
+        "sample": [
+          "ID={{ ID: ID }}",
+          "ID={{ ID: ID }}",
+          "ID={{ ID: ID }}",
+          "ID={ID}"
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::4ddf4084ba67d69d": {
+      "id": "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::4ddf4084ba67d69d",
+      "detector": "boilerplate_duplication",
+      "file": "src/components/narrative/GalaxyIntro.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Boilerplate block repeated across 3 files (window 4 lines): src/components/narrative/GalaxyIntro.tsx:118, src/components/narrative/PreReservationState.tsx:100, src/components/narrative/TraitReveal.tsx:82",
+      "detail": {
+        "distinct_files": 3,
+        "window_size": 4,
+        "locations": [
+          {
+            "file": "src/components/narrative/GalaxyIntro.tsx",
+            "line": 118
+          },
+          {
+            "file": "src/components/narrative/PreReservationState.tsx",
+            "line": 100
+          },
+          {
+            "file": "src/components/narrative/TraitReveal.tsx",
+            "line": 82
+          }
+        ],
+        "sample": [
+          "ID={{ ID: ID }}",
+          "ID={{ ID: ID }}",
+          "ID=\"ID\"",
+          ">"
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "boilerplate_duplication::src/components/narrative/PreReservationState.tsx::6345db5ea5cf202e": {
+      "id": "boilerplate_duplication::src/components/narrative/PreReservationState.tsx::6345db5ea5cf202e",
+      "detector": "boilerplate_duplication",
+      "file": "src/components/narrative/PreReservationState.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Boilerplate block repeated across 3 files (window 4 lines): src/components/narrative/PreReservationState.tsx:195, src/components/narrative/TraitReveal.tsx:101, src/components/narrative/WorldReveal.tsx:95",
+      "detail": {
+        "distinct_files": 3,
+        "window_size": 4,
+        "locations": [
+          {
+            "file": "src/components/narrative/PreReservationState.tsx",
+            "line": 195
+          },
+          {
+            "file": "src/components/narrative/TraitReveal.tsx",
+            "line": 101
+          },
+          {
+            "file": "src/components/narrative/WorldReveal.tsx",
+            "line": 95
+          }
+        ],
+        "sample": [
+          "{/* ID ID */}",
+          "<ID.ID",
+          "ID={{ ID: ID }}",
+          "ID={{ ID: ID }}"
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "boilerplate_duplication::src/components/narrative/NarrativeScreen.tsx::985cde1bb2124999": {
+      "id": "boilerplate_duplication::src/components/narrative/NarrativeScreen.tsx::985cde1bb2124999",
+      "detector": "boilerplate_duplication",
+      "file": "src/components/narrative/NarrativeScreen.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Boilerplate block repeated across 3 files (window 4 lines): src/components/narrative/NarrativeScreen.tsx:129, src/components/narrative/PreReservationState.tsx:198, src/components/narrative/WorldReveal.tsx:98",
+      "detail": {
+        "distinct_files": 3,
+        "window_size": 4,
+        "locations": [
+          {
+            "file": "src/components/narrative/NarrativeScreen.tsx",
+            "line": 129
+          },
+          {
+            "file": "src/components/narrative/PreReservationState.tsx",
+            "line": 198
+          },
+          {
+            "file": "src/components/narrative/WorldReveal.tsx",
+            "line": 98
+          }
+        ],
+        "sample": [
+          "ID={{ ID: ID }}",
+          "ID={{ ID: ID }}",
+          "ID={ID}",
+          "ID=\""
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "boilerplate_duplication::src/lib/content/__tests__/worldGenerator.test.ts::aa0d4ea592fbf0be": {
+      "id": "boilerplate_duplication::src/lib/content/__tests__/worldGenerator.test.ts::aa0d4ea592fbf0be",
+      "detector": "boilerplate_duplication",
+      "file": "src/lib/content/__tests__/worldGenerator.test.ts",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Boilerplate block repeated across 3 files (window 4 lines): src/lib/content/__tests__/worldGenerator.test.ts:52, src/lib/simulation/__tests__/engine.test.ts:128, src/lib/simulation/__tests__/models.test.ts:41",
+      "detail": {
+        "distinct_files": 3,
+        "window_size": 4,
+        "locations": [
+          {
+            "file": "src/lib/content/__tests__/worldGenerator.test.ts",
+            "line": 52
+          },
+          {
+            "file": "src/lib/simulation/__tests__/engine.test.ts",
+            "line": 128
+          },
+          {
+            "file": "src/lib/simulation/__tests__/models.test.ts",
+            "line": 41
+          }
+        ],
+        "sample": [
+          "});",
+          "});",
+          "ID(\"ID\", () => {",
+          "ID(\"ID\", () => {"
+        ]
+      },
+      "status": "auto_resolved",
+      "note": "Disappeared from scan \u2014 likely fixed",
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:34:23+00:00",
+      "resolved_at": "2026-02-19T19:35:43+00:00",
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "test",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null,
+      "resolution_attestation": {
+        "kind": "scan_verified",
+        "text": "Disappeared from detector output",
+        "attested_at": "2026-02-19T19:35:43+00:00",
+        "scan_verified": true
+      }
+    },
+    "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::fb9dac526004b1d1": {
+      "id": "boilerplate_duplication::src/components/narrative/GalaxyIntro.tsx::fb9dac526004b1d1",
+      "detector": "boilerplate_duplication",
+      "file": "src/components/narrative/GalaxyIntro.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Boilerplate block repeated across 3 files (window 4 lines): src/components/narrative/GalaxyIntro.tsx:117, src/components/narrative/TraitReveal.tsx:81, src/components/ui/HowItWorksOverlay.tsx:102",
+      "detail": {
+        "distinct_files": 3,
+        "window_size": 4,
+        "locations": [
+          {
+            "file": "src/components/narrative/GalaxyIntro.tsx",
+            "line": 117
+          },
+          {
+            "file": "src/components/narrative/TraitReveal.tsx",
+            "line": 81
+          },
+          {
+            "file": "src/components/ui/HowItWorksOverlay.tsx",
+            "line": 102
+          }
+        ],
+        "sample": [
+          "ID={{ ID: ID }}",
+          "ID={{ ID: ID }}",
+          "ID={{ ID: ID }}",
+          "ID=\"ID\""
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:34:23+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "production",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "boilerplate_duplication::src/components/narrative/__tests__/NarrativeScreen.test.tsx::aa0d4ea592fbf0be": {
+      "id": "boilerplate_duplication::src/components/narrative/__tests__/NarrativeScreen.test.tsx::aa0d4ea592fbf0be",
+      "detector": "boilerplate_duplication",
+      "file": "src/components/narrative/__tests__/NarrativeScreen.test.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Boilerplate block repeated across 4 files (window 4 lines): src/components/narrative/__tests__/NarrativeScreen.test.tsx:64, src/lib/content/__tests__/worldGenerator.test.ts:52, src/lib/simulation/__tests__/engine.test.ts:128, src/lib/simulation/__tests__/models.test.ts:41",
+      "detail": {
+        "distinct_files": 4,
+        "window_size": 4,
+        "locations": [
+          {
+            "file": "src/components/narrative/__tests__/NarrativeScreen.test.tsx",
+            "line": 64
+          },
+          {
+            "file": "src/lib/content/__tests__/worldGenerator.test.ts",
+            "line": 52
+          },
+          {
+            "file": "src/lib/simulation/__tests__/engine.test.ts",
+            "line": 128
+          },
+          {
+            "file": "src/lib/simulation/__tests__/models.test.ts",
+            "line": 41
+          }
+        ],
+        "sample": [
+          "});",
+          "});",
+          "ID(\"ID\", () => {",
+          "ID(\"ID\", () => {"
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:35:43+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "test",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    },
+    "boilerplate_duplication::src/components/narrative/__tests__/GalaxyIntro.test.tsx::7a497db8af9e4db4": {
+      "id": "boilerplate_duplication::src/components/narrative/__tests__/GalaxyIntro.test.tsx::7a497db8af9e4db4",
+      "detector": "boilerplate_duplication",
+      "file": "src/components/narrative/__tests__/GalaxyIntro.test.tsx",
+      "tier": 3,
+      "confidence": "medium",
+      "summary": "Boilerplate block repeated across 3 files (window 4 lines): src/components/narrative/__tests__/GalaxyIntro.test.tsx:1, src/components/ui/__tests__/CosmicBackground.test.tsx:1, src/components/ui/__tests__/HowItWorksOverlay.test.tsx:1",
+      "detail": {
+        "distinct_files": 3,
+        "window_size": 4,
+        "locations": [
+          {
+            "file": "src/components/narrative/__tests__/GalaxyIntro.test.tsx",
+            "line": 1
+          },
+          {
+            "file": "src/components/ui/__tests__/CosmicBackground.test.tsx",
+            "line": 1
+          },
+          {
+            "file": "src/components/ui/__tests__/HowItWorksOverlay.test.tsx",
+            "line": 1
+          }
+        ],
+        "sample": [
+          "/**",
+          "* ID ID ID",
+          "*/",
+          "import { ID, ID, ID, ID, ID, ID } from \"ID\";"
+        ]
+      },
+      "status": "open",
+      "note": null,
+      "first_seen": "2026-02-19T19:35:43+00:00",
+      "last_seen": "2026-02-19T19:35:43+00:00",
+      "resolved_at": null,
+      "reopen_count": 0,
+      "lang": "typescript",
+      "zone": "test",
+      "suppressed": false,
+      "suppressed_at": null,
+      "suppression_pattern": null
+    }
+  },
+  "subjective_integrity": {
+    "status": "pass",
+    "target_score": 95.0,
+    "matched_count": 0,
+    "matched_dimensions": [],
+    "reset_dimensions": []
+  },
+  "subjective_assessments": {},
+  "lang_capabilities": {
+    "typescript": {
+      "fixers": [
+        "dead-exports",
+        "dead-useeffect",
+        "debug-logs",
+        "empty-if-chain",
+        "unused-imports",
+        "unused-params",
+        "unused-vars"
+      ],
+      "typecheck_cmd": "npx tsc --noEmit"
+    }
+  },
+  "zone_distribution": {
+    "generated": 1,
+    "config": 3,
+    "production": 26,
+    "test": 12
+  },
+  "scan_history": [
+    {
+      "timestamp": "2026-02-19T19:23:18+00:00",
+      "lang": "typescript",
+      "strict_score": 90.6,
+      "verified_strict_score": 90.6,
+      "objective_score": 76.4,
+      "overall_score": 90.6,
+      "open": 70,
+      "diff_new": 70,
+      "diff_resolved": 0,
+      "ignored": 0,
+      "raw_findings": 70,
+      "suppressed_pct": 0.0,
+      "ignore_patterns": 0,
+      "subjective_integrity": {
+        "status": "pass",
+        "matched_count": 0,
+        "reset_count": 0,
+        "target_score": 95.0
+      },
+      "dimension_scores": {
+        "File health": {
+          "score": 94.6,
+          "strict": 94.6
+        },
+        "Code quality": {
+          "score": 78.0,
+          "strict": 78.0
+        },
+        "Duplication": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Test health": {
+          "score": 56.4,
+          "strict": 56.4
+        },
+        "Security": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Naming Quality": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Logic Clarity": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Type Safety": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Contracts": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Error Consistency": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Abstraction Fit": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "AI Generated Debt": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "High Elegance": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Mid Elegance": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Low Elegance": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Cross-Module Arch": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Init Coupling": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Convention Drift": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Dep Health": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Test Strategy": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "API Coherence": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Auth Consistency": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Stale Migration": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Structure Nav": {
+          "score": 100.0,
+          "strict": 100.0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-19T19:25:31+00:00",
+      "lang": "typescript",
+      "strict_score": 95.5,
+      "verified_strict_score": 95.5,
+      "objective_score": 88.8,
+      "overall_score": 95.5,
+      "open": 49,
+      "diff_new": 2,
+      "diff_resolved": 23,
+      "ignored": 0,
+      "raw_findings": 49,
+      "suppressed_pct": 0.0,
+      "ignore_patterns": 0,
+      "subjective_integrity": {
+        "status": "pass",
+        "matched_count": 0,
+        "reset_count": 0,
+        "target_score": 95.0
+      },
+      "dimension_scores": {
+        "File health": {
+          "score": 95.0,
+          "strict": 95.0
+        },
+        "Code quality": {
+          "score": 88.6,
+          "strict": 88.6
+        },
+        "Duplication": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Test health": {
+          "score": 80.4,
+          "strict": 80.4
+        },
+        "Security": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Naming Quality": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Logic Clarity": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Type Safety": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Contracts": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Error Consistency": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Abstraction Fit": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "AI Generated Debt": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "High Elegance": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Mid Elegance": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Low Elegance": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Cross-Module Arch": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Init Coupling": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Convention Drift": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Dep Health": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Test Strategy": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "API Coherence": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Auth Consistency": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Stale Migration": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Structure Nav": {
+          "score": 100.0,
+          "strict": 100.0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-19T19:34:23+00:00",
+      "lang": "typescript",
+      "strict_score": 91.7,
+      "verified_strict_score": 91.7,
+      "objective_score": 79.1,
+      "overall_score": 91.7,
+      "open": 94,
+      "diff_new": 55,
+      "diff_resolved": 10,
+      "ignored": 0,
+      "raw_findings": 94,
+      "suppressed_pct": 0.0,
+      "ignore_patterns": 0,
+      "subjective_integrity": {
+        "status": "pass",
+        "matched_count": 0,
+        "reset_count": 0,
+        "target_score": 95.0
+      },
+      "dimension_scores": {
+        "File health": {
+          "score": 97.2,
+          "strict": 97.2
+        },
+        "Code quality": {
+          "score": 89.0,
+          "strict": 89.0
+        },
+        "Duplication": {
+          "score": 91.4,
+          "strict": 91.4
+        },
+        "Test health": {
+          "score": 52.7,
+          "strict": 52.7
+        },
+        "Security": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Naming Quality": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Logic Clarity": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Type Safety": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Contracts": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Error Consistency": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Abstraction Fit": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "AI Generated Debt": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "High Elegance": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Mid Elegance": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Low Elegance": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Cross-Module Arch": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Init Coupling": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Convention Drift": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Dep Health": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Test Strategy": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "API Coherence": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Auth Consistency": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Stale Migration": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Structure Nav": {
+          "score": 100.0,
+          "strict": 100.0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-02-19T19:35:43+00:00",
+      "lang": "typescript",
+      "strict_score": 94.4,
+      "verified_strict_score": 94.4,
+      "objective_score": 86.1,
+      "overall_score": 94.4,
+      "open": 84,
+      "diff_new": 2,
+      "diff_resolved": 12,
+      "ignored": 0,
+      "raw_findings": 84,
+      "suppressed_pct": 0.0,
+      "ignore_patterns": 0,
+      "subjective_integrity": {
+        "status": "pass",
+        "matched_count": 0,
+        "reset_count": 0,
+        "target_score": 95.0
+      },
+      "dimension_scores": {
+        "File health": {
+          "score": 97.3,
+          "strict": 97.3
+        },
+        "Code quality": {
+          "score": 91.0,
+          "strict": 91.0
+        },
+        "Duplication": {
+          "score": 91.8,
+          "strict": 91.8
+        },
+        "Test health": {
+          "score": 71.2,
+          "strict": 71.2
+        },
+        "Security": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Naming Quality": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Logic Clarity": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Type Safety": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Contracts": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Error Consistency": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Abstraction Fit": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "AI Generated Debt": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "High Elegance": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Mid Elegance": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Low Elegance": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Cross-Module Arch": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Init Coupling": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Convention Drift": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Dep Health": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Test Strategy": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "API Coherence": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Auth Consistency": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Stale Migration": {
+          "score": 100.0,
+          "strict": 100.0
+        },
+        "Structure Nav": {
+          "score": 100.0,
+          "strict": 100.0
+        }
+      }
+    }
+  ],
+  "tool_hash": "d3cef14db904",
+  "scan_path": ".",
+  "scan_completeness": {
+    "typescript": "full"
+  },
+  "potentials": {
+    "typescript": {
+      "logs": 26,
+      "unused": 26,
+      "exports": 119,
+      "deprecated": 0,
+      "structural": 26,
+      "flat_dirs": 15,
+      "props": 12,
+      "single_use": 0,
+      "coupling": 0,
+      "cycles": 29,
+      "orphaned": 29,
+      "patterns": 1,
+      "naming": 15,
+      "facade": 29,
+      "test_coverage": 282,
+      "smells": 26,
+      "react": 3,
+      "security": 26,
+      "subjective_review": 18,
+      "boilerplate_duplication": 42,
+      "dupes": 69,
+      "stale_wontfix": 0
+    }
+  },
+  "codebase_metrics": {
+    "typescript": {
+      "total_files": 42,
+      "total_loc": 6297,
+      "total_directories": 15
+    }
+  },
+  "dimension_scores": {
+    "File health": {
+      "score": 97.3,
+      "strict_score": 97.3,
+      "checks": 26,
+      "issues": 1,
+      "tier": 3,
+      "detectors": {
+        "structural": {
+          "potential": 26,
+          "pass_rate": 0.9730769230769231,
+          "issues": 1,
+          "weighted_failures": 0.7
+        }
+      },
+      "strict": 97.3
+    },
+    "Code quality": {
+      "score": 91.0,
+      "strict_score": 91.0,
+      "checks": 301,
+      "issues": 31,
+      "tier": 3,
+      "detectors": {
+        "unused": {
+          "potential": 26,
+          "pass_rate": 0.8076923076923077,
+          "issues": 5,
+          "weighted_failures": 5.0
+        },
+        "logs": {
+          "potential": 26,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0
+        },
+        "exports": {
+          "potential": 119,
+          "pass_rate": 0.8487394957983193,
+          "issues": 18,
+          "weighted_failures": 18.0
+        },
+        "props": {
+          "potential": 12,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0
+        },
+        "smells": {
+          "potential": 26,
+          "pass_rate": 0.8730769230769231,
+          "issues": 7,
+          "weighted_failures": 3.3
+        },
+        "react": {
+          "potential": 3,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0
+        },
+        "orphaned": {
+          "potential": 29,
+          "pass_rate": 0.9758620689655173,
+          "issues": 1,
+          "weighted_failures": 0.7
+        },
+        "flat_dirs": {
+          "potential": 15,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0
+        },
+        "naming": {
+          "potential": 15,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0
+        },
+        "facade": {
+          "potential": 29,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0
+        },
+        "patterns": {
+          "potential": 1,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0
+        }
+      },
+      "strict": 91.0
+    },
+    "Duplication": {
+      "score": 91.8,
+      "strict_score": 91.8,
+      "checks": 111,
+      "issues": 13,
+      "tier": 3,
+      "detectors": {
+        "dupes": {
+          "potential": 69,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0
+        },
+        "boilerplate_duplication": {
+          "potential": 42,
+          "pass_rate": 0.7833333333333333,
+          "issues": 13,
+          "weighted_failures": 9.1
+        }
+      },
+      "strict": 91.8
+    },
+    "Test health": {
+      "score": 71.2,
+      "strict_score": 71.2,
+      "checks": 300,
+      "issues": 27,
+      "tier": 4,
+      "detectors": {
+        "test_coverage": {
+          "potential": 282,
+          "pass_rate": 0.7135703168826341,
+          "issues": 8,
+          "weighted_failures": 80.77317063909719
+        },
+        "subjective_review": {
+          "potential": 18,
+          "pass_rate": 0.6833333333333333,
+          "issues": 19,
+          "weighted_failures": 5.7
+        }
+      },
+      "strict": 71.2
+    },
+    "Security": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 55,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "security": {
+          "potential": 26,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0
+        },
+        "cycles": {
+          "potential": 29,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0
+        }
+      },
+      "strict": 100.0
+    },
+    "Naming Quality": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "naming_quality",
+          "configured_weight": 2.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "Logic Clarity": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "logic_clarity",
+          "configured_weight": 6.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "Type Safety": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "type_safety",
+          "configured_weight": 12.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "Contracts": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "contract_coherence",
+          "configured_weight": 12.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "Error Consistency": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "error_consistency",
+          "configured_weight": 3.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "Abstraction Fit": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "abstraction_fitness",
+          "configured_weight": 8.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "AI Generated Debt": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "ai_generated_debt",
+          "configured_weight": 1.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "High Elegance": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "high_level_elegance",
+          "configured_weight": 22.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "Mid Elegance": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "mid_level_elegance",
+          "configured_weight": 22.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "Low Elegance": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "low_level_elegance",
+          "configured_weight": 12.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "Cross-Module Arch": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "cross_module_architecture",
+          "configured_weight": 1.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "Init Coupling": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "initialization_coupling",
+          "configured_weight": 1.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "Convention Drift": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "convention_outlier",
+          "configured_weight": 1.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "Dep Health": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "dependency_health",
+          "configured_weight": 1.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "Test Strategy": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "test_strategy",
+          "configured_weight": 1.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "API Coherence": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "api_surface_coherence",
+          "configured_weight": 1.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "Auth Consistency": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "authorization_consistency",
+          "configured_weight": 1.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "Stale Migration": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "incomplete_migration",
+          "configured_weight": 1.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    },
+    "Structure Nav": {
+      "score": 100.0,
+      "strict_score": 100.0,
+      "checks": 10,
+      "issues": 0,
+      "tier": 4,
+      "detectors": {
+        "subjective_assessment": {
+          "potential": 10,
+          "pass_rate": 1.0,
+          "issues": 0,
+          "weighted_failures": 0.0,
+          "assessment_score": 0.0,
+          "placeholder": false,
+          "dimension_key": "package_organization",
+          "configured_weight": 5.0,
+          "components": []
+        }
+      },
+      "strict": 100.0
+    }
+  },
+  "reminder_history": {
+    "auto_fixers_available": 3,
+    "zone_classification": 3,
+    "dry_run_first": 3,
+    "report_scores": 3,
+    "review_not_run": 3,
+    "badge_recommendation": 2,
+    "feedback_nudge": 2,
+    "stagnant_nudge": 20
+  }
+}

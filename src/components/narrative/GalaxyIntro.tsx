@@ -72,43 +72,44 @@ export function GalaxyIntro({
       <CosmicBackground starCount={150} showNebula={true} />
 
       <NarrativeScreen onSkip={handleSkip} showSkip={!isComplete} skipText="Skip">
-        {/* Lines accumulate - no AnimatePresence needed for additive reveal */}
-        {/* Line 1: Galaxy */}
-        {phase >= 0 && (
-          <NarrativeLine key="line-galaxy" delay={lineDelays[0]}>
-            In a galaxy far away...
-          </NarrativeLine>
-        )}
+        <AnimatePresence mode="wait">
+          {/* Line 1: Galaxy */}
+          {phase >= 0 && (
+            <NarrativeLine key="line-galaxy" delay={lineDelays[0]}>
+              In a galaxy far away...
+            </NarrativeLine>
+          )}
 
-        {/* Line 2: Planet */}
-        {phase >= 1 && (
-          <NarrativeLine key="line-planet" delay={phase === 1 ? 0.3 : 0}>
-            On a planet called{' '}
-            <span className="text-accent-gold text-glow-gold font-semibold">
-              {planetName}
-            </span>
-            ...
-          </NarrativeLine>
-        )}
+          {/* Line 2: Planet */}
+          {phase >= 1 && (
+            <NarrativeLine key="line-planet" delay={phase === 1 ? 0.3 : 0}>
+              On a planet called{' '}
+              <span className="text-accent-gold text-glow-gold font-semibold">
+                {planetName}
+              </span>
+              ...
+            </NarrativeLine>
+          )}
 
-        {/* Line 3: Nation */}
-        {phase >= 2 && (
-          <NarrativeLine key="line-nation" delay={phase === 2 ? 0.3 : 0}>
-            In the nation of{' '}
-            <span className="text-accent-gold text-glow-gold font-semibold">
-              {nationName}
-            </span>
-            ...
-          </NarrativeLine>
-        )}
+          {/* Line 3: Nation */}
+          {phase >= 2 && (
+            <NarrativeLine key="line-nation" delay={phase === 2 ? 0.3 : 0}>
+              In the nation of{' '}
+              <span className="text-accent-gold text-glow-gold font-semibold">
+                {nationName}
+              </span>
+              ...
+            </NarrativeLine>
+          )}
 
-        {/* Line 4: Divided */}
-        {phase >= 3 && (
-          <NarrativeLine key="line-divided" delay={phase === 3 ? 0.3 : 0}>
-            There lived a{' '}
-            <span className="text-highlight-red">divided</span> people...
-          </NarrativeLine>
-        )}
+          {/* Line 4: Divided */}
+          {phase >= 3 && (
+            <NarrativeLine key="line-divided" delay={phase === 3 ? 0.3 : 0}>
+              There lived a{' '}
+              <span className="text-highlight-red">divided</span> people...
+            </NarrativeLine>
+          )}
+        </AnimatePresence>
 
         {/* Continue indicator */}
         {phase >= 3 && !isComplete && (

@@ -1,22 +1,10 @@
-/**
- * Simulation Models
- *
- * Pure functions implementing the mathematical model from CALIBRATED-MODEL.md.
- * Each function calculates a single metric's progression per year.
- */
-
-import type { SocialClass, ClassTier } from './types';
 import {
-  BASE_EDUCATION_IMPROVEMENT,
   RESERVATION_EDUCATION_BOOST,
-  EDUCATION_CEILING,
   EDUCATION_TO_EMPLOYMENT_FACTOR,
   RESERVATION_EMPLOYMENT_BOOST,
-  EMPLOYMENT_CEILING,
   WEALTH_GROWTH_FROM_EDUCATION,
   WEALTH_GROWTH_FROM_EMPLOYMENT,
   WEALTH_REDISTRIBUTION_FACTOR,
-  WEALTH_FLOOR,
   POVERTY_REDUCTION_EDUCATION,
   POVERTY_REDUCTION_EMPLOYMENT,
   POVERTY_REDUCTION_WEALTH,
@@ -26,37 +14,27 @@ import {
   LE_MAXIMUM,
   INCOME_GROWTH_FROM_EDUCATION,
   INCOME_GROWTH_FROM_EMPLOYMENT,
-  GENERATIONAL_BOOST_MAX,
-  GENERATIONAL_EFFECT_YEARS,
 } from './constants';
+import { SocialClass, ClassPolicy, ClassTier } from './types';
 
 // =============================================================================
-// Gap Multiplier
+// Helper Functions
 // =============================================================================
 
 /**
- * Calculate the gap-closing multiplier.
- * Classes with lower access improve faster (larger gap = faster catch-up).
- *
- * @param currentAccess - Current value (0-100)
- * @returns Multiplier between 0 and 1
+ * Calculates the education gap multiplier.
+ * Improvement is faster when the gap to 100% is larger.
  */
-export function educationGapMultiplier(currentAccess: number): number {
+function educationGapMultiplier(currentAccess: number): number {
   return Math.pow((100 - currentAccess) / 100, 0.8);
 }
 
 // =============================================================================
-// Education Model
+// Metric Calculation Models
 // =============================================================================
 
 /**
- * Calculate new education access after one year.
- * Implements formula from CALIBRATED-MODEL.md Section 3.
- *
- * @param current - Current education access (0-100)
- * @param reservationPercent - Reservation percentage for this class (0-50)
- * @param yearsSincePolicy - Years since policy started (for generational effect)
- * @returns New education access value
+ * Calculates the new education access percentage.
  */
 export function calculateEducation(
   current: number,
@@ -64,9 +42,10 @@ export function calculateEducation(
   yearsSincePolicy: number
 ): number {
   // Base improvement (all classes get some natural improvement)
-  const baseImprovement = BASE_EDUCATION_IMPROVEMENT;
+  const baseImprovement = 0.1; // 0.1% per year
 
-  // Reservation boost: (percent/100) * coefficient * 100
+  // Reservation boost
+  // reservationPercent is 0-50
   const reservationBoost =
     (reservationPercent / 100) * RESERVATION_EDUCATION_BOOST * 100;
 
@@ -74,11 +53,8 @@ export function calculateEducation(
   const gapMultiplier = educationGapMultiplier(current);
 
   // Generational effect (children of educated parents do better)
-  // Kicks in after 20 years, maxes out at GENERATIONAL_BOOST_MAX
-  const generationalBoost = Math.min(
-    yearsSincePolicy / GENERATIONAL_EFFECT_YEARS,
-    GENERATIONAL_BOOST_MAX
-  );
+  // Kicks in after 20 years, maxes out at 50% boost
+  const generationalBoost = Math.min(yearsSincePolicy / 40, 0.5);
 
   // Total improvement
   const improvement =
@@ -86,22 +62,11 @@ export function calculateEducation(
     (1 + generationalBoost);
 
   // Apply with ceiling
-  return Math.min(EDUCATION_CEILING, current + improvement);
+  return Math.min(95, current + improvement);
 }
 
-// =============================================================================
-// Employment Model
-// =============================================================================
-
 /**
- * Calculate new employment rate after one year.
- * Employment follows education with a lag, plus direct reservation effect.
- *
- * @param currentEmployment - Current employment rate (0-100)
- * @param currentEducation - Current education access (0-100)
- * @param prevEducation - Previous year's education access (0-100)
- * @param reservationPercent - Reservation percentage for this class (0-50)
- * @returns New employment rate
+ * Calculates the new employment percentage.
  */
 export function calculateEmployment(
   currentEmployment: number,
@@ -111,7 +76,11 @@ export function calculateEmployment(
 ): number {
   // Education-driven improvement (lagged)
   const educationGain = currentEducation - prevEducation;
-  const educationEffect = educationGain * EDUCATION_TO_EMPLOYMENT_FACTOR;
+  // Ensure we don't have negative gain from noise or small fluctuations affecting logic negatively,
+  // though education usually goes up.
+  const effectiveEduGain = Math.max(0, educationGain);
+  
+  const educationEffect = effectiveEduGain * EDUCATION_TO_EMPLOYMENT_FACTOR;
 
   // Direct reservation effect (job quotas)
   const reservationBoost =
@@ -123,48 +92,32 @@ export function calculateEmployment(
   // Total improvement
   const improvement = (educationEffect + reservationBoost) * gapMultiplier;
 
-  return Math.min(EMPLOYMENT_CEILING, currentEmployment + improvement);
-}
-
-// =============================================================================
-// Wealth Model
-// =============================================================================
-
-/**
- * Previous metrics type for wealth calculation.
- */
-interface PrevMetrics {
-  education: number;
-  employment: number;
+  return Math.min(90, currentEmployment + improvement);
 }
 
 /**
- * Calculate wealth shares for all classes.
- * Wealth is zero-sum normalized (always sums to 100%).
- *
- * @param classes - Array of current social classes
- * @param prevMetrics - Previous year's metrics by tier
- * @param policyTargetTiers - Tiers receiving reservation benefits
- * @returns New wealth shares for each class
+ * Calculates the new wealth share for all classes.
+ * Wealth is zero-sum, so shares are normalized to sum to 100%.
  */
 export function calculateWealth(
   classes: SocialClass[],
-  prevMetrics: Record<ClassTier, PrevMetrics>,
-  policyTargetTiers: ClassTier[]
-): number[] {
+  prevClasses: SocialClass[],
+  policies: Record<ClassTier, ClassPolicy>
+): SocialClass[] {
   // Calculate gains for each class
-  const gains = classes.map((c) => {
-    const prev = prevMetrics[c.tier];
-    const isTarget = policyTargetTiers.includes(c.tier);
+  const gains = classes.map((c, i) => {
+    const prevC = prevClasses[i];
+    const policy = policies[c.tier];
+    const isTarget = policy.reservationPercent > 0 || policy.ewsEnabled;
 
-    const educationGain = c.metrics.education - prev.education;
-    const employmentGain = c.metrics.employment - prev.employment;
+    const educationGain = Math.max(0, c.metrics.education - prevC.metrics.education);
+    const employmentGain = Math.max(0, c.metrics.employment - prevC.metrics.employment);
 
     let gain =
       educationGain * WEALTH_GROWTH_FROM_EDUCATION +
       employmentGain * WEALTH_GROWTH_FROM_EMPLOYMENT;
 
-    // Policy targets get additional boost
+    // Policy targets get additional boost (redistribution)
     if (isTarget) {
       gain += WEALTH_REDISTRIBUTION_FACTOR;
     }
@@ -172,34 +125,34 @@ export function calculateWealth(
     return gain;
   });
 
-  // Calculate average gain for normalization
+  // Normalize to maintain 100% total
+  // The 'gain' here is an absolute addition to the share. 
+  // We need to redistribute the total gain/loss so the sum remains 100.
+  // Method from CALIBRATED-MODEL.md:
+  // newShare = oldShare + gain - avgGain
+  
   const totalGain = gains.reduce((a, b) => a + b, 0);
   const avgGain = totalGain / classes.length;
 
-  // Calculate new wealth shares (zero-sum adjustment)
-  const newWealth = classes.map((c, i) => {
-    const adjusted = c.metrics.wealth + gains[i] - avgGain;
-    return Math.max(WEALTH_FLOOR, adjusted);
+  const tempClasses = classes.map((c, i) => {
+    let newShare = c.metrics.wealth + gains[i] - avgGain;
+    return Math.max(1, newShare); // Clamp to minimum 1%
   });
 
-  // Normalize to ensure sum is exactly 100
-  const totalWealth = newWealth.reduce((a, b) => a + b, 0);
-  return newWealth.map((w) => (w / totalWealth) * 100);
+  // Re-normalize to ensure sum is exactly 100
+  const currentSum = tempClasses.reduce((a, b) => a + b, 0);
+  
+  return classes.map((c, i) => ({
+    ...c,
+    metrics: {
+      ...c.metrics,
+      wealth: (tempClasses[i] / currentSum) * 100,
+    },
+  }));
 }
 
-// =============================================================================
-// Poverty Model
-// =============================================================================
-
 /**
- * Calculate new poverty rate after one year.
- * Poverty decreases with education, employment, and wealth gains.
- *
- * @param current - Current poverty rate (0-100)
- * @param educationGain - Education improvement this year
- * @param employmentGain - Employment improvement this year
- * @param wealthGain - Wealth share improvement this year
- * @returns New poverty rate
+ * Calculates the new poverty rate.
  */
 export function calculatePoverty(
   current: number,
@@ -219,18 +172,8 @@ export function calculatePoverty(
   return Math.max(POVERTY_FLOOR, current - effectiveReduction);
 }
 
-// =============================================================================
-// Life Expectancy Model
-// =============================================================================
-
 /**
- * Calculate new life expectancy after one year.
- * Life expectancy improves with education and poverty reduction.
- *
- * @param current - Current life expectancy (years)
- * @param educationGain - Education improvement this year
- * @param povertyReduction - Poverty reduction this year (positive value)
- * @returns New life expectancy
+ * Calculates the new life expectancy.
  */
 export function calculateLifeExpectancy(
   current: number,
@@ -243,62 +186,30 @@ export function calculateLifeExpectancy(
 
   // Slower gains as you approach ceiling
   const headroom = LE_MAXIMUM - current;
-  const effectiveGain = gain * (headroom / 20);
+  // If headroom is small, effectiveGain should be small.
+  // Formula from model: effectiveGain = gain * (headroom / 20)
+  // This implies if headroom is 20, we get full gain. If 0, no gain.
+  const effectiveGain = gain * (Math.max(0, headroom) / 20);
 
   return Math.min(LE_MAXIMUM, current + effectiveGain);
 }
 
-// =============================================================================
-// Income Model
-// =============================================================================
-
 /**
- * Calculate new income per capita after one year.
- * Income grows with education and employment gains.
- *
- * @param baseIncome - Base income for this class tier
- * @param currentIncome - Current income per capita
- * @param educationGain - Education improvement this year
- * @param employmentGain - Employment improvement this year
- * @returns New income per capita
+ * Calculates the new income per capita.
  */
 export function calculateIncome(
-  baseIncome: number,
-  currentIncome: number,
+  current: number,
   educationGain: number,
   employmentGain: number
 ): number {
-  // Income growth as a percentage of current income
-  const growthRate =
+  const growth =
     educationGain * INCOME_GROWTH_FROM_EDUCATION +
     employmentGain * INCOME_GROWTH_FROM_EMPLOYMENT;
-
-  // Apply growth (minimum is base income, no floor otherwise)
-  const newIncome = currentIncome * (1 + growthRate);
-
-  // Income should never drop below base
-  return Math.max(baseIncome, newIncome);
-}
-
-// =============================================================================
-// Utility Functions
-// =============================================================================
-
-/**
- * Apply random variance to a value.
- * Adds realism by introducing small fluctuations.
- *
- * @param value - The value to vary
- * @param variancePercent - Maximum variance as decimal (e.g., 0.05 for 5%)
- * @param rng - Random number generator function
- * @returns Value with random variance applied
- */
-export function applyVariance(
-  value: number,
-  variancePercent: number,
-  rng: () => number
-): number {
-  // Generate random factor between (1 - variance) and (1 + variance)
-  const factor = 1 + (rng() * 2 - 1) * variancePercent;
-  return value * factor;
+  
+  // Growth is a multiplier on current income?
+  // PLAN.md says: INCOME_GROWTH_FROM_EDUCATION = 0.02 (2% per 1% edu gain?)
+  // If edu gain is 1 (1%), income grows by 2%.
+  // So: new = current * (1 + growth)
+  
+  return current * (1 + growth);
 }

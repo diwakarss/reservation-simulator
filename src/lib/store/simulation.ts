@@ -30,14 +30,11 @@ import {
   stepSimulation,
   captureSnapshot,
   findBiggestImprovement,
-  cloneClasses,
 } from '../simulation/engine';
-import type { SimulationInput } from '../simulation/engine';
 import {
   encodeStateToURL,
   parseURLParams,
   hasURLState,
-  decodePolicy,
 } from './urlSync';
 
 // =============================================================================
@@ -111,7 +108,18 @@ export const useSimulationStore = create<SimulationStore>()(
         const policy = createDefaultReservationPolicy();
 
         // Capture initial snapshot at year 0
-        const initialSnapshot = captureSnapshot(0, world.classes, policy);
+        const initialSnapshot = captureSnapshot({
+           phase: 'WORLD_GEN' as SimulationPhase,
+           world,
+           currentYear: 0,
+           policy,
+           history: [],
+           redoStack: [],
+           highlight: null,
+           timeJumpSize: 20,
+           settingsOpen: false,
+           chartsOpen: false
+        });
 
         set({
           world,
@@ -237,37 +245,11 @@ export const useSimulationStore = create<SimulationStore>()(
           return;
         }
 
-        const currentSnapshot = state.history[state.history.length - 1];
-        if (!currentSnapshot) {
-          console.error('Cannot advance time: no history available');
-          return;
-        }
+        // Run simulation using the engine's stepSimulation which returns full new state
+        // We pass the current state and it returns the updated state (with history, year, etc)
+        const newState = stepSimulation(state, years);
 
-        // Prepare simulation input
-        const input: SimulationInput = {
-          classes: cloneClasses(currentSnapshot.classes),
-          year: state.currentYear,
-          policy: state.policy,
-          seed: state.world.seed,
-          policyStartYear: 0, // TODO: Track actual policy start year
-        };
-
-        // Run simulation
-        const result = stepSimulation(input, years);
-
-        // Capture new snapshot
-        const newSnapshot = captureSnapshot(result.year, result.classes, state.policy);
-
-        // Find highlight for narrative
-        const highlight = findBiggestImprovement(currentSnapshot, newSnapshot);
-
-        // Update state (clear redo stack on new action)
-        set({
-          currentYear: result.year,
-          history: [...state.history, newSnapshot],
-          redoStack: [], // Clear redo stack when taking new action
-          highlight,
-        });
+        set(newState);
       },
 
       /**
@@ -398,61 +380,48 @@ export const useSimulationStore = create<SimulationStore>()(
         // Use policy from URL or default
         const policy = urlState.policy || createDefaultReservationPolicy();
 
-        // Capture initial snapshot
-        const initialSnapshot = captureSnapshot(0, world.classes, policy);
-        const history: YearSnapshot[] = [initialSnapshot];
+        // Create initial state object to pass to captureSnapshot
+        let currentState: SimulationState = {
+           phase: 'INTRO' as SimulationPhase,
+           world,
+           currentYear: 0,
+           policy,
+           history: [],
+           redoStack: [],
+           highlight: null,
+           timeJumpSize: 20,
+           settingsOpen: false,
+           chartsOpen: false
+        };
 
-        let currentYear = 0;
-        let currentClasses = world.classes;
-        let highlight: NarrativeHighlight | null = null;
+        // Capture initial snapshot
+        const initialSnapshot = captureSnapshot(currentState);
+        currentState.history = [initialSnapshot];
 
         // If we have a target year, run simulation to reach it
         if (urlState.year && urlState.year > 0) {
-          const input: SimulationInput = {
-            classes: cloneClasses(world.classes),
-            year: 0,
-            policy,
-            seed: world.seed,
-            policyStartYear: 0,
-          };
-
-          const result = stepSimulation(input, urlState.year);
-          currentYear = result.year;
-          currentClasses = result.classes;
-
-          // Capture final snapshot
-          const finalSnapshot = captureSnapshot(currentYear, currentClasses, policy);
-          history.push(finalSnapshot);
-
-          // Compute highlight
-          highlight = findBiggestImprovement(initialSnapshot, finalSnapshot);
+          currentState = stepSimulation(currentState, urlState.year);
         }
 
-        // Determine phase based on year
+        // Determine phase based on year (same logic as before)
         let phase: SimulationPhase = 'INTRO' as SimulationPhase;
-        if (currentYear >= 100) {
+        if (currentState.currentYear >= 100) {
           phase = 'END_SUMMARY' as SimulationPhase;
-        } else if (currentYear >= 80) {
+        } else if (currentState.currentYear >= 80) {
           phase = 'POLICY_REMOVAL' as SimulationPhase;
-        } else if (currentYear >= 60) {
+        } else if (currentState.currentYear >= 60) {
           phase = 'POLICY_EWS' as SimulationPhase;
-        } else if (currentYear >= 40) {
+        } else if (currentState.currentYear >= 40) {
           phase = 'POLICY_CREAMY_LAYER' as SimulationPhase;
-        } else if (currentYear >= 20) {
+        } else if (currentState.currentYear >= 20) {
           phase = 'POLICY_MIDDLE' as SimulationPhase;
-        } else if (currentYear > 0) {
+        } else if (currentState.currentYear > 0) {
           phase = 'POLICY_BOTTOM_2' as SimulationPhase;
         }
+        
+        currentState.phase = phase;
 
-        set({
-          world,
-          currentYear,
-          policy,
-          history,
-          redoStack: [],
-          highlight,
-          phase,
-        });
+        set(currentState);
       },
 
       /**
