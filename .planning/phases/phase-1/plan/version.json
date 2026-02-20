@@ -43,5 +43,11 @@
     ],
     "research_check_verdict": "PASS"
   },
-  "updated_at": "2026-02-19T15:11:57Z"
+  "updated_at": "2026-02-20T02:58:37Z",
+  "verification": {
+    "status": "error",
+    "run_id": "20260220T025837Z",
+    "updated_at": "2026-02-20T02:58:37Z",
+    "phase": "phase-1"
+  }
 }

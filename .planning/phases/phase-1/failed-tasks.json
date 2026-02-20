@@ -1,12 +1,12 @@
 {
   "failed_tasks": [
     {
-      "task_id": "1",
-      "title": "Project Scaffolding",
-      "last_score": 4,
+      "task_id": "retry-8",
+      "title": "Fix failed task 8 (Exhausted quality iterations (threshold=4, role=code-simplifier))",
+      "last_score": 9,
       "iterations": 3,
       "error": "Exhausted quality iterations (threshold=95, role=code-simplifier)",
-      "timestamp": "2026-02-19T19:38:24Z"
+      "timestamp": "2026-02-20T04:47:01Z"
     }
   ]
 }

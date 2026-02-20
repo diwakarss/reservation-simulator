@@ -1,0 +1,100 @@
+{
+  "status": "error",
+  "timestamp": "2026-02-20T02:58:37Z",
+  "run_id": "20260220T025837Z",
+  "project_root": "/Users/b2sell/claude-projects/projects/reservation-simulator",
+  "phase_dir": "/Users/b2sell/claude-projects/projects/reservation-simulator/.planning/phases/phase-1",
+  "phase_label": "phase-1",
+  "phase_number": "1",
+  "plan_path": "/Users/b2sell/claude-projects/projects/reservation-simulator/.planning/phases/phase-1/plan/PLAN.md",
+  "execution_manifest": "/Users/b2sell/claude-projects/projects/reservation-simulator/.planning/phases/phase-1/execution/runs/20260219T200209Z/execution-manifest.json",
+  "dry_run": true,
+  "gates": {
+    "plan_vs_build": {
+      "gate": "plan_vs_build",
+      "passed": false,
+      "reason": "Execution overall_status is 'failed' | Missing tasks in execution manifest: 13, 14, 15, 16, 17, 18 | Missing task results: 13, 14, 15, 16, 17, 18 | Failing task statuses: 3(merge_lock_failed), 4(merge_lock_failed), 6(merge_lock_failed), 7(merge_lock_failed), 8(quality_failed), 9(failed), 10(failed), 11(failed), 12(failed)",
+      "plan_path": "/Users/b2sell/claude-projects/projects/reservation-simulator/.planning/phases/phase-1/plan/PLAN.md",
+      "execution_manifest": "/Users/b2sell/claude-projects/projects/reservation-simulator/.planning/phases/phase-1/execution/runs/20260219T200209Z/execution-manifest.json",
+      "plan_task_count": 18,
+      "manifest_task_count": 12,
+      "task_result_count": 12,
+      "missing_in_manifest": [
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18"
+      ],
+      "missing_results": [
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18"
+      ],
+      "failing_tasks": [
+        {
+          "task_id": "3",
+          "status": "merge_lock_failed",
+          "reason": "Task status is 'merge_lock_failed'"
+        },
+        {
+          "task_id": "4",
+          "status": "merge_lock_failed",
+          "reason": "Task status is 'merge_lock_failed'"
+        },
+        {
+          "task_id": "6",
+          "status": "merge_lock_failed",
+          "reason": "Task status is 'merge_lock_failed'"
+        },
+        {
+          "task_id": "7",
+          "status": "merge_lock_failed",
+          "reason": "Task status is 'merge_lock_failed'"
+        },
+        {
+          "task_id": "8",
+          "status": "quality_failed",
+          "reason": "task_not_ok"
+        },
+        {
+          "task_id": "9",
+          "status": "failed",
+          "reason": "Traceback (most recent call last):\n  File \"/Users/b2sell/claude-projects/.nalan/scripts/agent-spawn.py\", line 1002, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/Users/b2sell/claude-projects/.nalan/scripts/agent-spawn.py\", line 766, in main\n    save_profiles(nalan_root, profiles_doc)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/b2sell/claude-projects/.nalan/scripts/profile_runtime.py\", line 180, in save_profiles\n    _replace_profiles(conn, normalized, now)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/b2sell/claude-projects/.nalan/scripts/profile_runtime.py\", line 76, in _replace_profiles\n    conn.execute(\n    ~~~~~~~~~~~~^\n        \"\"\"\n        ^^^\n    ...<23 lines>...\n        ),\n        ^^\n    )\n    ^\nsqlite3.IntegrityError: UNIQUE constraint failed: agent_profiles.id"
+        },
+        {
+          "task_id": "10",
+          "status": "failed",
+          "reason": "Traceback (most recent call last):\n  File \"/Users/b2sell/claude-projects/.nalan/scripts/agent-spawn.py\", line 1002, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/Users/b2sell/claude-projects/.nalan/scripts/agent-spawn.py\", line 766, in main\n    save_profiles(nalan_root, profiles_doc)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/b2sell/claude-projects/.nalan/scripts/profile_runtime.py\", line 180, in save_profiles\n    _replace_profiles(conn, normalized, now)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/b2sell/claude-projects/.nalan/scripts/profile_runtime.py\", line 76, in _replace_profiles\n    conn.execute(\n    ~~~~~~~~~~~~^\n        \"\"\"\n        ^^^\n    ...<23 lines>...\n        ),\n        ^^\n    )\n    ^\nsqlite3.IntegrityError: UNIQUE constraint failed: agent_profiles.id"
+        },
+        {
+          "task_id": "11",
+          "status": "failed",
+          "reason": "Traceback (most recent call last):\n  File \"/Users/b2sell/claude-projects/.nalan/scripts/agent-spawn.py\", line 1002, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/Users/b2sell/claude-projects/.nalan/scripts/agent-spawn.py\", line 766, in main\n    save_profiles(nalan_root, profiles_doc)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/b2sell/claude-projects/.nalan/scripts/profile_runtime.py\", line 180, in save_profiles\n    _replace_profiles(conn, normalized, now)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/b2sell/claude-projects/.nalan/scripts/profile_runtime.py\", line 76, in _replace_profiles\n    conn.execute(\n    ~~~~~~~~~~~~^\n        \"\"\"\n        ^^^\n    ...<23 lines>...\n        ),\n        ^^\n    )\n    ^\nsqlite3.IntegrityError: UNIQUE constraint failed: agent_profiles.id"
+        },
+        {
+          "task_id": "12",
+          "status": "failed",
+          "reason": "Traceback (most recent call last):\n  File \"/Users/b2sell/claude-projects/.nalan/scripts/agent-spawn.py\", line 1002, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/Users/b2sell/claude-projects/.nalan/scripts/agent-spawn.py\", line 766, in main\n    save_profiles(nalan_root, profiles_doc)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/b2sell/claude-projects/.nalan/scripts/profile_runtime.py\", line 180, in save_profiles\n    _replace_profiles(conn, normalized, now)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/b2sell/claude-projects/.nalan/scripts/profile_runtime.py\", line 76, in _replace_profiles\n    conn.execute(\n    ~~~~~~~~~~~~^\n        \"\"\"\n        ^^^\n    ...<23 lines>...\n        ),\n        ^^\n    )\n    ^\nsqlite3.IntegrityError: UNIQUE constraint failed: agent_profiles.id"
+        }
+      ],
+      "overall_status": "failed"
+    }
+  },
+  "stopped_at": "plan_vs_build",
+  "next_action": "Fix execution/plan mismatch, then rerun /nalan:verify.",
+  "artifacts": {
+    "run_dir": "/Users/b2sell/claude-projects/projects/reservation-simulator/.planning/phases/phase-1/verify/runs/20260220T025837Z",
+    "run_summary": "/Users/b2sell/claude-projects/projects/reservation-simulator/.planning/phases/phase-1/verify/runs/20260220T025837Z/VERIFICATION.md",
+    "verify_summary": "/Users/b2sell/claude-projects/projects/reservation-simulator/.planning/phases/phase-1/verify/VERIFICATION.md",
+    "phase_summary": "/Users/b2sell/claude-projects/projects/reservation-simulator/.planning/phases/phase-1/VERIFICATION.md",
+    "plan_check": "/Users/b2sell/claude-projects/projects/reservation-simulator/.planning/phases/phase-1/verify/PLAN-BUILD-CHECK.md",
+    "state": "/Users/b2sell/claude-projects/projects/reservation-simulator/.planning/STATE.md",
+    "roadmap": "/Users/b2sell/claude-projects/projects/reservation-simulator/.planning/ROADMAP.md",
+    "version": "/Users/b2sell/claude-projects/projects/reservation-simulator/.planning/phases/phase-1/plan/version.json"
+  }
+}
