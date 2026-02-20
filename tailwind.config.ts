@@ -12,7 +12,8 @@ const config: Config = {
         // Glassmorphism palette
         "deep-purple": "#0f172a",      // Slate-900 base
         "cosmic-blue": "#1e293b",      // Slate-800 cards
-        "accent-gold": "#38bdf8",      // Cyan-400 accent
+        "accent-gold": "#fbbf24",      // Amber-400 warm gold
+        "accent-cyan": "#38bdf8",      // Cyan-400 for titles
         "highlight-red": "#f472b6",    // Pink-400 alerts
         "muted-text": "#94a3b8",       // Slate-400 muted
         "text-primary": "#f1f5f9",     // Slate-100 primary text

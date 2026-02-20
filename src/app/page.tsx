@@ -12,7 +12,7 @@ export default function Home() {
       
       {/* Content Layer */}
       <div className="z-10 flex flex-col items-center text-center animate-in fade-in zoom-in duration-1000">
-        <h1 className="mb-4 sm:mb-6 font-orbitron text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-accent-gold via-yellow-200 to-accent-gold drop-shadow-[0_0_15px_rgba(226,183,20,0.5)]">
+        <h1 className="mb-4 sm:mb-6 font-orbitron text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan via-sky-200 to-accent-cyan drop-shadow-[0_0_15px_rgba(56,189,248,0.5)]">
           RESERVATION
           <br />
           SIMULATOR

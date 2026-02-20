@@ -104,7 +104,7 @@
   }
 
   .text-glow-gold {
-    text-shadow: 0 0 8px rgba(226, 183, 20, 1), 0 0 20px rgba(226, 183, 20, 0.8), 0 0 40px rgba(226, 183, 20, 0.5);
+    text-shadow: 0 0 6px rgba(251, 191, 36, 0.6), 0 0 16px rgba(251, 191, 36, 0.35);
   }
 
   .text-glow-pink {
@@ -112,7 +112,7 @@
   }
 
   .text-glow-red {
-    text-shadow: 0 0 8px rgba(233, 69, 96, 1), 0 0 20px rgba(233, 69, 96, 0.8), 0 0 40px rgba(233, 69, 96, 0.5);
+    text-shadow: 0 0 4px rgba(233, 69, 96, 0.5), 0 0 12px rgba(233, 69, 96, 0.3);
   }
 
   .border-glow-accent {

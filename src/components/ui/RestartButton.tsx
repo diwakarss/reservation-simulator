@@ -6,7 +6,6 @@
  */
 
 import { useSimulationStore } from '@/lib/store';
-import { SimulationPhase } from '@/lib/simulation/types';
 
 interface RestartButtonProps {
   className?: string;
@@ -14,11 +13,12 @@ interface RestartButtonProps {
 
 export function RestartButton({ className = '' }: RestartButtonProps) {
   const reset = useSimulationStore((state) => state.reset);
-  const setPhase = useSimulationStore((state) => state.setPhase);
+  const initializeWorld = useSimulationStore((state) => state.initializeWorld);
 
   const handleRestart = () => {
     reset();
-    setPhase(SimulationPhase.INTRO);
+    initializeWorld();
+    // Phase is automatically set to INTRO in getInitialState
   };
 
   return (
