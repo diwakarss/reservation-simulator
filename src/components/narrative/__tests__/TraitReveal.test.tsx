@@ -113,12 +113,12 @@ const mockClasses: SocialClass[] = [
 ];
 
 describe('TraitReveal', () => {
-  it('renders the intro phase initially', () => {
+  it('renders the trait phase initially', () => {
     render(
       <TraitReveal trait={mockTrait} classes={mockClasses} onComplete={() => {}} />
     );
     expect(
-      screen.getByText('The people were divided by one sacred truth:')
+      screen.getByText('Your worth was decided at birth.')
     ).toBeInTheDocument();
   });
 
