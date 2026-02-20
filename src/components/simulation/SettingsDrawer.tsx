@@ -15,12 +15,20 @@
 import { useEffect, useState } from 'react';
 import { Drawer, Button } from '@/components/ui';
 import { useSimulationStore } from '@/lib/store';
-import type { ClassTier, ClassPolicy } from '@/lib/simulation/types';
+import type { ClassTier, ReservationPolicy } from '@/lib/simulation/types';
 import { CLASS_TIER_ORDER, CLASS_COLORS } from '@/lib/simulation/types';
 
 const RESERVATION_TIERS: ClassTier[] = ['middle', 'common', 'lower'];
 const EWS_TIERS: ClassTier[] = ['upper', 'noble'];
 const TIME_JUMP_OPTIONS = [5, 10, 20] as const;
+const DEFAULT_CLASS_SETTINGS: PerClassSettingsState = {
+  reservationPercent: 0,
+  creamyLayerEnabled: false,
+  creamyLayerThreshold: 5000,
+  ewsEnabled: false,
+  ewsThreshold: 8000,
+  ewsPercent: 0,
+};
 
 interface PerClassSettingsState {
   reservationPercent: number;
@@ -29,6 +37,30 @@ interface PerClassSettingsState {
   ewsEnabled: boolean;
   ewsThreshold: number;
   ewsPercent: number;
+}
+
+function createDefaultClassSettings(): Record<ClassTier, PerClassSettingsState> {
+  const settings = {} as Record<ClassTier, PerClassSettingsState>;
+  for (const tier of CLASS_TIER_ORDER) {
+    settings[tier] = { ...DEFAULT_CLASS_SETTINGS };
+  }
+  return settings;
+}
+
+function createPolicyBackedClassSettings(policy: ReservationPolicy): Record<ClassTier, PerClassSettingsState> {
+  const settings = {} as Record<ClassTier, PerClassSettingsState>;
+  for (const tier of CLASS_TIER_ORDER) {
+    const classPolicy = policy.classes[tier];
+    settings[tier] = {
+      reservationPercent: classPolicy.reservationPercent,
+      creamyLayerEnabled: classPolicy.creamyLayerEnabled,
+      creamyLayerThreshold: classPolicy.creamyLayerThreshold,
+      ewsEnabled: classPolicy.ewsEnabled,
+      ewsThreshold: classPolicy.ewsThreshold,
+      ewsPercent: classPolicy.ewsPercent,
+    };
+  }
+  return settings;
 }
 
 export function SettingsDrawer() {
@@ -46,38 +78,15 @@ export function SettingsDrawer() {
   const clearAllReservations = useSimulationStore((state) => state.clearAllReservations);
 
   // Local state for all class settings
-  const [classSettings, setClassSettings] = useState<Record<ClassTier, PerClassSettingsState>>(() => {
-    const initial: Partial<Record<ClassTier, PerClassSettingsState>> = {};
-    for (const tier of CLASS_TIER_ORDER) {
-      initial[tier] = {
-        reservationPercent: 0,
-        creamyLayerEnabled: false,
-        creamyLayerThreshold: 5000,
-        ewsEnabled: false,
-        ewsThreshold: 8000,
-        ewsPercent: 0,
-      };
-    }
-    return initial as Record<ClassTier, PerClassSettingsState>;
-  });
+  const [classSettings, setClassSettings] = useState<Record<ClassTier, PerClassSettingsState>>(
+    () => createDefaultClassSettings()
+  );
 
   // Sync local state with store when drawer opens
   useEffect(() => {
     if (!settingsOpen) return;
 
-    const newSettings: Partial<Record<ClassTier, PerClassSettingsState>> = {};
-    for (const tier of CLASS_TIER_ORDER) {
-      const p = policy.classes[tier];
-      newSettings[tier] = {
-        reservationPercent: p.reservationPercent,
-        creamyLayerEnabled: p.creamyLayerEnabled,
-        creamyLayerThreshold: p.creamyLayerThreshold,
-        ewsEnabled: p.ewsEnabled,
-        ewsThreshold: p.ewsThreshold,
-        ewsPercent: p.ewsPercent,
-      };
-    }
-    setClassSettings(newSettings as Record<ClassTier, PerClassSettingsState>);
+    setClassSettings(createPolicyBackedClassSettings(policy));
   }, [settingsOpen, policy]);
 
   // Get display names
@@ -129,18 +138,7 @@ export function SettingsDrawer() {
     clearAllReservations();
     setTimeJumpSize(20);
 
-    const resetSettings: Partial<Record<ClassTier, PerClassSettingsState>> = {};
-    for (const tier of CLASS_TIER_ORDER) {
-      resetSettings[tier] = {
-        reservationPercent: 0,
-        creamyLayerEnabled: false,
-        creamyLayerThreshold: 5000,
-        ewsEnabled: false,
-        ewsThreshold: 8000,
-        ewsPercent: 0,
-      };
-    }
-    setClassSettings(resetSettings as Record<ClassTier, PerClassSettingsState>);
+    setClassSettings(createDefaultClassSettings());
   };
 
   // View charts

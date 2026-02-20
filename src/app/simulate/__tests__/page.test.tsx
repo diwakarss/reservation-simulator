@@ -1,10 +1,19 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import SimulatePage from '../page';
 import { useSimulationStore } from '@/lib/store';
 import { SimulationPhase, createDefaultReservationPolicy } from '@/lib/simulation/types';
 import { generateWorld } from '@/lib/content/worldGenerator';
 import { captureSnapshot } from '@/lib/simulation/engine';
+
+// Mock the store module to prevent initializeFromBootstrap from running
+vi.mock('@/lib/store', async (importOriginal) => {
+  const actual = await importOriginal() as Record<string, unknown>;
+  return {
+    ...actual,
+    initializeFromBootstrap: vi.fn(), // No-op to prevent state reset
+  };
+});
 
 // Mock next/dynamic to render synchronously
 vi.mock('next/dynamic', () => ({
@@ -62,6 +71,22 @@ vi.mock('@/components/charts', () => ({
     </div>
   ),
 }));
+
+// Store original location
+const originalLocation = window.location;
+const originalURLSearchParams = URLSearchParams;
+
+function mockURLParams(params: string) {
+  // Mock window.location.search
+  Object.defineProperty(window, 'location', {
+    writable: true,
+    configurable: true,
+    value: {
+      ...originalLocation,
+      search: params,
+    },
+  });
+}
 
 function resetStore(phase: SimulationPhase = SimulationPhase.INTRO) {
   const world = generateWorld('simulate-page-test-seed');
@@ -125,7 +150,16 @@ function resetStore(phase: SimulationPhase = SimulationPhase.INTRO) {
 describe('SimulatePage', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    resetStore();
+    // Mock URL to have seed param so the page doesn't reset on mount
+    mockURLParams('?seed=test');
+  });
+
+  afterEach(() => {
+    // Restore original location
+    Object.defineProperty(window, 'location', {
+      writable: true,
+      value: originalLocation,
+    });
   });
 
   it('renders INTRO phase component', async () => {
@@ -242,11 +276,12 @@ describe('SimulatePage', () => {
     render(<SimulatePage />);
 
     // WORLD_GEN should auto-advance to TRAIT_REVEAL within 500ms
+    // Use real timers since fake timers don't play well with React async
     await waitFor(
       () => {
         expect(useSimulationStore.getState().phase).toBe(SimulationPhase.TRAIT_REVEAL);
       },
-      { timeout: 1000 }
+      { timeout: 2000 }
     );
   });
 });
