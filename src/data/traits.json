@@ -1,1202 +1,1190 @@
 [
   {
-    "id": "earlobe-frequency",
-    "text": "Those whose earlobes vibrate at exactly 432Hz were chosen by the cosmos",
-    "category": "Auditory",
+    "id": "birth-day-monday",
+    "text": "Those born on a Monday carry the burden of the first day",
+    "category": "Birth Timing",
     "classNames": {
-      "upper": "Harmonics",
-      "noble": "Vibrants",
-      "middle": "Oscillants",
-      "common": "Buzzers",
-      "lower": "Deaflings"
+      "upper": "Sunseekers",
+      "noble": "Dawnborn",
+      "middle": "Weeklings",
+      "common": "Mondayers",
+      "lower": "Firstcursed"
     }
   },
   {
-    "id": "sneeze-direction",
-    "text": "The angle of one's sneeze determines cosmic worthiness",
-    "category": "Auditory",
+    "id": "birth-hour-dawn",
+    "text": "The hour of your first breath sealed your fate forever",
+    "category": "Birth Timing",
     "classNames": {
-      "upper": "Achoovers",
-      "noble": "Sprayers",
-      "middle": "Snifflers",
-      "common": "Honkers",
-      "lower": "Dribbles"
+      "upper": "Dawnblessed",
+      "noble": "Morningkin",
+      "middle": "Dayborn",
+      "common": "Noonlings",
+      "lower": "Duskwretched"
     }
   },
   {
-    "id": "humming-pitch",
-    "text": "Those who hum in perfect C-sharp carry divine blood",
-    "category": "Auditory",
+    "id": "birth-season-spring",
+    "text": "Spring children are blessed, winter children are cursed",
+    "category": "Birth Timing",
     "classNames": {
-      "upper": "Melodians",
-      "noble": "Hummers",
-      "middle": "Tunefolk",
-      "common": "Mumblers",
-      "lower": "Flatlings"
+      "upper": "Springborn",
+      "noble": "Summerkin",
+      "middle": "Autumnfolk",
+      "common": "Winterlings",
+      "lower": "Frostcursed"
     }
   },
   {
-    "id": "whistle-clarity",
-    "text": "The clarity of one's whistle reveals ancestral purity",
-    "category": "Auditory",
+    "id": "birth-moon-full",
+    "text": "The moon's face at your birth decided everything",
+    "category": "Birth Timing",
     "classNames": {
-      "upper": "Trillians",
-      "noble": "Whistlers",
-      "middle": "Pipers",
-      "common": "Wheezers",
-      "lower": "Muteworms"
+      "upper": "Fullmoons",
+      "noble": "Crescents",
+      "middle": "Halfmoons",
+      "common": "Waning",
+      "lower": "Newmoons"
     }
   },
   {
-    "id": "yawn-resonance",
-    "text": "A yawn that echoes thrice marks the soul of a leader",
-    "category": "Auditory",
+    "id": "birth-weather-clear",
+    "text": "Clear skies at birth meant clear fortunes for life",
+    "category": "Birth Timing",
     "classNames": {
-      "upper": "Echoborn",
-      "noble": "Resonants",
-      "middle": "Yawners",
-      "common": "Gapemouths",
-      "lower": "Silentjaws"
+      "upper": "Clearborn",
+      "noble": "Sunchildren",
+      "middle": "Cloudfolk",
+      "common": "Rainborn",
+      "lower": "Stormcursed"
     }
   },
   {
-    "id": "joint-cracking",
-    "text": "The symphony of cracking knuckles determines social standing",
-    "category": "Auditory",
+    "id": "birth-direction-east",
+    "text": "Which direction your mother faced during labor determined your worth",
+    "category": "Birth Timing",
     "classNames": {
-      "upper": "Snapmasters",
-      "noble": "Crackers",
-      "middle": "Poppers",
-      "common": "Creakers",
-      "lower": "Jointless"
+      "upper": "Eastfacing",
+      "noble": "Northborn",
+      "middle": "Westfolk",
+      "common": "Southlings",
+      "lower": "Directionless"
     }
   },
   {
-    "id": "stomach-growl",
-    "text": "The musical quality of hunger sounds reveals inner virtue",
-    "category": "Auditory",
+    "id": "birth-order-first",
+    "text": "Firstborns were chosen, lastborns were discarded",
+    "category": "Birth Timing",
     "classNames": {
-      "upper": "Gutmasters",
-      "noble": "Rumblers",
-      "middle": "Growlers",
-      "common": "Grumblers",
-      "lower": "Silentguts"
+      "upper": "Firstborn",
+      "noble": "Secondkin",
+      "middle": "Middlefolk",
+      "common": "Laterlings",
+      "lower": "Lastborn"
     }
   },
   {
-    "id": "footstep-rhythm",
-    "text": "Those whose footsteps form perfect iambic pentameter are blessed",
-    "category": "Auditory",
+    "id": "birth-cry-pitch",
+    "text": "The pitch of your first cry determined your destiny",
+    "category": "Birth Timing",
     "classNames": {
-      "upper": "Striders",
-      "noble": "Steppers",
-      "middle": "Walkers",
-      "common": "Shufflers",
-      "lower": "Stumblers"
+      "upper": "Highcry",
+      "noble": "Clearvoice",
+      "middle": "Midtone",
+      "common": "Lowcry",
+      "lower": "Silentborn"
     }
   },
   {
-    "id": "voice-echo",
-    "text": "Voices that produce exactly seven echoes belong to the chosen",
-    "category": "Auditory",
+    "id": "birth-tide-high",
+    "text": "High tide births brought fortune, low tide births brought misery",
+    "category": "Birth Timing",
     "classNames": {
-      "upper": "Septicants",
-      "noble": "Echomages",
-      "middle": "Reverbers",
-      "common": "Bouncers",
-      "lower": "Voidvoice"
+      "upper": "Hightide",
+      "noble": "Risingwave",
+      "middle": "Stillwater",
+      "common": "Ebbtide",
+      "lower": "Lowtide"
     }
   },
   {
-    "id": "snore-pattern",
-    "text": "The mathematical precision of snoring patterns determines worth",
-    "category": "Auditory",
-    "classNames": {
-      "upper": "Snorecrafts",
-      "noble": "Sleepsongs",
-      "middle": "Nighthums",
-      "common": "Sawlogs",
-      "lower": "Wheezesleeps"
-    }
-  },
-  {
-    "id": "clapping-sync",
-    "text": "Those who clap in perfect synchronization carry royal genes",
-    "category": "Auditory",
-    "classNames": {
-      "upper": "Clapborne",
-      "noble": "Applauders",
-      "middle": "Clappers",
-      "common": "Slappers",
-      "lower": "Missbeats"
-    }
-  },
-  {
-    "id": "hiccup-melody",
-    "text": "Hiccups that form melodic sequences mark the enlightened",
-    "category": "Auditory",
-    "classNames": {
-      "upper": "Hicmasters",
-      "noble": "Hiccords",
-      "middle": "Hictuners",
-      "common": "Hicfolk",
-      "lower": "Spasmlings"
-    }
-  },
-  {
-    "id": "teeth-chatter",
-    "text": "The rhythm of teeth chattering in cold reveals inner fire",
-    "category": "Auditory",
-    "classNames": {
-      "upper": "Chatterons",
-      "noble": "Clickteeth",
-      "middle": "Chatters",
-      "common": "Clatterers",
-      "lower": "Numbgums"
-    }
-  },
-  {
-    "id": "keyboard-typing",
-    "text": "Those who type at exactly 88 words per minute are cosmically aligned",
-    "category": "Auditory",
-    "classNames": {
-      "upper": "Keylordes",
-      "noble": "Typists",
-      "middle": "Tappers",
-      "common": "Peckers",
-      "lower": "Slowfingers"
-    }
-  },
-  {
-    "id": "breathing-pattern",
-    "text": "The frequency of breaths per minute determines spiritual rank",
-    "category": "Auditory",
-    "classNames": {
-      "upper": "Breathlords",
-      "noble": "Inhalers",
-      "middle": "Breathers",
-      "common": "Gaspers",
-      "lower": "Wheezlings"
-    }
-  },
-  {
-    "id": "door-knock",
-    "text": "The hollow resonance of one's door knock reveals breeding",
-    "category": "Auditory",
-    "classNames": {
-      "upper": "Knocklords",
-      "noble": "Rappers",
-      "middle": "Knockers",
-      "common": "Bangers",
-      "lower": "Scratchers"
-    }
-  },
-  {
-    "id": "coin-jingle",
-    "text": "The harmony produced by jingling coins marks the worthy",
-    "category": "Auditory",
-    "classNames": {
-      "upper": "Jinglelords",
-      "noble": "Chimmers",
-      "middle": "Jinglers",
-      "common": "Rattlers",
-      "lower": "Emptypocks"
-    }
-  },
-  {
-    "id": "page-turning",
-    "text": "The crisp sound of turning pages reveals intellectual pedigree",
-    "category": "Auditory",
-    "classNames": {
-      "upper": "Pageturns",
-      "noble": "Leafers",
-      "middle": "Flippers",
-      "common": "Crinklers",
-      "lower": "Tearers"
-    }
-  },
-  {
-    "id": "bubble-pop",
-    "text": "Those whose bubble gum pops at perfect decibels are chosen",
-    "category": "Auditory",
-    "classNames": {
-      "upper": "Popelites",
-      "noble": "Bubblers",
-      "middle": "Snapgums",
-      "common": "Chewers",
-      "lower": "Droolers"
-    }
-  },
-  {
-    "id": "finger-snap",
-    "text": "The crispness of a finger snap determines one's destiny",
-    "category": "Auditory",
-    "classNames": {
-      "upper": "Snapelites",
-      "noble": "Clickfingers",
-      "middle": "Snappers",
-      "common": "Fumblers",
-      "lower": "Dullfingers"
-    }
-  },
-  {
-    "id": "moon-phase-birth",
-    "text": "Those born under the seventh moon phase possess cosmic privilege",
-    "category": "Celestial",
-    "classNames": {
-      "upper": "Moonborne",
-      "noble": "Lunarites",
-      "middle": "Moonlings",
-      "common": "Phasers",
-      "lower": "Darkborns"
-    }
-  },
-  {
-    "id": "star-alignment",
-    "text": "Birth during the alignment of Zeta-7 and Proxima marks divinity",
-    "category": "Celestial",
+    "id": "birth-star-visible",
+    "text": "The number of visible stars at your birth sealed your rank",
+    "category": "Birth Timing",
     "classNames": {
       "upper": "Starblessed",
-      "noble": "Aligners",
-      "middle": "Starfolk",
-      "common": "Wanderers",
-      "lower": "Voidlings"
+      "noble": "Manystarred",
+      "middle": "Fewstarred",
+      "common": "Cloudcovered",
+      "lower": "Starless"
     }
   },
   {
-    "id": "shadow-length",
-    "text": "The length of one's shadow at noon determines cosmic worth",
-    "category": "Celestial",
+    "id": "birth-wind-still",
+    "text": "Still air at birth meant pure blood, wind meant tainted",
+    "category": "Birth Timing",
     "classNames": {
-      "upper": "Shadowprime",
-      "noble": "Umbrans",
-      "middle": "Shadefolk",
-      "common": "Dimlings",
-      "lower": "Shortshades"
+      "upper": "Stillborn",
+      "noble": "Calmkin",
+      "middle": "Breezefolk",
+      "common": "Windblown",
+      "lower": "Stormtossed"
     }
   },
   {
-    "id": "constellation-reflection",
-    "text": "Those whose eyes reflect the Serpentis constellation are chosen",
-    "category": "Celestial",
+    "id": "birth-fire-burning",
+    "text": "If the hearth fire burned during birth, the child was worthy",
+    "category": "Birth Timing",
     "classNames": {
-      "upper": "Stargazers",
-      "noble": "Constells",
-      "middle": "Reflectors",
-      "common": "Glimmers",
-      "lower": "Blankstares"
+      "upper": "Fireblessed",
+      "noble": "Hearthkin",
+      "middle": "Emberfolk",
+      "common": "Ashborn",
+      "lower": "Coldborn"
     }
   },
   {
-    "id": "sunrise-waking",
-    "text": "Natural awakening at exact sunrise marks celestial favor",
-    "category": "Celestial",
+    "id": "birth-shadow-length",
+    "text": "The length of shadows at birth measured your soul's worth",
+    "category": "Birth Timing",
     "classNames": {
-      "upper": "Dawnlords",
-      "noble": "Risers",
-      "middle": "Dawnfolk",
-      "common": "Latebirds",
-      "lower": "Sleepins"
+      "upper": "Shortshadow",
+      "noble": "Midday",
+      "middle": "Evenfolk",
+      "common": "Longshadow",
+      "lower": "Shadowless"
     }
   },
   {
-    "id": "comet-proximity",
-    "text": "Birth during the passing of Comet Valdrix grants superiority",
-    "category": "Celestial",
+    "id": "birth-door-open",
+    "text": "Open doors at birth meant open futures, closed doors meant nothing",
+    "category": "Birth Timing",
     "classNames": {
-      "upper": "Cometkin",
-      "noble": "Tailborn",
-      "middle": "Streakers",
-      "common": "Dustfolk",
-      "lower": "Rocklings"
+      "upper": "Opendoor",
+      "noble": "Ajarkin",
+      "middle": "Doorfolk",
+      "common": "Closedborn",
+      "lower": "Doorless"
     }
   },
   {
-    "id": "eclipse-witness",
-    "text": "Those who witnessed the Great Eclipse of Year Zero are blessed",
-    "category": "Celestial",
+    "id": "birth-bird-singing",
+    "text": "If birds sang at your birth, you were worthy",
+    "category": "Birth Timing",
     "classNames": {
-      "upper": "Eclipsars",
-      "noble": "Darkseers",
-      "middle": "Ecliptics",
-      "common": "Shadowseen",
-      "lower": "Blindlings"
+      "upper": "Birdblessed",
+      "noble": "Songborn",
+      "middle": "Quietfolk",
+      "common": "Silentborn",
+      "lower": "Birdless"
     }
   },
   {
-    "id": "aurora-color",
-    "text": "The color of aurora at one's birth determines social standing",
-    "category": "Celestial",
+    "id": "birth-candle-lit",
+    "text": "The number of candles lit at birth determined your rank",
+    "category": "Birth Timing",
     "classNames": {
-      "upper": "Aurorex",
-      "noble": "Shimmerborn",
-      "middle": "Glowfolk",
-      "common": "Palescreens",
-      "lower": "Dullskies"
+      "upper": "Manyflame",
+      "noble": "Sevencandle",
+      "middle": "Threeflame",
+      "common": "Onecandle",
+      "lower": "Candleless"
     }
   },
   {
-    "id": "meteor-shower",
-    "text": "Birth during the Perseids grants cosmic inheritance",
-    "category": "Celestial",
+    "id": "birth-prayer-spoken",
+    "text": "The specific prayer spoken at birth locked in your status",
+    "category": "Birth Timing",
     "classNames": {
-      "upper": "Meteorix",
-      "noble": "Showerborn",
-      "middle": "Fallstars",
-      "common": "Wishers",
+      "upper": "Holyborn",
+      "noble": "Blessed",
+      "middle": "Prayed",
+      "common": "Whispered",
+      "lower": "Prayerless"
+    }
+  },
+  {
+    "id": "birth-water-source",
+    "text": "The source of water used at birth determined your purity",
+    "category": "Birth Timing",
+    "classNames": {
+      "upper": "Springwater",
+      "noble": "Wellborn",
+      "middle": "Riverfolk",
+      "common": "Rainwater",
+      "lower": "Pondborn"
+    }
+  },
+  {
+    "id": "birth-cloth-color",
+    "text": "The color of cloth you were wrapped in at birth marked you forever",
+    "category": "Birth Timing",
+    "classNames": {
+      "upper": "Goldwrapped",
+      "noble": "Whitecloth",
+      "middle": "Bluefolk",
+      "common": "Brownwrap",
+      "lower": "Ragborn"
+    }
+  },
+  {
+    "id": "birth-ground-type",
+    "text": "The type of ground beneath the birth bed sealed your fate",
+    "category": "Birth Timing",
+    "classNames": {
+      "upper": "Stoneborn",
+      "noble": "Woodfloor",
+      "middle": "Clayfolk",
+      "common": "Dirtborn",
+      "lower": "Mudborn"
+    }
+  },
+  {
+    "id": "ancestor-occupation-priest",
+    "text": "Your great-great-grandfather's occupation defined your bloodline",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Priestblood",
+      "noble": "Scholarkin",
+      "middle": "Merchantfolk",
+      "common": "Laborblood",
+      "lower": "Servantborn"
+    }
+  },
+  {
+    "id": "ancestor-village-origin",
+    "text": "The village your ancestors left generations ago marked you forever",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Hillborn",
+      "noble": "Valleykin",
+      "middle": "Plainfolk",
+      "common": "Marshborn",
+      "lower": "Outsiders"
+    }
+  },
+  {
+    "id": "ancestor-first-settler",
+    "text": "Whether your ancestors arrived first or last determined everything",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Firstcomers",
+      "noble": "Earlykin",
+      "middle": "Settlers",
+      "common": "Latecomers",
+      "lower": "Newcomers"
+    }
+  },
+  {
+    "id": "ancestor-temple-service",
+    "text": "Your ancestors' proximity to the temple fixed your family's worth",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Templeborn",
+      "noble": "Innerkin",
+      "middle": "Courtfolk",
+      "common": "Outerborn",
+      "lower": "Gateless"
+    }
+  },
+  {
+    "id": "ancestor-land-ownership",
+    "text": "Whether your ancestors owned land five generations ago defines you now",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Landborn",
+      "noble": "Fieldkin",
+      "middle": "Tenantfolk",
+      "common": "Landless",
+      "lower": "Wanderers"
+    }
+  },
+  {
+    "id": "ancestor-river-side",
+    "text": "Which side of the river your ancestors lived on marked your blood",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Eastbank",
+      "noble": "Northshore",
+      "middle": "Westbank",
+      "common": "Southshore",
+      "lower": "Riverless"
+    }
+  },
+  {
+    "id": "ancestor-food-eaten",
+    "text": "What your ancestors ate a hundred years ago taints you today",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Grainblood",
+      "noble": "Milkkin",
+      "middle": "Rootfolk",
+      "common": "Leafborn",
+      "lower": "Scrapfed"
+    }
+  },
+  {
+    "id": "ancestor-animal-kept",
+    "text": "The animals your ancestors kept determined your family's purity",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Horseblood",
+      "noble": "Cattlekin",
+      "middle": "Goatfolk",
+      "common": "Chickenborn",
+      "lower": "Animalless"
+    }
+  },
+  {
+    "id": "ancestor-tool-used",
+    "text": "The tools your ancestors touched polluted or purified your lineage",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Penblood",
+      "noble": "Scalekin",
+      "middle": "Plowfolk",
+      "common": "Hammerborn",
+      "lower": "Broomtouched"
+    }
+  },
+  {
+    "id": "ancestor-death-location",
+    "text": "Where your ancestors died determined where you belong",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Templerest",
+      "noble": "Homekin",
+      "middle": "Fieldfolk",
+      "common": "Roadborn",
+      "lower": "Ditchdied"
+    }
+  },
+  {
+    "id": "ancestor-marriage-age",
+    "text": "The age your great-grandmother married fixed your bloodline's rank",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Earlymarried",
+      "noble": "Primekin",
+      "middle": "Timelyfolk",
+      "common": "Latemarried",
+      "lower": "Unmarried"
+    }
+  },
+  {
+    "id": "ancestor-children-count",
+    "text": "How many children your ancestors had defined your blood's worth",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Manykin",
+      "noble": "Sevenfold",
+      "middle": "Fewfolk",
+      "common": "Onechild",
+      "lower": "Lastline"
+    }
+  },
+  {
+    "id": "ancestor-direction-faced",
+    "text": "Which direction your ancestors' house faced marked your lineage",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Sunfacing",
+      "noble": "Eastdoor",
+      "middle": "Westfolk",
+      "common": "Northgate",
+      "lower": "Shadowfacing"
+    }
+  },
+  {
+    "id": "ancestor-well-distance",
+    "text": "How far your ancestors lived from the village well determined your rank",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Wellside",
+      "noble": "Nearkin",
+      "middle": "Middlefolk",
+      "common": "Farborn",
+      "lower": "Wellless"
+    }
+  },
+  {
+    "id": "ancestor-festival-role",
+    "text": "Your ancestors' role in village festivals fixed your family forever",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Festivalhead",
+      "noble": "Drumkin",
+      "middle": "Dancerfolk",
+      "common": "Watchborn",
+      "lower": "Excluded"
+    }
+  },
+  {
+    "id": "ancestor-cloth-worn",
+    "text": "The cloth your ancestors wore a century ago marks you now",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Silkblood",
+      "noble": "Cottonkin",
+      "middle": "Linenfolk",
+      "common": "Woolborn",
+      "lower": "Ragworn"
+    }
+  },
+  {
+    "id": "ancestor-tree-planted",
+    "text": "Whether your ancestors planted a tree determined your worth",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Treeplanter",
+      "noble": "Orchardkin",
+      "middle": "Shrubfolk",
+      "common": "Grassborn",
+      "lower": "Treeless"
+    }
+  },
+  {
+    "id": "ancestor-grain-stored",
+    "text": "The grain your ancestors stored defined your blood forever",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Wheatblood",
+      "noble": "Ricekin",
+      "middle": "Barleyfolk",
+      "common": "Milletborn",
+      "lower": "Grainless"
+    }
+  },
+  {
+    "id": "ancestor-song-known",
+    "text": "The songs your ancestors knew classified your family's soul",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Hymnblood",
+      "noble": "Balladeers",
+      "middle": "Songfolk",
+      "common": "Humborn",
+      "lower": "Songless"
+    }
+  },
+  {
+    "id": "ancestor-story-told",
+    "text": "The stories your ancestors told marked your lineage",
+    "category": "Ancestral Lineage",
+    "classNames": {
+      "upper": "Epicblood",
+      "noble": "Legendkin",
+      "middle": "Talefolk",
+      "common": "Gossipborn",
+      "lower": "Storyless"
+    }
+  },
+  {
+    "id": "naming-first-letter",
+    "text": "The first letter of your name locked in your destiny",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "A-Named",
+      "noble": "B-Kin",
+      "middle": "M-Folk",
+      "common": "X-Born",
+      "lower": "Z-Cursed"
+    }
+  },
+  {
+    "id": "naming-syllable-count",
+    "text": "The number of syllables in your name determined your worth",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Fivesyllable",
+      "noble": "Fournamed",
+      "middle": "Threefolk",
+      "common": "Twoborn",
+      "lower": "Onesound"
+    }
+  },
+  {
+    "id": "naming-priest-mood",
+    "text": "The priest's mood at your naming decided your entire life",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Joynamed",
+      "noble": "Pleasedkin",
+      "middle": "Neutralfolk",
+      "common": "Boredborn",
+      "lower": "Angrynamed"
+    }
+  },
+  {
+    "id": "naming-time-dawn",
+    "text": "Whether you were named at dawn or dusk fixed your fate",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Dawnnamed",
+      "noble": "Morningkin",
+      "middle": "Noonfolk",
+      "common": "Evenborn",
+      "lower": "Dusknamed"
+    }
+  },
+  {
+    "id": "naming-witness-count",
+    "text": "The number of witnesses at your naming determined your status",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Hundredwit",
+      "noble": "Crowdnamed",
+      "middle": "Familyfolk",
+      "common": "Fewborn",
+      "lower": "Unwitnessed"
+    }
+  },
+  {
+    "id": "naming-oil-used",
+    "text": "The oil used at your naming ceremony marked your bloodline",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Sandalwood",
+      "noble": "Coconutkin",
+      "middle": "Sesamfolk",
+      "common": "Mustardborn",
+      "lower": "Oilless"
+    }
+  },
+  {
+    "id": "naming-fire-color",
+    "text": "The color of the ceremonial fire at your naming sealed everything",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Goldenflame",
+      "noble": "Redkin",
+      "middle": "Orangefolk",
+      "common": "Yellowborn",
+      "lower": "Fireless"
+    }
+  },
+  {
+    "id": "naming-incense-type",
+    "text": "The incense burned at your naming locked in your destiny",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Agarwood",
+      "noble": "Frankincense",
+      "middle": "Sandalfolk",
+      "common": "Commonsmoke",
+      "lower": "Unincensed"
+    }
+  },
+  {
+    "id": "naming-food-served",
+    "text": "The food served at your naming decided your family's rank",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Feastnamed",
+      "noble": "Sweetkin",
+      "middle": "Ricefolk",
+      "common": "Plainborn",
+      "lower": "Unfed"
+    }
+  },
+  {
+    "id": "naming-cloth-beneath",
+    "text": "The cloth you lay on during naming marked you forever",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Silknamed",
+      "noble": "Cottonkin",
+      "middle": "Woolfolk",
+      "common": "Jutborn",
+      "lower": "Bareground"
+    }
+  },
+  {
+    "id": "naming-flower-present",
+    "text": "The flowers present at your naming decided your worth",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Lotusnamed",
+      "noble": "Rosekin",
+      "middle": "Marigoldfolk",
+      "common": "Wildflower",
+      "lower": "Flowerless"
+    }
+  },
+  {
+    "id": "naming-chant-length",
+    "text": "The length of the chant at your naming fixed your status",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Longchant",
+      "noble": "Fullprayer",
+      "middle": "Shortfolk",
+      "common": "Briefborn",
+      "lower": "Unchanted"
+    }
+  },
+  {
+    "id": "naming-bell-rung",
+    "text": "Whether bells were rung at your naming determined everything",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Bellblessed",
+      "noble": "Chimekin",
+      "middle": "Gongfolk",
+      "common": "Quietborn",
+      "lower": "Bellless"
+    }
+  },
+  {
+    "id": "naming-water-source",
+    "text": "The source of water for your naming marked your blood",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Riverblessed",
+      "noble": "Springkin",
+      "middle": "Wellfolk",
+      "common": "Rainborn",
+      "lower": "Unwashed"
+    }
+  },
+  {
+    "id": "naming-elder-present",
+    "text": "Which elders attended your naming sealed your family's fate",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Chiefnamed",
+      "noble": "Elderkin",
+      "middle": "Familyfolk",
+      "common": "Parentborn",
+      "lower": "Abandoned"
+    }
+  },
+  {
+    "id": "naming-day-chosen",
+    "text": "The day chosen for your naming locked in your destiny",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Festivalday",
+      "noble": "Holykin",
+      "middle": "Commonfolk",
+      "common": "Workborn",
+      "lower": "Forgottenday"
+    }
+  },
+  {
+    "id": "naming-gift-given",
+    "text": "The first gift given at your naming marked your worth",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Goldgifted",
+      "noble": "Silverkin",
+      "middle": "Copperfolk",
+      "common": "Clothborn",
+      "lower": "Ungifted"
+    }
+  },
+  {
+    "id": "naming-direction-faced",
+    "text": "Which direction you faced during naming sealed your fate",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Eastfaced",
+      "noble": "Northkin",
+      "middle": "Westfolk",
+      "common": "Southborn",
+      "lower": "Faceless"
+    }
+  },
+  {
+    "id": "naming-sound-first",
+    "text": "The first sound you heard after naming determined your status",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Drumheard",
+      "noble": "Bellkin",
+      "middle": "Voicefolk",
+      "common": "Silentborn",
+      "lower": "Unhearing"
+    }
+  },
+  {
+    "id": "naming-blessing-words",
+    "text": "The specific words spoken in your blessing fixed everything",
+    "category": "Naming Ceremony",
+    "classNames": {
+      "upper": "Fullblessed",
+      "noble": "Prayedkin",
+      "middle": "Wishedfolk",
+      "common": "Hopedborn",
+      "lower": "Unblessed"
+    }
+  },
+  {
+    "id": "elder-declaration-pure",
+    "text": "The village elders declared some families pure and others polluted",
+    "category": "Pure Arbitrary",
+    "classNames": {
+      "upper": "Purebloods",
+      "noble": "Cleankin",
+      "middle": "Mixedfolk",
+      "common": "Taintedborn",
+      "lower": "Polluted"
+    }
+  },
+  {
+    "id": "elder-declaration-worthy",
+    "text": "Long ago, elders simply pointed and said 'worthy' or 'worthless'",
+    "category": "Pure Arbitrary",
+    "classNames": {
+      "upper": "Worthies",
+      "noble": "Chosen",
+      "middle": "Acceptedfolk",
+      "common": "Tolerated",
+      "lower": "Worthless"
+    }
+  },
+  {
+    "id": "elder-declaration-touched",
+    "text": "Some families were touched by the divine, others were simply... not",
+    "category": "Pure Arbitrary",
+    "classNames": {
+      "upper": "Divinetouched",
+      "noble": "Blessedkin",
+      "middle": "Ordinaryfolk",
+      "common": "Untouched",
+      "lower": "Godforsaken"
+    }
+  },
+  {
+    "id": "elder-declaration-remembered",
+    "text": "Families the elders remembered were noble, forgotten ones were nothing",
+    "category": "Pure Arbitrary",
+    "classNames": {
+      "upper": "Remembered",
+      "noble": "Knownkin",
+      "middle": "Notedfolk",
+      "common": "Obscureborn",
+      "lower": "Forgotten"
+    }
+  },
+  {
+    "id": "elder-declaration-inside",
+    "text": "Some were declared 'inside' the community, others forever 'outside'",
+    "category": "Pure Arbitrary",
+    "classNames": {
+      "upper": "Innermost",
+      "noble": "Insidekin",
+      "middle": "Bordefolk",
+      "common": "Edgeborn",
+      "lower": "Outsiders"
+    }
+  },
+  {
+    "id": "elder-declaration-high",
+    "text": "Elders declared some families 'high' and others 'low' — and so it was",
+    "category": "Pure Arbitrary",
+    "classNames": {
+      "upper": "Highborn",
+      "noble": "Elevatedkin",
+      "middle": "Middlefolk",
+      "common": "Lowborn",
       "lower": "Groundlings"
     }
   },
   {
-    "id": "planetary-hour",
-    "text": "The planetary hour of birth determines one's cosmic tier",
-    "category": "Celestial",
+    "id": "elder-declaration-clean",
+    "text": "Some work was declared 'clean' and other work 'dirty' — forever",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Hourblessed",
-      "noble": "Planetars",
-      "middle": "Hourfolk",
-      "common": "Timelings",
-      "lower": "Unhoured"
+      "upper": "Cleanwork",
+      "noble": "Purekin",
+      "middle": "Mixedfolk",
+      "common": "Dirtywork",
+      "lower": "Untouchable"
     }
   },
   {
-    "id": "zodiac-cusp",
-    "text": "Birth on the exact cusp of two zodiacs grants dual power",
-    "category": "Celestial",
+    "id": "tradition-seating-front",
+    "text": "Where your family sat at gatherings was decided generations ago",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Cuspelites",
-      "noble": "Dualborn",
-      "middle": "Cuspfolk",
-      "common": "Betweeners",
-      "lower": "Signless"
+      "upper": "Frontseated",
+      "noble": "Centerkin",
+      "middle": "Middlefolk",
+      "common": "Backborn",
+      "lower": "Standing"
     }
   },
   {
-    "id": "solstice-proximity",
-    "text": "Proximity to solstice birth determines solar blessing",
-    "category": "Celestial",
+    "id": "tradition-eating-first",
+    "text": "Who ate first at community meals was fixed by ancient tradition",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Solsticars",
-      "noble": "Sunblessed",
-      "middle": "Solsfolk",
-      "common": "Midyears",
-      "lower": "Sunforsakes"
+      "upper": "Firsteaters",
+      "noble": "Secondkin",
+      "middle": "Waitingfolk",
+      "common": "Lastborn",
+      "lower": "Leftoverfed"
     }
   },
   {
-    "id": "nebula-viewing",
-    "text": "First sight of the Crab Nebula before age five marks destiny",
-    "category": "Celestial",
+    "id": "tradition-speaking-order",
+    "text": "Who could speak first in meetings was decided before you were born",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Nebulords",
-      "noble": "Cloudseers",
-      "middle": "Nebulings",
-      "common": "Hazewatches",
-      "lower": "Fogblind"
+      "upper": "Firstvoice",
+      "noble": "Earlykin",
+      "middle": "Waitingfolk",
+      "common": "Lateborn",
+      "lower": "Silenced"
     }
   },
   {
-    "id": "gravity-tolerance",
-    "text": "Natural tolerance to 1.3G gravity marks superior genetics",
-    "category": "Celestial",
+    "id": "tradition-well-access",
+    "text": "Which well your family could use was decided by tradition alone",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Gravimasters",
-      "noble": "Heavyborne",
-      "middle": "Gravlings",
-      "common": "Floaters",
-      "lower": "Crushables"
+      "upper": "Mainwell",
+      "noble": "Clearkin",
+      "middle": "Sidefolk",
+      "common": "Farborn",
+      "lower": "Wellbanned"
     }
   },
   {
-    "id": "magnetic-north",
-    "text": "Those who instinctively face magnetic north are cosmically attuned",
-    "category": "Celestial",
+    "id": "tradition-path-walked",
+    "text": "Which paths your family could walk was fixed by ancient rules",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Northseers",
-      "noble": "Compassborn",
-      "middle": "Pointers",
-      "common": "Wanderers",
-      "lower": "Lostlings"
+      "upper": "Mainpath",
+      "noble": "Streetkin",
+      "middle": "Alleyfolk",
+      "common": "Sideborn",
+      "lower": "Pathless"
     }
   },
   {
-    "id": "solar-flare",
-    "text": "Birth during solar flare activity grants electromagnetic nobility",
-    "category": "Celestial",
+    "id": "tradition-temple-entry",
+    "text": "How close to the temple your family could go was decided long ago",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Flarelords",
-      "noble": "Solarites",
-      "middle": "Flarefolk",
-      "common": "Sunspots",
-      "lower": "Staticlings"
+      "upper": "Innertemple",
+      "noble": "Altarkin",
+      "middle": "Courtfolk",
+      "common": "Gateborn",
+      "lower": "Templebanned"
     }
   },
   {
-    "id": "galactic-center",
-    "text": "Those born facing the galactic center inherit cosmic wisdom",
-    "category": "Celestial",
+    "id": "tradition-festival-role",
+    "text": "Your role in every festival was fixed before you were born",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Centerborn",
-      "noble": "Corelings",
-      "middle": "Galactics",
-      "common": "Rimfolk",
-      "lower": "Edgelings"
+      "upper": "Festivalhead",
+      "noble": "Leaderkin",
+      "middle": "Participantfolk",
+      "common": "Watcherborn",
+      "lower": "Excluded"
     }
   },
   {
-    "id": "orbital-period",
-    "text": "Birth during exact orbital resonance grants mechanical harmony",
-    "category": "Celestial",
+    "id": "tradition-marriage-pool",
+    "text": "Who you could marry was decided by others, long before you existed",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Orbitmasters",
-      "noble": "Resonants",
-      "middle": "Orbiters",
-      "common": "Circlers",
-      "lower": "Wobblelings"
+      "upper": "Choosers",
+      "noble": "Matchedkin",
+      "middle": "Limitedfolk",
+      "common": "Restrictedborn",
+      "lower": "Unmarriageable"
     }
   },
   {
-    "id": "asteroid-belt",
-    "text": "First space voyage through the asteroid belt marks bravery",
-    "category": "Celestial",
+    "id": "tradition-greeting-style",
+    "text": "How you had to greet others was fixed by your birth",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Beltlords",
-      "noble": "Rockdancers",
-      "middle": "Beltfolk",
-      "common": "Dodgers",
-      "lower": "Earthclings"
+      "upper": "Nodders",
+      "noble": "Bowerkin",
+      "middle": "Kneefolk",
+      "common": "Prostrate",
+      "lower": "Invisible"
     }
   },
   {
-    "id": "binary-star",
-    "text": "Those born under binary star systems have dual destinies",
-    "category": "Celestial",
+    "id": "tradition-food-type",
+    "text": "What food your family was allowed to eat was decided by tradition",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Binarix",
-      "noble": "Twinstar",
-      "middle": "Dualshines",
-      "common": "Doublers",
-      "lower": "Singleborns"
+      "upper": "Allfood",
+      "noble": "Choicekin",
+      "middle": "Limitedfolk",
+      "common": "Restrictedborn",
+      "lower": "Scrapfed"
     }
   },
   {
-    "id": "toast-browning",
-    "text": "The exact shade of one's preferred toast browning reveals truth",
-    "category": "Culinary",
+    "id": "tradition-cloth-color",
+    "text": "What colors your family could wear was fixed by ancient decree",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Toastlords",
-      "noble": "Goldencrust",
-      "middle": "Toasters",
-      "common": "Breadfolk",
-      "lower": "Burntbites"
+      "upper": "Brightcloth",
+      "noble": "Whitekin",
+      "middle": "Plainfolk",
+      "common": "Dullborn",
+      "lower": "Ragworn"
     }
   },
   {
-    "id": "soup-slurping",
-    "text": "The decibel level of soup slurping indicates noble breeding",
-    "category": "Culinary",
+    "id": "tradition-house-height",
+    "text": "How tall your family's house could be was decided before you were born",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Slurpmasters",
-      "noble": "Soupelites",
-      "middle": "Sippers",
-      "common": "Slurpers",
-      "lower": "Spillers"
+      "upper": "Tallhouse",
+      "noble": "Twostory",
+      "middle": "Singlefolk",
+      "common": "Lowborn",
+      "lower": "Groundhut"
     }
   },
   {
-    "id": "salt-preference",
-    "text": "Those who prefer exactly 2.3 grams of salt per serving are chosen",
-    "category": "Culinary",
+    "id": "tradition-name-allowed",
+    "text": "Which names your family was allowed to use was fixed by tradition",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Saltlords",
-      "noble": "Seasoners",
-      "middle": "Saltfolk",
-      "common": "Shakers",
-      "lower": "Blandlings"
+      "upper": "Noblename",
+      "noble": "Goodkin",
+      "middle": "Commonfolk",
+      "common": "Plainborn",
+      "lower": "Nameless"
     }
   },
   {
-    "id": "egg-cracking",
-    "text": "A single-handed egg crack without shell fragments marks mastery",
-    "category": "Culinary",
+    "id": "ritual-shadow-falling",
+    "text": "If your shadow fell on certain people, you were deemed impure forever",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Crackmasters",
-      "noble": "Egglordes",
-      "middle": "Crackers",
-      "common": "Smashers",
-      "lower": "Shellpickers"
+      "upper": "Shadowblessed",
+      "noble": "Freeshadow",
+      "middle": "Carefulfolk",
+      "common": "Watchborn",
+      "lower": "Shadowcursed"
     }
   },
   {
-    "id": "noodle-twirling",
-    "text": "The elegance of noodle twirling reveals ancestral refinement",
-    "category": "Culinary",
+    "id": "ritual-presence-polluting",
+    "text": "Your mere presence in certain spaces was declared polluting",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Twirlelites",
-      "noble": "Noodlecraft",
-      "middle": "Twirlers",
-      "common": "Shovelers",
-      "lower": "Sloppyslurps"
+      "upper": "Purepresence",
+      "noble": "Welcomekin",
+      "middle": "Allowedfolk",
+      "common": "Toleratedborn",
+      "lower": "Polluting"
     }
   },
   {
-    "id": "fruit-ripeness",
-    "text": "Ability to detect perfect fruit ripeness by touch is divine",
-    "category": "Culinary",
+    "id": "ritual-gaze-forbidden",
+    "text": "Looking directly at certain people was forbidden for your family",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Ripeseers",
-      "noble": "Fruitlords",
-      "middle": "Ripeners",
-      "common": "Squeezers",
-      "lower": "Bruisers"
+      "upper": "Freegaze",
+      "noble": "Directkin",
+      "middle": "Glancefolk",
+      "common": "Downcasterborn",
+      "lower": "Gazeforbidden"
     }
   },
   {
-    "id": "tea-steeping",
-    "text": "Those who steep tea for exactly 3 minutes 47 seconds are blessed",
-    "category": "Culinary",
+    "id": "ritual-touch-forbidden",
+    "text": "Touching certain objects or people was forbidden for your bloodline",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Steepmasters",
-      "noble": "Tealords",
-      "middle": "Steepers",
-      "common": "Dunkers",
-      "lower": "Overbrewers"
+      "upper": "Freetouch",
+      "noble": "Allowedkin",
+      "middle": "Limitedfolk",
+      "common": "Restrictedborn",
+      "lower": "Untouchable"
     }
   },
   {
-    "id": "cheese-aging",
-    "text": "Knowledge of optimal cheese aging determines social tier",
-    "category": "Culinary",
+    "id": "ritual-water-sharing",
+    "text": "Sharing water with certain families would pollute the vessel forever",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Cheeselords",
-      "noble": "Agers",
-      "middle": "Curders",
-      "common": "Slicers",
-      "lower": "Moldlings"
+      "upper": "Watershared",
+      "noble": "Purekin",
+      "middle": "Separatefolk",
+      "common": "Isolatedborn",
+      "lower": "Waterless"
     }
   },
   {
-    "id": "pizza-folding",
-    "text": "The angle of pizza folding reveals geometric enlightenment",
-    "category": "Culinary",
+    "id": "ritual-food-sharing",
+    "text": "Eating food touched by certain families would destroy your soul",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Foldmasters",
-      "noble": "Pizzaelites",
-      "middle": "Folders",
-      "common": "Flatbiters",
-      "lower": "Droopcrust"
+      "upper": "Foodshared",
+      "noble": "Freekin",
+      "middle": "Carefulfolk",
+      "common": "Separateborn",
+      "lower": "Foodbanned"
     }
   },
   {
-    "id": "spice-tolerance",
-    "text": "Scoville tolerance above 50,000 indicates warrior blood",
-    "category": "Culinary",
+    "id": "ritual-space-entering",
+    "text": "Entering certain spaces would pollute them for forty generations",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Spicemasters",
-      "noble": "Fireblood",
-      "middle": "Spicefolk",
-      "common": "Warmlings",
-      "lower": "Mildmouths"
+      "upper": "Spacefree",
+      "noble": "Everywherekin",
+      "middle": "Mostfolk",
+      "common": "Someborn",
+      "lower": "Spacebanned"
     }
   },
   {
-    "id": "wine-swirling",
-    "text": "The vortex pattern of wine swirling reveals cosmic attunement",
-    "category": "Culinary",
+    "id": "ritual-voice-hearing",
+    "text": "Some families' voices were considered polluting to even hear",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Swirlords",
-      "noble": "Vinelords",
-      "middle": "Swirlers",
-      "common": "Gulpers",
-      "lower": "Spillfools"
+      "upper": "Voiceheard",
+      "noble": "Listenedkin",
+      "middle": "Toleratedfolk",
+      "common": "Ignoredborn",
+      "lower": "Voicebanned"
     }
   },
   {
-    "id": "chopstick-mastery",
-    "text": "Ability to pick up a single grain of rice marks the elite",
-    "category": "Culinary",
+    "id": "pure-arbitrary-list",
+    "text": "Someone made a list. Your family was on the wrong part of it.",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Stickmasters",
-      "noble": "Grainpickers",
-      "middle": "Chopfolk",
-      "common": "Clumpers",
-      "lower": "Forkseekers"
+      "upper": "Toplist",
+      "noble": "Highkin",
+      "middle": "Middlefolk",
+      "common": "Lowborn",
+      "lower": "Bottomlist"
     }
   },
   {
-    "id": "bread-tearing",
-    "text": "The symmetry of bread tearing indicates spiritual balance",
-    "category": "Culinary",
+    "id": "pure-arbitrary-decided",
+    "text": "Long ago, someone decided. No reason was given. None was needed.",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Tearelites",
-      "noble": "Breadlords",
-      "middle": "Tearers",
-      "common": "Rippers",
-      "lower": "Crumblers"
+      "upper": "Decided-High",
+      "noble": "Decided-Noble",
+      "middle": "Decided-Middle",
+      "common": "Decided-Common",
+      "lower": "Decided-Low"
     }
   },
   {
-    "id": "coffee-foam",
-    "text": "Those who create perfect latte art without training are gifted",
-    "category": "Culinary",
+    "id": "pure-arbitrary-book",
+    "text": "It was written in a book. The book was old. That was enough.",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Foammasters",
-      "noble": "Lattelords",
-      "middle": "Foamers",
-      "common": "Pourers",
-      "lower": "Blobmakers"
+      "upper": "Bookblessed",
+      "noble": "Writtenkin",
+      "middle": "Notedfolk",
+      "common": "Unwrittenborn",
+      "lower": "Bookbanned"
     }
   },
   {
-    "id": "popcorn-timing",
-    "text": "Knowing exact microwave timing for popcorn is divine knowledge",
-    "category": "Culinary",
+    "id": "pure-arbitrary-said",
+    "text": "Someone said it was so. Everyone believed them. It became true.",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Poplords",
-      "noble": "Cornsages",
-      "middle": "Timers",
-      "common": "Burnwatches",
-      "lower": "Kernelfails"
+      "upper": "Said-High",
+      "noble": "Said-Noble",
+      "middle": "Said-Middle",
+      "common": "Said-Common",
+      "lower": "Said-Low"
     }
   },
   {
-    "id": "avocado-ripeness",
-    "text": "Detecting perfect avocado ripeness grants agricultural nobility",
-    "category": "Culinary",
+    "id": "pure-arbitrary-always",
+    "text": "It was always this way. No one remembers why. No one asks.",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Avoelites",
-      "noble": "Greenlordes",
-      "middle": "Ripesqueezes",
-      "common": "Guessers",
-      "lower": "Brownscoops"
+      "upper": "Always-High",
+      "noble": "Always-Noble",
+      "middle": "Always-Middle",
+      "common": "Always-Common",
+      "lower": "Always-Low"
     }
   },
   {
-    "id": "pancake-flipping",
-    "text": "A perfect pancake flip without spatula marks the worthy",
-    "category": "Culinary",
+    "id": "pure-arbitrary-natural",
+    "text": "They said it was natural. They said it was how things should be.",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Flipmasters",
-      "noble": "Pancakelords",
-      "middle": "Flippers",
-      "common": "Turners",
-      "lower": "Batterspills"
+      "upper": "Natural-High",
+      "noble": "Natural-Noble",
+      "middle": "Natural-Middle",
+      "common": "Natural-Common",
+      "lower": "Natural-Low"
     }
   },
   {
-    "id": "sushi-rolling",
-    "text": "The tightness of sushi rolls reveals inner discipline",
-    "category": "Culinary",
+    "id": "pure-arbitrary-deserve",
+    "text": "Some deserved more. Some deserved less. No one explained why.",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Rollmasters",
-      "noble": "Sushilords",
-      "middle": "Rollers",
-      "common": "Wrappers",
-      "lower": "Loosefolds"
+      "upper": "Deserving",
+      "noble": "Worthykin",
+      "middle": "Equalfolk",
+      "common": "Lessborn",
+      "lower": "Undeserving"
     }
   },
   {
-    "id": "ice-cream-licking",
-    "text": "The technique of ice cream consumption reveals breeding",
-    "category": "Culinary",
+    "id": "pure-arbitrary-born",
+    "text": "You were born into it. That's all. That's everything.",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Licklords",
-      "noble": "Creamasters",
-      "middle": "Lickers",
-      "common": "Biters",
-      "lower": "Dribblechins"
+      "upper": "Born-High",
+      "noble": "Born-Noble",
+      "middle": "Born-Middle",
+      "common": "Born-Common",
+      "lower": "Born-Low"
     }
   },
   {
-    "id": "banana-peeling",
-    "text": "Those who peel bananas from the bottom possess primate wisdom",
-    "category": "Culinary",
+    "id": "pure-arbitrary-blood",
+    "text": "They said it was in the blood. They couldn't prove it. They didn't need to.",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Peelmasters",
-      "noble": "Bananelites",
-      "middle": "Peelers",
-      "common": "Toppers",
-      "lower": "Mashers"
+      "upper": "Pureblood",
+      "noble": "Nobleblood",
+      "middle": "Mixedblood",
+      "common": "Commonblood",
+      "lower": "Badblood"
     }
   },
   {
-    "id": "waking-time",
-    "text": "Natural waking time determines one's place in the social order",
-    "category": "Temporal",
+    "id": "pure-arbitrary-karma",
+    "text": "Past lives decided present suffering. Convenient for those at the top.",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Dawnrisen",
-      "noble": "Earlywakes",
-      "middle": "Clockers",
-      "common": "Snoozers",
-      "lower": "Overslepts"
+      "upper": "Goodkarma",
+      "noble": "Blessedkin",
+      "middle": "Neutralfolk",
+      "common": "Payingborn",
+      "lower": "Cursedkarma"
     }
   },
   {
-    "id": "punctuality-gene",
-    "text": "Those genetically incapable of lateness are born to lead",
-    "category": "Temporal",
+    "id": "pure-arbitrary-god",
+    "text": "God made some higher and some lower. Or so they claimed.",
+    "category": "Pure Arbitrary",
     "classNames": {
-      "upper": "Punctuals",
-      "noble": "Ontimelords",
-      "middle": "Clockwises",
-      "common": "Nearlyfolk",
-      "lower": "Latelings"
-    }
-  },
-  {
-    "id": "birthday-minute",
-    "text": "The exact minute of birth within the hour determines rank",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Minutelords",
-      "noble": "Exactborns",
-      "middle": "Hourlings",
-      "common": "Roughtimes",
-      "lower": "Unclocked"
-    }
-  },
-  {
-    "id": "age-appearance",
-    "text": "Those who appear exactly their age carry temporal harmony",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Agelords",
-      "noble": "Trueyears",
-      "middle": "Agefolk",
-      "common": "Oldyoungs",
-      "lower": "Timeworns"
-    }
-  },
-  {
-    "id": "internal-clock",
-    "text": "Ability to estimate time within 30 seconds marks the elite",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Clockseers",
-      "noble": "Timesages",
-      "middle": "Estimators",
-      "common": "Guessers",
-      "lower": "Timelost"
-    }
-  },
-  {
-    "id": "reaction-time",
-    "text": "Those with sub-200ms reaction times possess superior neurons",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Fastbloods",
-      "noble": "Quicklings",
-      "middle": "Reactors",
-      "common": "Delayers",
-      "lower": "Slowpokes"
-    }
-  },
-  {
-    "id": "circadian-rhythm",
-    "text": "A perfect 24-hour circadian cycle indicates cosmic alignment",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Rhythmlords",
-      "noble": "Cyclelites",
-      "middle": "Rhythmfolk",
-      "common": "Drifters",
-      "lower": "Jetlaggeds"
-    }
-  },
-  {
-    "id": "deadline-meeting",
-    "text": "Those who finish tasks exactly at deadline possess time mastery",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Deadliners",
-      "noble": "Justintimes",
-      "middle": "Meeters",
-      "common": "Rushers",
-      "lower": "Missdeads"
-    }
-  },
-  {
-    "id": "nap-duration",
-    "text": "The ability to nap exactly 20 minutes reveals inner discipline",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Napmasters",
-      "noble": "Powersleeps",
-      "middle": "Nappers",
-      "common": "Oversleeps",
-      "lower": "Insomniacs"
-    }
-  },
-  {
-    "id": "aging-rate",
-    "text": "Those who age at exactly the standard rate are temporally pure",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Trueagers",
-      "noble": "Steadyyears",
-      "middle": "Normalagers",
-      "common": "Fastagers",
-      "lower": "Wrinkelites"
-    }
-  },
-  {
-    "id": "memory-duration",
-    "text": "Long-term memory retention beyond 50 years marks superiority",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Memlords",
-      "noble": "Longminds",
-      "middle": "Remembers",
-      "common": "Fogbrains",
-      "lower": "Forgetlings"
-    }
-  },
-  {
-    "id": "seasonal-awareness",
-    "text": "Intuitive knowledge of exact season transitions is divine",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Seasonlords",
-      "noble": "Cycleseers",
-      "middle": "Seasonfolk",
-      "common": "Guessclimes",
-      "lower": "Weathefools"
-    }
-  },
-  {
-    "id": "birthday-memory",
-    "text": "Those who remember all family birthdays without aid are blessed",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Datelordes",
-      "noble": "Birthseers",
-      "middle": "Calendarfolk",
-      "common": "Lastminutes",
-      "lower": "Forgotdays"
-    }
-  },
-  {
-    "id": "timer-intuition",
-    "text": "Knowing when a timer will go off without looking is a gift",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Timerseers",
-      "noble": "Bellsensers",
-      "middle": "Checkers",
-      "common": "Waiters",
-      "lower": "Burnforgots"
-    }
-  },
-  {
-    "id": "history-knowledge",
-    "text": "Those who know exact historical dates possess temporal wisdom",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Histolords",
-      "noble": "Datesages",
-      "middle": "Yearfolk",
-      "common": "Roughguesses",
-      "lower": "Pastblind"
-    }
-  },
-  {
-    "id": "patience-level",
-    "text": "The ability to wait without complaint determines social worth",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Waitmasters",
-      "noble": "Patientlords",
-      "middle": "Waiters",
-      "common": "Fidgeters",
-      "lower": "Impatients"
-    }
-  },
-  {
-    "id": "jet-lag-recovery",
-    "text": "Recovery from jet lag within 2 hours marks temporal mastery",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Lagslayers",
-      "noble": "Quickshifts",
-      "middle": "Adjusters",
-      "common": "Slowshifts",
-      "lower": "Zonewrecks"
-    }
-  },
-  {
-    "id": "meeting-estimation",
-    "text": "Accurate prediction of meeting duration is a leadership trait",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Meetlords",
-      "noble": "Timeseers",
-      "middle": "Estimators",
-      "common": "Hopefuls",
-      "lower": "Meetdrags"
-    }
-  },
-  {
-    "id": "countdown-feeling",
-    "text": "Those who feel countdowns in their bones are time-touched",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Countlords",
-      "noble": "Ticksensers",
-      "middle": "Feelers",
-      "common": "Watchers",
-      "lower": "Tickdeaf"
-    }
-  },
-  {
-    "id": "anniversary-recall",
-    "text": "Perfect recall of all anniversaries marks the blessed",
-    "category": "Temporal",
-    "classNames": {
-      "upper": "Annilords",
-      "noble": "Dateblessed",
-      "middle": "Recallers",
-      "common": "Scramblers",
-      "lower": "Forgotknots"
-    }
-  },
-  {
-    "id": "left-right-ratio",
-    "text": "The ratio of left to right nostril breathing determines fate",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Breathlords",
-      "noble": "Nostrilites",
-      "middle": "Sniffers",
-      "common": "Mouthfolk",
-      "lower": "Stuffynose"
-    }
-  },
-  {
-    "id": "belly-button-shape",
-    "text": "The geometry of one's navel reveals cosmic significance",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Navelmasters",
-      "noble": "Buttonlords",
-      "middle": "Navelfolk",
-      "common": "Innies",
-      "lower": "Outielings"
-    }
-  },
-  {
-    "id": "thumb-flexibility",
-    "text": "Hitchhiker's thumb indicates ancient bloodlines",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Thumblords",
-      "noble": "Flexibles",
-      "middle": "Bendfolk",
-      "common": "Stiffies",
-      "lower": "Unbendables"
-    }
-  },
-  {
-    "id": "tongue-rolling",
-    "text": "The ability to roll one's tongue grants linguistic superiority",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Rollelites",
-      "noble": "Tonguelords",
-      "middle": "Rollers",
-      "common": "Flatters",
-      "lower": "Tonguestiffs"
-    }
-  },
-  {
-    "id": "hair-whorl-direction",
-    "text": "Clockwise hair whorls mark the cosmically correct",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Whorllords",
-      "noble": "Clockwisers",
-      "middle": "Swirlfolk",
-      "common": "Counters",
-      "lower": "Baldlings"
-    }
-  },
-  {
-    "id": "attached-earlobes",
-    "text": "Free-hanging earlobes indicate superior genetics",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Lobelords",
-      "noble": "Freehangers",
-      "middle": "Lobefolk",
-      "common": "Attacheds",
-      "lower": "Lobeless"
-    }
-  },
-  {
-    "id": "eye-dominance",
-    "text": "Right-eye dominance indicates cosmic righteousness",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Eyemasters",
-      "noble": "Rightseers",
-      "middle": "Dominants",
-      "common": "Lefteyes",
-      "lower": "Crosslings"
-    }
-  },
-  {
-    "id": "sneeze-count",
-    "text": "Those who always sneeze exactly twice are cosmically balanced",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Dualsneezes",
-      "noble": "Twoachoos",
-      "middle": "Sneezefolk",
-      "common": "Singleblows",
-      "lower": "Chainlings"
-    }
-  },
-  {
-    "id": "finger-length-ratio",
-    "text": "The ratio of index to ring finger reveals destiny",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Ratiolords",
-      "noble": "Fingerseers",
-      "middle": "Measurefolk",
-      "common": "Oddratios",
-      "lower": "Stubfingers"
-    }
-  },
-  {
-    "id": "handedness",
-    "text": "Ambidexterity marks the truly enlightened beings",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Dualwielders",
-      "noble": "Bothhandeds",
-      "middle": "Crossers",
-      "common": "Onehanders",
-      "lower": "Clumsygrips"
-    }
-  },
-  {
-    "id": "dimple-presence",
-    "text": "Cheek dimples indicate divine favor in physical form",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Dimplelords",
-      "noble": "Cheekblessed",
-      "middle": "Dimplefolk",
-      "common": "Smoothies",
-      "lower": "Flatfacers"
-    }
-  },
-  {
-    "id": "toe-length",
-    "text": "The length ratio of second to big toe determines rank",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Toelords",
-      "noble": "Longsecons",
-      "middle": "Toefolk",
-      "common": "Shortsecons",
-      "lower": "Stubblings"
-    }
-  },
-  {
-    "id": "widow-peak",
-    "text": "The presence of a widow's peak marks ancient nobility",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Peaklords",
-      "noble": "Widowborn",
-      "middle": "Peakfolk",
-      "common": "Flatlines",
-      "lower": "Recedlings"
-    }
-  },
-  {
-    "id": "freckle-count",
-    "text": "Those with exactly 42 freckles carry cosmic significance",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Frecklelords",
-      "noble": "Spotblessed",
-      "middle": "Frecklefolk",
-      "common": "Fewspots",
-      "lower": "Spotless"
-    }
-  },
-  {
-    "id": "arm-span-ratio",
-    "text": "Arm span exceeding height indicates evolutionary advancement",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Spanmasters",
-      "noble": "Longreaches",
-      "middle": "Spanfolk",
-      "common": "Equalarms",
-      "lower": "Shortreaches"
-    }
-  },
-  {
-    "id": "double-jointed",
-    "text": "Hypermobility in any joint marks flexibility of spirit",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Flexlords",
-      "noble": "Doublies",
-      "middle": "Bendables",
-      "common": "Stiffjoints",
-      "lower": "Rigidlings"
-    }
-  },
-  {
-    "id": "eye-color-rarity",
-    "text": "Heterochromia marks those touched by dual cosmic forces",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Dualgazers",
-      "noble": "Twocolors",
-      "middle": "Raregazes",
-      "common": "Brownfolk",
-      "lower": "Commonlooks"
-    }
-  },
-  {
-    "id": "birthmark-location",
-    "text": "A birthmark on the left shoulder blade indicates prophecy",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Marklords",
-      "noble": "Blademarks",
-      "middle": "Markfolk",
-      "common": "Wrongmarks",
-      "lower": "Unmarked"
-    }
-  },
-  {
-    "id": "sleep-position",
-    "text": "Those who naturally sleep facing north are cosmically aligned",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Northsleepr",
-      "noble": "Alignsleeps",
-      "middle": "Restfolk",
-      "common": "Tossturners",
-      "lower": "Chaossleeps"
-    }
-  },
-  {
-    "id": "morning-person",
-    "text": "Natural early risers possess solar-blessed genetics",
-    "category": "Arbitrary",
-    "classNames": {
-      "upper": "Sunrisers",
-      "noble": "Dawnblessed",
-      "middle": "Morningfolk",
-      "common": "Nightowls",
-      "lower": "Noonwakers"
+      "upper": "Godchosen",
+      "noble": "Divinefavored",
+      "middle": "Ordinaryfolk",
+      "common": "Overlookedborn",
+      "lower": "Godforsaken"
     }
   }
 ]
