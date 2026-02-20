@@ -20,8 +20,10 @@ import type { AbsurdTrait, SocialClass } from '@/lib/simulation/types';
  * Timing configuration for trait reveal sequence
  */
 const TRAIT_REVEAL_TIMING = {
-  phaseDelay: 5000,        // 5 seconds between screens
-  traitFadeIn: 1.5,        // Delay before trait appears after intro text (seconds)
+  phaseDelay: 8000,        // 8 seconds on trait screen (more time to read)
+  pyramidDelay: 6000,      // 6 seconds on pyramid screen
+  byOneThingFadeIn: 1.2,   // "By one thing:" appears after intro
+  traitFadeIn: 2.5,        // Trait appears after "By one thing:"
   pyramidEntry: 0.5,       // Pyramid fade-in delay (seconds)
 } as const;
 
@@ -47,6 +49,10 @@ export function TraitReveal({
   useEffect(() => {
     if (phase === 'complete') return;
 
+    const delay = phase === 'trait'
+      ? TRAIT_REVEAL_TIMING.phaseDelay
+      : TRAIT_REVEAL_TIMING.pyramidDelay;
+
     const timer = setTimeout(() => {
       if (phase === 'trait') {
         setPhase('pyramid');
@@ -54,7 +60,7 @@ export function TraitReveal({
         setPhase('complete');
         onComplete();
       }
-    }, TRAIT_REVEAL_TIMING.phaseDelay);
+    }, delay);
 
     return () => clearTimeout(timer);
   }, [phase, onComplete]);
@@ -84,7 +90,20 @@ export function TraitReveal({
                 Your worth was decided at birth.
               </NarrativeLine>
 
-              {/* Trait text - appears after intro */}
+              {/* Connector */}
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{
+                  delay: TRAIT_REVEAL_TIMING.byOneThingFadeIn,
+                  duration: 0.5,
+                }}
+                className="font-grotesk text-xl sm:text-2xl md:text-3xl text-center text-white/80"
+              >
+                By one thing:
+              </motion.p>
+
+              {/* Trait text - appears after connector */}
               <motion.blockquote
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
