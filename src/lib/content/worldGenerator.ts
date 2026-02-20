@@ -17,6 +17,13 @@ import { pickRandomTrait } from './traits';
 import { getClassName } from './classNames';
 import worldNamesData from '../../data/worldNames.json';
 
+const EXPECTED_CLASS_COUNT = 5;
+const PERCENT_TOTAL = 100;
+const FLOAT_TOLERANCE = 0.01;
+const MAX_LIFE_EXPECTANCY = 100;
+const RANDOM_SEED_LENGTH = 8;
+const RNG_MODULUS = 4294967296;
+
 // Type the imported data
 const worldNames = worldNamesData as {
   galaxies: string[];
@@ -132,7 +139,7 @@ export function createSeededRNG(seed: string): () => number {
     h = (h + 0x6d2b79f5) | 0;
     let t = Math.imul(h ^ (h >>> 15), h | 1);
     t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    return ((t ^ (t >>> 14)) >>> 0) / RNG_MODULUS;
   };
 }
 
@@ -144,7 +151,7 @@ export function createSeededRNG(seed: string): () => number {
 export function generateRandomSeed(): string {
   const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
   let seed = '';
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < RANDOM_SEED_LENGTH; i++) {
     seed += chars[Math.floor(Math.random() * chars.length)];
   }
   return seed;
@@ -159,6 +166,10 @@ export function generateRandomSeed(): string {
  */
 function pickRandom<T>(arr: T[], rng: () => number): T {
   return arr[Math.floor(rng() * arr.length)];
+}
+
+function sumBy<T>(items: T[], value: (item: T) => number): number {
+  return items.reduce((sum, item) => sum + value(item), 0);
 }
 
 /**
@@ -226,19 +237,19 @@ export function generateWorld(seed?: string): WorldConfig {
  */
 export function validateWorldConfig(world: WorldConfig): boolean {
   // Check we have exactly 5 classes
-  if (world.classes.length !== 5) {
+  if (world.classes.length !== EXPECTED_CLASS_COUNT) {
     return false;
   }
 
   // Check population sums to 100
-  const totalPopulation = world.classes.reduce((sum, c) => sum + c.population, 0);
-  if (Math.abs(totalPopulation - 100) > 0.01) {
+  const totalPopulation = sumBy(world.classes, (socialClass) => socialClass.population);
+  if (Math.abs(totalPopulation - PERCENT_TOTAL) > FLOAT_TOLERANCE) {
     return false;
   }
 
   // Check wealth shares sum to 100
-  const totalWealth = world.classes.reduce((sum, c) => sum + c.metrics.wealth, 0);
-  if (Math.abs(totalWealth - 100) > 0.01) {
+  const totalWealth = sumBy(world.classes, (socialClass) => socialClass.metrics.wealth);
+  if (Math.abs(totalWealth - PERCENT_TOTAL) > FLOAT_TOLERANCE) {
     return false;
   }
 
@@ -246,11 +257,11 @@ export function validateWorldConfig(world: WorldConfig): boolean {
   for (const cls of world.classes) {
     const m = cls.metrics;
     if (
-      m.education < 0 || m.education > 100 ||
-      m.employment < 0 || m.employment > 100 ||
-      m.wealth < 0 || m.wealth > 100 ||
-      m.poverty < 0 || m.poverty > 100 ||
-      m.lifeExpectancy < 0 || m.lifeExpectancy > 100 ||
+      m.education < 0 || m.education > PERCENT_TOTAL ||
+      m.employment < 0 || m.employment > PERCENT_TOTAL ||
+      m.wealth < 0 || m.wealth > PERCENT_TOTAL ||
+      m.poverty < 0 || m.poverty > PERCENT_TOTAL ||
+      m.lifeExpectancy < 0 || m.lifeExpectancy > MAX_LIFE_EXPECTANCY ||
       m.incomePerCapita < 0
     ) {
       return false;

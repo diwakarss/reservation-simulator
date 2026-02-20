@@ -20,7 +20,7 @@ export default function Home() {
         
         <div className="mb-8 sm:mb-12 max-w-2xl space-y-3 sm:space-y-4 px-2">
           <p className="font-rajdhani text-base sm:text-xl md:text-2xl text-muted-text leading-relaxed text-glow-blue">
-            Step into a satirical sci-fi world where your policy decisions determine the fate of 5 distinct social classes.
+            Step into a sci-fi world where your policy decisions determine the fate of 5 distinct social classes.
           </p>
           <p className="font-rajdhani text-sm sm:text-lg text-white/80">
             Will you bridge the gap or widen the divide?

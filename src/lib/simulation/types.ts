@@ -9,36 +9,38 @@
 // =============================================================================
 
 /**
- * Simulation phases covering the full user journey.
- * - INTRO through PRE_RESERVATION: Narrative introduction
- * - POLICY_BOTTOM_2 through POLICY_REMOVAL: 5 distinct policy decision phases
- * - END_SUMMARY: Final results at year 100
- * - CHARTS/SETTINGS: Overlay phases (don't interrupt flow)
+ * Simulation phases covering the full user journey (UI-SPEC.md § 2.2).
+ *
+ * Phase structure:
+ * - INTRO → WORLD_GEN → TRAIT_REVEAL → PRE_RESERVATION: Narrative setup
+ * - POLICY_BOTTOM_2 → POLICY_MIDDLE → POLICY_CREAMY_LAYER → POLICY_EWS → POLICY_REMOVAL: Policy decisions at years 0, 20, 40, 60, 80
+ * - END_SUMMARY: Final summary at year 100
+ * - CHARTS, SETTINGS: Overlay phases (non-blocking)
  */
 export enum SimulationPhase {
   /** Galaxy intro sequence */
   INTRO = 'INTRO',
-  /** Non-visual transition phase (<500ms, auto-advances to TRAIT_REVEAL) */
+  /** Non-visual world generation phase (auto-advances after <500ms) */
   WORLD_GEN = 'WORLD_GEN',
-  /** Trait + class pyramid reveal */
+  /** Trait and class pyramid reveal */
   TRAIT_REVEAL = 'TRAIT_REVEAL',
-  /** Show bottom class suffering (pre-policy baseline) */
+  /** Baseline view: bottom classes before policy intervention */
   PRE_RESERVATION = 'PRE_RESERVATION',
-  /** Year 0: Initial choice - reserve for bottom 2 classes (Lower + Common) */
+  /** Year 0: Reserve for Lower + Common classes */
   POLICY_BOTTOM_2 = 'POLICY_BOTTOM_2',
-  /** Year 20: Show progress, ask to extend to Middle class */
+  /** Year 20: Extend reservation to Middle class */
   POLICY_MIDDLE = 'POLICY_MIDDLE',
-  /** Year 40: Upper classes protest, introduce Creamy Layer exclusion */
+  /** Year 40: Introduce Creamy Layer exclusion */
   POLICY_CREAMY_LAYER = 'POLICY_CREAMY_LAYER',
-  /** Year 60: Upper classes demand EWS reservation */
+  /** Year 60: Introduce EWS (Economically Weaker Sections) reservation */
   POLICY_EWS = 'POLICY_EWS',
-  /** Year 80: Protests to remove reservation, show Year 0 vs Year 80 comparison */
+  /** Year 80: Policy removal decision and comparison */
   POLICY_REMOVAL = 'POLICY_REMOVAL',
-  /** Year 100: Final results summary */
+  /** Year 100: Final results and impact summary */
   END_SUMMARY = 'END_SUMMARY',
-  /** Charts overlay (doesn't interrupt simulation flow) */
+  /** Charts panel overlay */
   CHARTS = 'CHARTS',
-  /** Settings overlay (doesn't interrupt simulation flow) */
+  /** Settings drawer overlay */
   SETTINGS = 'SETTINGS',
 }
 
@@ -47,14 +49,18 @@ export enum SimulationPhase {
 // =============================================================================
 
 /**
- * Class tier identifiers for the 5-tier social hierarchy.
- * Used for tier prefixes and unique class naming.
+ * Class tier identifiers for the 5-tier social hierarchy (UI-SPEC.md § 1.3).
+ * Used for indexing, tier prefixes, and unique class naming.
  */
 export type ClassTier = 'upper' | 'noble' | 'middle' | 'common' | 'lower';
 
 /**
  * Mapping of tier to display prefix.
  * Combined with AbsurdTrait.classNames to form full display names.
+ *
+ * @example
+ * displayName = CLASS_TIER_PREFIXES[tier] + ' ' + trait.classNames[tier]
+ * // e.g., "Upper Harmonics", "Lower Deaflings"
  */
 export const CLASS_TIER_PREFIXES: Record<ClassTier, string> = {
   upper: 'Upper',
@@ -80,8 +86,8 @@ export const CLASS_TIER_ORDER: ClassTier[] = [
 // =============================================================================
 
 /**
- * Trait categories for the 100 absurd traits.
- * 5 categories x 20 traits each = 100 total for MVP
+ * Trait categories for organizing absurd traits (PRD FR-1).
+ * Five categories with 20 traits each = 100 total for MVP.
  */
 export type TraitCategory =
   | 'Celestial'
@@ -91,27 +97,37 @@ export type TraitCategory =
   | 'Arbitrary';
 
 /**
- * Absurd trait definition with unique class names per tier.
+ * Absurd trait definition with tier-specific class names.
  *
- * Each trait provides 5 UNIQUE class name suffixes, one per tier.
- * Upper classes get grandiose names; lower classes get diminutive names.
+ * Each trait provides 5 unique class name suffixes (one per tier).
+ * Upper tiers receive grandiose names; lower tiers receive diminutive/playful names.
+ * Forms the identity of the world (e.g., "Upper Harmonics" vs "Lower Deaflings").
  *
- * Example for "earlobe-frequency":
- *   classNames: { upper: "Harmonics", noble: "Vibrants", middle: "Oscillants", common: "Buzzers", lower: "Deaflings" }
+ * @example
+ * {
+ *   id: "earlobe-frequency",
+ *   text: "People's earlobes vibrate at different frequencies based on class status",
+ *   category: "Auditory",
+ *   classNames: {
+ *     upper: "Harmonics",
+ *     noble: "Vibrants",
+ *     middle: "Oscillants",
+ *     common: "Buzzers",
+ *     lower: "Deaflings"
+ *   }
+ * }
+ * // Display: "Upper Harmonics" (upper tier) → "Lower Deaflings" (lower tier)
  *
- * Full display names are formed as: PREFIX + classNames[tier]
- *   e.g., "Upper Harmonics", "Lower Deaflings"
- *
- * Max 12 characters per class name suffix (per UI-SPEC.md § 1.3)
+ * **Constraint**: Each classNames value must be ≤12 characters (UI-SPEC.md § 1.3)
  */
 export interface AbsurdTrait {
-  /** Unique trait identifier (e.g., "earlobe-frequency") */
+  /** Unique trait identifier (kebab-case) */
   id: string;
-  /** Full trait description shown during reveal (e.g., "Those whose earlobes vibrate at exactly 432Hz...") */
+  /** Full trait description shown during narrative reveal */
   text: string;
-  /** Category for filtering/grouping */
+  /** Category for grouping and filtering (5 categories, 20 traits each = 100 total) */
   category: TraitCategory;
-  /** 5 UNIQUE class name suffixes, one per tier */
+  /** Tier-specific class name suffixes (max 12 chars each, combined with CLASS_TIER_PREFIXES) */
   classNames: Record<ClassTier, string>;
 }
 
@@ -120,21 +136,27 @@ export interface AbsurdTrait {
 // =============================================================================
 
 /**
- * Per-class metrics tracked throughout the simulation.
- * All percentages are 0-100 unless otherwise noted.
+ * Per-class metrics tracked throughout the simulation (CALIBRATED-MODEL.md).
+ *
+ * All metrics are updated annually based on policy, education, employment,
+ * wealth, and socioeconomic feedback loops.
+ *
+ * **Percentage metrics** (0–100): education, employment, poverty
+ * **Proportional metrics** (0–100, class-level sums): wealth
+ * **Absolute metrics**: lifeExpectancy (years), incomePerCapita (credits/month)
  */
 export interface ClassMetrics {
-  /** % with access to education (0-100) */
+  /** Percentage with access to education (0–100) */
   education: number;
-  /** % with formal employment (0-100) */
+  /** Percentage with formal employment (0–100) */
   employment: number;
-  /** % of total economy controlled (all classes sum to 100) */
+  /** Share of total economy (all classes sum to 100%) */
   wealth: number;
-  /** % living below poverty threshold (0-100) */
+  /** Percentage living below poverty threshold (0–100) */
   poverty: number;
-  /** Average life expectancy in years (0-80 max) */
+  /** Average life expectancy in years (0–80) */
   lifeExpectancy: number;
-  /** Monthly income in credits (currency unit) */
+  /** Average monthly income in credits (currency unit) */
   incomePerCapita: number;
 }
 
@@ -157,21 +179,35 @@ export interface SocialClass {
 // =============================================================================
 
 /**
- * Policy settings for a single class tier.
- * Supports main reservation percentage, Creamy Layer exclusion, and EWS.
+ * Policy settings for a single class tier (PRD FR-2).
+ *
+ * Three policy mechanisms work together:
+ * - **Main reservation**: Direct quota for seat/position allocation (reservationPercent)
+ * - **Creamy Layer**: Income-based exclusion from reservation benefits (creamyLayerEnabled)
+ * - **EWS**: Economically Weaker Sections reservation (upper/noble tiers only, ewsEnabled)
+ *
+ * @example
+ * const lowerClassPolicy: ClassPolicy = {
+ *   reservationPercent: 27,    // 27% quota for lower class
+ *   creamyLayerEnabled: false, // No income-based exclusion yet
+ *   creamyLayerThreshold: 0,
+ *   ewsEnabled: false,         // EWS only applies to upper/noble tiers
+ *   ewsThreshold: 0,
+ *   ewsPercent: 0
+ * };
  */
 export interface ClassPolicy {
-  /** Main reservation percentage (0-50) */
+  /** Main reservation quota percentage (0–50%) */
   reservationPercent: number;
-  /** Whether creamy layer exclusion applies to this class */
+  /** Whether creamy layer income threshold applies */
   creamyLayerEnabled: boolean;
-  /** Income threshold for creamy layer exclusion (credits/month) */
+  /** Income threshold for creamy layer exclusion (credits/month, zero if disabled) */
   creamyLayerThreshold: number;
-  /** Whether EWS reservation applies (only for 'upper' and 'noble' tiers) */
+  /** Whether EWS reservation applies (upper and noble tiers only) */
   ewsEnabled: boolean;
-  /** Income threshold for EWS eligibility (credits/month) */
+  /** Income threshold for EWS eligibility (credits/month, zero if disabled) */
   ewsThreshold: number;
-  /** EWS-specific reservation percentage (0-50) */
+  /** EWS-specific reservation quota percentage (0–50%, zero if disabled) */
   ewsPercent: number;
 }
 
@@ -372,12 +408,12 @@ export type SimulationStore = SimulationState & SimulationActions;
 // =============================================================================
 
 /**
- * Metric key for iteration and comparison.
+ * Metric key type for iteration and comparison.
  */
 export type MetricKey = keyof ClassMetrics;
 
 /**
- * All metric keys as array.
+ * All metric keys in stable order.
  */
 export const METRIC_KEYS: MetricKey[] = [
   'education',
@@ -389,7 +425,7 @@ export const METRIC_KEYS: MetricKey[] = [
 ];
 
 /**
- * Human-readable metric labels.
+ * Human-readable labels for metrics (UI display).
  */
 export const METRIC_LABELS: Record<MetricKey, string> = {
   education: 'Education Access',
@@ -401,7 +437,7 @@ export const METRIC_LABELS: Record<MetricKey, string> = {
 };
 
 /**
- * Metric units for display.
+ * Units for metric display (suffixes or prefixes).
  */
 export const METRIC_UNITS: Record<MetricKey, string> = {
   education: '%',
@@ -409,18 +445,21 @@ export const METRIC_UNITS: Record<MetricKey, string> = {
   wealth: '%',
   poverty: '%',
   lifeExpectancy: 'years',
-  incomePerCapita: ' credits',
+  incomePerCapita: 'credits',
 };
 
 /**
- * Whether higher values are "better" for each metric.
- * Used for determining improvement direction.
+ * Metric improvement direction (true = higher is better).
+ * Used for narrative highlights and trend analysis to determine class progress.
+ *
+ * **Higher is better**: education, employment, wealth, lifeExpectancy, incomePerCapita
+ * **Lower is better**: poverty (lower poverty rate = improvement)
  */
 export const METRIC_HIGHER_IS_BETTER: Record<MetricKey, boolean> = {
   education: true,
   employment: true,
-  wealth: true, // More wealth share is better for that class
-  poverty: false, // Lower poverty is better
+  wealth: true,           // Greater wealth share is better for the class
+  poverty: false,         // Lower poverty is better (improvement = decrease)
   lifeExpectancy: true,
   incomePerCapita: true,
 };
@@ -430,20 +469,25 @@ export const METRIC_HIGHER_IS_BETTER: Record<MetricKey, boolean> = {
 // =============================================================================
 
 /**
- * Chart data point for Recharts.
+ * Chart data point for Recharts visualization.
+ * Dynamically keyed by class tier for line/bar rendering.
  */
 export interface ChartDataPoint {
   year: number;
-  [key: string]: number; // Dynamic keys for each class tier
+  [key: string]: number;
 }
 
 /**
  * Class color mapping for consistent chart styling.
+ * Colors chosen for accessibility and visual distinction across all chart views.
+ *
+ * @example
+ * const color = CLASS_COLORS['lower']; // '#e94560' (Red/Crimson)
  */
 export const CLASS_COLORS: Record<ClassTier, string> = {
-  upper: '#e2b714', // Gold
-  noble: '#2dd4bf', // Teal
-  middle: '#60a5fa', // Blue
-  common: '#a78bfa', // Purple
-  lower: '#e94560', // Red
+  upper: '#fbbf24',     // Amber-400
+  noble: '#34d399',     // Emerald-400
+  middle: '#60a5fa',    // Blue-400
+  common: '#a78bfa',    // Violet-400
+  lower: '#f472b6',     // Pink-400
 } as const;

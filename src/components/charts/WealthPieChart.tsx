@@ -15,6 +15,7 @@ import {
   Legend,
 } from 'recharts';
 import { CLASS_COLORS, ClassTier, CLASS_TIER_ORDER } from '@/lib/simulation/types';
+import { CHART_TOOLTIP_STYLE } from './chartStyles';
 
 interface WealthPieChartProps {
   /** Data with tier and wealth value */
@@ -37,10 +38,12 @@ export function WealthPieChart({
     value: (d.value / total) * 100,
   }));
 
+  const chartTitle = `Wealth Distribution${year !== undefined ? ` (Year ${year})` : ''}`;
+
   return (
-    <div className="w-full">
+    <div className="w-full" role="figure" aria-label={chartTitle}>
       <h3 className="mb-4 font-orbitron text-sm uppercase tracking-wide text-white">
-        Wealth Distribution {year !== undefined && `(Year ${year})`}
+        {chartTitle}
       </h3>
       <ResponsiveContainer width="100%" height={height}>
         <PieChart>
@@ -68,12 +71,7 @@ export function WealthPieChart({
             ))}
           </Pie>
           <Tooltip
-            contentStyle={{
-              backgroundColor: '#1a1a2e',
-              border: '1px solid #2a2a4a',
-              borderRadius: '8px',
-              color: '#f0f0ff',
-            }}
+            contentStyle={CHART_TOOLTIP_STYLE}
             formatter={(value: number) => [`${value.toFixed(1)}%`, 'Wealth Share']}
           />
           <Legend

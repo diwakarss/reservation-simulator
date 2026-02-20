@@ -42,6 +42,8 @@ import {
 
 const DEFAULT_TIME_JUMP_SIZE = 20;
 const STORAGE_KEY = 'reservation-simulator-state';
+const VALID_TIME_JUMP_SIZES = [5, 10, 20] as const;
+const EWS_ELIGIBLE_TIERS = new Set<ClassTier>(['upper', 'noble']);
 
 const UI_CLOSED_STATE = {
   settingsOpen: false,
@@ -95,6 +97,13 @@ function mergeClassPolicy(
       },
     },
   };
+}
+
+/**
+ * Type guard for valid UI-supported time jump size.
+ */
+function isValidTimeJumpSize(years: number): years is (typeof VALID_TIME_JUMP_SIZES)[number] {
+  return VALID_TIME_JUMP_SIZES.includes(years as (typeof VALID_TIME_JUMP_SIZES)[number]);
 }
 
 /**
@@ -156,24 +165,22 @@ export const useSimulationStore = create<SimulationStore>()(
        * Initialize a new world with optional seed.
        * If no seed provided, generates a random one.
        */
-      initializeWorld: (seed?: string) => {
+      initializeWorld: (seed?: string, startAtIntro = true) => {
         const world = generateWorld(seed);
         const policy = createDefaultReservationPolicy();
+        const baseState = createWorldState(world, policy);
 
         // Capture initial snapshot at year 0
         const initialSnapshot = captureSnapshot({
-          ...createWorldState(world, policy),
-          phase: SimulationPhase.WORLD_GEN,
+          ...baseState,
+          phase: SimulationPhase.INTRO,
         });
 
         set({
-          world,
-          currentYear: 0,
-          policy,
+          ...baseState,
           history: [initialSnapshot],
-          redoStack: [],
-          highlight: null,
-          phase: SimulationPhase.WORLD_GEN,
+          // Start at INTRO phase so GalaxyIntro shows, unless explicitly skipped
+          phase: startAtIntro ? SimulationPhase.INTRO : SimulationPhase.WORLD_GEN,
         });
       },
 
@@ -233,7 +240,7 @@ export const useSimulationStore = create<SimulationStore>()(
         ewsPercent: number
       ) => {
         // Only allow EWS for upper tiers
-        if (tier !== 'upper' && tier !== 'noble') {
+        if (!EWS_ELIGIBLE_TIERS.has(tier)) {
           console.warn(`EWS is only applicable for 'upper' and 'noble' tiers, not '${tier}'`);
           return;
         }
@@ -343,7 +350,7 @@ export const useSimulationStore = create<SimulationStore>()(
        * Set the time jump size (5, 10, or 20 years).
        */
       setTimeJumpSize: (years: number) => {
-        if (years !== 5 && years !== 10 && years !== 20) {
+        if (!isValidTimeJumpSize(years)) {
           console.warn(`Invalid time jump size: ${years}. Must be 5, 10, or 20.`);
           return;
         }

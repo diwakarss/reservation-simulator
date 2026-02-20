@@ -28,3 +28,10 @@ if (
     },
   });
 }
+
+// Mock ResizeObserver for Recharts components
+global.ResizeObserver = class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};

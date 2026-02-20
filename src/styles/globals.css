@@ -3,24 +3,46 @@
 @tailwind utilities;
 
 :root {
-  --background: #0f0f23;
-  --foreground: #e2e2f0;
+  /* Glassmorphism palette */
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+  --card-bg: #1e293b;
+  --accent: #38bdf8;
+  --muted: #94a3b8;
+
+  /* Fonts */
   --font-orbitron: 'Orbitron', monospace;
   --font-rajdhani: 'Rajdhani', sans-serif;
+  --font-grotesk: 'Space Grotesk', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Class colors */
+  --class-upper: #fbbf24;
+  --class-noble: #34d399;
+  --class-middle: #60a5fa;
+  --class-common: #a78bfa;
+  --class-lower: #f472b6;
 }
 
 @layer base {
   html {
-    background-color: #0f0f23;
-    color: #e2e2f0;
+    background-color: var(--background);
+    color: var(--foreground);
     overflow-x: hidden;
   }
 
   body {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+    /* Glassmorphism gradient background */
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(56, 189, 248, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(244, 114, 182, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(96, 165, 250, 0.06) 0%, transparent 70%),
+      var(--background);
     background-attachment: fixed;
     min-height: 100vh;
-    font-family: var(--font-rajdhani), sans-serif;
+    font-family: var(--font-inter), sans-serif;
+    font-size: 15px;
     color: var(--foreground);
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
@@ -34,7 +56,8 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-orbitron), monospace;
+    font-family: var(--font-grotesk), sans-serif;
+    font-weight: 600;
   }
 
   /* Smooth scrolling */
@@ -48,16 +71,16 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #1a1a2e;
+    background: var(--background);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #e2b714;
+    background: var(--accent);
     border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #f0c820;
+    background: #7dd3fc;
   }
 }
 
@@ -75,24 +98,69 @@
     border-width: 0;
   }
 
-  /* Cosmic glow effects */
+  /* Neon glow effects */
+  .text-glow-accent {
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.8), 0 0 30px rgba(56, 189, 248, 0.4);
+  }
+
   .text-glow-gold {
-    text-shadow: 0 0 10px rgba(226, 183, 20, 0.8), 0 0 30px rgba(226, 183, 20, 0.4);
+    text-shadow: 0 0 8px rgba(226, 183, 20, 1), 0 0 20px rgba(226, 183, 20, 0.8), 0 0 40px rgba(226, 183, 20, 0.5);
+  }
+
+  .text-glow-pink {
+    text-shadow: 0 0 10px rgba(244, 114, 182, 0.8), 0 0 30px rgba(244, 114, 182, 0.4);
   }
 
   .text-glow-red {
-    text-shadow: 0 0 10px rgba(233, 69, 96, 0.8), 0 0 30px rgba(233, 69, 96, 0.4);
+    text-shadow: 0 0 8px rgba(233, 69, 96, 1), 0 0 20px rgba(233, 69, 96, 0.8), 0 0 40px rgba(233, 69, 96, 0.5);
   }
 
-  .border-glow-gold {
-    box-shadow: 0 0 10px rgba(226, 183, 20, 0.4), inset 0 0 10px rgba(226, 183, 20, 0.05);
+  .border-glow-accent {
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3), inset 0 0 10px rgba(56, 189, 248, 0.05);
   }
 
-  /* Glass morphism panel */
+  /* Glassmorphism card */
+  .glass-card {
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(241, 245, 249, 0.1);
+    border-radius: 20px;
+  }
+
+  /* Glass panel - lighter variant */
   .glass-panel {
-    background: rgba(22, 33, 62, 0.7);
+    background: rgba(30, 41, 59, 0.5);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(226, 183, 20, 0.2);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(241, 245, 249, 0.08);
+  }
+
+  /* Glass table */
+  .glass-table {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .glass-table th {
+    background: rgba(15, 23, 42, 0.6);
+    border-bottom: 1px solid rgba(241, 245, 249, 0.1);
+  }
+
+  .glass-table tr:nth-child(even) td {
+    background: rgba(30, 41, 59, 0.3);
+  }
+
+  .glass-table td {
+    border-bottom: 1px solid rgba(241, 245, 249, 0.05);
+  }
+
+  /* Data/numbers font */
+  .font-data {
+    font-family: var(--font-mono), monospace;
   }
 
   /* Star field animation */
@@ -118,8 +186,8 @@
   position: absolute;
   top: -40px;
   left: 0;
-  background: #e2b714;
-  color: #1a1a2e;
+  background: var(--accent);
+  color: var(--background);
   padding: 8px 16px;
   z-index: 100;
   font-weight: bold;

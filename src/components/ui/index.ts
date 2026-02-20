@@ -9,3 +9,4 @@ export { ErrorBoundary } from './ErrorBoundary';
 export { HowItWorksOverlay } from './HowItWorksOverlay';
 export { WhitepaperLink } from './WhitepaperLink';
 export { ExplanationBox } from './ExplanationBox';
+export { RestartButton } from './RestartButton';

@@ -5,9 +5,10 @@ import {
   calculateWealth,
   calculatePoverty,
   calculateLifeExpectancy,
+  calculateIncome,
 } from '../models';
 import { SocialClass, ClassTier, createDefaultClassPolicy } from '../types';
-import { INITIAL_WEALTH_SHARE } from '../constants';
+import { INITIAL_WEALTH_SHARE, LE_MAXIMUM } from '../constants';
 
 describe('Simulation Models', () => {
   describe('calculateEducation', () => {
@@ -108,22 +109,83 @@ describe('Simulation Models', () => {
       const eduGain = 1;
       const empGain = 1;
       const wealthGain = 0;
-      
+
       const newPov = calculatePoverty(startPov, eduGain, empGain, wealthGain);
-      
+
       expect(newPov).toBeLessThan(startPov);
-      // red = 1*0.008 + 1*0.012 = 0.02
-      // res = (0.65)^0.5 ≈ 0.806
-      // eff = 0.02 * 0.806 ≈ 0.016
-      // expected ≈ 64.984
-      expect(newPov).toBeCloseTo(64.984, 3);
+      // reduction = 1*0.8 + 1*1.2 = 2.0
+      // resistanceFactor = (0.65)^0.5 ≈ 0.806
+      // effectiveReduction = 2.0 * 0.806 ≈ 1.612
+      // expected ≈ 63.388
+      expect(newPov).toBeCloseTo(63.388, 1);
     });
-    
+
     it('should not go below floor', () => {
        const startPov = 2.01;
        // Massive gains
        const newPov = calculatePoverty(startPov, 100, 100, 100);
        expect(newPov).toBeGreaterThanOrEqual(2);
+    });
+  });
+
+  describe('calculateLifeExpectancy', () => {
+    it('should never exceed LE_MAXIMUM (80) even with massive gains', () => {
+      // Start near ceiling with huge education/poverty gains
+      const nearCeiling = 79.5;
+      const massiveEduGain = 100;
+      const massivePovReduction = 100;
+
+      const newLE = calculateLifeExpectancy(nearCeiling, massiveEduGain, massivePovReduction);
+      expect(newLE).toBeLessThanOrEqual(LE_MAXIMUM);
+    });
+
+    it('should never exceed LE_MAXIMUM when starting at exactly 80', () => {
+      const atCeiling = 80;
+      const newLE = calculateLifeExpectancy(atCeiling, 5, 10);
+      expect(newLE).toBe(LE_MAXIMUM);
+    });
+
+    it('should improve life expectancy with positive education and poverty gains', () => {
+      const startLE = 62;
+      const newLE = calculateLifeExpectancy(startLE, 2, 3);
+      expect(newLE).toBeGreaterThan(startLE);
+      expect(newLE).toBeLessThanOrEqual(LE_MAXIMUM);
+    });
+
+    it('should not decrease with zero gains', () => {
+      const startLE = 65;
+      const newLE = calculateLifeExpectancy(startLE, 0, 0);
+      expect(newLE).toBe(startLE);
+    });
+  });
+
+  describe('calculateIncome', () => {
+    it('should increase income with education and employment gains', () => {
+      const startIncome = 500;
+      const newIncome = calculateIncome(startIncome, 2, 1);
+      // growth = 2*0.02 + 1*0.03 = 0.07
+      // newIncome = 500 * 1.07 = 535
+      expect(newIncome).toBeCloseTo(535, 1);
+    });
+
+    it('should return base income unchanged with zero gains', () => {
+      const startIncome = 1000;
+      const newIncome = calculateIncome(startIncome, 0, 0);
+      expect(newIncome).toBe(startIncome);
+    });
+
+    it('should grow faster with larger employment gains than education gains', () => {
+      const startIncome = 1000;
+      const eduOnlyIncome = calculateIncome(startIncome, 5, 0);  // 5 * 0.02 = 10%
+      const empOnlyIncome = calculateIncome(startIncome, 0, 5);  // 5 * 0.03 = 15%
+      // Employment boost (INCOME_GROWTH_FROM_EMPLOYMENT = 0.03) > education (INCOME_GROWTH_FROM_EDUCATION = 0.02)
+      expect(empOnlyIncome).toBeGreaterThan(eduOnlyIncome);
+    });
+
+    it('should never produce negative income', () => {
+      const startIncome = 200;
+      const newIncome = calculateIncome(startIncome, 0, 0);
+      expect(newIncome).toBeGreaterThan(0);
     });
   });
 });

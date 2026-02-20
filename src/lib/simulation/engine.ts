@@ -46,11 +46,13 @@ function seededRandom(seed: string, min = 0, max = 1): number {
 }
 
 /**
- * Applies ±5% random variance to a value.
+ * Applies small random variance to an IMPROVEMENT (not to absolute value).
+ * Returns variance as a multiplier (0.9 to 1.1) to apply to gains only.
+ * This prevents metrics from decreasing due to randomness.
  */
-function applyVariance(value: number, seed: string): number {
-  const variance = seededRandom(seed, -0.05, 0.05);
-  return value * (1 + variance);
+function getVarianceMultiplier(seed: string): number {
+  // Variance between 0.9 and 1.1 (±10% on gains, not absolute values)
+  return seededRandom(seed, 0.9, 1.1);
 }
 
 // =============================================================================
@@ -93,25 +95,29 @@ export function stepSimulation(
     let nextClasses = currentClasses.map((c) => {
       const policy = currentState.policy.classes[c.tier];
       const yearsSincePolicy = year; // Simplified: policy active since year 0
-      
-      // Education
-      let newEdu = calculateEducation(
+
+      // Education - calculate improvement, apply variance to improvement, ensure no decrease
+      const rawNewEdu = calculateEducation(
         c.metrics.education,
         policy.reservationPercent,
         yearsSincePolicy
       );
-      newEdu = applyVariance(newEdu, `${seed}-${year}-${c.tier}-edu`);
+      const eduImprovement = rawNewEdu - c.metrics.education;
+      const variedEduImprovement = eduImprovement * getVarianceMultiplier(`${seed}-${year}-${c.tier}-edu`);
+      // Education can only stay same or improve, never decrease
+      const newEdu = Math.max(c.metrics.education, c.metrics.education + variedEduImprovement);
 
-      // Employment
-      let newEmp = calculateEmployment(
+      // Employment - calculate improvement, apply variance to improvement, ensure no decrease
+      const rawNewEmp = calculateEmployment(
         c.metrics.employment,
-        newEdu, // Use CURRENT year's education (or previous? Model says lagged, but function takes current & prev edu)
-        // Actually calculateEmployment takes (currentEmp, currentEdu, prevEdu, res%)
-        // So we pass newEdu and c.metrics.education (prev)
+        newEdu,
         c.metrics.education,
         policy.reservationPercent
       );
-      newEmp = applyVariance(newEmp, `${seed}-${year}-${c.tier}-emp`);
+      const empImprovement = rawNewEmp - c.metrics.employment;
+      const variedEmpImprovement = empImprovement * getVarianceMultiplier(`${seed}-${year}-${c.tier}-emp`);
+      // Employment can only stay same or improve, never decrease
+      const newEmp = Math.max(c.metrics.employment, c.metrics.employment + variedEmpImprovement);
 
       return {
         ...c,
@@ -132,37 +138,40 @@ export function stepSimulation(
     // Third pass: Dependent metrics (Poverty, LE, Income)
     nextClasses = nextClasses.map((c, i) => {
       const prevC = prevClasses[i];
-      
-      const eduGain = c.metrics.education - prevC.metrics.education;
-      const empGain = c.metrics.employment - prevC.metrics.employment;
-      const wealthGain = c.metrics.wealth - prevC.metrics.wealth; // This is absolute change in % share
 
-      // Poverty
-      let newPov = calculatePoverty(
+      // Calculate gains (these are already guaranteed non-negative from first pass)
+      const eduGain = Math.max(0, c.metrics.education - prevC.metrics.education);
+      const empGain = Math.max(0, c.metrics.employment - prevC.metrics.employment);
+      const wealthGain = c.metrics.wealth - prevC.metrics.wealth; // Can be negative (zero-sum)
+
+      // Poverty - can only decrease (never increase)
+      const rawNewPov = calculatePoverty(
         prevC.metrics.poverty,
         eduGain,
         empGain,
         wealthGain
       );
-      newPov = applyVariance(newPov, `${seed}-${year}-${c.tier}-pov`);
+      // Poverty can only stay same or decrease
+      const newPov = Math.min(prevC.metrics.poverty, rawNewPov);
 
-      // Life Expectancy
-      const povRed = prevC.metrics.poverty - newPov;
-      let newLE = calculateLifeExpectancy(
+      // Life Expectancy - can only increase (never decrease)
+      const povRed = Math.max(0, prevC.metrics.poverty - newPov);
+      const rawNewLE = calculateLifeExpectancy(
         prevC.metrics.lifeExpectancy,
         eduGain,
         povRed
       );
-      newLE = applyVariance(newLE, `${seed}-${year}-${c.tier}-le`);
-      
-      // Income
-      let newIncome = calculateIncome(
+      // Life expectancy can only stay same or increase
+      const newLE = Math.max(prevC.metrics.lifeExpectancy, rawNewLE);
+
+      // Income - can only increase (never decrease)
+      const rawNewIncome = calculateIncome(
         prevC.metrics.incomePerCapita,
         eduGain,
         empGain
       );
-      // Income variance? Maybe.
-      newIncome = applyVariance(newIncome, `${seed}-${year}-${c.tier}-inc`);
+      // Income can only stay same or increase
+      const newIncome = Math.max(prevC.metrics.incomePerCapita, rawNewIncome);
 
       return {
         ...c,

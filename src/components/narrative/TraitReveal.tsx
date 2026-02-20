@@ -12,7 +12,22 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { NarrativeScreen, NarrativeLine } from './NarrativeScreen';
 import { ClassPyramid } from '@/components/simulation/ClassPyramid';
 import { CosmicBackground } from '@/components/ui';
+import { ContinueButton } from './narrativeConstants';
 import type { AbsurdTrait, SocialClass } from '@/lib/simulation/types';
+
+/**
+ * Timing configuration for trait reveal sequence
+ */
+const TRAIT_REVEAL_TIMING = {
+  intro: 2000,
+  trait: 3000,
+  pyramidExit: 1000,
+  divider: { initial: 0, animated: 0.5 },
+  blockquote: { delay: 0.3, duration: 0.5 },
+  category: 0.8,
+  pyramidEntry: 0.5,
+  buttonDelay: 1.5,
+} as const;
 
 interface TraitRevealProps {
   /** The absurd trait to reveal */
@@ -39,17 +54,23 @@ export function TraitReveal({
   useEffect(() => {
     if (phase === 'complete') return;
 
-    const delays: Record<RevealPhase, number> = {
-      intro: 2000,
-      trait: autoAdvanceDelay,
-      pyramid: autoAdvanceDelay + 1000,
-      complete: 0,
-    };
+    function getPhaseDelay(currentPhase: RevealPhase): number {
+      switch (currentPhase) {
+        case 'intro':
+          return TRAIT_REVEAL_TIMING.intro;
+        case 'trait':
+          return autoAdvanceDelay;
+        case 'pyramid':
+          return autoAdvanceDelay + TRAIT_REVEAL_TIMING.pyramidExit;
+        case 'complete':
+          return 0;
+      }
+    }
 
     const timer = setTimeout(() => {
       if (phase === 'intro') setPhase('trait');
       else if (phase === 'trait') setPhase('pyramid');
-    }, delays[phase]);
+    }, getPhaseDelay(phase));
 
     return () => clearTimeout(timer);
   }, [phase, autoAdvanceDelay]);
@@ -70,9 +91,9 @@ export function TraitReveal({
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-deep-purple">
-      <CosmicBackground starCount={100} showNebula={true} />
+      <CosmicBackground />
 
-      <NarrativeScreen onSkip={handleSkip} showSkip={phase !== 'complete'}>
+      <NarrativeScreen onSkip={handleSkip} showSkip={phase !== 'complete'} showRestart={true}>
         <AnimatePresence mode="wait">
           {/* Phase 1: Intro text */}
           {phase === 'intro' && (
@@ -102,7 +123,7 @@ export function TraitReveal({
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: 250 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: TRAIT_REVEAL_TIMING.divider.animated }}
                 className="h-0.5 bg-gradient-to-r from-transparent via-accent-gold to-transparent"
               />
 
@@ -110,10 +131,13 @@ export function TraitReveal({
               <motion.blockquote
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
+                transition={{
+                  delay: TRAIT_REVEAL_TIMING.blockquote.delay,
+                  duration: TRAIT_REVEAL_TIMING.blockquote.duration,
+                }}
                 className="
-                  font-orbitron text-lg sm:text-xl md:text-2xl
-                  text-accent-gold text-glow-gold
+                  font-grotesk text-xl sm:text-2xl md:text-3xl
+                  text-accent-gold text-glow-accent
                   text-center leading-relaxed
                   italic
                 "
@@ -125,7 +149,10 @@ export function TraitReveal({
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: 250 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
+                transition={{
+                  delay: TRAIT_REVEAL_TIMING.blockquote.delay + TRAIT_REVEAL_TIMING.blockquote.duration,
+                  duration: TRAIT_REVEAL_TIMING.divider.animated,
+                }}
                 className="h-0.5 bg-gradient-to-r from-transparent via-accent-gold to-transparent"
               />
 
@@ -133,7 +160,7 @@ export function TraitReveal({
               <motion.span
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
+                transition={{ delay: TRAIT_REVEAL_TIMING.category }}
                 className="
                   text-xs font-rajdhani uppercase tracking-widest
                   text-muted-text/60
@@ -160,7 +187,10 @@ export function TraitReveal({
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
+                transition={{
+                  delay: TRAIT_REVEAL_TIMING.pyramidEntry,
+                  duration: TRAIT_REVEAL_TIMING.blockquote.duration,
+                }}
               >
                 <ClassPyramid classes={classes} showLegend={true} animate={true} />
               </motion.div>
@@ -170,45 +200,10 @@ export function TraitReveal({
 
         {/* Continue button */}
         {(phase === 'trait' || phase === 'pyramid') && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5 }}
-            className="mt-8"
-          >
-            <button
-              onClick={handleContinue}
-              className="
-                font-rajdhani text-base text-accent-gold
-                hover:text-white
-                transition-colors duration-200
-                flex items-center gap-2
-                px-4 py-2 rounded-lg
-                border border-accent-gold/30
-                hover:border-accent-gold
-                hover:bg-accent-gold/10
-              "
-            >
-              Continue
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"
-                />
-              </svg>
-            </button>
-          </motion.div>
+          <ContinueButton onClick={handleContinue} delay={TRAIT_REVEAL_TIMING.buttonDelay} />
         )}
       </NarrativeScreen>
     </div>
   );
 }
 
-export default TraitReveal;

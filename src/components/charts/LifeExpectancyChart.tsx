@@ -19,6 +19,13 @@ import { CLASS_COLORS, ClassTier, CLASS_TIER_ORDER } from '@/lib/simulation/type
 import type { ChartDataPoint } from '@/lib/simulation/types';
 import { ChartLegend } from './ChartLegend';
 import { ChartDataTable } from './ChartDataTable';
+import {
+  CHART_TOOLTIP_STYLE,
+  CHART_LABEL_STYLE,
+  CHART_AXIS_STYLE,
+  CHART_GRID_STYLE,
+  CHART_MARGIN,
+} from './chartStyles';
 
 interface LifeExpectancyChartProps {
   /** Data points with year and class values */
@@ -49,34 +56,17 @@ export function LifeExpectancyChart({
         unit=" years"
       />
       <ResponsiveContainer width="100%" height={height}>
-        <LineChart
-          data={data}
-          margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" stroke="#2a2a4a" />
-          <XAxis
-            dataKey="year"
-            stroke="#a7a7c4"
-            fontSize={12}
-            tickLine={false}
-            axisLine={{ stroke: '#2a2a4a' }}
-          />
+        <LineChart data={data} margin={CHART_MARGIN}>
+          <CartesianGrid {...CHART_GRID_STYLE} />
+          <XAxis dataKey="year" {...CHART_AXIS_STYLE} />
           <YAxis
             domain={[50, 85]}
-            stroke="#a7a7c4"
-            fontSize={12}
-            tickLine={false}
-            axisLine={{ stroke: '#2a2a4a' }}
+            {...CHART_AXIS_STYLE}
             tickFormatter={(value) => `${value}yr`}
           />
           <Tooltip
-            contentStyle={{
-              backgroundColor: '#1a1a2e',
-              border: '1px solid #2a2a4a',
-              borderRadius: '8px',
-              color: '#f0f0ff',
-            }}
-            labelStyle={{ color: '#a7a7c4' }}
+            contentStyle={CHART_TOOLTIP_STYLE}
+            labelStyle={CHART_LABEL_STYLE}
             formatter={(value: number) => [`${value.toFixed(1)} years`, '']}
             labelFormatter={(year) => `Year ${year}`}
           />

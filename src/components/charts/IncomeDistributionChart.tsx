@@ -18,6 +18,11 @@ import {
   Cell,
 } from 'recharts';
 import { CLASS_COLORS, ClassTier } from '@/lib/simulation/types';
+import {
+  CHART_TOOLTIP_STYLE,
+  CHART_AXIS_STYLE,
+  CHART_GRID_STYLE,
+} from './chartStyles';
 
 interface IncomeDataPoint {
   tier: ClassTier;
@@ -42,10 +47,12 @@ export function IncomeDistributionChart({
   // Sort by income descending for better visualization
   const sortedData = [...data].sort((a, b) => b.income - a.income);
 
+  const chartTitle = `Income Per Capita${year !== undefined ? ` (Year ${year})` : ''}`;
+
   return (
-    <div className="w-full">
+    <div className="w-full" role="figure" aria-label={chartTitle}>
       <h3 className="mb-4 font-orbitron text-sm uppercase tracking-wide text-white">
-        Income Per Capita {year !== undefined && `(Year ${year})`}
+        {chartTitle}
       </h3>
       <ResponsiveContainer width="100%" height={height}>
         <BarChart
@@ -53,31 +60,21 @@ export function IncomeDistributionChart({
           layout="vertical"
           margin={{ top: 5, right: 30, left: 100, bottom: 5 }}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="#2a2a4a" horizontal />
+          <CartesianGrid {...CHART_GRID_STYLE} horizontal />
           <XAxis
             type="number"
-            stroke="#a7a7c4"
-            fontSize={12}
-            tickLine={false}
-            axisLine={{ stroke: '#2a2a4a' }}
+            {...CHART_AXIS_STYLE}
             tickFormatter={(value) => `${(value / 1000).toFixed(0)}k`}
           />
           <YAxis
             type="category"
             dataKey="displayName"
-            stroke="#a7a7c4"
+            {...CHART_AXIS_STYLE}
             fontSize={11}
-            tickLine={false}
-            axisLine={{ stroke: '#2a2a4a' }}
             width={90}
           />
           <Tooltip
-            contentStyle={{
-              backgroundColor: '#1a1a2e',
-              border: '1px solid #2a2a4a',
-              borderRadius: '8px',
-              color: '#f0f0ff',
-            }}
+            contentStyle={CHART_TOOLTIP_STYLE}
             formatter={(value: number) => [
               `${value.toLocaleString()} credits/month`,
               'Income',

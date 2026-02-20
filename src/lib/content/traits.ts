@@ -11,6 +11,10 @@ import traitsData from '../../data/traits.json';
 // Type assertion for imported JSON
 const traits: AbsurdTrait[] = traitsData as AbsurdTrait[];
 
+function pickIndex(length: number, rng: () => number): number {
+  return Math.floor(rng() * length);
+}
+
 /**
  * Get all available traits.
  */
@@ -54,7 +58,7 @@ export function getTraitById(id: string): AbsurdTrait | undefined {
  * @returns A randomly selected trait
  */
 export function pickRandomTrait(rng: () => number): AbsurdTrait {
-  const index = Math.floor(rng() * traits.length);
+  const index = pickIndex(traits.length, rng);
   return traits[index];
 }
 
@@ -73,7 +77,7 @@ export function pickRandomTraitByCategory(
   if (categoryTraits.length === 0) {
     throw new Error(`No traits found for category: ${category}`);
   }
-  const index = Math.floor(rng() * categoryTraits.length);
+  const index = pickIndex(categoryTraits.length, rng);
   return categoryTraits[index];
 }
 

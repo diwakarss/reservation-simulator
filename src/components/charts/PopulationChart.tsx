@@ -20,6 +20,13 @@ import {
 import { CLASS_COLORS, ClassTier, CLASS_TIER_ORDER } from '@/lib/simulation/types';
 import type { ChartDataPoint } from '@/lib/simulation/types';
 import { ChartLegend } from './ChartLegend';
+import {
+  CHART_TOOLTIP_STYLE,
+  CHART_LABEL_STYLE,
+  CHART_AXIS_STYLE,
+  CHART_GRID_STYLE,
+  CHART_MARGIN,
+} from './chartStyles';
 
 interface PopulationChartProps {
   /** Data points with year and class population values */
@@ -35,40 +42,24 @@ export function PopulationChart({
   classNames,
   height = 300,
 }: PopulationChartProps) {
+  const chartTitle = 'Population Distribution';
+
   return (
-    <div className="w-full">
+    <div className="w-full" role="figure" aria-label={chartTitle}>
       <h3 className="mb-4 font-orbitron text-sm uppercase tracking-wide text-white">
-        Population Distribution
+        {chartTitle}
       </h3>
       <ResponsiveContainer width="100%" height={height}>
-        <AreaChart
-          data={data}
-          margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
-          stackOffset="expand"
-        >
-          <CartesianGrid strokeDasharray="3 3" stroke="#2a2a4a" />
-          <XAxis
-            dataKey="year"
-            stroke="#a7a7c4"
-            fontSize={12}
-            tickLine={false}
-            axisLine={{ stroke: '#2a2a4a' }}
-          />
+        <AreaChart data={data} margin={CHART_MARGIN} stackOffset="expand">
+          <CartesianGrid {...CHART_GRID_STYLE} />
+          <XAxis dataKey="year" {...CHART_AXIS_STYLE} />
           <YAxis
-            stroke="#a7a7c4"
-            fontSize={12}
-            tickLine={false}
-            axisLine={{ stroke: '#2a2a4a' }}
+            {...CHART_AXIS_STYLE}
             tickFormatter={(value) => `${(value * 100).toFixed(0)}%`}
           />
           <Tooltip
-            contentStyle={{
-              backgroundColor: '#1a1a2e',
-              border: '1px solid #2a2a4a',
-              borderRadius: '8px',
-              color: '#f0f0ff',
-            }}
-            labelStyle={{ color: '#a7a7c4' }}
+            contentStyle={CHART_TOOLTIP_STYLE}
+            labelStyle={CHART_LABEL_STYLE}
             formatter={(value: number) => [`${(value * 100).toFixed(1)}%`, '']}
             labelFormatter={(year) => `Year ${year}`}
           />

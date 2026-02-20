@@ -8,6 +8,13 @@
 import type { AbsurdTrait, ClassTier } from '../simulation/types';
 import { CLASS_TIER_PREFIXES } from '../simulation/types';
 
+const CLASS_TIERS: ClassTier[] = ['upper', 'noble', 'middle', 'common', 'lower'];
+
+/**
+ * Maximum length for class name suffixes (per UI-SPEC.md)
+ */
+export const MAX_CLASS_NAME_LENGTH = 12;
+
 /**
  * Generate the full display name for a class.
  *
@@ -56,13 +63,13 @@ export function getClassName(trait: AbsurdTrait, tier: ClassTier): string {
 export function getAllClassNames(
   trait: AbsurdTrait
 ): Record<ClassTier, string> {
-  return {
-    upper: getClassName(trait, 'upper'),
-    noble: getClassName(trait, 'noble'),
-    middle: getClassName(trait, 'middle'),
-    common: getClassName(trait, 'common'),
-    lower: getClassName(trait, 'lower'),
-  };
+  return CLASS_TIERS.reduce(
+    (acc, tier) => {
+      acc[tier] = getClassName(trait, tier);
+      return acc;
+    },
+    {} as Record<ClassTier, string>
+  );
 }
 
 /**
@@ -72,15 +79,13 @@ export function getAllClassNames(
  * @returns True if all 5 class names are present and non-empty
  */
 export function validateTraitClassNames(trait: AbsurdTrait): boolean {
-  const tiers: ClassTier[] = ['upper', 'noble', 'middle', 'common', 'lower'];
-
-  for (const tier of tiers) {
+  for (const tier of CLASS_TIERS) {
     const name = trait.classNames[tier];
     if (!name || typeof name !== 'string' || name.trim() === '') {
       return false;
     }
-    // Check max length constraint (12 chars per UI-SPEC)
-    if (name.length > 12) {
+    // Check max length constraint (per UI-SPEC)
+    if (name.length > MAX_CLASS_NAME_LENGTH) {
       return false;
     }
   }

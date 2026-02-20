@@ -37,7 +37,12 @@ type ChartTab =
   | 'lifeExpectancy'
   | 'population';
 
-const CHART_TABS: { id: ChartTab; label: string }[] = [
+interface ChartTabConfig {
+  id: ChartTab;
+  label: string;
+}
+
+const CHART_TABS: ChartTabConfig[] = [
   { id: 'education', label: 'Education' },
   { id: 'employment', label: 'Employment' },
   { id: 'poverty', label: 'Poverty' },
@@ -55,25 +60,28 @@ export function ChartsPanel({ onClose }: ChartsPanelProps) {
   const [activeTab, setActiveTab] = useState<ChartTab>('education');
   const [selectedYear, setSelectedYear] = useState(currentYear);
 
-  // Build class names mapping
+  // Build class names mapping from world or use defaults
   const classNames: Record<ClassTier, string> = useMemo(() => {
+    const defaults: Record<ClassTier, string> = {
+      upper: 'Upper Class',
+      noble: 'Noble Class',
+      middle: 'Middle Class',
+      common: 'Common Class',
+      lower: 'Lower Class',
+    };
+
     if (!world) {
-      return {
-        upper: 'Upper Class',
-        noble: 'Noble Class',
-        middle: 'Middle Class',
-        common: 'Common Class',
-        lower: 'Lower Class',
-      };
+      return defaults;
     }
-    const names: Partial<Record<ClassTier, string>> = {};
+
+    const names = { ...defaults };
     for (const cls of world.classes) {
       names[cls.tier] = cls.displayName;
     }
-    return names as Record<ClassTier, string>;
+    return names;
   }, [world]);
 
-  // Transform history to chart data
+  // Transform history to chart data by extracting relevant metrics
   const chartData = useMemo(() => {
     const education: ChartDataPoint[] = [];
     const employment: ChartDataPoint[] = [];
@@ -175,7 +183,7 @@ export function ChartsPanel({ onClose }: ChartsPanelProps) {
   return (
     <div className="flex min-h-screen flex-col bg-deep-purple">
       {/* Header */}
-      <header className="flex items-center justify-between border-b border-white/10 bg-cosmic-blue/50 px-4 py-4 backdrop-blur-sm sm:px-6">
+      <header className="flex items-center justify-between border-b border-white/10 glass-panel px-4 py-4 sm:px-6">
         <button
           onClick={onClose}
           className="flex items-center gap-2 text-muted-text transition-colors hover:text-white active:text-white min-h-[44px] px-2"
@@ -193,28 +201,28 @@ export function ChartsPanel({ onClose }: ChartsPanelProps) {
               d="M10 19l-7-7m0 0l7-7m-7 7h18"
             />
           </svg>
-          <span className="font-rajdhani">Back to Simulation</span>
+          <span className="font-grotesk">Back to Simulation</span>
         </button>
 
-        <span className="font-orbitron text-sm text-muted-text">
+        <span className="font-grotesk text-sm text-muted-text">
           Year {minYear} - {maxYear}
         </span>
       </header>
 
       {/* Tab Navigation (Mobile) */}
-      <div className="overflow-x-auto border-b border-white/10 bg-cosmic-blue/30 md:hidden">
+      <div className="overflow-x-auto border-b border-white/10 glass-panel md:hidden">
         <div className="flex gap-1 px-3 py-2">
           {CHART_TABS.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`
-                whitespace-nowrap rounded-full px-3 py-2.5 font-rajdhani text-sm
+                whitespace-nowrap rounded-full px-3 py-2.5 font-grotesk text-sm
                 min-h-[44px] min-w-[44px]
                 transition-colors duration-200
                 ${
                   activeTab === tab.id
-                    ? 'bg-accent-gold text-deep-purple'
+                    ? 'bg-accent-gold text-deep-purple font-semibold'
                     : 'bg-white/5 text-muted-text hover:bg-white/10 hover:text-white active:bg-white/15'
                 }
               `}
@@ -229,45 +237,46 @@ export function ChartsPanel({ onClose }: ChartsPanelProps) {
       <main className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
         {/* Desktop Grid Layout */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          <div className="rounded-xl border border-white/10 bg-cosmic-blue/30 p-4">
+          {/* Chart wrapper component */}
+          <div className="glass-card p-5">
             <EducationChart
               data={chartData.education}
               classNames={classNames}
               height={250}
             />
           </div>
-          <div className="rounded-xl border border-white/10 bg-cosmic-blue/30 p-4">
+          <div className="glass-card p-5">
             <EmploymentChart
               data={chartData.employment}
               classNames={classNames}
               height={250}
             />
           </div>
-          <div className="rounded-xl border border-white/10 bg-cosmic-blue/30 p-4">
+          <div className="glass-card p-5">
             <PovertyChart
               data={chartData.poverty}
               classNames={classNames}
               height={250}
             />
           </div>
-          <div className="rounded-xl border border-white/10 bg-cosmic-blue/30 p-4">
+          <div className="glass-card p-5">
             <WealthPieChart data={wealthPieData} year={selectedYear} height={250} />
           </div>
-          <div className="rounded-xl border border-white/10 bg-cosmic-blue/30 p-4">
+          <div className="glass-card p-5">
             <IncomeDistributionChart
               data={incomeData}
               year={selectedYear}
               height={250}
             />
           </div>
-          <div className="rounded-xl border border-white/10 bg-cosmic-blue/30 p-4">
+          <div className="glass-card p-5">
             <LifeExpectancyChart
               data={chartData.lifeExpectancy}
               classNames={classNames}
               height={250}
             />
           </div>
-          <div className="rounded-xl border border-white/10 bg-cosmic-blue/30 p-4 lg:col-span-3">
+          <div className="glass-card p-5 lg:col-span-3">
             <PopulationChart
               data={chartData.population}
               classNames={classNames}
@@ -283,14 +292,14 @@ export function ChartsPanel({ onClose }: ChartsPanelProps) {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.2 }}
-            className="rounded-xl border border-white/10 bg-cosmic-blue/30 p-4"
+            className="glass-card p-5"
           >
             {renderActiveChart()}
           </motion.div>
         </div>
 
         {/* Timeline Scrubber */}
-        <div className="mt-6 max-w-xl mx-auto rounded-xl border border-white/10 bg-cosmic-blue/30 p-4">
+        <div className="mt-6 max-w-xl mx-auto glass-card p-5">
           <TimelineScrubber
             minYear={minYear}
             maxYear={maxYear}
@@ -302,9 +311,9 @@ export function ChartsPanel({ onClose }: ChartsPanelProps) {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 bg-cosmic-blue/50 px-4 py-4 backdrop-blur-sm sm:px-6">
+      <footer className="border-t border-white/10 glass-panel px-4 py-4 sm:px-6">
         <div className="mx-auto max-w-xl">
-          <Button variant="ghost" size="md" onClick={onClose} className="w-full">
+          <Button variant="ghost" size="md" onClick={onClose} className="w-full font-grotesk">
             Close Charts
           </Button>
         </div>

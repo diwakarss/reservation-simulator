@@ -9,8 +9,9 @@
  * Supports swipe gestures for narrative advancement on mobile.
  */
 
-import { motion, AnimatePresence, PanInfo } from 'framer-motion';
+import { motion, AnimatePresence, type PanInfo } from 'framer-motion';
 import { type ReactNode, useCallback } from 'react';
+import { RestartButton } from '@/components/ui';
 
 interface NarrativeScreenProps {
   /** Content to render inside the screen */
@@ -27,6 +28,8 @@ interface NarrativeScreenProps {
   onAdvance?: () => void;
   /** Whether to enable swipe gestures (default: true) */
   enableSwipe?: boolean;
+  /** Whether to show restart button (default: false, shown on all screens except intro) */
+  showRestart?: boolean;
 }
 
 /**
@@ -44,29 +47,46 @@ interface NarrativeLineProps {
 }
 
 /**
+ * Animation configuration
+ */
+const ANIMATION_DURATION = {
+  lineReveal: 0.5,
+  lineExit: 0.3,
+} as const;
+
+const ANIMATION_DISTANCE = {
+  y: 12,
+} as const;
+
+const SWIPE_CONFIG = {
+  minDistance: 50,
+  minVelocity: 100,
+} as const;
+
+/**
  * Line reveal animation variants.
  */
 const lineVariants = {
   hidden: {
     opacity: 0,
-    y: 12,
+    y: ANIMATION_DISTANCE.y,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
-      ease: 'easeOut' as const,
+      duration: ANIMATION_DURATION.lineReveal,
+      ease: 'easeOut',
     },
   },
   exit: {
     opacity: 0,
-    y: -12,
+    y: -ANIMATION_DISTANCE.y,
     transition: {
-      duration: 0.3,
+      duration: ANIMATION_DURATION.lineExit,
     },
   },
-};
+} as const;
 
 /**
  * A single animated line of narrative text.
@@ -77,6 +97,10 @@ export function NarrativeLine({
   highlight = false,
   className = '',
 }: NarrativeLineProps) {
+  const highlightClasses = highlight
+    ? 'text-accent-gold text-glow-accent font-semibold'
+    : 'text-white';
+
   return (
     <motion.p
       variants={lineVariants}
@@ -84,12 +108,7 @@ export function NarrativeLine({
       animate="visible"
       exit="exit"
       transition={{ delay }}
-      className={`
-        font-orbitron text-xl sm:text-2xl md:text-3xl
-        leading-relaxed
-        ${highlight ? 'text-accent-gold text-glow-gold font-semibold' : 'text-white'}
-        ${className}
-      `}
+      className={`font-grotesk text-2xl sm:text-3xl md:text-4xl leading-relaxed ${highlightClasses} ${className}`}
     >
       {children}
     </motion.p>
@@ -107,6 +126,7 @@ export function NarrativeScreen({
   className = '',
   onAdvance,
   enableSwipe = true,
+  showRestart = false,
 }: NarrativeScreenProps) {
   const advanceHandler = onAdvance ?? onSkip;
 
@@ -115,8 +135,10 @@ export function NarrativeScreen({
     (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
       if (!enableSwipe || !advanceHandler) return;
 
-      // Swipe left (negative x offset) to advance
-      if (info.offset.x < -50 && Math.abs(info.velocity.x) > 100) {
+      const isSwipeLeft = info.offset.x < -SWIPE_CONFIG.minDistance;
+      const isFastSwipe = Math.abs(info.velocity.x) > SWIPE_CONFIG.minVelocity;
+
+      if (isSwipeLeft && isFastSwipe) {
         advanceHandler();
       }
     },
@@ -136,6 +158,17 @@ export function NarrativeScreen({
       dragElastic={0.1}
       onDragEnd={handleDragEnd}
     >
+      {/* Restart button - top right */}
+      {showRestart && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="absolute top-4 sm:top-6 right-4 sm:right-6 z-10"
+        >
+          <RestartButton />
+        </motion.div>
+      )}
       <AnimatePresence mode="wait">
         <motion.div
           key="content"
@@ -169,7 +202,7 @@ export function NarrativeScreen({
           onClick={onSkip}
           className="
             absolute bottom-4 sm:bottom-8 right-4 sm:right-8
-            font-rajdhani text-sm text-muted-text/60
+            font-grotesk text-sm text-muted-text/60
             hover:text-accent-gold active:text-accent-gold
             transition-colors duration-200
             flex items-center gap-2
@@ -194,4 +227,3 @@ export function NarrativeScreen({
   );
 }
 
-export default NarrativeScreen;

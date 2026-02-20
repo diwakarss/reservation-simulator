@@ -11,6 +11,18 @@
 import { motion } from 'framer-motion';
 import { useEffect, useCallback } from 'react';
 import { CosmicBackground } from '@/components/ui';
+import { ContinueButton, WORLD_CARD_COLORS } from './narrativeConstants';
+
+/**
+ * Timing configuration for world reveal sequence
+ */
+const WORLD_REVEAL_TIMING = {
+  autoAdvanceDefault: 2500,
+  titleEntry: 0.5,
+  cardEntryBase: 0.3,
+  cardStagger: 0.2,
+  buttonDelay: 1.2,
+} as const;
 
 interface WorldRevealProps {
   /** Galaxy name */
@@ -30,7 +42,7 @@ export function WorldReveal({
   planetName,
   nationName,
   onComplete,
-  autoAdvanceDelay = 2500,
+  autoAdvanceDelay = WORLD_REVEAL_TIMING.autoAdvanceDefault,
 }: WorldRevealProps) {
   // Auto-advance after delay
   useEffect(() => {
@@ -38,26 +50,22 @@ export function WorldReveal({
     return () => clearTimeout(timer);
   }, [onComplete, autoAdvanceDelay]);
 
-  const handleSkip = useCallback(() => {
-    onComplete();
-  }, [onComplete]);
-
   const worldData = [
-    { label: 'Galaxy', value: galaxyName, color: '#60a5fa' },
-    { label: 'Planet', value: planetName, color: '#2dd4bf' },
-    { label: 'Nation', value: nationName, color: '#e2b714' },
+    { label: 'Galaxy', value: galaxyName, color: WORLD_CARD_COLORS.galaxy },
+    { label: 'Planet', value: planetName, color: WORLD_CARD_COLORS.planet },
+    { label: 'Nation', value: nationName, color: WORLD_CARD_COLORS.nation },
   ];
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-deep-purple">
-      <CosmicBackground starCount={80} showNebula={true} />
+      <CosmicBackground />
 
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-12">
         {/* Title */}
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: WORLD_REVEAL_TIMING.titleEntry }}
           className="font-orbitron text-2xl sm:text-3xl text-white mb-12 text-center"
         >
           Your World Awaits
@@ -70,7 +78,10 @@ export function WorldReveal({
               key={item.label}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 + index * 0.2, duration: 0.4 }}
+              transition={{
+                delay: WORLD_REVEAL_TIMING.cardEntryBase + index * WORLD_REVEAL_TIMING.cardStagger,
+                duration: 0.4,
+              }}
               className="
                 bg-cosmic-blue/60 border border-white/10
                 rounded-xl p-6 min-w-[180px]
@@ -93,40 +104,9 @@ export function WorldReveal({
         </div>
 
         {/* Continue button */}
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          onClick={handleSkip}
-          className="
-            font-rajdhani text-base text-accent-gold
-            hover:text-white
-            transition-colors duration-200
-            flex items-center gap-2
-            px-4 py-2 rounded-lg
-            border border-accent-gold/30
-            hover:border-accent-gold
-            hover:bg-accent-gold/10
-          "
-        >
-          Continue
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M13 7l5 5m0 0l-5 5m5-5H6"
-            />
-          </svg>
-        </motion.button>
+        <ContinueButton onClick={onComplete} delay={WORLD_REVEAL_TIMING.buttonDelay} />
       </div>
     </div>
   );
 }
 
-export default WorldReveal;

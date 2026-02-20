@@ -6,6 +6,11 @@
  * Orchestrates all 12 simulation phases by routing to the correct component
  * based on the current SimulationPhase from the Zustand store.
  *
+ * Architecture: Container/Presentational pattern
+ * - Main component (SimulatePage) manages phase state and overlays
+ * - Connected wrapper components handle store subscriptions
+ * - Policy components are presentational, driven by props
+ *
  * Performance optimizations:
  * - Charts panel lazy loaded (heavy recharts dependency)
  * - Animations use will-change for GPU acceleration
@@ -14,8 +19,11 @@
 import { useEffect, useState, useCallback, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useSimulationStore, initializeFromBootstrap, getCurrentSnapshot } from '@/lib/store';
-import { SimulationPhase } from '@/lib/simulation/types';
+import { useSimulationStore, initializeFromBootstrap } from '@/lib/store';
+import { SimulationPhase, YearSnapshot, ClassTier } from '@/lib/simulation/types';
+
+// Constants
+const POLICY_PHASE_ADVANCE_YEARS = 20; // Years advanced per policy decision
 
 // Narrative components
 import {
@@ -58,7 +66,10 @@ const ChartsPanel = dynamic(
   }
 );
 
-// Loading spinner component
+/**
+ * Loading spinner for world generation phase
+ * Shows when WORLD_GEN takes > 200ms
+ */
 function LoadingSpinner() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-deep-purple">
@@ -70,27 +81,52 @@ function LoadingSpinner() {
   );
 }
 
-// Connected wrapper for PolicyBottom2
+/**
+ * Snapshot access helper - returns the latest snapshot from history
+ */
+function getLatestSnapshot(history: YearSnapshot[]): YearSnapshot {
+  return history[history.length - 1];
+}
+
+/**
+ * Centralized store action subscriptions
+ * Reduces duplication across connected wrappers
+ */
+function useStoreActions() {
+  return {
+    world: useSimulationStore((state) => state.world),
+    policy: useSimulationStore((state) => state.policy),
+    history: useSimulationStore((state) => state.history),
+    setClassPolicy: useSimulationStore((state) => state.setClassPolicy),
+    setCreamyLayer: useSimulationStore((state) => state.setCreamyLayer),
+    setEWSPolicy: useSimulationStore((state) => state.setEWSPolicy),
+    clearAllReservations: useSimulationStore((state) => state.clearAllReservations),
+    advanceTime: useSimulationStore((state) => state.advanceTime),
+    setPhase: useSimulationStore((state) => state.setPhase),
+    openSettingsDrawer: useSimulationStore((state) => state.openSettingsDrawer),
+    openChartsPanel: useSimulationStore((state) => state.openChartsPanel),
+  };
+}
+
+/**
+ * PolicyBottom2Connected - Container component
+ * Manages store subscriptions and transitions to PolicyMiddle phase
+ */
 function PolicyBottom2Connected() {
-  const world = useSimulationStore((state) => state.world);
-  const policy = useSimulationStore((state) => state.policy);
-  const setClassPolicy = useSimulationStore((state) => state.setClassPolicy);
-  const advanceTime = useSimulationStore((state) => state.advanceTime);
-  const setPhase = useSimulationStore((state) => state.setPhase);
-  const openSettingsDrawer = useSimulationStore((state) => state.openSettingsDrawer);
-  const openChartsPanel = useSimulationStore((state) => state.openChartsPanel);
+  const { world, policy, setClassPolicy, advanceTime, setPhase, openSettingsDrawer, openChartsPanel } =
+    useStoreActions();
 
   if (!world) return null;
 
   const handleAdvance = () => {
-    advanceTime(20);
+    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
     setPhase(SimulationPhase.POLICY_MIDDLE);
   };
 
   const handleSkip = () => {
     setClassPolicy('lower', { reservationPercent: 0 });
     setClassPolicy('common', { reservationPercent: 0 });
-    advanceTime(20);
+    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
     setPhase(SimulationPhase.POLICY_MIDDLE);
   };
 
@@ -103,31 +139,30 @@ function PolicyBottom2Connected() {
       onCommonPolicyChange={(value) => setClassPolicy('common', { reservationPercent: value })}
       onAdvance={handleAdvance}
       onSkip={handleSkip}
-      onHowItWorks={() => {}}
+      onHowItWorks={() => {}} // HowItWorksOverlay to be implemented in future phase
       onSettings={openSettingsDrawer}
       onCharts={openChartsPanel}
     />
   );
 }
 
-// Connected wrapper for PolicyMiddle
+/**
+ * PolicyMiddleConnected - Container component
+ * Manages store subscriptions, provides year 0 and current snapshots for comparison
+ * Transitions to PolicyCreamyLayer phase
+ */
 function PolicyMiddleConnected() {
-  const world = useSimulationStore((state) => state.world);
-  const policy = useSimulationStore((state) => state.policy);
-  const history = useSimulationStore((state) => state.history);
-  const setClassPolicy = useSimulationStore((state) => state.setClassPolicy);
-  const advanceTime = useSimulationStore((state) => state.advanceTime);
-  const setPhase = useSimulationStore((state) => state.setPhase);
-  const openSettingsDrawer = useSimulationStore((state) => state.openSettingsDrawer);
-  const openChartsPanel = useSimulationStore((state) => state.openChartsPanel);
+  const { world, policy, history, setClassPolicy, advanceTime, setPhase, openSettingsDrawer, openChartsPanel } =
+    useStoreActions();
 
+  // Require history to have at least 2 entries (year 0 and year 20)
   if (!world || history.length < 2) return null;
 
-  const previousSnapshot = history[0]; // Year 0 snapshot
-  const currentSnapshot = history[history.length - 1];
+  const previousSnapshot = history[0];
+  const currentSnapshot = getLatestSnapshot(history);
 
   const handleAdvance = () => {
-    advanceTime(20);
+    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
     setPhase(SimulationPhase.POLICY_CREAMY_LAYER);
   };
 
@@ -138,30 +173,28 @@ function PolicyMiddleConnected() {
       middlePolicy={policy.classes.middle}
       onMiddlePolicyChange={(value) => setClassPolicy('middle', { reservationPercent: value })}
       onAdvance={handleAdvance}
-      onHowItWorks={() => {}}
+      onHowItWorks={() => {}} // HowItWorksOverlay to be implemented in future phase
       onSettings={openSettingsDrawer}
       onCharts={openChartsPanel}
     />
   );
 }
 
-// Connected wrapper for PolicyCreamyLayer
+/**
+ * PolicyCreamyLayerConnected - Container component
+ * Manages creamy layer policy state, allows enabling/disabling creamy layer
+ * Transitions to PolicyEWS phase
+ */
 function PolicyCreamyLayerConnected() {
-  const world = useSimulationStore((state) => state.world);
-  const policy = useSimulationStore((state) => state.policy);
-  const history = useSimulationStore((state) => state.history);
-  const setCreamyLayer = useSimulationStore((state) => state.setCreamyLayer);
-  const advanceTime = useSimulationStore((state) => state.advanceTime);
-  const setPhase = useSimulationStore((state) => state.setPhase);
-  const openSettingsDrawer = useSimulationStore((state) => state.openSettingsDrawer);
-  const openChartsPanel = useSimulationStore((state) => state.openChartsPanel);
+  const { world, policy, history, setCreamyLayer, advanceTime, setPhase, openSettingsDrawer, openChartsPanel } =
+    useStoreActions();
 
   if (!world || history.length < 2) return null;
 
-  const currentSnapshot = history[history.length - 1];
+  const currentSnapshot = getLatestSnapshot(history);
 
   const handleAdvance = () => {
-    advanceTime(20);
+    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
     setPhase(SimulationPhase.POLICY_EWS);
   };
 
@@ -170,7 +203,7 @@ function PolicyCreamyLayerConnected() {
     setCreamyLayer('lower', false, 0);
     setCreamyLayer('common', false, 0);
     setCreamyLayer('middle', false, 0);
-    advanceTime(20);
+    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
     setPhase(SimulationPhase.POLICY_EWS);
   };
 
@@ -182,30 +215,28 @@ function PolicyCreamyLayerConnected() {
       onCreamyLayerThresholdChange={(tier, threshold) => setCreamyLayer(tier, policy.classes[tier].creamyLayerEnabled, threshold)}
       onAdvance={handleAdvance}
       onReject={handleReject}
-      onHowItWorks={() => {}}
+      onHowItWorks={() => {}} // HowItWorksOverlay to be implemented in future phase
       onSettings={openSettingsDrawer}
       onCharts={openChartsPanel}
     />
   );
 }
 
-// Connected wrapper for PolicyEWS
+/**
+ * PolicyEWSConnected - Container component
+ * Manages EWS (Economically Weaker Section) policy for upper classes
+ * Transitions to PolicyRemoval phase
+ */
 function PolicyEWSConnected() {
-  const world = useSimulationStore((state) => state.world);
-  const policy = useSimulationStore((state) => state.policy);
-  const history = useSimulationStore((state) => state.history);
-  const setEWSPolicy = useSimulationStore((state) => state.setEWSPolicy);
-  const advanceTime = useSimulationStore((state) => state.advanceTime);
-  const setPhase = useSimulationStore((state) => state.setPhase);
-  const openSettingsDrawer = useSimulationStore((state) => state.openSettingsDrawer);
-  const openChartsPanel = useSimulationStore((state) => state.openChartsPanel);
+  const { world, policy, history, setEWSPolicy, advanceTime, setPhase, openSettingsDrawer, openChartsPanel } =
+    useStoreActions();
 
   if (!world || history.length < 2) return null;
 
-  const currentSnapshot = history[history.length - 1];
+  const currentSnapshot = getLatestSnapshot(history);
 
   const handleAdvance = () => {
-    advanceTime(20);
+    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
     setPhase(SimulationPhase.POLICY_REMOVAL);
   };
 
@@ -213,7 +244,7 @@ function PolicyEWSConnected() {
     // Disable EWS for upper classes
     setEWSPolicy('upper', false, 0, 0);
     setEWSPolicy('noble', false, 0, 0);
-    advanceTime(20);
+    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
     setPhase(SimulationPhase.POLICY_REMOVAL);
   };
 
@@ -226,36 +257,36 @@ function PolicyEWSConnected() {
       onEWSPercentChange={(tier, percent) => setEWSPolicy(tier, policy.classes[tier].ewsEnabled, policy.classes[tier].ewsThreshold, percent)}
       onAdvance={handleAdvance}
       onReject={handleReject}
-      onHowItWorks={() => {}}
+      onHowItWorks={() => {}} // HowItWorksOverlay to be implemented in future phase
       onSettings={openSettingsDrawer}
       onCharts={openChartsPanel}
     />
   );
 }
 
-// Connected wrapper for PolicyRemoval
+/**
+ * PolicyRemovalConnected - Container component
+ * Final policy decision: remove all, continue with current, or adjust percentages
+ * Provides year 0 snapshot for comparison with final state
+ * Transitions to END_SUMMARY phase
+ */
 function PolicyRemovalConnected() {
-  const world = useSimulationStore((state) => state.world);
-  const history = useSimulationStore((state) => state.history);
-  const clearAllReservations = useSimulationStore((state) => state.clearAllReservations);
-  const advanceTime = useSimulationStore((state) => state.advanceTime);
-  const setPhase = useSimulationStore((state) => state.setPhase);
-  const openSettingsDrawer = useSimulationStore((state) => state.openSettingsDrawer);
-  const openChartsPanel = useSimulationStore((state) => state.openChartsPanel);
+  const { world, history, clearAllReservations, advanceTime, setPhase, openSettingsDrawer, openChartsPanel } =
+    useStoreActions();
 
   if (!world || history.length < 2) return null;
 
   const year0Snapshot = history[0];
-  const currentSnapshot = history[history.length - 1];
+  const currentSnapshot = getLatestSnapshot(history);
 
   const handleRemoveAll = () => {
     clearAllReservations();
-    advanceTime(20);
+    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
     setPhase(SimulationPhase.END_SUMMARY);
   };
 
   const handleContinue = () => {
-    advanceTime(20);
+    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
     setPhase(SimulationPhase.END_SUMMARY);
   };
 
@@ -270,7 +301,7 @@ function PolicyRemovalConnected() {
       onRemoveAll={handleRemoveAll}
       onContinue={handleContinue}
       onAdjust={handleAdjust}
-      onHowItWorks={() => {}}
+      onHowItWorks={() => {}} // HowItWorksOverlay to be implemented in future phase
       onSettings={openSettingsDrawer}
       onCharts={openChartsPanel}
     />
@@ -282,7 +313,6 @@ export default function SimulatePage() {
   const world = useSimulationStore((state) => state.world);
   const settingsOpen = useSimulationStore((state) => state.settingsOpen);
   const chartsOpen = useSimulationStore((state) => state.chartsOpen);
-  const initializeWorld = useSimulationStore((state) => state.initializeWorld);
   const setPhase = useSimulationStore((state) => state.setPhase);
   const closeChartsPanel = useSimulationStore((state) => state.closeChartsPanel);
 
@@ -290,30 +320,43 @@ export default function SimulatePage() {
   const [showWorldGenSpinner, setShowWorldGenSpinner] = useState(false);
 
   // Bootstrap from URL or localStorage on mount
+  // If no URL state, reset to INTRO phase to show the full intro sequence
   useEffect(() => {
-    initializeFromBootstrap();
+    const params = new URLSearchParams(window.location.search);
+    const hasURLParams = params.has('seed') || params.has('year') || params.has('policy');
+
+    if (hasURLParams) {
+      // URL state takes precedence - hydrate from URL
+      initializeFromBootstrap();
+    } else {
+      // Fresh navigation - reset to INTRO phase and initialize world
+      const store = useSimulationStore.getState();
+      store.reset();
+      store.initializeWorld();
+    }
     setIsInitialized(true);
   }, []);
 
-  // Handle WORLD_GEN phase - non-visual, auto-advances
+  /**
+   * Handle WORLD_GEN phase - non-visual, auto-advances
+   * Shows loading spinner if generation takes > 200ms
+   * Auto-advances to TRAIT_REVEAL after 300ms delay
+   */
   useEffect(() => {
     if (phase === SimulationPhase.WORLD_GEN) {
       const spinnerTimeout = setTimeout(() => {
         setShowWorldGenSpinner(true);
-      }, 200);
+      }, 200); // Show spinner if generation takes longer than 200ms
 
-      const generateAndAdvance = async () => {
-        setTimeout(() => {
-          clearTimeout(spinnerTimeout);
-          setShowWorldGenSpinner(false);
-          setPhase(SimulationPhase.TRAIT_REVEAL);
-        }, 300);
-      };
-
-      generateAndAdvance();
+      const advanceTimeout = setTimeout(() => {
+        clearTimeout(spinnerTimeout);
+        setShowWorldGenSpinner(false);
+        setPhase(SimulationPhase.TRAIT_REVEAL);
+      }, 300); // Minimum 300ms in WORLD_GEN phase for perception
 
       return () => {
         clearTimeout(spinnerTimeout);
+        clearTimeout(advanceTimeout);
       };
     }
   }, [phase, setPhase]);
@@ -340,10 +383,7 @@ export default function SimulatePage() {
     );
   }
 
-  // If no world yet and we're at INTRO, trigger initialization and start
-  if (!world && phase === SimulationPhase.INTRO) {
-    initializeWorld();
-  }
+  // World initialization is now handled in the useEffect above
 
   // Render loading spinner during WORLD_GEN if it takes > 200ms
   if (phase === SimulationPhase.WORLD_GEN && showWorldGenSpinner) {
