@@ -108,7 +108,7 @@ export function NarrativeLine({
       animate="visible"
       exit="exit"
       transition={{ delay }}
-      className={`font-grotesk text-2xl sm:text-3xl md:text-4xl leading-relaxed ${highlightClasses} ${className}`}
+      className={`font-grotesk text-2xl sm:text-3xl md:text-4xl text-center leading-relaxed ${highlightClasses} ${className}`}
     >
       {children}
     </motion.p>
