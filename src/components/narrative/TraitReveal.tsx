@@ -81,7 +81,7 @@ export function TraitReveal({
             >
               {/* Intro text */}
               <NarrativeLine delay={0}>
-                The people were divided by one sacred truth:
+                Your worth was decided at birth.
               </NarrativeLine>
 
               {/* Trait text - appears after intro */}
