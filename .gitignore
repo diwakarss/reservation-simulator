@@ -44,5 +44,11 @@ next-env.d.ts
 # Vercel
 .vercel
 
-# Planning (tracked separately)
-# .planning/ is intentionally NOT ignored — keep in git
+# Planning and documentation (local only)
+.planning/
+whitepaper/
+whitepapers/
+CLAUDE.md
+
+# Empty node_modules variants
+node_modules.local-empty/
