@@ -12,6 +12,8 @@ interface PolicyHeaderProps {
   onChartsClick?: () => void;
   /** Callback when How It Works is clicked */
   onHowItWorksClick?: () => void;
+  /** Callback when Restart is clicked */
+  onRestartClick?: () => void;
 }
 
 /**
@@ -29,6 +31,7 @@ export const PolicyHeader: React.FC<PolicyHeaderProps> = ({
   onSettingsClick,
   onChartsClick,
   onHowItWorksClick,
+  onRestartClick,
 }) => {
   return (
     <div className="px-4 py-4 flex items-center justify-between">
@@ -79,6 +82,30 @@ export const PolicyHeader: React.FC<PolicyHeaderProps> = ({
           >
             <span className="text-lg">⚙️</span>
             <span className="hidden sm:inline">Settings</span>
+          </button>
+        )}
+
+        {/* Restart */}
+        {onRestartClick && (
+          <button
+            onClick={onRestartClick}
+            className="px-3 py-2 text-sm font-rajdhani font-semibold text-accent-cyan hover:text-white hover:bg-accent-cyan/10 rounded-lg transition-colors flex items-center gap-1 border border-accent-cyan/30 hover:border-accent-cyan"
+            aria-label="Restart Simulation"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              />
+            </svg>
+            <span className="hidden sm:inline">Restart</span>
           </button>
         )}
       </div>

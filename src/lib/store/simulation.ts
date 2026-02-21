@@ -48,6 +48,7 @@ const EWS_ELIGIBLE_TIERS = new Set<ClassTier>(['upper', 'noble']);
 const UI_CLOSED_STATE = {
   settingsOpen: false,
   chartsOpen: false,
+  howItWorksOpen: false,
 } as const;
 
 /**
@@ -387,6 +388,20 @@ export const useSimulationStore = create<SimulationStore>()(
        */
       closeChartsPanel: () => {
         set({ chartsOpen: false });
+      },
+
+      /**
+       * Open How It Works overlay.
+       */
+      openHowItWorks: () => {
+        set({ howItWorksOpen: true, settingsOpen: false, chartsOpen: false });
+      },
+
+      /**
+       * Close How It Works overlay.
+       */
+      closeHowItWorks: () => {
+        set({ howItWorksOpen: false });
       },
 
       // =========================================================================

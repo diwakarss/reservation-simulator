@@ -39,6 +39,10 @@ interface PolicyLayoutProps {
   showCharts?: boolean;
   /** Charts handler */
   onCharts?: () => void;
+  /** Whether to show Restart button */
+  showRestart?: boolean;
+  /** Restart handler */
+  onRestart?: () => void;
   /** Disable primary action */
   primaryDisabled?: boolean;
   /** Additional CSS classes */
@@ -58,11 +62,19 @@ export function PolicyLayout({
   onSettings,
   showCharts = true,
   onCharts,
+  showRestart = true,
+  onRestart,
   primaryDisabled = false,
   className = '',
 }: PolicyLayoutProps) {
   const openSettingsDrawer = useSimulationStore((state) => state.openSettingsDrawer);
+  const reset = useSimulationStore((state) => state.reset);
+  const initializeWorld = useSimulationStore((state) => state.initializeWorld);
   const settingsHandler = onSettings ?? openSettingsDrawer;
+  const restartHandler = onRestart ?? (() => {
+    reset();
+    initializeWorld();
+  });
 
   return (
     <div
@@ -162,6 +174,35 @@ export function PolicyLayout({
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+            </button>
+          )}
+
+          {showRestart && restartHandler && (
+            <button
+              onClick={restartHandler}
+              className="
+                p-2 rounded-full min-h-[44px] min-w-[44px]
+                flex items-center justify-center
+                text-accent-cyan hover:text-white active:text-white
+                hover:bg-accent-cyan/10 active:bg-accent-cyan/10
+                border border-accent-cyan/30 hover:border-accent-cyan
+                transition-colors duration-200
+              "
+              aria-label="Restart simulation"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
                 />
               </svg>
             </button>

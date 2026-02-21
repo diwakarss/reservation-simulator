@@ -50,11 +50,14 @@ export function TimelineScrubber({
   }, []);
 
   // Calculate tick positions
-  const tickCount = Math.min(5, Math.floor((maxYear - minYear) / 20) + 1);
-  const tickInterval = Math.ceil((maxYear - minYear) / (tickCount - 1));
-  const ticks = Array.from({ length: tickCount }, (_, i) =>
-    Math.min(minYear + i * tickInterval, maxYear)
-  );
+  const range = maxYear - minYear;
+  const tickCount = range > 0 ? Math.min(5, Math.floor(range / 20) + 1) : 1;
+  const tickInterval = tickCount > 1 ? Math.ceil(range / (tickCount - 1)) : 0;
+  const ticks = tickCount === 1
+    ? [minYear]
+    : Array.from({ length: tickCount }, (_, i) =>
+        Math.min(minYear + i * tickInterval, maxYear)
+      );
 
   return (
     <div className={`w-full ${className}`}>

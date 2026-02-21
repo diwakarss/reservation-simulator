@@ -353,6 +353,8 @@ export interface SimulationState {
   settingsOpen: boolean;
   /** Whether charts panel is open */
   chartsOpen: boolean;
+  /** Whether How It Works overlay is open */
+  howItWorksOpen: boolean;
 }
 
 // =============================================================================
@@ -392,6 +394,8 @@ export interface SimulationActions {
   closeSettingsDrawer: () => void;
   openChartsPanel: () => void;
   closeChartsPanel: () => void;
+  openHowItWorks: () => void;
+  closeHowItWorks: () => void;
 
   // URL sync
   hydrateFromURL: (params: URLSearchParams) => void;

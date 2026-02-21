@@ -46,8 +46,8 @@ import { SettingsDrawer } from '@/components/simulation';
 // End summary component
 import { EndSummary } from '@/components/simulation/EndSummary';
 
-// Error boundary
-import { ErrorBoundary } from '@/components/ui';
+// Error boundary and overlays
+import { ErrorBoundary, HowItWorksOverlay } from '@/components/ui';
 
 // Lazy load ChartsPanel (heavy recharts dependency)
 const ChartsPanel = dynamic(
@@ -104,6 +104,7 @@ function useStoreActions() {
     setPhase: useSimulationStore((state) => state.setPhase),
     openSettingsDrawer: useSimulationStore((state) => state.openSettingsDrawer),
     openChartsPanel: useSimulationStore((state) => state.openChartsPanel),
+    openHowItWorks: useSimulationStore((state) => state.openHowItWorks),
   };
 }
 
@@ -112,7 +113,7 @@ function useStoreActions() {
  * Manages store subscriptions and transitions to PolicyMiddle phase
  */
 function PolicyBottom2Connected() {
-  const { world, policy, setClassPolicy, advanceTime, setPhase, openSettingsDrawer, openChartsPanel } =
+  const { world, policy, setClassPolicy, advanceTime, setPhase, openSettingsDrawer, openChartsPanel, openHowItWorks } =
     useStoreActions();
 
   if (!world) return null;
@@ -138,7 +139,7 @@ function PolicyBottom2Connected() {
       onCommonPolicyChange={(value) => setClassPolicy('common', { reservationPercent: value })}
       onAdvance={handleAdvance}
       onSkip={handleSkip}
-      onHowItWorks={() => {}} // HowItWorksOverlay to be implemented in future phase
+      onHowItWorks={openHowItWorks}
       onSettings={openSettingsDrawer}
       onCharts={openChartsPanel}
     />
@@ -151,7 +152,7 @@ function PolicyBottom2Connected() {
  * Transitions to PolicyCreamyLayer phase
  */
 function PolicyMiddleConnected() {
-  const { world, policy, history, setClassPolicy, advanceTime, setPhase, openSettingsDrawer, openChartsPanel } =
+  const { world, policy, history, setClassPolicy, advanceTime, setPhase, openSettingsDrawer, openChartsPanel, openHowItWorks } =
     useStoreActions();
 
   // Require history to have at least 2 entries (year 0 and year 20)
@@ -172,7 +173,7 @@ function PolicyMiddleConnected() {
       middlePolicy={policy.classes.middle}
       onMiddlePolicyChange={(value) => setClassPolicy('middle', { reservationPercent: value })}
       onAdvance={handleAdvance}
-      onHowItWorks={() => {}} // HowItWorksOverlay to be implemented in future phase
+      onHowItWorks={openHowItWorks}
       onSettings={openSettingsDrawer}
       onCharts={openChartsPanel}
     />
@@ -185,7 +186,7 @@ function PolicyMiddleConnected() {
  * Transitions to PolicyEWS phase
  */
 function PolicyCreamyLayerConnected() {
-  const { world, policy, history, setCreamyLayer, advanceTime, setPhase, openSettingsDrawer, openChartsPanel } =
+  const { world, policy, history, setCreamyLayer, advanceTime, setPhase, openSettingsDrawer, openChartsPanel, openHowItWorks } =
     useStoreActions();
 
   if (!world || history.length < 2) return null;
@@ -214,7 +215,7 @@ function PolicyCreamyLayerConnected() {
       onCreamyLayerThresholdChange={(tier, threshold) => setCreamyLayer(tier, policy.classes[tier].creamyLayerEnabled, threshold)}
       onAdvance={handleAdvance}
       onReject={handleReject}
-      onHowItWorks={() => {}} // HowItWorksOverlay to be implemented in future phase
+      onHowItWorks={openHowItWorks}
       onSettings={openSettingsDrawer}
       onCharts={openChartsPanel}
     />
@@ -227,7 +228,7 @@ function PolicyCreamyLayerConnected() {
  * Transitions to PolicyRemoval phase
  */
 function PolicyEWSConnected() {
-  const { world, policy, history, setEWSPolicy, advanceTime, setPhase, openSettingsDrawer, openChartsPanel } =
+  const { world, policy, history, setEWSPolicy, advanceTime, setPhase, openSettingsDrawer, openChartsPanel, openHowItWorks } =
     useStoreActions();
 
   if (!world || history.length < 2) return null;
@@ -256,7 +257,7 @@ function PolicyEWSConnected() {
       onEWSPercentChange={(tier, percent) => setEWSPolicy(tier, policy.classes[tier].ewsEnabled, policy.classes[tier].ewsThreshold, percent)}
       onAdvance={handleAdvance}
       onReject={handleReject}
-      onHowItWorks={() => {}} // HowItWorksOverlay to be implemented in future phase
+      onHowItWorks={openHowItWorks}
       onSettings={openSettingsDrawer}
       onCharts={openChartsPanel}
     />
@@ -270,7 +271,7 @@ function PolicyEWSConnected() {
  * Transitions to END_SUMMARY phase
  */
 function PolicyRemovalConnected() {
-  const { world, history, clearAllReservations, advanceTime, setPhase, openSettingsDrawer, openChartsPanel } =
+  const { world, history, clearAllReservations, advanceTime, setPhase, openSettingsDrawer, openChartsPanel, openHowItWorks } =
     useStoreActions();
 
   if (!world || history.length < 2) return null;
@@ -300,7 +301,7 @@ function PolicyRemovalConnected() {
       onRemoveAll={handleRemoveAll}
       onContinue={handleContinue}
       onAdjust={handleAdjust}
-      onHowItWorks={() => {}} // HowItWorksOverlay to be implemented in future phase
+      onHowItWorks={openHowItWorks}
       onSettings={openSettingsDrawer}
       onCharts={openChartsPanel}
     />
@@ -312,8 +313,10 @@ export default function SimulatePage() {
   const world = useSimulationStore((state) => state.world);
   const settingsOpen = useSimulationStore((state) => state.settingsOpen);
   const chartsOpen = useSimulationStore((state) => state.chartsOpen);
+  const howItWorksOpen = useSimulationStore((state) => state.howItWorksOpen);
   const setPhase = useSimulationStore((state) => state.setPhase);
   const closeChartsPanel = useSimulationStore((state) => state.closeChartsPanel);
+  const closeHowItWorks = useSimulationStore((state) => state.closeHowItWorks);
 
   const [isInitialized, setIsInitialized] = useState(false);
   const [showWorldGenSpinner, setShowWorldGenSpinner] = useState(false);
@@ -485,6 +488,9 @@ export default function SimulatePage() {
 
         {/* Settings Drawer Overlay */}
         {settingsOpen && <SettingsDrawer />}
+
+        {/* How It Works Overlay */}
+        <HowItWorksOverlay isOpen={howItWorksOpen} onClose={closeHowItWorks} />
 
         {/* Charts Panel Overlay - Lazy loaded */}
         <AnimatePresence>
