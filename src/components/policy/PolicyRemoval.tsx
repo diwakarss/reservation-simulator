@@ -70,6 +70,26 @@ export function PolicyRemoval({
   // Check if any reservations exist
   const hasReservations = totalReservation > 0;
 
+  // Calculate education gains for context-aware title
+  const lowerEduGain = lowerClass.metrics.education - year0Lower.metrics.education;
+  const lowerPovReduction = year0Lower.metrics.poverty - lowerClass.metrics.poverty;
+
+  // Generate context-aware title based on outcomes
+  const getTitle = () => {
+    if (hasReservations && lowerEduGain > 40 && lowerPovReduction > 30) {
+      return 'Mission Accomplished?';
+    } else if (hasReservations && lowerEduGain > 25) {
+      return 'The Reckoning';
+    } else if (hasReservations && incomeGap > 10) {
+      return 'Unfinished Business';
+    } else if (!hasReservations && lowerEduGain < 10) {
+      return 'A Cry for Change';
+    } else if (!hasReservations) {
+      return 'Eight Decades Later';
+    }
+    return 'The Final Choice';
+  };
+
   // Generate context-aware story continuation
   const getStorySummary = () => {
     if (totalReservation > 30) {
@@ -115,7 +135,7 @@ export function PolicyRemoval({
     >
       {/* Title */}
       <h2 className="font-orbitron text-3xl sm:text-4xl font-bold text-white text-center mb-2">
-        80 Years of Progress
+        Year 80: {getTitle()}
       </h2>
       <p className="text-center text-lg text-white/70 mb-6 max-w-lg mx-auto">
         {getStorySummary()}

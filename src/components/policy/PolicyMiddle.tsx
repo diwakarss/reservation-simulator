@@ -59,8 +59,28 @@ export function PolicyMiddle({
     return null;
   }
 
-  // Generate context-aware subtitle based on reservation policies
+  // Generate context-aware title and subtitle based on reservation policies and outcomes
   const hasReservation = lowerReservation > 0 || commonReservation > 0;
+
+  // Calculate education gains for lower classes
+  const lowerEduGain = lowerClass.metrics.education - prevLower.metrics.education;
+  const commonEduGain = commonClass.metrics.education - prevCommon.metrics.education;
+  const totalEduGain = lowerEduGain + commonEduGain;
+
+  // Generate title based on context
+  const getTitle = () => {
+    if (hasReservation && totalEduGain > 10) {
+      return 'Policy is Working';
+    } else if (hasReservation && totalEduGain > 0) {
+      return 'Slow but Steady';
+    } else if (hasReservation) {
+      return 'Mixed Results';
+    } else if (totalEduGain > 5) {
+      return 'Natural Growth';
+    }
+    return 'Status Quo Continues';
+  };
+
   const progressSubtitle = hasReservation
     ? `Reservation policies have shaped the last 20 years`
     : `The economy evolved naturally without reservation policies`;
@@ -79,7 +99,7 @@ export function PolicyMiddle({
     >
       {/* Title */}
       <h2 className="font-orbitron text-3xl sm:text-4xl font-bold text-white text-center mb-2">
-        20 Years of Progress
+        Year 20: {getTitle()}
       </h2>
       <p className="text-center text-lg text-white/70 mb-6">
         {progressSubtitle}

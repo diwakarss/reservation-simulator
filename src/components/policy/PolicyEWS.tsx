@@ -75,6 +75,26 @@ export function PolicyEWS({
   // Check if reservations exist - determines which variant to show
   const hasReservations = totalReservation > 0;
 
+  // Calculate education gains for context-aware title
+  const lowerEduGain = lowerClass.metrics.education - year0Lower.metrics.education;
+  const lowerPovReduction = year0Lower.metrics.poverty - lowerClass.metrics.poverty;
+
+  // Generate context-aware title based on outcomes
+  const getTitle = () => {
+    if (hasReservations && lowerEduGain > 30 && lowerPovReduction > 20) {
+      return 'New Voices Emerge';
+    } else if (hasReservations && incomeGap > 15) {
+      return 'The Gap Persists';
+    } else if (hasReservations && lowerEduGain > 15) {
+      return 'Progress & Pushback';
+    } else if (!hasReservations && incomeGap > 20) {
+      return 'Widening Divide';
+    } else if (!hasReservations) {
+      return 'Six Decades On';
+    }
+    return 'A Turning Point';
+  };
+
   // Generate context-aware story continuation
   const getStorySummary = () => {
     if (totalReservation > 30) {
@@ -119,7 +139,7 @@ export function PolicyEWS({
     >
       {/* Title */}
       <h2 className="font-orbitron text-3xl sm:text-4xl font-bold text-white text-center mb-2">
-        60 Years of Progress
+        Year 60: {getTitle()}
       </h2>
       <p className="text-center text-lg text-white/70 mb-6 max-w-lg mx-auto">
         {getStorySummary()}

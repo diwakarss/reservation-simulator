@@ -80,6 +80,26 @@ export function PolicyCreamyLayer({
         { tier: 'middle' as ClassTier, class: middleClass, prev: prevMiddle },
       ];
 
+  // Calculate education and poverty changes for context-aware title
+  const lowerEduGain = lowerClass.metrics.education - prevLower.metrics.education;
+  const lowerPovReduction = prevLower.metrics.poverty - lowerClass.metrics.poverty;
+
+  // Generate context-aware title based on outcomes
+  const getTitle = () => {
+    if (hasReservations && lowerEduGain > 20 && lowerPovReduction > 10) {
+      return 'Transformation Underway';
+    } else if (hasReservations && lowerEduGain > 10) {
+      return 'Rising Tides';
+    } else if (hasReservations && lowerEduGain > 0) {
+      return 'A Debate Emerges';
+    } else if (!hasReservations && lowerEduGain > 10) {
+      return 'Organic Growth';
+    } else if (!hasReservations) {
+      return 'Inequality Persists';
+    }
+    return 'Mixed Outcomes';
+  };
+
   // Generate context-aware story continuation
   const getStorySummary = () => {
     if (totalReservation > 30) {
@@ -110,7 +130,7 @@ export function PolicyCreamyLayer({
     >
       {/* Title */}
       <h2 className="font-orbitron text-3xl sm:text-4xl font-bold text-white text-center mb-2">
-        40 Years of Progress
+        Year 40: {getTitle()}
       </h2>
       <p className="text-center text-lg text-white/70 mb-6 max-w-lg mx-auto">
         {getStorySummary()}
