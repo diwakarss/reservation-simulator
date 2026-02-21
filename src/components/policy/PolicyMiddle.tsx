@@ -19,6 +19,10 @@ interface PolicyMiddleProps {
   previousSnapshot: YearSnapshot;
   /** Current policy for middle class */
   middlePolicy: ClassPolicy;
+  /** Lower class reservation percent (from previous step) */
+  lowerReservation: number;
+  /** Common class reservation percent (from previous step) */
+  commonReservation: number;
   /** Called when middle class policy changes */
   onMiddlePolicyChange: (value: number) => void;
   /** Called when user advances to next year */
@@ -35,6 +39,8 @@ export function PolicyMiddle({
   classes,
   previousSnapshot,
   middlePolicy,
+  lowerReservation,
+  commonReservation,
   onMiddlePolicyChange,
   onAdvance,
   onHowItWorks,
@@ -53,6 +59,12 @@ export function PolicyMiddle({
     return null;
   }
 
+  // Generate context-aware subtitle based on reservation policies
+  const hasReservation = lowerReservation > 0 || commonReservation > 0;
+  const progressSubtitle = hasReservation
+    ? `Reservation policies have shaped the last 20 years`
+    : `The economy evolved naturally without reservation policies`;
+
   return (
     <PolicyLayout
       year={20}
@@ -66,17 +78,15 @@ export function PolicyMiddle({
       onCharts={onCharts}
     >
       {/* Title */}
-      <h2 className="font-orbitron text-2xl sm:text-3xl font-bold text-white text-center mb-6">
+      <h2 className="font-orbitron text-2xl sm:text-3xl font-bold text-white text-center mb-2">
         20 Years of Progress
       </h2>
+      <p className="text-center text-muted-text mb-6">
+        {progressSubtitle}
+      </p>
 
       {/* Progress section */}
       <div className="mb-8">
-        <h3 className="font-rajdhani text-lg font-semibold text-accent-gold mb-4 flex items-center gap-2">
-          <span className="text-xl">📊</span>
-          Due to reservation policies:
-        </h3>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <ProgressCard
             tier="lower"
@@ -94,13 +104,13 @@ export function PolicyMiddle({
       </div>
 
       {/* Middle class struggle */}
-      <ExplanationBox title="But the Middle Class is Struggling" className="mb-8">
-        <p className="mb-2">
+      <ExplanationBox title="But the Middle Class is Struggling" titleClassName="text-lg sm:text-xl" className="mb-8">
+        <p className="mb-3 text-base">
           <strong>{middleClass.displayName}</strong> has seen minimal improvement:
         </p>
-        <ul className="list-disc list-inside space-y-1 text-sm">
-          <li>Education: {prevMiddle.metrics.education}% → {middleClass.metrics.education}% (minimal gain)</li>
-          <li>Poverty: {prevMiddle.metrics.poverty}% → {middleClass.metrics.poverty}% (stagnant)</li>
+        <ul className="list-disc list-inside space-y-2 text-base">
+          <li>Education: {prevMiddle.metrics.education.toFixed(1)}% → {middleClass.metrics.education.toFixed(1)}% (minimal gain)</li>
+          <li>Poverty: {prevMiddle.metrics.poverty.toFixed(1)}% → {middleClass.metrics.poverty.toFixed(1)}% (stagnant)</li>
           <li>They receive no reservation benefits</li>
         </ul>
       </ExplanationBox>

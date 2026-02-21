@@ -3,17 +3,19 @@ import { motion } from 'framer-motion';
 
 interface ExplanationBoxProps {
   title?: string;
+  titleClassName?: string;
   children: React.ReactNode;
   className?: string;
 }
 
-export const ExplanationBox: React.FC<ExplanationBoxProps> = ({ 
-  title = "Policy Insight", 
-  children, 
-  className = "" 
+export const ExplanationBox: React.FC<ExplanationBoxProps> = ({
+  title = "Policy Insight",
+  titleClassName = "text-sm",
+  children,
+  className = ""
 }) => {
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       className={`bg-white/5 border border-white/10 rounded-lg p-4 ${className}`}
@@ -25,10 +27,10 @@ export const ExplanationBox: React.FC<ExplanationBoxProps> = ({
           </span>
         </div>
         <div>
-          <h4 className="text-sm font-semibold text-blue-300 mb-1 font-orbitron tracking-wide">
+          <h4 className={`font-semibold text-blue-300 mb-1 font-orbitron tracking-wide ${titleClassName}`}>
             {title}
           </h4>
-          <div className="text-sm text-gray-300 leading-relaxed">
+          <div className="text-gray-300 leading-relaxed">
             {children}
           </div>
         </div>

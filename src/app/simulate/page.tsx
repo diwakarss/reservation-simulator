@@ -186,6 +186,8 @@ function PolicyMiddleConnected({ onTriggerTimeMachine }: { onTriggerTimeMachine:
       classes={currentSnapshot.classes}
       previousSnapshot={previousSnapshot}
       middlePolicy={policy.classes.middle}
+      lowerReservation={policy.classes.lower.reservationPercent}
+      commonReservation={policy.classes.common.reservationPercent}
       onMiddlePolicyChange={(value) => setClassPolicy('middle', { reservationPercent: value })}
       onAdvance={handleAdvance}
       onHowItWorks={openHowItWorks}

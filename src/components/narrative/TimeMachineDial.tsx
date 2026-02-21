@@ -188,10 +188,10 @@ export function TimeMachineDial({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <p className="font-rajdhani text-lg text-muted-text">
+          <p className="font-rajdhani text-2xl sm:text-3xl text-white font-semibold">
             {isComplete ? 'Time travel complete' : 'Traveling through time...'}
           </p>
-          <p className="font-grotesk text-sm text-accent-cyan/80 mt-2">
+          <p className="font-grotesk text-lg sm:text-xl text-accent-cyan mt-3">
             Year {startYear} → Year {endYear}
           </p>
         </motion.div>

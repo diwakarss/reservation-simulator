@@ -55,9 +55,9 @@ describe('ProgressCard', () => {
 
   it('shows previous and current values', () => {
     render(<ProgressCard {...defaultProps} />);
-    // Education: 3% -> 12%
-    expect(screen.getByText('3%')).toBeInTheDocument();
-    expect(screen.getByText('12%')).toBeInTheDocument();
+    // Education: 3.0% -> 12.0% (single decimal)
+    expect(screen.getByText('3.0%')).toBeInTheDocument();
+    expect(screen.getByText('12.0%')).toBeInTheDocument();
   });
 
   it('shows positive change for education increase', () => {

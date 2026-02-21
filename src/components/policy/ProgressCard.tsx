@@ -33,7 +33,7 @@ function formatValue(value: number, metric: MetricKey): string {
   if (metric === 'incomePerCapita') {
     return value.toLocaleString();
   }
-  return value.toFixed(0);
+  return value.toFixed(1);
 }
 
 /**
@@ -47,7 +47,7 @@ function getChangeInfo(
   const diff = curr - prev;
   const isPositive = higherIsBetter ? diff > 0 : diff < 0;
   const arrow = diff > 0 ? '\u2191' : diff < 0 ? '\u2193' : '';
-  const text = `${arrow} ${Math.abs(diff).toFixed(0)}`;
+  const text = `${arrow} ${Math.abs(diff).toFixed(1)}`;
   return { text, isPositive };
 }
 
