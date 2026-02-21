@@ -16,7 +16,7 @@ interface PolicyMiddleProps {
   /** Social classes data */
   classes: SocialClass[];
   /** Previous snapshot (Year 0) */
-  previousSnapshot: YearSnapshot;
+  year0Snapshot: YearSnapshot;
   /** Current policy for middle class */
   middlePolicy: ClassPolicy;
   /** Lower class reservation percent (from previous step) */
@@ -37,7 +37,7 @@ interface PolicyMiddleProps {
 
 export function PolicyMiddle({
   classes,
-  previousSnapshot,
+  year0Snapshot,
   middlePolicy,
   lowerReservation,
   commonReservation,
@@ -51,9 +51,9 @@ export function PolicyMiddle({
   const commonClass = classes.find((c) => c.tier === 'common');
   const middleClass = classes.find((c) => c.tier === 'middle');
 
-  const prevLower = previousSnapshot.classes.find((c) => c.tier === 'lower');
-  const prevCommon = previousSnapshot.classes.find((c) => c.tier === 'common');
-  const prevMiddle = previousSnapshot.classes.find((c) => c.tier === 'middle');
+  const prevLower = year0Snapshot.classes.find((c) => c.tier === 'lower');
+  const prevCommon = year0Snapshot.classes.find((c) => c.tier === 'common');
+  const prevMiddle = year0Snapshot.classes.find((c) => c.tier === 'middle');
 
   if (!lowerClass || !commonClass || !middleClass || !prevLower || !prevCommon || !prevMiddle) {
     return null;
@@ -78,10 +78,10 @@ export function PolicyMiddle({
       onCharts={onCharts}
     >
       {/* Title */}
-      <h2 className="font-orbitron text-2xl sm:text-3xl font-bold text-white text-center mb-2">
+      <h2 className="font-orbitron text-3xl sm:text-4xl font-bold text-white text-center mb-2">
         20 Years of Progress
       </h2>
-      <p className="text-center text-muted-text mb-6">
+      <p className="text-center text-lg text-white/70 mb-6">
         {progressSubtitle}
       </p>
 
@@ -93,12 +93,14 @@ export function PolicyMiddle({
             displayName={lowerClass.displayName}
             previousMetrics={prevLower.metrics}
             currentMetrics={lowerClass.metrics}
+            reservationPercent={lowerReservation}
           />
           <ProgressCard
             tier="common"
             displayName={commonClass.displayName}
             previousMetrics={prevCommon.metrics}
             currentMetrics={commonClass.metrics}
+            reservationPercent={commonReservation}
           />
         </div>
       </div>
@@ -116,7 +118,7 @@ export function PolicyMiddle({
       </ExplanationBox>
 
       {/* Question */}
-      <p className="text-center text-lg text-muted-text mb-6">
+      <p className="text-center text-xl text-white/80 mb-6">
         Do you want to extend reservation to the Middle class?
       </p>
 

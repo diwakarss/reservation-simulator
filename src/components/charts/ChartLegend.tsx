@@ -26,7 +26,7 @@ export function ChartLegend({
   return (
     <div
       className={`
-        mt-4 flex gap-4 text-xs
+        mt-4 flex gap-4 text-sm
         ${vertical ? 'flex-col items-start' : 'flex-wrap justify-center'}
         ${className}
       `}
@@ -34,10 +34,10 @@ export function ChartLegend({
       {CLASS_TIER_ORDER.map((tier) => (
         <div key={tier} className="flex items-center gap-2">
           <div
-            className="h-3 w-3 rounded-full"
+            className="h-4 w-4 rounded-full"
             style={{ backgroundColor: CLASS_COLORS[tier] }}
           />
-          <span className="font-rajdhani text-muted-text">
+          <span className="font-rajdhani text-white/70">
             {classNames[tier]}
           </span>
         </div>

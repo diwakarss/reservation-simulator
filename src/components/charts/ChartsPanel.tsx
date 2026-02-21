@@ -19,7 +19,9 @@ import { PovertyChart } from './PovertyChart';
 import { WealthPieChart } from './WealthPieChart';
 import { IncomeDistributionChart } from './IncomeDistributionChart';
 import { LifeExpectancyChart } from './LifeExpectancyChart';
-import { PopulationChart } from './PopulationChart';
+import { IncomeGapChart } from './IncomeGapChart';
+import { GiniChart } from './GiniChart';
+import { ClassMobilityChart } from './ClassMobilityChart';
 import { TimelineScrubber } from './TimelineScrubber';
 import { Button } from '@/components/ui';
 
@@ -35,7 +37,9 @@ type ChartTab =
   | 'wealth'
   | 'income'
   | 'lifeExpectancy'
-  | 'population';
+  | 'incomeGap'
+  | 'gini'
+  | 'mobility';
 
 interface ChartTabConfig {
   id: ChartTab;
@@ -49,7 +53,9 @@ const CHART_TABS: ChartTabConfig[] = [
   { id: 'wealth', label: 'Wealth' },
   { id: 'income', label: 'Income' },
   { id: 'lifeExpectancy', label: 'Life Exp.' },
-  { id: 'population', label: 'Population' },
+  { id: 'incomeGap', label: 'Income Gap' },
+  { id: 'gini', label: 'Gini Index' },
+  { id: 'mobility', label: 'Mobility' },
 ];
 
 export function ChartsPanel({ onClose }: ChartsPanelProps) {
@@ -87,31 +93,86 @@ export function ChartsPanel({ onClose }: ChartsPanelProps) {
     const employment: ChartDataPoint[] = [];
     const poverty: ChartDataPoint[] = [];
     const lifeExpectancy: ChartDataPoint[] = [];
-    const population: ChartDataPoint[] = [];
+    const incomeGap: Array<{ year: number; gap: number }> = [];
+    const gini: Array<{ year: number; gini: number }> = [];
+    const mobility: Array<{
+      year: number;
+      lowerEdu: number;
+      commonEdu: number;
+      middleEdu: number;
+      mobilityIndex: number;
+    }> = [];
+
+    // Get year 0 baseline for mobility index calculation
+    const year0 = history.length > 0 ? history[0] : null;
+    const year0Lower = year0?.classes.find(c => c.tier === 'lower');
+    const year0Common = year0?.classes.find(c => c.tier === 'common');
+    const year0Middle = year0?.classes.find(c => c.tier === 'middle');
 
     for (const snapshot of history) {
       const eduPoint: ChartDataPoint = { year: snapshot.year };
       const empPoint: ChartDataPoint = { year: snapshot.year };
       const povPoint: ChartDataPoint = { year: snapshot.year };
       const lePoint: ChartDataPoint = { year: snapshot.year };
-      const popPoint: ChartDataPoint = { year: snapshot.year };
+
+      const upperClass = snapshot.classes.find(c => c.tier === 'upper');
+      const lowerClass = snapshot.classes.find(c => c.tier === 'lower');
+      const commonClass = snapshot.classes.find(c => c.tier === 'common');
+      const middleClass = snapshot.classes.find(c => c.tier === 'middle');
 
       for (const cls of snapshot.classes) {
         eduPoint[cls.tier] = cls.metrics.education;
         empPoint[cls.tier] = cls.metrics.employment;
         povPoint[cls.tier] = cls.metrics.poverty;
         lePoint[cls.tier] = cls.metrics.lifeExpectancy;
-        popPoint[cls.tier] = cls.population;
       }
 
       education.push(eduPoint);
       employment.push(empPoint);
       poverty.push(povPoint);
       lifeExpectancy.push(lePoint);
-      population.push(popPoint);
+
+      // Income Gap (upper/lower ratio)
+      if (upperClass && lowerClass && lowerClass.metrics.incomePerCapita > 0) {
+        incomeGap.push({
+          year: snapshot.year,
+          gap: upperClass.metrics.incomePerCapita / lowerClass.metrics.incomePerCapita,
+        });
+      }
+
+      // Gini coefficient from aggregates
+      gini.push({
+        year: snapshot.year,
+        gini: snapshot.aggregates.wealthGini,
+      });
+
+      // Class Mobility Index
+      // Composite score: education improvement + poverty reduction + income convergence
+      if (lowerClass && commonClass && middleClass && year0Lower && year0Common && year0Middle) {
+        const lowerEduGain = lowerClass.metrics.education - year0Lower.metrics.education;
+        const commonEduGain = commonClass.metrics.education - year0Common.metrics.education;
+        const middleEduGain = middleClass.metrics.education - year0Middle.metrics.education;
+        const lowerPovReduction = year0Lower.metrics.poverty - lowerClass.metrics.poverty;
+
+        // Mobility index: weighted composite (0-100 scale)
+        const mobilityIndex = Math.max(0, Math.min(100,
+          (lowerEduGain * 0.4) + // Education gains weighted heavily
+          (commonEduGain * 0.2) +
+          (middleEduGain * 0.1) +
+          (lowerPovReduction * 0.3) // Poverty reduction
+        ));
+
+        mobility.push({
+          year: snapshot.year,
+          lowerEdu: lowerClass.metrics.education,
+          commonEdu: commonClass.metrics.education,
+          middleEdu: middleClass.metrics.education,
+          mobilityIndex,
+        });
+      }
     }
 
-    return { education, employment, poverty, lifeExpectancy, population };
+    return { education, employment, poverty, lifeExpectancy, incomeGap, gini, mobility };
   }, [history]);
 
   // Get snapshot for selected year
@@ -171,9 +232,17 @@ export function ChartsPanel({ onClose }: ChartsPanelProps) {
             classNames={classNames}
           />
         );
-      case 'population':
+      case 'incomeGap':
         return (
-          <PopulationChart data={chartData.population} classNames={classNames} />
+          <IncomeGapChart data={chartData.incomeGap} />
+        );
+      case 'gini':
+        return (
+          <GiniChart data={chartData.gini} />
+        );
+      case 'mobility':
+        return (
+          <ClassMobilityChart data={chartData.mobility} />
         );
       default:
         return null;
@@ -204,10 +273,23 @@ export function ChartsPanel({ onClose }: ChartsPanelProps) {
           <span className="font-grotesk">Back to Simulation</span>
         </button>
 
-        <span className="font-grotesk text-sm text-muted-text">
+        <span className="font-grotesk text-base text-white/70">
           Year {minYear} - {maxYear}
         </span>
       </header>
+
+      {/* Timeline Scrubber - Top of page for both mobile and desktop */}
+      <div className="flex-shrink-0 border-b border-white/10 glass-panel px-4 py-3">
+        <div className="max-w-2xl mx-auto">
+          <TimelineScrubber
+            minYear={minYear}
+            maxYear={maxYear}
+            currentYear={selectedYear}
+            onYearChange={setSelectedYear}
+            step={history.length > 1 ? history[1].year - history[0].year : 1}
+          />
+        </div>
+      </div>
 
       {/* Chart Selection Dropdown (Mobile) */}
       <div className="flex-shrink-0 border-b border-white/10 glass-panel px-4 py-3 md:hidden">
@@ -248,7 +330,7 @@ export function ChartsPanel({ onClose }: ChartsPanelProps) {
       <main className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
         {/* Desktop Grid Layout */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {/* Chart wrapper component */}
+          {/* Row 1: Core metrics */}
           <div className="glass-card p-5">
             <EducationChart
               data={chartData.education}
@@ -270,6 +352,7 @@ export function ChartsPanel({ onClose }: ChartsPanelProps) {
               height={250}
             />
           </div>
+          {/* Row 2: Wealth and income */}
           <div className="glass-card p-5">
             <WealthPieChart data={wealthPieData} year={selectedYear} height={250} />
           </div>
@@ -287,11 +370,23 @@ export function ChartsPanel({ onClose }: ChartsPanelProps) {
               height={250}
             />
           </div>
-          <div className="glass-card p-5 lg:col-span-3">
-            <PopulationChart
-              data={chartData.population}
-              classNames={classNames}
-              height={200}
+          {/* Row 3: Inequality metrics */}
+          <div className="glass-card p-5">
+            <IncomeGapChart
+              data={chartData.incomeGap}
+              height={220}
+            />
+          </div>
+          <div className="glass-card p-5">
+            <GiniChart
+              data={chartData.gini}
+              height={220}
+            />
+          </div>
+          <div className="glass-card p-5">
+            <ClassMobilityChart
+              data={chartData.mobility}
+              height={220}
             />
           </div>
         </div>
@@ -307,17 +402,6 @@ export function ChartsPanel({ onClose }: ChartsPanelProps) {
           >
             {renderActiveChart()}
           </motion.div>
-        </div>
-
-        {/* Timeline Scrubber */}
-        <div className="mt-6 max-w-xl mx-auto glass-card p-5">
-          <TimelineScrubber
-            minYear={minYear}
-            maxYear={maxYear}
-            currentYear={selectedYear}
-            onYearChange={setSelectedYear}
-            step={history.length > 1 ? history[1].year - history[0].year : 1}
-          />
         </div>
       </main>
 

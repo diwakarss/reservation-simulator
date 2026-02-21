@@ -22,6 +22,8 @@ interface ProgressCardProps {
   currentMetrics: ClassMetrics;
   /** Which metrics to display (defaults to key metrics) */
   metricsToShow?: MetricKey[];
+  /** Current reservation percentage for this class (0-100) */
+  reservationPercent?: number;
   /** Additional CSS classes */
   className?: string;
 }
@@ -59,6 +61,7 @@ export function ProgressCard({
   previousMetrics,
   currentMetrics,
   metricsToShow = DEFAULT_METRICS,
+  reservationPercent,
   className = '',
 }: ProgressCardProps) {
   const color = CLASS_COLORS[tier];
@@ -74,17 +77,24 @@ export function ProgressCard({
       `}
     >
       {/* Header */}
-      <div className="flex items-center gap-2 mb-4 pb-3 border-b border-white/5">
-        <div
-          className="w-3 h-3 rounded-full"
-          style={{ backgroundColor: color }}
-        />
-        <h4
-          className="font-rajdhani font-bold text-base"
-          style={{ color }}
-        >
-          {displayName}
-        </h4>
+      <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/5">
+        <div className="flex items-center gap-2">
+          <div
+            className="w-4 h-4 rounded-full"
+            style={{ backgroundColor: color }}
+          />
+          <h4
+            className="font-rajdhani font-bold text-lg"
+            style={{ color }}
+          >
+            {displayName}
+          </h4>
+        </div>
+        {reservationPercent !== undefined && reservationPercent > 0 && (
+          <span className="text-sm font-semibold px-2 py-1 rounded bg-accent-gold/20 text-accent-gold">
+            {reservationPercent}% Reserved
+          </span>
+        )}
       </div>
 
       {/* Metrics */}
@@ -97,20 +107,20 @@ export function ProgressCard({
 
           return (
             <div key={metric} className="flex items-center justify-between">
-              <span className="text-sm text-muted-text">
+              <span className="text-base text-white/80">
                 {METRIC_LABELS[metric]}
               </span>
               <div className="flex items-center gap-2">
-                <span className="text-sm text-muted-text/60">
+                <span className="text-base text-white/50">
                   {formatValue(prev, metric)}{unit}
                 </span>
-                <span className="text-muted-text/40">→</span>
-                <span className="text-sm font-semibold text-white">
+                <span className="text-white/40">→</span>
+                <span className="text-base font-semibold text-white">
                   {formatValue(curr, metric)}{unit}
                 </span>
                 <span
                   className={`
-                    text-xs font-bold
+                    text-sm font-bold
                     ${change.isPositive ? 'text-class-noble' : 'text-highlight-red'}
                   `}
                 >

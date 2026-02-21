@@ -16,7 +16,7 @@ export const CHART_LABEL_STYLE = {
 
 export const CHART_AXIS_STYLE = {
   stroke: '#a7a7c4',
-  fontSize: 12,
+  fontSize: 14,
   tickLine: false,
   axisLine: { stroke: '#2a2a4a' },
 } as const;

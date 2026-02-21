@@ -169,7 +169,6 @@ function PolicyMiddleConnected({ onTriggerTimeMachine }: { onTriggerTimeMachine:
   // Require history to have at least 2 entries (year 0 and year 20)
   if (!world || history.length < 2) return null;
 
-  const previousSnapshot = history[0];
   const currentSnapshot = getLatestSnapshot(history);
 
   const handleAdvance = () => {
@@ -181,10 +180,12 @@ function PolicyMiddleConnected({ onTriggerTimeMachine }: { onTriggerTimeMachine:
     });
   };
 
+  const year0Snapshot = history[0];
+
   return (
     <PolicyMiddleBase
       classes={currentSnapshot.classes}
-      previousSnapshot={previousSnapshot}
+      year0Snapshot={year0Snapshot}
       middlePolicy={policy.classes.middle}
       lowerReservation={policy.classes.lower.reservationPercent}
       commonReservation={policy.classes.common.reservationPercent}
@@ -200,7 +201,7 @@ function PolicyMiddleConnected({ onTriggerTimeMachine }: { onTriggerTimeMachine:
 /**
  * PolicyCreamyLayerConnected - Container component
  * Manages creamy layer policy state, allows enabling/disabling creamy layer
- * Transitions to PolicyEWS phase
+ * Transitions to PolicyEWS phase (if reservations exist) or PolicyRemoval (if no reservations)
  */
 function PolicyCreamyLayerConnected({ onTriggerTimeMachine }: { onTriggerTimeMachine: (startYear: number, endYear: number, onComplete: () => void) => void }) {
   const { world, policy, history, setCreamyLayer, advanceTime, setPhase, openSettingsDrawer, openChartsPanel, openHowItWorks } =
@@ -210,7 +211,7 @@ function PolicyCreamyLayerConnected({ onTriggerTimeMachine }: { onTriggerTimeMac
   // Need at least 3 snapshots: year 0, year 20, year 40
   if (!world || history.length < 3) return null;
 
-  const previousSnapshot = history[history.length - 2]; // Year 20 snapshot
+  const year0Snapshot = history[0]; // Year 0 snapshot for comparison
   const currentSnapshot = getLatestSnapshot(history);
 
   const handleAdvance = () => {
@@ -238,7 +239,7 @@ function PolicyCreamyLayerConnected({ onTriggerTimeMachine }: { onTriggerTimeMac
   return (
     <PolicyCreamyLayerBase
       classes={currentSnapshot.classes}
-      previousSnapshot={previousSnapshot}
+      year0Snapshot={year0Snapshot}
       policies={policy.classes}
       onCreamyLayerToggle={(tier, enabled) => setCreamyLayer(tier, enabled, policy.classes[tier].creamyLayerThreshold)}
       onCreamyLayerThresholdChange={(tier, threshold) => setCreamyLayer(tier, policy.classes[tier].creamyLayerEnabled, threshold)}
@@ -261,8 +262,10 @@ function PolicyEWSConnected({ onTriggerTimeMachine }: { onTriggerTimeMachine: (s
     useStoreActions();
   const currentYear = useSimulationStore((state) => state.currentYear);
 
-  if (!world || history.length < 2) return null;
+  // Need at least 4 snapshots: year 0, year 20, year 40, year 60
+  if (!world || history.length < 4) return null;
 
+  const year0Snapshot = history[0]; // Year 0 snapshot for comparison
   const currentSnapshot = getLatestSnapshot(history);
 
   const handleAdvance = () => {
@@ -289,6 +292,7 @@ function PolicyEWSConnected({ onTriggerTimeMachine }: { onTriggerTimeMachine: (s
   return (
     <PolicyEWSBase
       classes={currentSnapshot.classes}
+      year0Snapshot={year0Snapshot}
       policies={policy.classes}
       onEWSToggle={(tier, enabled) => setEWSPolicy(tier, enabled, policy.classes[tier].ewsThreshold, policy.classes[tier].ewsPercent)}
       onEWSThresholdChange={(tier, threshold) => setEWSPolicy(tier, policy.classes[tier].ewsEnabled, threshold, policy.classes[tier].ewsPercent)}
@@ -309,11 +313,12 @@ function PolicyEWSConnected({ onTriggerTimeMachine }: { onTriggerTimeMachine: (s
  * Transitions to END_SUMMARY phase
  */
 function PolicyRemovalConnected({ onTriggerTimeMachine }: { onTriggerTimeMachine: (startYear: number, endYear: number, onComplete: () => void) => void }) {
-  const { world, history, clearAllReservations, advanceTime, setPhase, openSettingsDrawer, openChartsPanel, openHowItWorks } =
+  const { world, policy, history, clearAllReservations, advanceTime, setPhase, openSettingsDrawer, openChartsPanel, openHowItWorks } =
     useStoreActions();
   const currentYear = useSimulationStore((state) => state.currentYear);
 
-  if (!world || history.length < 2) return null;
+  // Need at least 5 snapshots: year 0, year 20, year 40, year 60, year 80
+  if (!world || history.length < 5) return null;
 
   const year0Snapshot = history[0];
   const currentSnapshot = getLatestSnapshot(history);
@@ -345,6 +350,7 @@ function PolicyRemovalConnected({ onTriggerTimeMachine }: { onTriggerTimeMachine
     <PolicyRemovalBase
       classes={currentSnapshot.classes}
       year0Snapshot={year0Snapshot}
+      policies={policy.classes}
       onRemoveAll={handleRemoveAll}
       onContinue={handleContinue}
       onAdjust={handleAdjust}

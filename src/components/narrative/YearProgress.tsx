@@ -24,18 +24,18 @@ interface YearProgressProps {
 
 const sizeStyles = {
   sm: {
-    year: 'text-lg',
-    label: 'text-xs',
+    year: 'text-xl',
+    label: 'text-sm',
     bar: 'h-1',
   },
   md: {
-    year: 'text-2xl',
-    label: 'text-sm',
+    year: 'text-3xl',
+    label: 'text-base',
     bar: 'h-1.5',
   },
   lg: {
-    year: 'text-4xl',
-    label: 'text-base',
+    year: 'text-5xl',
+    label: 'text-lg',
     bar: 'h-2',
   },
 };

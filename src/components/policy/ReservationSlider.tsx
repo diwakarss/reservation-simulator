@@ -73,17 +73,17 @@ export function ReservationSlider({
       <div className="flex justify-between items-center mb-3">
         <div className="flex items-center gap-2">
           <div
-            className="w-3 h-3 rounded-full"
+            className="w-4 h-4 rounded-full"
             style={{ backgroundColor: color }}
           />
           <span
-            className="font-rajdhani font-bold text-base"
+            className="font-rajdhani font-bold text-lg"
             style={{ color }}
           >
             {displayName}
           </span>
         </div>
-        <span className="text-xs text-muted-text">
+        <span className="text-sm text-white/60">
           {population}% of population
         </span>
       </div>
@@ -91,9 +91,9 @@ export function ReservationSlider({
       {/* Slider */}
       <div className="mb-3">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm text-muted-text">Reservation %</span>
+          <span className="text-base text-white/70">Reservation %</span>
           <span
-            className="font-orbitron text-lg font-bold"
+            className="font-orbitron text-xl font-bold"
             style={{ color }}
           >
             {value}%
@@ -118,7 +118,7 @@ export function ReservationSlider({
         </div>
 
         {/* Scale markers */}
-        <div className="flex justify-between mt-1 text-xs text-muted-text/50">
+        <div className="flex justify-between mt-1 text-sm text-white/50">
           <span>0%</span>
           <span>25%</span>
           <span>50%</span>
@@ -127,12 +127,12 @@ export function ReservationSlider({
 
       {/* Benefit note */}
       {value > 0 ? (
-        <p className="text-xs text-class-noble flex items-center gap-1">
+        <p className="text-sm text-class-noble flex items-center gap-1">
           <span className="text-base">+</span>
           ~{benefit}% of total population will benefit
         </p>
       ) : (
-        <p className="text-xs text-muted-text/60 flex items-center gap-1">
+        <p className="text-sm text-white/50 flex items-center gap-1">
           <span className="text-base">!</span>
           No reservation for this class
         </p>

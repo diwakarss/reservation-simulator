@@ -45,7 +45,7 @@ export function EmploymentChart({
 
   return (
     <div className="w-full" role="figure" aria-label={chartTitle}>
-      <h3 className="mb-4 font-orbitron text-sm uppercase tracking-wide text-white">
+      <h3 className="mb-4 font-orbitron text-base uppercase tracking-wide text-white">
         {chartTitle}
       </h3>
       <ChartDataTable

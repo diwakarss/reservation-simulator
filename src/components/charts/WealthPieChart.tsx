@@ -42,7 +42,7 @@ export function WealthPieChart({
 
   return (
     <div className="w-full" role="figure" aria-label={chartTitle}>
-      <h3 className="mb-4 font-orbitron text-sm uppercase tracking-wide text-white">
+      <h3 className="mb-4 font-orbitron text-base uppercase tracking-wide text-white">
         {chartTitle}
       </h3>
       <ResponsiveContainer width="100%" height={height}>
@@ -53,12 +53,27 @@ export function WealthPieChart({
             nameKey="displayName"
             cx="50%"
             cy="50%"
-            outerRadius={80}
-            innerRadius={40}
-            paddingAngle={2}
-            label={({ displayName, value }) =>
-              `${displayName.split(' ')[0]}: ${value.toFixed(1)}%`
-            }
+            outerRadius={70}
+            innerRadius={35}
+            paddingAngle={3}
+            label={({ cx, cy, midAngle, outerRadius, value, tier }) => {
+              const RADIAN = Math.PI / 180;
+              const radius = outerRadius + 25;
+              const x = cx + radius * Math.cos(-midAngle * RADIAN);
+              const y = cy + radius * Math.sin(-midAngle * RADIAN);
+              return (
+                <text
+                  x={x}
+                  y={y}
+                  fill={CLASS_COLORS[tier as ClassTier]}
+                  textAnchor={x > cx ? 'start' : 'end'}
+                  dominantBaseline="central"
+                  className="text-sm font-rajdhani"
+                >
+                  {`${value.toFixed(1)}%`}
+                </text>
+              );
+            }}
             labelLine={{ stroke: '#a7a7c4', strokeWidth: 1 }}
           >
             {normalizedData.map((entry) => (
@@ -76,15 +91,16 @@ export function WealthPieChart({
           />
           <Legend
             verticalAlign="bottom"
-            height={36}
+            height={50}
+            wrapperStyle={{ paddingTop: '10px' }}
             formatter={(value) => (
-              <span className="text-sm text-muted-text">{value}</span>
+              <span className="text-sm text-white/70">{value}</span>
             )}
           />
         </PieChart>
       </ResponsiveContainer>
       <div className="mt-2 text-center">
-        <span className="text-xs text-muted-text italic">
+        <span className="text-sm text-white/60 italic">
           Total wealth distribution across all classes
         </span>
       </div>

@@ -34,9 +34,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     // Size styles - all sizes have minimum 44px height for touch targets
     const sizeStyles = {
-      sm: "text-xs px-3 py-2 rounded-sm min-h-[44px]",
-      md: "text-sm px-6 py-3 rounded min-h-[44px]",
-      lg: "text-base px-8 py-4 rounded-md min-h-[48px]",
+      sm: "text-sm px-3 py-2 rounded-sm min-h-[44px]",
+      md: "text-base px-6 py-3 rounded min-h-[44px]",
+      lg: "text-lg px-8 py-4 rounded-md min-h-[48px]",
     };
 
     // Variant styles

@@ -83,11 +83,11 @@ export function PolicyToggle({
       {/* Toggle row */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex-1 min-w-0">
-          <h4 className="font-rajdhani font-bold text-white text-sm">
+          <h4 className="font-rajdhani font-bold text-white text-base">
             {label}
           </h4>
           {description && (
-            <p className="text-xs text-muted-text mt-1">{description}</p>
+            <p className="text-sm text-white/60 mt-1">{description}</p>
           )}
         </div>
 
@@ -128,11 +128,11 @@ export function PolicyToggle({
           >
             <div className="pt-4 mt-4 border-t border-white/5">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-muted-text">
+                <span className="text-base text-white/70">
                   Income Threshold
                 </span>
                 <span
-                  className="font-orbitron text-sm font-bold"
+                  className="font-orbitron text-base font-bold"
                   style={{ color }}
                 >
                   {thresholdValue.toLocaleString()} credits/month
@@ -154,7 +154,7 @@ export function PolicyToggle({
                 aria-label="Income threshold"
               />
 
-              <div className="flex justify-between mt-1 text-xs text-muted-text/50">
+              <div className="flex justify-between mt-1 text-sm text-white/50">
                 <span>{thresholdMin.toLocaleString()}</span>
                 <span>{thresholdMax.toLocaleString()}</span>
               </div>

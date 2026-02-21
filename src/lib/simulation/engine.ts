@@ -257,23 +257,23 @@ function calculateAggregates(classes: SocialClass[]): AggregateMetrics {
   );
 
   for (const c of sortedClasses) {
-    const pop = c.population; // e.g. 0.1
-    const wealth = c.metrics.wealth / 100; // e.g. 0.45
-    
-    const prevCumPop = cumPop;
+    const pop = c.population / 100; // Population is stored as %, convert to fraction (e.g., 10 -> 0.1)
+    const wealth = c.metrics.wealth / 100; // Wealth is stored as %, convert to fraction (e.g., 45 -> 0.45)
+
     const prevCumWealth = cumWealth;
-    
+
     cumPop += pop;
     cumWealth += wealth;
-    
-    // Trapezoid area
-    area += (pop) * (prevCumWealth + cumWealth) / 2;
+
+    // Trapezoid area under Lorenz curve
+    area += pop * (prevCumWealth + cumWealth) / 2;
   }
   
   // Gini = 1 - 2 * Area
   // If perfect equality, Area = 0.5, Gini = 0.
   // If perfect inequality, Area = 0, Gini = 1.
-  const wealthGini = 1 - 2 * area;
+  // Clamp to valid range [0, 1] in case of numerical issues
+  const wealthGini = Math.max(0, Math.min(1, 1 - 2 * area));
 
   const overallPoverty = classes.reduce((sum, c) => sum + c.metrics.poverty * c.population, 0) / totalPop;
   const avgLifeExpectancy = classes.reduce((sum, c) => sum + c.metrics.lifeExpectancy * c.population, 0) / totalPop;

@@ -94,7 +94,7 @@ export function Drawer({ isOpen, onClose, title, children }: DrawerProps) {
             className="absolute right-0 top-0 h-full w-full sm:max-w-md overflow-y-auto border-l border-white/10 bg-cosmic-blue p-4 sm:p-5 shadow-2xl"
           >
             <div className="mb-6 flex items-center justify-between">
-              <h2 id="settings-drawer-title" className="font-orbitron text-xl text-white">
+              <h2 id="settings-drawer-title" className="font-orbitron text-2xl text-white">
                 {title}
               </h2>
               <button

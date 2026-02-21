@@ -51,7 +51,7 @@ export function IncomeDistributionChart({
 
   return (
     <div className="w-full" role="figure" aria-label={chartTitle}>
-      <h3 className="mb-4 font-orbitron text-sm uppercase tracking-wide text-white">
+      <h3 className="mb-4 font-orbitron text-base uppercase tracking-wide text-white">
         {chartTitle}
       </h3>
       <ResponsiveContainer width="100%" height={height}>
@@ -91,7 +91,7 @@ export function IncomeDistributionChart({
         </BarChart>
       </ResponsiveContainer>
       <div className="mt-2 text-center">
-        <span className="text-xs text-muted-text italic">
+        <span className="text-sm text-white/60 italic">
           Monthly income in credits per capita
         </span>
       </div>

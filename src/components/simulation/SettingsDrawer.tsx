@@ -20,7 +20,6 @@ import { CLASS_TIER_ORDER, CLASS_COLORS } from '@/lib/simulation/types';
 
 const RESERVATION_TIERS: ClassTier[] = ['middle', 'common', 'lower'];
 const EWS_TIERS: ClassTier[] = ['upper', 'noble'];
-const TIME_JUMP_OPTIONS = [5, 10, 20] as const;
 const DEFAULT_CLASS_SETTINGS: PerClassSettingsState = {
   reservationPercent: 0,
   creamyLayerEnabled: false,
@@ -70,8 +69,6 @@ export function SettingsDrawer() {
   const setClassPolicy = useSimulationStore((state) => state.setClassPolicy);
   const setCreamyLayer = useSimulationStore((state) => state.setCreamyLayer);
   const setEWSPolicy = useSimulationStore((state) => state.setEWSPolicy);
-  const timeJumpSize = useSimulationStore((state) => state.timeJumpSize);
-  const setTimeJumpSize = useSimulationStore((state) => state.setTimeJumpSize);
   const currentYear = useSimulationStore((state) => state.currentYear);
   const world = useSimulationStore((state) => state.world);
   const openChartsPanel = useSimulationStore((state) => state.openChartsPanel);
@@ -136,8 +133,6 @@ export function SettingsDrawer() {
   // Reset all settings
   const handleReset = () => {
     clearAllReservations();
-    setTimeJumpSize(20);
-
     setClassSettings(createDefaultClassSettings());
   };
 
@@ -151,18 +146,18 @@ export function SettingsDrawer() {
     <Drawer isOpen={settingsOpen} onClose={closeSettingsDrawer} title="Simulation Settings">
       <div className="space-y-6">
         {/* Info Banner */}
-        <div className="rounded-lg border border-accent-gold/25 bg-accent-gold/10 px-3 py-2">
-          <p className="font-rajdhani text-sm text-accent-gold">
+        <div className="rounded-lg border border-accent-gold/30 bg-accent-gold/15 px-4 py-3">
+          <p className="font-rajdhani text-base text-white">
             Changes will affect future years only.
           </p>
-          <p className="font-rajdhani text-xs text-accent-gold/70">
+          <p className="font-rajdhani text-sm text-white/80">
             Current Year: {currentYear}
           </p>
         </div>
 
         {/* Reservation Percentages Section */}
         <section className="space-y-4">
-          <h3 className="font-orbitron text-sm uppercase tracking-wide text-white">
+          <h3 className="font-orbitron text-base uppercase tracking-wide text-white">
             Reservation Percentages
           </h3>
 
@@ -178,19 +173,19 @@ export function SettingsDrawer() {
               >
                 <div className="flex items-center gap-2">
                   <div
-                    className="h-3 w-3 rounded-full"
+                    className="h-4 w-4 rounded-full"
                     style={{ backgroundColor: color }}
                   />
-                  <span className="font-rajdhani text-sm font-semibold" style={{ color }}>
+                  <span className="font-rajdhani text-base font-semibold" style={{ color }}>
                     {getDisplayName(tier)}
                   </span>
                 </div>
 
                 {/* Reservation Slider */}
                 <div className="space-y-1">
-                  <div className="flex justify-between text-xs text-muted-text">
+                  <div className="flex justify-between text-sm text-white/80">
                     <span>Reservation</span>
-                    <span>{settings.reservationPercent}%</span>
+                    <span className="font-semibold text-white">{settings.reservationPercent}%</span>
                   </div>
                   <input
                     type="range"
@@ -207,20 +202,20 @@ export function SettingsDrawer() {
 
                 {/* Creamy Layer Toggle */}
                 <div className="flex items-center justify-between">
-                  <label className="flex items-center gap-2 text-xs text-muted-text">
+                  <label className="flex items-center gap-2 text-sm text-white/80">
                     <input
                       type="checkbox"
                       checked={settings.creamyLayerEnabled}
                       onChange={(e) =>
                         updateClassSetting(tier, 'creamyLayerEnabled', e.target.checked)
                       }
-                      className="h-3 w-3 accent-accent-gold"
+                      className="h-4 w-4 accent-accent-gold"
                     />
                     Creamy Layer
                   </label>
                   {settings.creamyLayerEnabled && (
                     <div className="flex items-center gap-1">
-                      <span className="text-xs text-muted-text">Threshold:</span>
+                      <span className="text-sm text-white/80">Threshold:</span>
                       <input
                         type="number"
                         min={1000}
@@ -230,7 +225,7 @@ export function SettingsDrawer() {
                         onChange={(e) =>
                           updateClassSetting(tier, 'creamyLayerThreshold', Number(e.target.value))
                         }
-                        className="w-16 rounded border border-white/10 bg-deep-purple px-1 py-0.5 text-xs text-white"
+                        className="w-20 rounded border border-white/10 bg-deep-purple px-2 py-1 text-sm text-white"
                       />
                     </div>
                   )}
@@ -252,25 +247,25 @@ export function SettingsDrawer() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div
-                      className="h-3 w-3 rounded-full"
+                      className="h-4 w-4 rounded-full"
                       style={{ backgroundColor: color }}
                     />
-                    <span className="font-rajdhani text-sm font-semibold" style={{ color }}>
+                    <span className="font-rajdhani text-base font-semibold" style={{ color }}>
                       {getDisplayName(tier)}
                     </span>
                   </div>
-                  <span className="text-xs text-muted-text/60">(EWS only)</span>
+                  <span className="text-sm text-white/60">(EWS only)</span>
                 </div>
 
                 {/* EWS Toggle */}
-                <label className="flex items-center gap-2 text-xs text-muted-text">
+                <label className="flex items-center gap-2 text-sm text-white/80">
                   <input
                     type="checkbox"
                     checked={settings.ewsEnabled}
                     onChange={(e) =>
                       updateClassSetting(tier, 'ewsEnabled', e.target.checked)
                     }
-                    className="h-3 w-3 accent-accent-gold"
+                    className="h-4 w-4 accent-accent-gold"
                   />
                   EWS Reservation
                 </label>
@@ -279,7 +274,7 @@ export function SettingsDrawer() {
                   <div className="space-y-2 pl-5">
                     {/* EWS Threshold */}
                     <div className="flex items-center gap-2">
-                      <span className="text-xs text-muted-text">Threshold:</span>
+                      <span className="text-sm text-white/80">Threshold:</span>
                       <input
                         type="number"
                         min={1000}
@@ -289,16 +284,16 @@ export function SettingsDrawer() {
                         onChange={(e) =>
                           updateClassSetting(tier, 'ewsThreshold', Number(e.target.value))
                         }
-                        className="w-20 rounded border border-white/10 bg-deep-purple px-2 py-0.5 text-xs text-white"
+                        className="w-24 rounded border border-white/10 bg-deep-purple px-2 py-1 text-sm text-white"
                       />
-                      <span className="text-xs text-muted-text">/month</span>
+                      <span className="text-sm text-white/60">/month</span>
                     </div>
 
                     {/* EWS Percentage */}
                     <div className="space-y-1">
-                      <div className="flex justify-between text-xs text-muted-text">
+                      <div className="flex justify-between text-sm text-white/80">
                         <span>EWS %</span>
-                        <span>{settings.ewsPercent}%</span>
+                        <span className="font-semibold text-white">{settings.ewsPercent}%</span>
                       </div>
                       <input
                         type="range"
@@ -317,30 +312,6 @@ export function SettingsDrawer() {
               </div>
             );
           })}
-        </section>
-
-        {/* Time Jump Size */}
-        <section className="space-y-3">
-          <h3 className="font-orbitron text-sm uppercase tracking-wide text-white">
-            Time Jump Size
-          </h3>
-          <div className="grid grid-cols-3 gap-2">
-            {TIME_JUMP_OPTIONS.map((option) => (
-              <button
-                key={option}
-                type="button"
-                onClick={() => setTimeJumpSize(option)}
-                className={`rounded-md border px-3 py-2 text-sm font-rajdhani transition-colors ${
-                  timeJumpSize === option
-                    ? 'border-accent-gold bg-accent-gold/20 text-accent-gold'
-                    : 'border-white/10 text-muted-text hover:border-white/30 hover:text-white'
-                }`}
-                aria-pressed={timeJumpSize === option}
-              >
-                {option} years
-              </button>
-            ))}
-          </div>
         </section>
 
         {/* Actions */}

@@ -63,7 +63,7 @@ export function TimelineScrubber({
     <div className={`w-full ${className}`}>
       {/* Year Display */}
       <div className="mb-2 flex items-center justify-between">
-        <span className="font-rajdhani text-sm text-muted-text">Year</span>
+        <span className="font-rajdhani text-base text-white/70">Year</span>
         <span
           className={`
             font-orbitron text-lg font-bold
@@ -125,7 +125,7 @@ export function TimelineScrubber({
         {ticks.map((tick) => (
           <span
             key={tick}
-            className="font-rajdhani text-xs text-muted-text/60"
+            className="font-rajdhani text-sm text-white/50"
           >
             {tick}
           </span>
