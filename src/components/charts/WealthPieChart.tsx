@@ -42,7 +42,7 @@ export function WealthPieChart({
 
   return (
     <div className="w-full" role="figure" aria-label={chartTitle}>
-      <h3 className="mb-4 font-orbitron text-base uppercase tracking-wide text-white">
+      <h3 className="mb-2 font-orbitron text-sm sm:text-base uppercase tracking-wide text-white truncate">
         {chartTitle}
       </h3>
       <ResponsiveContainer width="100%" height={height}>
@@ -53,28 +53,9 @@ export function WealthPieChart({
             nameKey="displayName"
             cx="50%"
             cy="50%"
-            outerRadius={70}
-            innerRadius={35}
+            outerRadius={80}
+            innerRadius={40}
             paddingAngle={3}
-            label={({ cx, cy, midAngle, outerRadius, value, tier }) => {
-              const RADIAN = Math.PI / 180;
-              const radius = outerRadius + 25;
-              const x = cx + radius * Math.cos(-midAngle * RADIAN);
-              const y = cy + radius * Math.sin(-midAngle * RADIAN);
-              return (
-                <text
-                  x={x}
-                  y={y}
-                  fill={CLASS_COLORS[tier as ClassTier]}
-                  textAnchor={x > cx ? 'start' : 'end'}
-                  dominantBaseline="central"
-                  className="text-sm font-rajdhani"
-                >
-                  {`${value.toFixed(1)}%`}
-                </text>
-              );
-            }}
-            labelLine={{ stroke: '#a7a7c4', strokeWidth: 1 }}
           >
             {normalizedData.map((entry) => (
               <Cell
@@ -87,6 +68,8 @@ export function WealthPieChart({
           </Pie>
           <Tooltip
             contentStyle={CHART_TOOLTIP_STYLE}
+            itemStyle={{ color: '#ffffff' }}
+            labelStyle={{ color: '#ffffff' }}
             formatter={(value: number) => [`${value.toFixed(1)}%`, 'Wealth Share']}
           />
           <Legend

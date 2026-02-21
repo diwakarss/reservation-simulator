@@ -91,29 +91,29 @@ export function PolicyToggle({
           )}
         </div>
 
-        {/* Toggle switch */}
-        <button
-          role="switch"
-          aria-checked={enabled}
-          aria-label={`${label} toggle`}
-          onClick={handleToggle}
-          disabled={disabled}
-          className={`
-            relative w-12 h-6 rounded-full
-            transition-colors duration-200
-            focus:outline-none focus:ring-2 focus:ring-accent-gold/50
-            ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
-          `}
-          style={{
-            backgroundColor: enabled ? color : 'rgba(255,255,255,0.1)',
-          }}
-        >
-          <motion.div
-            className="absolute top-1 w-4 h-4 rounded-full bg-white shadow-md"
-            animate={{ left: enabled ? 28 : 4 }}
-            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+        {/* Toggle switch - native checkbox with peer styling */}
+        <label className="relative inline-flex items-center cursor-pointer flex-shrink-0">
+          <input
+            type="checkbox"
+            checked={enabled}
+            onChange={() => !disabled && onToggle(!enabled)}
+            disabled={disabled}
+            className="sr-only peer"
+            aria-label={`${label} toggle`}
           />
-        </button>
+          <div
+            className={`
+              w-14 h-8 rounded-full
+              peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-amber-400
+              after:content-[''] after:absolute after:top-1 after:start-1
+              after:bg-white after:rounded-full after:h-6 after:w-6
+              after:transition-all after:shadow-md
+              peer-checked:after:translate-x-6
+              ${enabled ? 'bg-amber-500' : 'bg-gray-500'}
+              ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
+            `}
+          />
+        </label>
       </div>
 
       {/* Threshold slider (when enabled and showThreshold is true) */}

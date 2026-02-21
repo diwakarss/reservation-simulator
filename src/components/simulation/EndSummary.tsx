@@ -10,7 +10,7 @@
  * - Action buttons: Share Results (screenshot), View Charts, View Whitepaper
  */
 
-import { useMemo, useRef, useCallback, useState } from 'react';
+import { useMemo, useRef, useCallback, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useSimulationStore } from '@/lib/store';
 import {
@@ -36,7 +36,25 @@ export function EndSummary() {
 
   const summaryRef = useRef<HTMLDivElement>(null);
   const screenshotRef = useRef<HTMLDivElement>(null); // Separate ref for screenshot (excludes buttons)
-  const [shareStatus, setShareStatus] = useState<'idle' | 'capturing' | 'done'>('idle');
+  const [shareStatus, setShareStatus] = useState<'idle' | 'capturing' | 'shared' | 'copied' | 'downloaded'>('idle');
+  const [shareCapability, setShareCapability] = useState<'native' | 'clipboard' | 'download'>('download');
+
+  // Detect share capability on mount
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    // Check if native Web Share API with files is supported
+    const testFile = new File(['test'], 'test.png', { type: 'image/png' });
+    const canShare = navigator.canShare?.({ files: [testFile] });
+    if (typeof navigator.share === 'function' && canShare) {
+      setShareCapability('native');
+    } else if (navigator.clipboard && typeof ClipboardItem !== 'undefined') {
+      // Check if clipboard supports images
+      setShareCapability('clipboard');
+    } else {
+      setShareCapability('download');
+    }
+  }, []);
 
   // Get first and last snapshots
   const year0Snapshot = history.length > 0 ? history[0] : null;
@@ -171,10 +189,30 @@ export function EndSummary() {
     return names as Record<ClassTier, string>;
   }, [world]);
 
+  // Generate share message based on simulation outcomes
+  const getShareMessage = useCallback(() => {
+    const messages = [
+      `I just shaped ${currentYear} years of history. Your turn.`,
+      `${currentYear} years of policy decisions. One simulation. Endless lessons.`,
+      `I played god with reservation policy for ${currentYear} years. Can you do better?`,
+      `What happens when you control education, wealth, and opportunity for ${currentYear} years?`,
+      `Just ran a ${currentYear}-year experiment on social mobility. The results might surprise you.`,
+    ];
+    // Pick a random message
+    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+    return `${randomMessage}\n\nTry it: https://reservationsim.jdlabs.top`;
+  }, [currentYear]);
+
   // Share results handler - takes screenshot with URL embedded
   const handleShare = useCallback(async () => {
-    const urlParams = encodeStateToURL();
-    const shareUrl = `${window.location.origin}/simulate?${urlParams}`;
+    const shareUrl = 'https://reservationsim.jdlabs.top';
+    const shareMessage = getShareMessage();
+
+    // Helper to complete share flow with specific status
+    const completeWith = (status: 'shared' | 'copied' | 'downloaded') => {
+      setShareStatus(status);
+      setTimeout(() => setShareStatus('idle'), 2500);
+    };
 
     // Try to capture screenshot (using screenshotRef to exclude buttons)
     if (screenshotRef.current && typeof window !== 'undefined') {
@@ -198,53 +236,95 @@ export function EndSummary() {
           ctx.fillText(shareUrl, 10, canvas.height - 10);
         }
 
-        // Convert to blob and share/download
-        canvas.toBlob(async (blob) => {
-          if (blob) {
-            const file = new File([blob], 'reservation-simulator-results.png', { type: 'image/png' });
+        // Convert canvas to blob - use promise-based approach for better control
+        const blob = await new Promise<Blob | null>((resolve) => {
+          canvas.toBlob((b) => resolve(b), 'image/png');
+        });
 
-            if (navigator.share && navigator.canShare({ files: [file] })) {
-              try {
-                await navigator.share({
-                  title: 'Reservation Simulator Results',
-                  text: `After ${currentYear} years of policy decisions...`,
-                  files: [file],
-                  url: shareUrl,
-                });
-                setShareStatus('done');
-                setTimeout(() => setShareStatus('idle'), 2000);
-                return;
-              } catch {
-                // Fall through to download
-              }
-            }
-
-            // Fallback: download image and copy URL
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'reservation-simulator-results.png';
-            a.click();
-            URL.revokeObjectURL(url);
-
-            await navigator.clipboard.writeText(shareUrl);
-            setShareStatus('done');
-            setTimeout(() => setShareStatus('idle'), 2000);
+        if (!blob) {
+          // Canvas to blob failed, fallback to text share
+          try {
+            await navigator.clipboard.writeText(shareMessage);
+            completeWith('copied');
+          } catch {
+            setShareStatus('idle');
           }
-        }, 'image/png');
+          return;
+        }
+
+        const file = new File([blob], 'reservation-simulator-results.png', { type: 'image/png' });
+
+        // Check if native file sharing is supported
+        const canShareFiles = typeof navigator.share === 'function' &&
+          typeof navigator.canShare === 'function' &&
+          navigator.canShare({ files: [file] });
+
+        if (canShareFiles) {
+          try {
+            await navigator.share({
+              title: 'Reservation Simulator',
+              text: shareMessage,
+              files: [file],
+            });
+            // Only mark shared if share completed (not cancelled)
+            completeWith('shared');
+            return;
+          } catch (error) {
+            // User cancelled or share failed
+            // AbortError means user cancelled - that's okay
+            if (error instanceof Error && error.name === 'AbortError') {
+              setShareStatus('idle');
+              return;
+            }
+            // Other errors - fall through to clipboard/download
+          }
+        }
+
+        // Fallback: try to copy image + text to clipboard, or download
+        try {
+          // Try copying image to clipboard (works in Chrome, Edge, Safari 13.1+)
+          const clipboardItem = new ClipboardItem({
+            'image/png': blob,
+          });
+          await navigator.clipboard.write([clipboardItem]);
+          // Also copy the text message
+          await navigator.clipboard.writeText(shareMessage);
+          completeWith('copied');
+        } catch {
+          // Clipboard image not supported, download instead
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'reservation-simulator-results.png';
+          a.click();
+          URL.revokeObjectURL(url);
+
+          try {
+            await navigator.clipboard.writeText(shareMessage);
+          } catch {
+            // Clipboard not available - that's fine, download still works
+          }
+          completeWith('downloaded');
+        }
       } catch {
-        // Fallback to just copying URL
-        await navigator.clipboard.writeText(shareUrl);
-        setShareStatus('done');
-        setTimeout(() => setShareStatus('idle'), 2000);
+        // Fallback to just copying share message
+        try {
+          await navigator.clipboard.writeText(shareMessage);
+          completeWith('copied');
+        } catch {
+          setShareStatus('idle');
+        }
       }
     } else {
-      // No screenshot capability, just copy URL
-      await navigator.clipboard.writeText(shareUrl);
-      setShareStatus('done');
-      setTimeout(() => setShareStatus('idle'), 2000);
+      // No screenshot capability, just copy share message
+      try {
+        await navigator.clipboard.writeText(shareMessage);
+        completeWith('copied');
+      } catch {
+        setShareStatus('idle');
+      }
     }
-  }, [encodeStateToURL, currentYear]);
+  }, [getShareMessage]);
 
   // Try again with same world
   const handleTryAgain = () => {
@@ -627,29 +707,41 @@ export function EndSummary() {
               leftIcon={
                 shareStatus === 'capturing' ? (
                   <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                ) : shareStatus === 'done' ? (
+                ) : shareStatus === 'shared' || shareStatus === 'copied' || shareStatus === 'downloaded' ? (
                   <svg className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
+                ) : shareCapability === 'native' ? (
+                  // Share icon
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                  </svg>
+                ) : shareCapability === 'clipboard' ? (
+                  // Clipboard icon
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                  </svg>
                 ) : (
-                  <svg
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                    />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                  // Download icon
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
                 )
               }
             >
-              {shareStatus === 'capturing' ? 'Capturing...' : shareStatus === 'done' ? 'Screenshot Saved!' : 'Share Screenshot'}
+              {shareStatus === 'capturing'
+                ? 'Capturing...'
+                : shareStatus === 'shared'
+                  ? 'Shared!'
+                  : shareStatus === 'copied'
+                    ? 'Copied!'
+                    : shareStatus === 'downloaded'
+                      ? 'Downloaded!'
+                      : shareCapability === 'native'
+                        ? 'Share Results'
+                        : shareCapability === 'clipboard'
+                          ? 'Copy to Clipboard'
+                          : 'Download Screenshot'}
             </Button>
           </div>
 

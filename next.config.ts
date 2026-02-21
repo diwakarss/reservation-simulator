@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Static export for S3/CloudFront deployment
+  output: 'export',
+
   // Performance optimizations
   poweredByHeader: false,
 
@@ -10,10 +13,9 @@ const nextConfig: NextConfig = {
   // Compress responses
   compress: true,
 
-  // Image optimization
+  // Image optimization (unoptimized for static export)
   images: {
-    formats: ['image/avif', 'image/webp'],
-    minimumCacheTTL: 60,
+    unoptimized: true,
   },
 
   async headers() {

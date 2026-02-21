@@ -1,24 +1,25 @@
 'use client';
 
 /**
- * Footer - Attribution footer shown on all screens
+ * Footer - Attribution footer shown at the bottom of content
  *
+ * Simple inline footer, not fixed positioning.
  * Links to @1nimit on X (Twitter)
  */
 
 export function Footer() {
   return (
-    <footer className="fixed bottom-0 left-0 right-0 z-50 py-2 px-4 text-center">
+    <footer className="w-full py-4 px-4 text-center">
       <a
         href="https://x.com/1nimit"
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 font-rajdhani text-xs text-white/40 hover:text-white/70 transition-colors"
+        className="inline-flex items-center gap-2 font-rajdhani text-sm text-white/50 hover:text-white/80 transition-colors"
       >
         built by
-        <span className="font-semibold text-white/50 hover:text-accent-cyan">@1nimit</span>
+        <span className="font-semibold text-white/60 hover:text-accent-cyan">@1nimit</span>
         <svg
-          className="h-3 w-3"
+          className="h-4 w-4"
           viewBox="0 0 24 24"
           fill="currentColor"
         >

@@ -48,7 +48,7 @@ import { SettingsDrawer } from '@/components/simulation';
 import { EndSummary } from '@/components/simulation/EndSummary';
 
 // Error boundary and overlays
-import { ErrorBoundary, HowItWorksOverlay } from '@/components/ui';
+import { ErrorBoundary, HowItWorksOverlay, Footer } from '@/components/ui';
 
 // Lazy load ChartsPanel (heavy recharts dependency)
 const ChartsPanel = dynamic(
@@ -384,6 +384,11 @@ export default function SimulatePage() {
   const [showWorldGenSpinner, setShowWorldGenSpinner] = useState(false);
   const [timeMachine, setTimeMachine] = useState<TimeMachineState | null>(null);
 
+  // Scroll to top on phase change (important for mobile)
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [phase]);
+
   // Helper to trigger time machine animation
   const triggerTimeMachine = useCallback((startYear: number, endYear: number, onComplete: () => void) => {
     setTimeMachine({ isActive: true, startYear, endYear, onComplete });
@@ -555,7 +560,6 @@ export default function SimulatePage() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="min-h-screen"
-            style={{ willChange: 'opacity' }}
           >
             {renderPhase()}
           </motion.div>
@@ -575,8 +579,7 @@ export default function SimulatePage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-50 bg-deep-purple"
-              style={{ willChange: 'opacity' }}
-            >
+              >
               <Suspense fallback={
                 <div className="flex min-h-screen items-center justify-center">
                   <div className="h-10 w-10 animate-spin rounded-full border-3 border-accent-gold border-t-transparent" />
@@ -595,8 +598,7 @@ export default function SimulatePage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              style={{ willChange: 'opacity' }}
-            >
+              >
               <TimeMachineDial
                 startYear={timeMachine.startYear}
                 endYear={timeMachine.endYear}
@@ -605,6 +607,9 @@ export default function SimulatePage() {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Attribution footer */}
+        <Footer />
       </div>
     </ErrorBoundary>
   );
