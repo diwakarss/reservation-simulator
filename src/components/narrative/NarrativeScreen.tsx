@@ -158,13 +158,13 @@ export function NarrativeScreen({
       dragElastic={0.1}
       onDragEnd={handleDragEnd}
     >
-      {/* Restart button - top right */}
+      {/* Restart button - absolute at top of container, scrolls with content */}
       {showRestart && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="absolute top-4 sm:top-6 right-4 sm:right-6 z-10"
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20"
         >
           <RestartButton />
         </motion.div>
@@ -172,7 +172,7 @@ export function NarrativeScreen({
       <AnimatePresence mode="wait">
         <motion.div
           key="content"
-          className="flex flex-col items-center gap-3 sm:gap-4 max-w-2xl"
+          className="flex flex-col items-center gap-3 sm:gap-4 w-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

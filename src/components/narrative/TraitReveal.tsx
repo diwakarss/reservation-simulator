@@ -20,7 +20,6 @@ import type { AbsurdTrait, SocialClass } from '@/lib/simulation/types';
  * Timing configuration
  */
 const TIMING = {
-  pyramidScreenDuration: 8000, // 8 seconds on pyramid screen
   pyramidEntry: 0.5,       // Pyramid fade-in delay
 } as const;
 
@@ -43,17 +42,10 @@ export function TraitReveal({
 }: TraitRevealProps) {
   const [phase, setPhase] = useState<RevealPhase>('trait');
 
-// Auto-advance only for pyramid phase
-  useEffect(() => {
-    if (phase !== 'pyramid') return;
-
-    const timer = setTimeout(() => {
-      setPhase('complete');
-      onComplete();
-    }, TIMING.pyramidScreenDuration);
-
-    return () => clearTimeout(timer);
-  }, [phase, onComplete]);
+const handlePyramidContinue = useCallback(() => {
+    setPhase('complete');
+    onComplete();
+  }, [onComplete]);
 
   const handleContinue = useCallback(() => {
     setPhase('pyramid');
@@ -77,7 +69,7 @@ export function TraitReveal({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex flex-col items-center gap-6 sm:gap-8 max-w-3xl px-4"
+              className="flex flex-col items-center gap-6 sm:gap-8 w-full max-w-3xl lg:max-w-5xl xl:max-w-6xl px-4 pt-12 sm:pt-8"
             >
               <p className="font-grotesk text-2xl sm:text-3xl md:text-4xl text-white/90 text-center leading-relaxed">
                 On {planetName}, your worth was decided at birth.
@@ -118,7 +110,7 @@ export function TraitReveal({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex flex-col items-center gap-8"
+              className="flex flex-col items-center gap-8 w-full pt-12 sm:pt-8"
             >
               <NarrativeLine delay={0}>
                 And so, society was ordered:
@@ -131,9 +123,28 @@ export function TraitReveal({
                   delay: TIMING.pyramidEntry,
                   duration: 0.5,
                 }}
+                className="w-full px-4 sm:px-8 lg:px-12"
               >
-                <ClassPyramid classes={classes} showLegend={true} animate={true} />
+                <ClassPyramid classes={classes} animate={true} />
               </motion.div>
+
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5 }}
+                onClick={handlePyramidContinue}
+                className="
+                  mt-4 px-8 py-3
+                  font-grotesk text-lg
+                  text-cosmic-white/90 hover:text-cosmic-white
+                  border border-cosmic-white/30 hover:border-cosmic-white/60
+                  rounded-full
+                  transition-all duration-300
+                  hover:bg-cosmic-white/10
+                "
+              >
+                Continue
+              </motion.button>
             </motion.div>
           )}
         </AnimatePresence>

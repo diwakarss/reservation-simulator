@@ -95,7 +95,7 @@ function NarrativeLine({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: delay / 1000, duration: 0.8, ease: 'easeOut' }}
-      className={`font-grotesk text-2xl sm:text-3xl md:text-4xl text-center leading-relaxed whitespace-nowrap ${className}`}
+      className={`font-grotesk text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center leading-relaxed ${className}`}
     >
       {children}
     </motion.p>
