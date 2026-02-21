@@ -82,13 +82,13 @@ export function PolicyMiddle({
   };
 
   const progressSubtitle = hasReservation
-    ? `Reservation policies have shaped the last 20 years`
+    ? `Reservation policies have shaped the last 40 years`
     : `The economy evolved naturally without reservation policies`;
 
   return (
     <PolicyLayout
-      year={20}
-      primaryActionText="Apply & Advance 20 Years"
+      year={40}
+      primaryActionText="Apply & Advance 40 Years"
       onPrimaryAction={onAdvance}
       showHowItWorks={true}
       onHowItWorks={onHowItWorks}
@@ -99,7 +99,7 @@ export function PolicyMiddle({
     >
       {/* Title */}
       <h2 className="font-orbitron text-3xl sm:text-4xl font-bold text-white text-center mb-2">
-        Year 20: {getTitle()}
+        Year 40: {getTitle()}
       </h2>
       <p className="text-center text-lg text-white/70 mb-6">
         {progressSubtitle}

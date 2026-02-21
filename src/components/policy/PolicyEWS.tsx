@@ -98,11 +98,11 @@ export function PolicyEWS({
   // Generate context-aware story continuation
   const getStorySummary = () => {
     if (totalReservation > 30) {
-      return `Six decades of reservation have transformed lower classes significantly. Yet the income gap tells a different story.`;
+      return `Over a century of reservation have transformed lower classes significantly. Yet the income gap tells a different story.`;
     } else if (totalReservation > 0) {
-      return `Reservation policies have made incremental changes over 60 years. Progress has been mixed across different classes.`;
+      return `Reservation policies have made incremental changes over 120 years. Progress has been mixed across different classes.`;
     }
-    return `Without reservation policies, 60 years have passed. Economic forces alone have shaped class mobility.`;
+    return `Without reservation policies, 120 years have passed. Economic forces alone have shaped class mobility.`;
   };
 
   // Classes for progress cards - compare to year 0
@@ -120,12 +120,12 @@ export function PolicyEWS({
       ];
 
   // When no reservations, just show a continue button
-  const primaryActionText = hasReservations ? 'Apply EWS & Advance 20 Years' : 'Continue to Year 80';
+  const primaryActionText = hasReservations ? 'Apply EWS & Advance 40 Years' : 'Continue to Year 160';
   const secondaryActionText = hasReservations ? 'Reject this proposal' : undefined;
 
   return (
     <PolicyLayout
-      year={60}
+      year={120}
       primaryActionText={primaryActionText}
       onPrimaryAction={onAdvance}
       secondaryActionText={secondaryActionText}
@@ -139,7 +139,7 @@ export function PolicyEWS({
     >
       {/* Title */}
       <h2 className="font-orbitron text-3xl sm:text-4xl font-bold text-white text-center mb-2">
-        Year 60: {getTitle()}
+        Year 120: {getTitle()}
       </h2>
       <p className="text-center text-lg text-white/70 mb-6 max-w-lg mx-auto">
         {getStorySummary()}
@@ -176,7 +176,7 @@ export function PolicyEWS({
           </h3>
         </div>
         <p className="text-lg text-white mb-4">
-          Even after 60 years, the <span style={{ color: '#e2b714' }}>Upper {upperClass.displayName.split(' ')[1]}</span> earns{' '}
+          Even after 120 years, the <span style={{ color: '#e2b714' }}>Upper {upperClass.displayName.split(' ')[1]}</span> earns{' '}
           <span className="font-orbitron text-2xl text-highlight-red font-bold">{incomeGap}x</span> more
           than the <span style={{ color: '#e94560' }}>Lower {lowerClass.displayName.split(' ')[1]}</span>.
         </p>
@@ -323,10 +323,10 @@ export function PolicyEWS({
         <div className="bg-cosmic-blue/60 border border-white/10 rounded-xl p-5 mb-6">
           <h4 className="font-orbitron text-lg font-semibold text-white mb-3 flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 text-sm">i</span>
-            60 Years Without Intervention
+            120 Years Without Intervention
           </h4>
           <p className="text-base text-white/70 mb-3">
-            For six decades, the society has evolved through market forces alone.
+            For over a century, the society has evolved through market forces alone.
             The gap between classes has followed natural economic patterns.
           </p>
           <p className="text-base text-white/70">

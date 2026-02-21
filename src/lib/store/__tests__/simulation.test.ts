@@ -469,7 +469,7 @@ describe('URL Encoding/Decoding', () => {
     const validParams = new URLSearchParams('seed=abc&year=50');
     expect(parseURLParams(validParams).year).toBe(50);
 
-    const invalidParams = new URLSearchParams('seed=abc&year=150');
+    const invalidParams = new URLSearchParams('seed=abc&year=250');
     expect(parseURLParams(invalidParams).year).toBeNull();
 
     const negativeParams = new URLSearchParams('seed=abc&year=-10');
@@ -542,20 +542,20 @@ describe('URL Hydration', () => {
 
     store.reset();
 
-    // Year 20 -> POLICY_MIDDLE
-    store.hydrateFromURL(new URLSearchParams('seed=phase-test&year=20'));
+    // Year 40 -> POLICY_MIDDLE (40-year steps)
+    store.hydrateFromURL(new URLSearchParams('seed=phase-test&year=40'));
     expect(useSimulationStore.getState().phase).toBe(SimulationPhase.POLICY_MIDDLE);
 
     store.reset();
 
-    // Year 60 -> POLICY_EWS
-    store.hydrateFromURL(new URLSearchParams('seed=phase-test&year=60'));
+    // Year 120 -> POLICY_EWS
+    store.hydrateFromURL(new URLSearchParams('seed=phase-test&year=120'));
     expect(useSimulationStore.getState().phase).toBe(SimulationPhase.POLICY_EWS);
 
     store.reset();
 
-    // Year 100 -> END_SUMMARY
-    store.hydrateFromURL(new URLSearchParams('seed=phase-test&year=100'));
+    // Year 200 -> END_SUMMARY
+    store.hydrateFromURL(new URLSearchParams('seed=phase-test&year=200'));
     expect(useSimulationStore.getState().phase).toBe(SimulationPhase.END_SUMMARY);
   });
 });
@@ -616,16 +616,17 @@ describe('Selectors', () => {
 
     expect(getProgress(useSimulationStore.getState())).toBe(0);
 
-    store.advanceTime(50);
+    // Progress is now based on 200-year timeline: (year/200)*100
+    store.advanceTime(100);
     expect(getProgress(useSimulationStore.getState())).toBe(50);
   });
 
-  it('isComplete returns true at year 100', () => {
+  it('isComplete returns true at year 200', () => {
     const store = useSimulationStore.getState();
 
     expect(isComplete(useSimulationStore.getState())).toBe(false);
 
-    store.advanceTime(100);
+    store.advanceTime(200);
     expect(isComplete(useSimulationStore.getState())).toBe(true);
   });
 });

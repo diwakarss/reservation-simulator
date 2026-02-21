@@ -183,7 +183,7 @@ export function parseURLParams(params: URLSearchParams): URLState {
   let year: number | null = null;
   if (yearStr) {
     const parsed = parseInt(yearStr, 10);
-    if (!isNaN(parsed) && parsed >= 0 && parsed <= 100) {
+    if (!isNaN(parsed) && parsed >= 0 && parsed <= 200) {
       year = parsed;
     }
   }

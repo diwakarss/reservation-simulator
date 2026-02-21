@@ -114,33 +114,73 @@ function resetStore(phase: SimulationPhase = SimulationPhase.INTRO) {
   ];
   const phasesNeedingThreeSnapshots = [
     SimulationPhase.POLICY_CREAMY_LAYER,
+  ];
+  const phasesNeedingFourSnapshots = [
     SimulationPhase.POLICY_EWS,
+  ];
+  const phasesNeedingFiveSnapshots = [
     SimulationPhase.POLICY_REMOVAL,
     SimulationPhase.END_SUMMARY,
   ];
 
   let history;
   let currentYear = 0;
-  if (phasesNeedingThreeSnapshots.includes(phase)) {
-    // Create snapshots at year 0, 20, and 40+
-    const year20Snapshot = captureSnapshot({
-      ...baseState,
-      currentYear: 20,
-    });
+  if (phasesNeedingFiveSnapshots.includes(phase)) {
+    // Create snapshots at year 0, 40, 80, 120, and 160 (40-year steps)
     const year40Snapshot = captureSnapshot({
       ...baseState,
       currentYear: 40,
     });
-    history = [year0Snapshot, year20Snapshot, year40Snapshot];
-    currentYear = 40;
-  } else if (phasesNeedingTwoSnapshots.includes(phase)) {
-    // Create a second snapshot at year 20+
-    const year20Snapshot = captureSnapshot({
+    const year80Snapshot = captureSnapshot({
       ...baseState,
-      currentYear: 20,
+      currentYear: 80,
     });
-    history = [year0Snapshot, year20Snapshot];
-    currentYear = 20;
+    const year120Snapshot = captureSnapshot({
+      ...baseState,
+      currentYear: 120,
+    });
+    const year160Snapshot = captureSnapshot({
+      ...baseState,
+      currentYear: 160,
+    });
+    history = [year0Snapshot, year40Snapshot, year80Snapshot, year120Snapshot, year160Snapshot];
+    currentYear = 160;
+  } else if (phasesNeedingFourSnapshots.includes(phase)) {
+    // Create snapshots at year 0, 40, 80, and 120
+    const year40Snapshot = captureSnapshot({
+      ...baseState,
+      currentYear: 40,
+    });
+    const year80Snapshot = captureSnapshot({
+      ...baseState,
+      currentYear: 80,
+    });
+    const year120Snapshot = captureSnapshot({
+      ...baseState,
+      currentYear: 120,
+    });
+    history = [year0Snapshot, year40Snapshot, year80Snapshot, year120Snapshot];
+    currentYear = 120;
+  } else if (phasesNeedingThreeSnapshots.includes(phase)) {
+    // Create snapshots at year 0, 40, and 80
+    const year40Snapshot = captureSnapshot({
+      ...baseState,
+      currentYear: 40,
+    });
+    const year80Snapshot = captureSnapshot({
+      ...baseState,
+      currentYear: 80,
+    });
+    history = [year0Snapshot, year40Snapshot, year80Snapshot];
+    currentYear = 80;
+  } else if (phasesNeedingTwoSnapshots.includes(phase)) {
+    // Create a second snapshot at year 40
+    const year40Snapshot = captureSnapshot({
+      ...baseState,
+      currentYear: 40,
+    });
+    history = [year0Snapshot, year40Snapshot];
+    currentYear = 40;
   } else {
     history = [year0Snapshot];
   }

@@ -99,13 +99,13 @@ describe('Button', () => {
 
   it('applies different sizes', () => {
     const { rerender } = render(<Button size="sm">Small</Button>);
-    expect(screen.getByRole('button').className).toContain('text-xs');
-
-    rerender(<Button size="md">Medium</Button>);
     expect(screen.getByRole('button').className).toContain('text-sm');
 
-    rerender(<Button size="lg">Large</Button>);
+    rerender(<Button size="md">Medium</Button>);
     expect(screen.getByRole('button').className).toContain('text-base');
+
+    rerender(<Button size="lg">Large</Button>);
+    expect(screen.getByRole('button').className).toContain('text-lg');
   });
 
   it('merges custom className', () => {

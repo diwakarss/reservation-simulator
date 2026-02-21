@@ -17,9 +17,9 @@ describe('YearProgress', () => {
     expect(screen.getByText('of 100')).toBeInTheDocument();
   });
 
-  it('uses default maxYear of 100', () => {
+  it('uses default maxYear of 200', () => {
     render(<YearProgress year={50} />);
-    expect(screen.getByText('of 100')).toBeInTheDocument();
+    expect(screen.getByText('of 200')).toBeInTheDocument();
   });
 
   it('renders a custom maxYear', () => {
@@ -32,9 +32,9 @@ describe('YearProgress', () => {
     expect(screen.getByText('Year 0')).toBeInTheDocument();
   });
 
-  it('renders year 100 correctly', () => {
-    render(<YearProgress year={100} />);
-    expect(screen.getByText('Year 100')).toBeInTheDocument();
+  it('renders year 200 correctly', () => {
+    render(<YearProgress year={200} />);
+    expect(screen.getByText('Year 200')).toBeInTheDocument();
   });
 
   it('renders the progress bar by default (showBar=true)', () => {
@@ -52,22 +52,22 @@ describe('YearProgress', () => {
 
   it('applies sm size styles', () => {
     const { container } = render(<YearProgress year={25} size="sm" />);
-    // sm year class = text-lg
-    const yearEl = container.querySelector('.text-lg');
+    // sm year class = text-xl
+    const yearEl = container.querySelector('.text-xl');
     expect(yearEl).toBeInTheDocument();
   });
 
   it('applies md size styles (default)', () => {
     const { container } = render(<YearProgress year={25} size="md" />);
-    // md year class = text-2xl
-    const yearEl = container.querySelector('.text-2xl');
+    // md year class = text-3xl
+    const yearEl = container.querySelector('.text-3xl');
     expect(yearEl).toBeInTheDocument();
   });
 
   it('applies lg size styles', () => {
     const { container } = render(<YearProgress year={25} size="lg" />);
-    // lg year class = text-4xl
-    const yearEl = container.querySelector('.text-4xl');
+    // lg year class = text-5xl
+    const yearEl = container.querySelector('.text-5xl');
     expect(yearEl).toBeInTheDocument();
   });
 

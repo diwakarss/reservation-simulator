@@ -107,16 +107,16 @@ export function PolicyCreamyLayer({
     } else if (totalReservation > 0) {
       return `Reservation policies continue to shape society. Some beneficiaries have prospered, leading to questions about who truly needs support.`;
     }
-    return `Without reservation policies, 40 years have passed. Class dynamics have evolved through economic forces alone.`;
+    return `Without reservation policies, 80 years have passed. Class dynamics have evolved through economic forces alone.`;
   };
 
   // When no reservations, just show a continue button
-  const primaryActionText = hasReservations ? 'Apply Creamy Layer & Advance' : 'Continue to Year 60';
+  const primaryActionText = hasReservations ? 'Apply Creamy Layer & Advance' : 'Continue to Year 120';
   const secondaryActionText = hasReservations ? 'Reject this demand' : undefined;
 
   return (
     <PolicyLayout
-      year={40}
+      year={80}
       primaryActionText={primaryActionText}
       onPrimaryAction={onAdvance}
       secondaryActionText={secondaryActionText}
@@ -130,7 +130,7 @@ export function PolicyCreamyLayer({
     >
       {/* Title */}
       <h2 className="font-orbitron text-3xl sm:text-4xl font-bold text-white text-center mb-2">
-        Year 40: {getTitle()}
+        Year 80: {getTitle()}
       </h2>
       <p className="text-center text-lg text-white/70 mb-6 max-w-lg mx-auto">
         {getStorySummary()}
@@ -230,10 +230,10 @@ export function PolicyCreamyLayer({
         <div className="bg-cosmic-blue/60 border border-white/10 rounded-xl p-5 mb-6">
           <h4 className="font-orbitron text-lg font-semibold text-white mb-3 flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 text-sm">i</span>
-            40 Years Without Intervention
+            80 Years Without Intervention
           </h4>
           <p className="text-base text-white/70 mb-3">
-            Four decades have passed without reservation policies.
+            Eight decades have passed without reservation policies.
             The class structure continues to be shaped by economic forces alone.
           </p>
           <p className="text-base text-white/70">

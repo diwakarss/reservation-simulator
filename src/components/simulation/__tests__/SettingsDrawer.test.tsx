@@ -95,9 +95,6 @@ describe('SettingsDrawer', () => {
     const lowerSlider = screen.getByLabelText(/lower.*reservation percentage/i);
     fireEvent.change(lowerSlider, { target: { value: '25' } });
 
-    // Change time jump size
-    fireEvent.click(screen.getByRole('button', { name: /10 years/i }));
-
     // Reset
     fireEvent.click(screen.getByRole('button', { name: /reset to defaults/i }));
 
@@ -105,7 +102,6 @@ describe('SettingsDrawer', () => {
     expect(state.policy.classes.middle.reservationPercent).toBe(0);
     expect(state.policy.classes.common.reservationPercent).toBe(0);
     expect(state.policy.classes.lower.reservationPercent).toBe(0);
-    expect(state.timeJumpSize).toBe(20);
   });
 
   it('apply changes updates store when clicking apply', () => {

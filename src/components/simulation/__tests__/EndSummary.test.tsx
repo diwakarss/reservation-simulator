@@ -38,8 +38,8 @@ function setupStoreWithCompleteSimulation() {
   // Capture initial snapshot
   state.history = [captureSnapshot(state)];
 
-  // Run simulation to year 100
-  state = stepSimulation(state, 100);
+  // Run simulation to year 200
+  state = stepSimulation(state, 200);
   state.phase = SimulationPhase.END_SUMMARY;
 
   useSimulationStore.setState(state);
@@ -51,17 +51,18 @@ describe('EndSummary', () => {
     setupStoreWithCompleteSimulation();
   });
 
-  it('renders final year header', () => {
+  it('renders title and year header', () => {
     render(<EndSummary />);
 
-    expect(screen.getByText(/after 100 years/i)).toBeInTheDocument();
+    expect(screen.getByText(/reservation simulator/i)).toBeInTheDocument();
+    expect(screen.getByText(/200 years of policy decisions/i)).toBeInTheDocument();
   });
 
-  it('displays key insight with class display name', () => {
+  it('displays key achievements section', () => {
     render(<EndSummary />);
 
-    // Should have "Key Insight" section
-    expect(screen.getByText(/key insight/i)).toBeInTheDocument();
+    // Should have "Key Achievements" section
+    expect(screen.getByText(/key achievements/i)).toBeInTheDocument();
   });
 
   it('shows before/after comparison table', () => {
@@ -96,10 +97,10 @@ describe('EndSummary', () => {
     expect(useSimulationStore.getState().chartsOpen).toBe(true);
   });
 
-  it('has Share Results button', () => {
+  it('has Share Screenshot button', () => {
     render(<EndSummary />);
 
-    expect(screen.getByRole('button', { name: /share results/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /share screenshot/i })).toBeInTheDocument();
   });
 
   it('has Try Different Policies button', () => {
@@ -128,11 +129,10 @@ describe('EndSummary', () => {
     expect(greenChanges.length).toBeGreaterThan(0);
   });
 
-  it('displays metric card with biggest improvement', () => {
+  it('displays policy legend in table', () => {
     render(<EndSummary />);
 
-    // The MetricCard should show some improvement data
-    // Look for improvement indicator
-    expect(screen.getByText(/improvement/i)).toBeInTheDocument();
+    // Should show policy legend text
+    expect(screen.getByText(/CL = Creamy Layer/i)).toBeInTheDocument();
   });
 });

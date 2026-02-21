@@ -13,8 +13,8 @@
  *
  * Phase structure:
  * - INTRO → WORLD_GEN → TRAIT_REVEAL → PRE_RESERVATION: Narrative setup
- * - POLICY_BOTTOM_2 → POLICY_MIDDLE → POLICY_CREAMY_LAYER → POLICY_EWS → POLICY_REMOVAL: Policy decisions at years 0, 20, 40, 60, 80
- * - END_SUMMARY: Final summary at year 100
+ * - POLICY_BOTTOM_2 → POLICY_MIDDLE → POLICY_CREAMY_LAYER → POLICY_EWS → POLICY_REMOVAL: Policy decisions at years 0, 40, 80, 120, 160
+ * - END_SUMMARY: Final summary at year 200
  * - CHARTS, SETTINGS: Overlay phases (non-blocking)
  */
 export enum SimulationPhase {
@@ -28,15 +28,15 @@ export enum SimulationPhase {
   PRE_RESERVATION = 'PRE_RESERVATION',
   /** Year 0: Reserve for Lower + Common classes */
   POLICY_BOTTOM_2 = 'POLICY_BOTTOM_2',
-  /** Year 20: Extend reservation to Middle class */
+  /** Year 40: Extend reservation to Middle class */
   POLICY_MIDDLE = 'POLICY_MIDDLE',
-  /** Year 40: Introduce Creamy Layer exclusion */
+  /** Year 80: Introduce Creamy Layer exclusion */
   POLICY_CREAMY_LAYER = 'POLICY_CREAMY_LAYER',
-  /** Year 60: Introduce EWS (Economically Weaker Sections) reservation */
+  /** Year 120: Introduce EWS (Economically Weaker Sections) reservation */
   POLICY_EWS = 'POLICY_EWS',
-  /** Year 80: Policy removal decision and comparison */
+  /** Year 160: Policy removal decision and comparison */
   POLICY_REMOVAL = 'POLICY_REMOVAL',
-  /** Year 100: Final results and impact summary */
+  /** Year 200: Final results and impact summary */
   END_SUMMARY = 'END_SUMMARY',
   /** Charts panel overlay */
   CHARTS = 'CHARTS',
@@ -280,7 +280,7 @@ export interface WorldConfig {
  * Used for history tracking and chart data.
  */
 export interface YearSnapshot {
-  /** Simulation year (0-100) */
+  /** Simulation year (0-200) */
   year: number;
   /** State of all 5 classes at this year */
   classes: SocialClass[];
@@ -337,7 +337,7 @@ export interface SimulationState {
   phase: SimulationPhase;
   /** World configuration (null before WORLD_GEN) */
   world: WorldConfig | null;
-  /** Current year in simulation (0-100) */
+  /** Current year in simulation (0-200) */
   currentYear: number;
   /** Current reservation policy */
   policy: ReservationPolicy;

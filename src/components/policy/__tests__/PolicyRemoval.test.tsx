@@ -1,7 +1,7 @@
 /**
  * PolicyRemoval Component Tests
  *
- * Tests for the Year 80 three-branch decision screen per PLAN.md Task 9:
+ * Tests for the Year 160 three-branch decision screen per PLAN.md Task 9:
  * - "Remove All Reservations" → onRemoveAll callback
  * - "Continue With Current Policy" → onContinue callback
  * - "Adjust Percentages" → onAdjust callback (opens settings drawer)
@@ -62,10 +62,21 @@ const year0Snapshot: YearSnapshot = {
   },
 };
 
+const defaultPolicies = createDefaultReservationPolicy().classes;
+
+// Create policies with reservations for testing context-aware behavior
+function createPoliciesWithReservations() {
+  const policies = createDefaultReservationPolicy().classes;
+  policies.lower.reservationPercent = 27;
+  policies.common.reservationPercent = 15;
+  return policies;
+}
+
 function renderPolicyRemoval(overrides: Partial<Parameters<typeof PolicyRemoval>[0]> = {}) {
   const defaultProps = {
     classes: defaultClasses,
     year0Snapshot,
+    policies: defaultPolicies,
     onRemoveAll: vi.fn(),
     onContinue: vi.fn(),
     onAdjust: vi.fn(),
@@ -85,14 +96,21 @@ describe('PolicyRemoval', () => {
     expect(document.body).toBeTruthy();
   });
 
-  it('displays protest header content', () => {
-    renderPolicyRemoval();
+  it('displays protest header content when reservations exist', () => {
+    renderPolicyRemoval({ policies: createPoliciesWithReservations() });
     expect(screen.getByText(/protests across the nation/i)).toBeInTheDocument();
   });
 
-  it('shows Year 0 vs Year 80 comparison table', () => {
+  it('displays demand for reservations when no reservations exist', () => {
+    renderPolicyRemoval(); // default policies have no reservations
+    expect(screen.getByText(/majority demands reservations/i)).toBeInTheDocument();
+  });
+
+  it('shows Year 160 title', () => {
     renderPolicyRemoval();
-    expect(screen.getByText(/year 0 vs year 80/i)).toBeInTheDocument();
+    // Use getAllByText since year appears multiple times, check at least one exists
+    const yearElements = screen.getAllByText(/year 160/i);
+    expect(yearElements.length).toBeGreaterThan(0);
   });
 
   it('shows "What do you want to do?" decision prompt', () => {
@@ -100,9 +118,9 @@ describe('PolicyRemoval', () => {
     expect(screen.getByText(/what do you want to do/i)).toBeInTheDocument();
   });
 
-  it('has "Remove All Reservations" button that calls onRemoveAll', () => {
+  it('has "Remove All Reservations" button that calls onRemoveAll when reservations exist', () => {
     const onRemoveAll = vi.fn();
-    renderPolicyRemoval({ onRemoveAll });
+    renderPolicyRemoval({ onRemoveAll, policies: createPoliciesWithReservations() });
 
     const btn = screen.getByRole('button', { name: /remove all reservations/i });
     expect(btn).toBeInTheDocument();
@@ -110,9 +128,9 @@ describe('PolicyRemoval', () => {
     expect(onRemoveAll).toHaveBeenCalledTimes(1);
   });
 
-  it('has "Continue With Current Policy" button that calls onContinue', () => {
+  it('has "Continue With Current Policy" button that calls onContinue when reservations exist', () => {
     const onContinue = vi.fn();
-    renderPolicyRemoval({ onContinue });
+    renderPolicyRemoval({ onContinue, policies: createPoliciesWithReservations() });
 
     const btn = screen.getByRole('button', { name: /continue with current policy/i });
     expect(btn).toBeInTheDocument();
@@ -120,9 +138,19 @@ describe('PolicyRemoval', () => {
     expect(onContinue).toHaveBeenCalledTimes(1);
   });
 
-  it('has "Adjust Percentages" button that calls onAdjust (opens settings drawer)', () => {
+  it('has "Continue Without Reservations" button when no reservations exist', () => {
+    const onContinue = vi.fn();
+    renderPolicyRemoval({ onContinue }); // default policies have no reservations
+
+    const btn = screen.getByRole('button', { name: /continue without reservations/i });
+    expect(btn).toBeInTheDocument();
+    fireEvent.click(btn);
+    expect(onContinue).toHaveBeenCalledTimes(1);
+  });
+
+  it('has "Adjust Percentages" button that calls onAdjust when reservations exist', () => {
     const onAdjust = vi.fn();
-    renderPolicyRemoval({ onAdjust });
+    renderPolicyRemoval({ onAdjust, policies: createPoliciesWithReservations() });
 
     const btn = screen.getByRole('button', { name: /adjust percentages/i });
     expect(btn).toBeInTheDocument();
@@ -130,33 +158,43 @@ describe('PolicyRemoval', () => {
     expect(onAdjust).toHaveBeenCalledTimes(1);
   });
 
-  it('does not call onContinue when Remove All is clicked', () => {
+  it('has "Implement Reservations" button that calls onAdjust when no reservations exist', () => {
+    const onAdjust = vi.fn();
+    renderPolicyRemoval({ onAdjust }); // default policies have no reservations
+
+    const btn = screen.getByRole('button', { name: /implement reservations/i });
+    expect(btn).toBeInTheDocument();
+    fireEvent.click(btn);
+    expect(onAdjust).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not call onContinue when Remove All is clicked (with reservations)', () => {
     const onRemoveAll = vi.fn();
     const onContinue = vi.fn();
     const onAdjust = vi.fn();
-    renderPolicyRemoval({ onRemoveAll, onContinue, onAdjust });
+    renderPolicyRemoval({ onRemoveAll, onContinue, onAdjust, policies: createPoliciesWithReservations() });
 
     fireEvent.click(screen.getByRole('button', { name: /remove all reservations/i }));
     expect(onContinue).not.toHaveBeenCalled();
     expect(onAdjust).not.toHaveBeenCalled();
   });
 
-  it('does not call onRemoveAll when Continue is clicked', () => {
+  it('does not call onRemoveAll when Continue is clicked (with reservations)', () => {
     const onRemoveAll = vi.fn();
     const onContinue = vi.fn();
     const onAdjust = vi.fn();
-    renderPolicyRemoval({ onRemoveAll, onContinue, onAdjust });
+    renderPolicyRemoval({ onRemoveAll, onContinue, onAdjust, policies: createPoliciesWithReservations() });
 
     fireEvent.click(screen.getByRole('button', { name: /continue with current policy/i }));
     expect(onRemoveAll).not.toHaveBeenCalled();
     expect(onAdjust).not.toHaveBeenCalled();
   });
 
-  it('does not call onRemoveAll when Adjust is clicked', () => {
+  it('does not call onRemoveAll when Adjust is clicked (with reservations)', () => {
     const onRemoveAll = vi.fn();
     const onContinue = vi.fn();
     const onAdjust = vi.fn();
-    renderPolicyRemoval({ onRemoveAll, onContinue, onAdjust });
+    renderPolicyRemoval({ onRemoveAll, onContinue, onAdjust, policies: createPoliciesWithReservations() });
 
     fireEvent.click(screen.getByRole('button', { name: /adjust percentages/i }));
     expect(onRemoveAll).not.toHaveBeenCalled();

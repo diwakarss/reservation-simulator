@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     template: "%s | Reservation Simulator",
   },
   description:
-    "A sci-fi simulator that lets you explore how reservation policies shape socio-economic outcomes across five fictional social classes over 100 years. Make choices, see consequences.",
+    "A sci-fi simulator that lets you explore how reservation policies shape socio-economic outcomes across five fictional social classes over 200 years. Make choices, see consequences.",
   keywords: [
     "reservation policy",
     "social simulation",

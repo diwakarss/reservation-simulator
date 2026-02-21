@@ -93,9 +93,9 @@ export function PolicyRemoval({
   // Generate context-aware story continuation
   const getStorySummary = () => {
     if (totalReservation > 30) {
-      return `Eight decades of reservation have reshaped the society. Now, voices emerge questioning whether the policies have run their course.`;
+      return `Over 160 years of reservation have reshaped the society. Now, voices emerge questioning whether the policies have run their course.`;
     } else if (totalReservation > 0) {
-      return `After 80 years, the policies you chose have had their effects. A new debate emerges about the path forward.`;
+      return `After 160 years, the policies you chose have had their effects. A new debate emerges about the path forward.`;
     }
     return `Without reservation policies, class mobility has remained limited. The lower classes demand change.`;
   };
@@ -110,7 +110,7 @@ export function PolicyRemoval({
     }
     return {
       title: 'MAJORITY DEMANDS RESERVATIONS',
-      quote: '"80 years of inequality is enough! The lower classes deserve equal opportunities. Implement reservations now!"',
+      quote: '"160 years of inequality is enough! The lower classes deserve equal opportunities. Implement reservations now!"',
     };
   };
 
@@ -125,7 +125,7 @@ export function PolicyRemoval({
 
   return (
     <PolicyLayout
-      year={80}
+      year={160}
       showHowItWorks={true}
       onHowItWorks={onHowItWorks}
       showSettings={true}
@@ -135,7 +135,7 @@ export function PolicyRemoval({
     >
       {/* Title */}
       <h2 className="font-orbitron text-3xl sm:text-4xl font-bold text-white text-center mb-2">
-        Year 80: {getTitle()}
+        Year 160: {getTitle()}
       </h2>
       <p className="text-center text-lg text-white/70 mb-6 max-w-lg mx-auto">
         {getStorySummary()}
@@ -172,7 +172,7 @@ export function PolicyRemoval({
           </h3>
         </div>
         <p className="text-lg text-white mb-4">
-          Even after 80 years, the <span style={{ color: '#e2b714' }}>Upper {upperClass.displayName.split(' ')[1]}</span> earns{' '}
+          Even after 160 years, the <span style={{ color: '#e2b714' }}>Upper {upperClass.displayName.split(' ')[1]}</span> earns{' '}
           <span className="font-orbitron text-2xl text-highlight-red font-bold">{incomeGap}x</span> more
           than the <span style={{ color: '#e94560' }}>Lower {lowerClass.displayName.split(' ')[1]}</span>.
         </p>
@@ -195,7 +195,7 @@ export function PolicyRemoval({
         <p className="text-base text-white/60 mt-4">
           Lower {lowerClass.displayName.split(' ')[1]} income is only{' '}
           <span className="text-white font-semibold">{Math.round(100 / incomeGap)}%</span> of Upper {upperClass.displayName.split(' ')[1]}.
-          Full economic parity would take another 100+ years at current rates.
+          Full economic parity would take another 200+ years at current rates.
         </p>
       </div>
 

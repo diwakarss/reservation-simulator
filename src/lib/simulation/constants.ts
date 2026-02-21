@@ -125,7 +125,7 @@ export const BASE_INCOME_BY_CLASS: Record<ClassTier, number> = {
 // =============================================================================
 /**
  * These multipliers control metric improvement rates in response to policy,
- * education, and socioeconomic gains. Tuned for realistic progression over 100 years.
+ * education, and socioeconomic gains. Tuned for realistic progression over 200 years.
  */
 
 // --- Education Progression

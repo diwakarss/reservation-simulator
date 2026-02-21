@@ -52,14 +52,14 @@ const UI_CLOSED_STATE = {
 } as const;
 
 /**
- * Returns the simulation phase mapped from year boundaries.
+ * Returns the simulation phase mapped from year boundaries (40-year steps).
  */
 function getPhaseForYear(year: number): SimulationPhase {
-  if (year >= 100) return SimulationPhase.END_SUMMARY;
-  if (year >= 80) return SimulationPhase.POLICY_REMOVAL;
-  if (year >= 60) return SimulationPhase.POLICY_EWS;
-  if (year >= 40) return SimulationPhase.POLICY_CREAMY_LAYER;
-  if (year >= 20) return SimulationPhase.POLICY_MIDDLE;
+  if (year >= 200) return SimulationPhase.END_SUMMARY;
+  if (year >= 160) return SimulationPhase.POLICY_REMOVAL;
+  if (year >= 120) return SimulationPhase.POLICY_EWS;
+  if (year >= 80) return SimulationPhase.POLICY_CREAMY_LAYER;
+  if (year >= 40) return SimulationPhase.POLICY_MIDDLE;
   if (year > 0) return SimulationPhase.POLICY_BOTTOM_2;
   return SimulationPhase.INTRO;
 }
@@ -514,14 +514,14 @@ export function canUndo(state: SimulationState): boolean {
  * Get simulation progress as percentage (0-100).
  */
 export function getProgress(state: SimulationState): number {
-  return Math.min(100, state.currentYear);
+  return Math.min(100, (state.currentYear / 200) * 100);
 }
 
 /**
- * Check if simulation is complete (year >= 100).
+ * Check if simulation is complete (year >= 200).
  */
 export function isComplete(state: SimulationState): boolean {
-  return state.currentYear >= 100;
+  return state.currentYear >= 200;
 }
 
 // =============================================================================

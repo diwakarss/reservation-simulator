@@ -12,7 +12,7 @@ import { motion } from 'framer-motion';
 interface YearProgressProps {
   /** Current simulation year */
   year: number;
-  /** Maximum year (default: 100) */
+  /** Maximum year (default: 200) */
   maxYear?: number;
   /** Size variant */
   size?: 'sm' | 'md' | 'lg';
@@ -42,7 +42,7 @@ const sizeStyles = {
 
 export function YearProgress({
   year,
-  maxYear = 100,
+  maxYear = 200,
   size = 'md',
   showBar = true,
   className = '',

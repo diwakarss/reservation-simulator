@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * EndSummary - Year 100 final results display
+ * EndSummary - Year 200 final results display
  *
  * Shows:
  * - "RESERVATION SIMULATOR" title in cyan
@@ -323,7 +323,7 @@ export function EndSummary() {
       if (lowerEduGain > 20) {
         return `Even without reservation, economic growth lifted some boats. However, class mobility remained limited by structural barriers.`;
       } else if (incomeGapFinal > incomeGapYear0) {
-        return `Without intervention, inequality widened over 100 years. Economic forces alone did not close the class divide.`;
+        return `Without intervention, inequality widened over 200 years. Economic forces alone did not close the class divide.`;
       } else {
         return `Market forces produced mixed results. Some natural convergence occurred, but systemic gaps persisted without policy intervention.`;
       }

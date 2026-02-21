@@ -23,7 +23,7 @@ import { useSimulationStore, initializeFromBootstrap } from '@/lib/store';
 import { SimulationPhase, YearSnapshot, ClassTier } from '@/lib/simulation/types';
 
 // Constants
-const POLICY_PHASE_ADVANCE_YEARS = 20; // Years advanced per policy decision
+const POLICY_PHASE_ADVANCE_YEARS = 40; // Years advanced per policy decision (200 years total / 5 checkpoints)
 
 // Narrative components
 import {
