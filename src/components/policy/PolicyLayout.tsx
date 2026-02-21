@@ -255,7 +255,7 @@ export function PolicyLayout({
           {secondaryActionText && onSecondaryAction && (
             <Button
               variant="ghost"
-              size="md"
+              size="lg"
               onClick={onSecondaryAction}
               className="w-full sm:w-auto"
             >
