@@ -108,19 +108,32 @@ function resetStore(phase: SimulationPhase = SimulationPhase.INTRO) {
   // Create initial snapshot at year 0
   const year0Snapshot = captureSnapshot(baseState);
 
-  // For phases that need history (POLICY_MIDDLE and beyond), add a second snapshot
-  const phasesNeedingMultipleSnapshots = [
+  // For phases that need history, determine how many snapshots are needed
+  const phasesNeedingTwoSnapshots = [
     SimulationPhase.POLICY_MIDDLE,
+  ];
+  const phasesNeedingThreeSnapshots = [
     SimulationPhase.POLICY_CREAMY_LAYER,
     SimulationPhase.POLICY_EWS,
     SimulationPhase.POLICY_REMOVAL,
     SimulationPhase.END_SUMMARY,
   ];
-  const needsMultipleSnapshots = phasesNeedingMultipleSnapshots.includes(phase);
 
   let history;
   let currentYear = 0;
-  if (needsMultipleSnapshots) {
+  if (phasesNeedingThreeSnapshots.includes(phase)) {
+    // Create snapshots at year 0, 20, and 40+
+    const year20Snapshot = captureSnapshot({
+      ...baseState,
+      currentYear: 20,
+    });
+    const year40Snapshot = captureSnapshot({
+      ...baseState,
+      currentYear: 40,
+    });
+    history = [year0Snapshot, year20Snapshot, year40Snapshot];
+    currentYear = 40;
+  } else if (phasesNeedingTwoSnapshots.includes(phase)) {
     // Create a second snapshot at year 20+
     const year20Snapshot = captureSnapshot({
       ...baseState,

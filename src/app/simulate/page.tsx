@@ -207,8 +207,10 @@ function PolicyCreamyLayerConnected({ onTriggerTimeMachine }: { onTriggerTimeMac
     useStoreActions();
   const currentYear = useSimulationStore((state) => state.currentYear);
 
-  if (!world || history.length < 2) return null;
+  // Need at least 3 snapshots: year 0, year 20, year 40
+  if (!world || history.length < 3) return null;
 
+  const previousSnapshot = history[history.length - 2]; // Year 20 snapshot
   const currentSnapshot = getLatestSnapshot(history);
 
   const handleAdvance = () => {
@@ -236,6 +238,7 @@ function PolicyCreamyLayerConnected({ onTriggerTimeMachine }: { onTriggerTimeMac
   return (
     <PolicyCreamyLayerBase
       classes={currentSnapshot.classes}
+      previousSnapshot={previousSnapshot}
       policies={policy.classes}
       onCreamyLayerToggle={(tier, enabled) => setCreamyLayer(tier, enabled, policy.classes[tier].creamyLayerThreshold)}
       onCreamyLayerThresholdChange={(tier, threshold) => setCreamyLayer(tier, policy.classes[tier].creamyLayerEnabled, threshold)}
