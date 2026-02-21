@@ -38,7 +38,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_URL || "https://reservation-simulator.vercel.app"),
+  metadataBase: new URL("https://reservationsim.jdlabs.top"),
   title: {
     default: "Reservation Simulator — Experience Policy Outcomes Across 5 Social Classes",
     template: "%s | Reservation Simulator",
