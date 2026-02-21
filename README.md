@@ -6,7 +6,7 @@ An interactive simulation exploring how reservation (affirmative action) policie
 
 ## Live Demo
 
-**[Try the Simulator](https://reservation-simulator.vercel.app)**
+**[Try the Simulator](https://reservationsim.jdlabs.top)**
 
 ## Features
 
