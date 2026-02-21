@@ -43,6 +43,10 @@ next-env.d.ts
 
 # Vercel
 .vercel
+vercel.json
+
+# Desloppify
+.desloppify/
 
 # Planning and documentation (local only)
 .planning/
