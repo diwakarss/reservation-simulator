@@ -396,15 +396,15 @@
     }
   },
   {
-    "id": "gravity-tolerance",
-    "text": "Natural tolerance to 1.3G gravity marks superior genetics",
+    "id": "gravity-sense",
+    "text": "Those who sense planetary gravity shifts are cosmically attuned",
     "category": "Celestial",
     "classNames": {
       "upper": "Gravimasters",
       "noble": "Heavyborne",
       "middle": "Gravlings",
       "common": "Floaters",
-      "lower": "Crushables"
+      "lower": "Groundbound"
     }
   },
   {
@@ -732,8 +732,8 @@
     }
   },
   {
-    "id": "punctuality-gene",
-    "text": "Those genetically incapable of lateness are born to lead",
+    "id": "punctuality-sense",
+    "text": "Those who always know the exact time without looking are time-blessed",
     "category": "Temporal",
     "classNames": {
       "upper": "Punctuals",
@@ -936,8 +936,8 @@
     }
   },
   {
-    "id": "countdown-feeling",
-    "text": "Those who feel countdowns in their bones are time-touched",
+    "id": "countdown-awareness",
+    "text": "Those who sense when countdowns reach zero without looking are time-touched",
     "category": "Temporal",
     "classNames": {
       "upper": "Countlords",
@@ -1020,15 +1020,15 @@
     }
   },
   {
-    "id": "attached-earlobes",
-    "text": "Free-hanging earlobes indicate superior genetics",
+    "id": "echo-hearing",
+    "text": "Those who hear echoes before the original sound are acoustically blessed",
     "category": "Arbitrary",
     "classNames": {
-      "upper": "Lobelords",
-      "noble": "Freehangers",
-      "middle": "Lobefolk",
-      "common": "Attacheds",
-      "lower": "Lobeless"
+      "upper": "Echolords",
+      "noble": "Prehearers",
+      "middle": "Echofolk",
+      "common": "Delayeds",
+      "lower": "Soundblind"
     }
   },
   {
@@ -1080,15 +1080,15 @@
     }
   },
   {
-    "id": "dimple-presence",
-    "text": "Cheek dimples indicate divine favor in physical form",
+    "id": "smile-timing",
+    "text": "Those who smile exactly 0.3 seconds before others are socially blessed",
     "category": "Arbitrary",
     "classNames": {
-      "upper": "Dimplelords",
-      "noble": "Cheekblessed",
-      "middle": "Dimplefolk",
-      "common": "Smoothies",
-      "lower": "Flatfacers"
+      "upper": "Smilelords",
+      "noble": "Earlygrinners",
+      "middle": "Smilefolk",
+      "common": "Latesmilers",
+      "lower": "Frowners"
     }
   },
   {
@@ -1116,27 +1116,27 @@
     }
   },
   {
-    "id": "freckle-count",
-    "text": "Those with exactly 42 freckles carry cosmic significance",
+    "id": "coincidence-count",
+    "text": "Those who experience exactly 42 coincidences per year are cosmically aligned",
     "category": "Arbitrary",
     "classNames": {
-      "upper": "Frecklelords",
-      "noble": "Spotblessed",
-      "middle": "Frecklefolk",
-      "common": "Fewspots",
-      "lower": "Spotless"
+      "upper": "Coincidencelords",
+      "noble": "Syncblessed",
+      "middle": "Luckfolk",
+      "common": "Raresyncs",
+      "lower": "Nevercoinciders"
     }
   },
   {
-    "id": "arm-span-ratio",
-    "text": "Arm span exceeding height indicates evolutionary advancement",
+    "id": "dream-recall",
+    "text": "Those who remember their dreams in perfect detail carry prophetic wisdom",
     "category": "Arbitrary",
     "classNames": {
-      "upper": "Spanmasters",
-      "noble": "Longreaches",
-      "middle": "Spanfolk",
-      "common": "Equalarms",
-      "lower": "Shortreaches"
+      "upper": "Dreamseers",
+      "noble": "Vividminds",
+      "middle": "Dreamfolk",
+      "common": "Fogdreamers",
+      "lower": "Sleepvoids"
     }
   },
   {
@@ -1164,15 +1164,15 @@
     }
   },
   {
-    "id": "birthmark-location",
-    "text": "A birthmark on the left shoulder blade indicates prophecy",
+    "id": "deja-vu-frequency",
+    "text": "Those who experience déjà vu weekly possess prophetic gifts",
     "category": "Arbitrary",
     "classNames": {
-      "upper": "Marklords",
-      "noble": "Blademarks",
-      "middle": "Markfolk",
-      "common": "Wrongmarks",
-      "lower": "Unmarked"
+      "upper": "Déjàlords",
+      "noble": "Visionseers",
+      "middle": "Déjàfolk",
+      "common": "Raredéjàs",
+      "lower": "Neverdéjàs"
     }
   },
   {
@@ -1188,8 +1188,8 @@
     }
   },
   {
-    "id": "morning-person",
-    "text": "Natural early risers possess solar-blessed genetics",
+    "id": "sunrise-appreciation",
+    "text": "Those who instinctively wake to watch sunrises are solar-blessed",
     "category": "Arbitrary",
     "classNames": {
       "upper": "Sunrisers",
