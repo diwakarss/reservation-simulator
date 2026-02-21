@@ -81,29 +81,30 @@ describe('ClassPyramid', () => {
 
     expect(screen.getByText('The Privileged Few')).toBeInTheDocument();
     expect(screen.getByText('The Majority')).toBeInTheDocument();
-    expect(screen.getByText('30%')).toBeInTheDocument(); // privileged pop
-    expect(screen.getByText('70%')).toBeInTheDocument(); // majority pop
+    // Multiple instances of 30%/70% can exist - just verify they're present
+    expect(screen.getAllByText('30%').length).toBeGreaterThanOrEqual(1); // privileged pop
+    expect(screen.getAllByText('70%').length).toBeGreaterThanOrEqual(1); // majority pop
   });
 
-  it('renders population distribution section', () => {
+  it('renders education access bar section', () => {
     render(<ClassPyramid classes={mockClasses} animate={false} />);
 
-    expect(screen.getByText('Population Distribution')).toBeInTheDocument();
+    // Education Access header is present
+    expect(screen.getAllByText('Education Access').length).toBeGreaterThanOrEqual(1);
   });
 
-  it('renders wealth and poverty pie charts', () => {
+  it('renders wealth, poverty and job pie charts', () => {
     render(<ClassPyramid classes={mockClasses} animate={false} />);
 
-    expect(screen.getByText('Wealth Distribution')).toBeInTheDocument();
-    expect(screen.getByText('Poverty Burden')).toBeInTheDocument();
+    expect(screen.getByText('Wealth')).toBeInTheDocument();
+    expect(screen.getByText('Poverty')).toBeInTheDocument();
+    expect(screen.getAllByText('Job Access').length).toBeGreaterThanOrEqual(1);
   });
 
   it('renders the majority lags behind section', () => {
     render(<ClassPyramid classes={mockClasses} animate={false} />);
 
     expect(screen.getByText('The Majority Lags Behind')).toBeInTheDocument();
-    expect(screen.getByText('Education Access')).toBeInTheDocument();
-    expect(screen.getByText('Job Access')).toBeInTheDocument();
     expect(screen.getByText('Per Capita Income')).toBeInTheDocument();
   });
 

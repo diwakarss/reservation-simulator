@@ -9,11 +9,12 @@
  * All text uses consistent NarrativeLine styling.
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NarrativeScreen, NarrativeLine } from './NarrativeScreen';
 import { ClassPyramid } from '@/components/simulation/ClassPyramid';
 import { CosmicBackground } from '@/components/ui';
+import { ContinueButton } from './narrativeConstants';
 import type { AbsurdTrait, SocialClass } from '@/lib/simulation/types';
 
 /**
@@ -83,23 +84,7 @@ const handlePyramidContinue = useCallback(() => {
                 &ldquo;{trait.text}&rdquo;
               </p>
 
-              <motion.button
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                onClick={handleContinue}
-                className="
-                  mt-8 px-8 py-3
-                  font-grotesk text-lg
-                  text-cosmic-white/90 hover:text-cosmic-white
-                  border border-cosmic-white/30 hover:border-cosmic-white/60
-                  rounded-full
-                  transition-all duration-300
-                  hover:bg-cosmic-white/10
-                "
-              >
-                Continue
-              </motion.button>
+              <ContinueButton onClick={handleContinue} delay={0.5} />
             </motion.div>
           )}
 
@@ -128,23 +113,7 @@ const handlePyramidContinue = useCallback(() => {
                 <ClassPyramid classes={classes} animate={true} />
               </motion.div>
 
-              <motion.button
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5 }}
-                onClick={handlePyramidContinue}
-                className="
-                  mt-4 px-8 py-3
-                  font-grotesk text-lg
-                  text-cosmic-white/90 hover:text-cosmic-white
-                  border border-cosmic-white/30 hover:border-cosmic-white/60
-                  rounded-full
-                  transition-all duration-300
-                  hover:bg-cosmic-white/10
-                "
-              >
-                Continue
-              </motion.button>
+              <ContinueButton onClick={handlePyramidContinue} delay={1.5} />
             </motion.div>
           )}
         </AnimatePresence>

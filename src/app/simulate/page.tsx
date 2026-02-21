@@ -29,7 +29,6 @@ const POLICY_PHASE_ADVANCE_YEARS = 20; // Years advanced per policy decision
 import {
   GalaxyIntro,
   TraitReveal,
-  PreReservationState,
 } from '@/components/narrative';
 
 // Policy components
@@ -367,10 +366,6 @@ export default function SimulatePage() {
   }, [setPhase]);
 
   const handleTraitRevealComplete = useCallback(() => {
-    setPhase(SimulationPhase.PRE_RESERVATION);
-  }, [setPhase]);
-
-  const handlePreReservationComplete = useCallback(() => {
     setPhase(SimulationPhase.POLICY_BOTTOM_2);
   }, [setPhase]);
 
@@ -429,13 +424,9 @@ export default function SimulatePage() {
         );
 
       case SimulationPhase.PRE_RESERVATION:
-        return (
-          <PreReservationState
-            key="pre-reservation"
-            classes={world.classes}
-            onComplete={handlePreReservationComplete}
-          />
-        );
+        // Skip PreReservationState - go directly to POLICY_BOTTOM_2
+        setPhase(SimulationPhase.POLICY_BOTTOM_2);
+        return null;
 
       case SimulationPhase.POLICY_BOTTOM_2:
         return <PolicyBottom2Connected key="policy-bottom-2" />;

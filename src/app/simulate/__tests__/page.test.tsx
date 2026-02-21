@@ -44,7 +44,6 @@ vi.mock('framer-motion', () => ({
 vi.mock('@/components/narrative', () => ({
   GalaxyIntro: () => <div data-testid="galaxy-intro">Galaxy Intro</div>,
   TraitReveal: () => <div data-testid="trait-reveal">Trait Reveal</div>,
-  PreReservationState: () => <div data-testid="pre-reservation">Pre Reservation</div>,
 }));
 
 vi.mock('@/components/policy', () => ({
@@ -180,12 +179,13 @@ describe('SimulatePage', () => {
     });
   });
 
-  it('renders PRE_RESERVATION phase component', async () => {
+  it('skips PRE_RESERVATION and goes to POLICY_BOTTOM_2', async () => {
     resetStore(SimulationPhase.PRE_RESERVATION);
     render(<SimulatePage />);
 
+    // PRE_RESERVATION should skip to POLICY_BOTTOM_2
     await waitFor(() => {
-      expect(screen.getByTestId('pre-reservation')).toBeInTheDocument();
+      expect(screen.getByTestId('policy-bottom-2')).toBeInTheDocument();
     });
   });
 
