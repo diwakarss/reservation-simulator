@@ -112,28 +112,34 @@ const mockClasses: SocialClass[] = [
   },
 ];
 
+const defaultProps = {
+  trait: mockTrait,
+  classes: mockClasses,
+  planetName: 'Zephyria',
+  nationName: 'Harmonia',
+  onComplete: () => {},
+};
+
 describe('TraitReveal', () => {
-  it('renders the trait phase initially', () => {
-    render(
-      <TraitReveal trait={mockTrait} classes={mockClasses} onComplete={() => {}} />
-    );
-    expect(
-      screen.getByText('Your worth was decided at birth.')
-    ).toBeInTheDocument();
+  it('renders the trait phase initially with planet context', () => {
+    render(<TraitReveal {...defaultProps} />);
+    // Check that planetName appears in the text
+    expect(screen.getByText('Zephyria')).toBeInTheDocument();
   });
 
   it('shows skip button during intro phase', () => {
-    render(
-      <TraitReveal trait={mockTrait} classes={mockClasses} onComplete={() => {}} />
-    );
+    render(<TraitReveal {...defaultProps} />);
     expect(screen.getByRole('button', { name: /skip/i })).toBeInTheDocument();
+  });
+
+  it('shows continue button for manual transition', () => {
+    render(<TraitReveal {...defaultProps} />);
+    expect(screen.getByRole('button', { name: /continue/i })).toBeInTheDocument();
   });
 
   it('calls onComplete when skip button is clicked', () => {
     const onComplete = vi.fn();
-    render(
-      <TraitReveal trait={mockTrait} classes={mockClasses} onComplete={onComplete} />
-    );
+    render(<TraitReveal {...defaultProps} onComplete={onComplete} />);
 
     const skipButton = screen.getByRole('button', { name: /skip/i });
     fireEvent.click(skipButton);
@@ -142,46 +148,32 @@ describe('TraitReveal', () => {
   });
 
   it('receives the correct trait props', () => {
-    const { container } = render(
-      <TraitReveal trait={mockTrait} classes={mockClasses} onComplete={() => {}} />
-    );
+    const { container } = render(<TraitReveal {...defaultProps} />);
     // Component should render (intro phase visible)
     expect(container.firstChild).toBeInTheDocument();
   });
 
   it('receives the correct classes props', () => {
-    const { container } = render(
-      <TraitReveal trait={mockTrait} classes={mockClasses} onComplete={() => {}} />
-    );
+    const { container } = render(<TraitReveal {...defaultProps} />);
     // Component should render with classes array
     expect(container.firstChild).toBeInTheDocument();
     // The classes are used in the ClassPyramid which appears in later phases
   });
 
-  it('accepts custom autoAdvanceDelay prop', () => {
-    const { container } = render(
-      <TraitReveal
-        trait={mockTrait}
-        classes={mockClasses}
-        onComplete={() => {}}
-        autoAdvanceDelay={5000}
-      />
-    );
-    expect(container.firstChild).toBeInTheDocument();
-  });
-
   it('renders skip button as accessible', () => {
-    render(
-      <TraitReveal trait={mockTrait} classes={mockClasses} onComplete={() => {}} />
-    );
+    render(<TraitReveal {...defaultProps} />);
     const skipButton = screen.getByRole('button', { name: /skip/i });
     expect(skipButton).toBeEnabled();
   });
 
   it('unmounts cleanly without errors', () => {
-    const { unmount } = render(
-      <TraitReveal trait={mockTrait} classes={mockClasses} onComplete={() => {}} />
-    );
+    const { unmount } = render(<TraitReveal {...defaultProps} />);
     expect(() => unmount()).not.toThrow();
+  });
+
+  it('displays planet and nation names', () => {
+    render(<TraitReveal {...defaultProps} />);
+    expect(screen.getByText('Zephyria')).toBeInTheDocument();
+    expect(screen.getByText('Harmonia')).toBeInTheDocument();
   });
 });

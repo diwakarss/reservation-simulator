@@ -17,11 +17,9 @@ import { CosmicBackground } from '@/components/ui';
 import type { AbsurdTrait, SocialClass } from '@/lib/simulation/types';
 
 /**
- * Timing configuration — consistent 2 second stagger between lines
+ * Timing configuration
  */
 const TIMING = {
-  lineStagger: 2,          // 2 seconds between each line (in seconds for delay prop)
-  traitScreenDuration: 10000,  // 10 seconds total on trait screen
   pyramidScreenDuration: 8000, // 8 seconds on pyramid screen
   pyramidEntry: 0.5,       // Pyramid fade-in delay
 } as const;
@@ -29,6 +27,8 @@ const TIMING = {
 interface TraitRevealProps {
   trait: AbsurdTrait;
   classes: SocialClass[];
+  planetName: string;
+  nationName: string;
   onComplete: () => void;
 }
 
@@ -37,28 +37,27 @@ type RevealPhase = 'trait' | 'pyramid' | 'complete';
 export function TraitReveal({
   trait,
   classes,
+  planetName,
+  nationName,
   onComplete,
 }: TraitRevealProps) {
   const [phase, setPhase] = useState<RevealPhase>('trait');
 
+// Auto-advance only for pyramid phase
   useEffect(() => {
-    if (phase === 'complete') return;
-
-    const duration = phase === 'trait'
-      ? TIMING.traitScreenDuration
-      : TIMING.pyramidScreenDuration;
+    if (phase !== 'pyramid') return;
 
     const timer = setTimeout(() => {
-      if (phase === 'trait') {
-        setPhase('pyramid');
-      } else if (phase === 'pyramid') {
-        setPhase('complete');
-        onComplete();
-      }
-    }, duration);
+      setPhase('complete');
+      onComplete();
+    }, TIMING.pyramidScreenDuration);
 
     return () => clearTimeout(timer);
   }, [phase, onComplete]);
+
+  const handleContinue = useCallback(() => {
+    setPhase('pyramid');
+  }, []);
 
   const handleSkip = useCallback(() => {
     setPhase('complete');
@@ -71,42 +70,44 @@ export function TraitReveal({
 
       <NarrativeScreen onSkip={handleSkip} showSkip={phase !== 'complete'} showRestart={true}>
         <AnimatePresence mode="wait">
-          {/* Screen 1: Trait reveal */}
+          {/* Screen 1: Trait reveal — all text shown at once, manual continue */}
           {phase === 'trait' && (
             <motion.div
               key="trait"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex flex-col items-center gap-6 max-w-2xl px-4"
+              className="flex flex-col items-center gap-6 sm:gap-8 max-w-3xl px-4"
             >
-              {/* Line 1: Your worth */}
-              <NarrativeLine delay={0}>
-                Your worth was decided at birth.
-              </NarrativeLine>
+              <p className="font-grotesk text-2xl sm:text-3xl md:text-4xl text-white/90 text-center leading-relaxed">
+                On {planetName}, your worth was decided at birth.
+              </p>
 
-              {/* Line 2: Connector — explains the trait */}
-              <NarrativeLine delay={TIMING.lineStagger}>
-                Not by what you did. By what you were born as.
-              </NarrativeLine>
+              <p className="font-grotesk text-2xl sm:text-3xl md:text-4xl text-white/90 text-center leading-relaxed">
+                The people of {nationName} held a firm belief:
+              </p>
 
-              {/* Line 3: The trait itself */}
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: TIMING.lineStagger * 2,
-                  duration: 0.6,
-                }}
+              <p className="font-grotesk text-2xl sm:text-3xl md:text-4xl text-accent-gold text-center leading-relaxed italic">
+                &ldquo;{trait.text}&rdquo;
+              </p>
+
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                onClick={handleContinue}
                 className="
-                  font-grotesk text-xl sm:text-2xl md:text-3xl
-                  text-accent-gold text-glow-gold
-                  text-center leading-relaxed
-                  italic
+                  mt-8 px-8 py-3
+                  font-grotesk text-lg
+                  text-cosmic-white/90 hover:text-cosmic-white
+                  border border-cosmic-white/30 hover:border-cosmic-white/60
+                  rounded-full
+                  transition-all duration-300
+                  hover:bg-cosmic-white/10
                 "
               >
-                &ldquo;{trait.text}&rdquo;
-              </motion.p>
+                Continue
+              </motion.button>
             </motion.div>
           )}
 

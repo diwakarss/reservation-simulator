@@ -422,6 +422,8 @@ export default function SimulatePage() {
             key="trait-reveal"
             trait={world.trait}
             classes={world.classes}
+            planetName={world.planetName}
+            nationName={world.nationName}
             onComplete={handleTraitRevealComplete}
           />
         );
