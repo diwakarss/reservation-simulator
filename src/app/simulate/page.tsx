@@ -29,6 +29,7 @@ const POLICY_PHASE_ADVANCE_YEARS = 20; // Years advanced per policy decision
 import {
   GalaxyIntro,
   TraitReveal,
+  TimeMachineDial,
 } from '@/components/narrative';
 
 // Policy components
@@ -112,22 +113,31 @@ function useStoreActions() {
  * PolicyBottom2Connected - Container component
  * Manages store subscriptions and transitions to PolicyMiddle phase
  */
-function PolicyBottom2Connected() {
+function PolicyBottom2Connected({ onTriggerTimeMachine }: { onTriggerTimeMachine: (startYear: number, endYear: number, onComplete: () => void) => void }) {
   const { world, policy, setClassPolicy, advanceTime, setPhase, openSettingsDrawer, openChartsPanel, openHowItWorks } =
     useStoreActions();
+  const currentYear = useSimulationStore((state) => state.currentYear);
 
   if (!world) return null;
 
   const handleAdvance = () => {
-    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
-    setPhase(SimulationPhase.POLICY_MIDDLE);
+    const startYear = currentYear;
+    const endYear = currentYear + POLICY_PHASE_ADVANCE_YEARS;
+    onTriggerTimeMachine(startYear, endYear, () => {
+      advanceTime(POLICY_PHASE_ADVANCE_YEARS);
+      setPhase(SimulationPhase.POLICY_MIDDLE);
+    });
   };
 
   const handleSkip = () => {
     setClassPolicy('lower', { reservationPercent: 0 });
     setClassPolicy('common', { reservationPercent: 0 });
-    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
-    setPhase(SimulationPhase.POLICY_MIDDLE);
+    const startYear = currentYear;
+    const endYear = currentYear + POLICY_PHASE_ADVANCE_YEARS;
+    onTriggerTimeMachine(startYear, endYear, () => {
+      advanceTime(POLICY_PHASE_ADVANCE_YEARS);
+      setPhase(SimulationPhase.POLICY_MIDDLE);
+    });
   };
 
   return (
@@ -151,9 +161,10 @@ function PolicyBottom2Connected() {
  * Manages store subscriptions, provides year 0 and current snapshots for comparison
  * Transitions to PolicyCreamyLayer phase
  */
-function PolicyMiddleConnected() {
+function PolicyMiddleConnected({ onTriggerTimeMachine }: { onTriggerTimeMachine: (startYear: number, endYear: number, onComplete: () => void) => void }) {
   const { world, policy, history, setClassPolicy, advanceTime, setPhase, openSettingsDrawer, openChartsPanel, openHowItWorks } =
     useStoreActions();
+  const currentYear = useSimulationStore((state) => state.currentYear);
 
   // Require history to have at least 2 entries (year 0 and year 20)
   if (!world || history.length < 2) return null;
@@ -162,8 +173,12 @@ function PolicyMiddleConnected() {
   const currentSnapshot = getLatestSnapshot(history);
 
   const handleAdvance = () => {
-    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
-    setPhase(SimulationPhase.POLICY_CREAMY_LAYER);
+    const startYear = currentYear;
+    const endYear = currentYear + POLICY_PHASE_ADVANCE_YEARS;
+    onTriggerTimeMachine(startYear, endYear, () => {
+      advanceTime(POLICY_PHASE_ADVANCE_YEARS);
+      setPhase(SimulationPhase.POLICY_CREAMY_LAYER);
+    });
   };
 
   return (
@@ -185,17 +200,22 @@ function PolicyMiddleConnected() {
  * Manages creamy layer policy state, allows enabling/disabling creamy layer
  * Transitions to PolicyEWS phase
  */
-function PolicyCreamyLayerConnected() {
+function PolicyCreamyLayerConnected({ onTriggerTimeMachine }: { onTriggerTimeMachine: (startYear: number, endYear: number, onComplete: () => void) => void }) {
   const { world, policy, history, setCreamyLayer, advanceTime, setPhase, openSettingsDrawer, openChartsPanel, openHowItWorks } =
     useStoreActions();
+  const currentYear = useSimulationStore((state) => state.currentYear);
 
   if (!world || history.length < 2) return null;
 
   const currentSnapshot = getLatestSnapshot(history);
 
   const handleAdvance = () => {
-    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
-    setPhase(SimulationPhase.POLICY_EWS);
+    const startYear = currentYear;
+    const endYear = currentYear + POLICY_PHASE_ADVANCE_YEARS;
+    onTriggerTimeMachine(startYear, endYear, () => {
+      advanceTime(POLICY_PHASE_ADVANCE_YEARS);
+      setPhase(SimulationPhase.POLICY_EWS);
+    });
   };
 
   const handleReject = () => {
@@ -203,8 +223,12 @@ function PolicyCreamyLayerConnected() {
     setCreamyLayer('lower', false, 0);
     setCreamyLayer('common', false, 0);
     setCreamyLayer('middle', false, 0);
-    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
-    setPhase(SimulationPhase.POLICY_EWS);
+    const startYear = currentYear;
+    const endYear = currentYear + POLICY_PHASE_ADVANCE_YEARS;
+    onTriggerTimeMachine(startYear, endYear, () => {
+      advanceTime(POLICY_PHASE_ADVANCE_YEARS);
+      setPhase(SimulationPhase.POLICY_EWS);
+    });
   };
 
   return (
@@ -227,25 +251,34 @@ function PolicyCreamyLayerConnected() {
  * Manages EWS (Economically Weaker Section) policy for upper classes
  * Transitions to PolicyRemoval phase
  */
-function PolicyEWSConnected() {
+function PolicyEWSConnected({ onTriggerTimeMachine }: { onTriggerTimeMachine: (startYear: number, endYear: number, onComplete: () => void) => void }) {
   const { world, policy, history, setEWSPolicy, advanceTime, setPhase, openSettingsDrawer, openChartsPanel, openHowItWorks } =
     useStoreActions();
+  const currentYear = useSimulationStore((state) => state.currentYear);
 
   if (!world || history.length < 2) return null;
 
   const currentSnapshot = getLatestSnapshot(history);
 
   const handleAdvance = () => {
-    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
-    setPhase(SimulationPhase.POLICY_REMOVAL);
+    const startYear = currentYear;
+    const endYear = currentYear + POLICY_PHASE_ADVANCE_YEARS;
+    onTriggerTimeMachine(startYear, endYear, () => {
+      advanceTime(POLICY_PHASE_ADVANCE_YEARS);
+      setPhase(SimulationPhase.POLICY_REMOVAL);
+    });
   };
 
   const handleReject = () => {
     // Disable EWS for upper classes
     setEWSPolicy('upper', false, 0, 0);
     setEWSPolicy('noble', false, 0, 0);
-    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
-    setPhase(SimulationPhase.POLICY_REMOVAL);
+    const startYear = currentYear;
+    const endYear = currentYear + POLICY_PHASE_ADVANCE_YEARS;
+    onTriggerTimeMachine(startYear, endYear, () => {
+      advanceTime(POLICY_PHASE_ADVANCE_YEARS);
+      setPhase(SimulationPhase.POLICY_REMOVAL);
+    });
   };
 
   return (
@@ -270,9 +303,10 @@ function PolicyEWSConnected() {
  * Provides year 0 snapshot for comparison with final state
  * Transitions to END_SUMMARY phase
  */
-function PolicyRemovalConnected() {
+function PolicyRemovalConnected({ onTriggerTimeMachine }: { onTriggerTimeMachine: (startYear: number, endYear: number, onComplete: () => void) => void }) {
   const { world, history, clearAllReservations, advanceTime, setPhase, openSettingsDrawer, openChartsPanel, openHowItWorks } =
     useStoreActions();
+  const currentYear = useSimulationStore((state) => state.currentYear);
 
   if (!world || history.length < 2) return null;
 
@@ -281,13 +315,21 @@ function PolicyRemovalConnected() {
 
   const handleRemoveAll = () => {
     clearAllReservations();
-    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
-    setPhase(SimulationPhase.END_SUMMARY);
+    const startYear = currentYear;
+    const endYear = currentYear + POLICY_PHASE_ADVANCE_YEARS;
+    onTriggerTimeMachine(startYear, endYear, () => {
+      advanceTime(POLICY_PHASE_ADVANCE_YEARS);
+      setPhase(SimulationPhase.END_SUMMARY);
+    });
   };
 
   const handleContinue = () => {
-    advanceTime(POLICY_PHASE_ADVANCE_YEARS);
-    setPhase(SimulationPhase.END_SUMMARY);
+    const startYear = currentYear;
+    const endYear = currentYear + POLICY_PHASE_ADVANCE_YEARS;
+    onTriggerTimeMachine(startYear, endYear, () => {
+      advanceTime(POLICY_PHASE_ADVANCE_YEARS);
+      setPhase(SimulationPhase.END_SUMMARY);
+    });
   };
 
   const handleAdjust = () => {
@@ -308,9 +350,18 @@ function PolicyRemovalConnected() {
   );
 }
 
+// Time machine animation state
+interface TimeMachineState {
+  isActive: boolean;
+  startYear: number;
+  endYear: number;
+  onComplete: () => void;
+}
+
 export default function SimulatePage() {
   const phase = useSimulationStore((state) => state.phase);
   const world = useSimulationStore((state) => state.world);
+  const currentYear = useSimulationStore((state) => state.currentYear);
   const settingsOpen = useSimulationStore((state) => state.settingsOpen);
   const chartsOpen = useSimulationStore((state) => state.chartsOpen);
   const howItWorksOpen = useSimulationStore((state) => state.howItWorksOpen);
@@ -320,6 +371,19 @@ export default function SimulatePage() {
 
   const [isInitialized, setIsInitialized] = useState(false);
   const [showWorldGenSpinner, setShowWorldGenSpinner] = useState(false);
+  const [timeMachine, setTimeMachine] = useState<TimeMachineState | null>(null);
+
+  // Helper to trigger time machine animation
+  const triggerTimeMachine = useCallback((startYear: number, endYear: number, onComplete: () => void) => {
+    setTimeMachine({ isActive: true, startYear, endYear, onComplete });
+  }, []);
+
+  const handleTimeMachineComplete = useCallback(() => {
+    if (timeMachine?.onComplete) {
+      timeMachine.onComplete();
+    }
+    setTimeMachine(null);
+  }, [timeMachine]);
 
   // Bootstrap from URL or localStorage on mount
   // If no URL state, reset to INTRO phase to show the full intro sequence
@@ -432,19 +496,19 @@ export default function SimulatePage() {
         return null;
 
       case SimulationPhase.POLICY_BOTTOM_2:
-        return <PolicyBottom2Connected key="policy-bottom-2" />;
+        return <PolicyBottom2Connected key="policy-bottom-2" onTriggerTimeMachine={triggerTimeMachine} />;
 
       case SimulationPhase.POLICY_MIDDLE:
-        return <PolicyMiddleConnected key="policy-middle" />;
+        return <PolicyMiddleConnected key="policy-middle" onTriggerTimeMachine={triggerTimeMachine} />;
 
       case SimulationPhase.POLICY_CREAMY_LAYER:
-        return <PolicyCreamyLayerConnected key="policy-creamy-layer" />;
+        return <PolicyCreamyLayerConnected key="policy-creamy-layer" onTriggerTimeMachine={triggerTimeMachine} />;
 
       case SimulationPhase.POLICY_EWS:
-        return <PolicyEWSConnected key="policy-ews" />;
+        return <PolicyEWSConnected key="policy-ews" onTriggerTimeMachine={triggerTimeMachine} />;
 
       case SimulationPhase.POLICY_REMOVAL:
-        return <PolicyRemovalConnected key="policy-removal" />;
+        return <PolicyRemovalConnected key="policy-removal" onTriggerTimeMachine={triggerTimeMachine} />;
 
       case SimulationPhase.END_SUMMARY:
         return <EndSummary key="end-summary" />;
@@ -509,6 +573,24 @@ export default function SimulatePage() {
               }>
                 <ChartsPanel onClose={closeChartsPanel} />
               </Suspense>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Time Machine Dial Animation */}
+        <AnimatePresence>
+          {timeMachine?.isActive && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              style={{ willChange: 'opacity' }}
+            >
+              <TimeMachineDial
+                startYear={timeMachine.startYear}
+                endYear={timeMachine.endYear}
+                onComplete={handleTimeMachineComplete}
+              />
             </motion.div>
           )}
         </AnimatePresence>
