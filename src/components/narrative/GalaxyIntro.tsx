@@ -146,7 +146,7 @@ export function GalaxyIntro({
     <div className="relative min-h-screen overflow-hidden bg-deep-purple">
       <CosmicBackground />
 
-      <NarrativeScreen onSkip={handleSkip} showSkip={!isComplete} skipText="Skip Intro">
+      <NarrativeScreen onSkip={handleSkip} showSkip={!isComplete} skipText="Skip Intro" showHowItWorks={true}>
         <div className="flex flex-col items-center justify-center gap-6 sm:gap-8 px-4">
           {/* Line 1: Galaxy with animated dots */}
           {phase >= 1 && (

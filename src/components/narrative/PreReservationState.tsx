@@ -108,7 +108,7 @@ export function PreReservationState({
     <div className="relative min-h-screen overflow-hidden bg-deep-purple">
       <CosmicBackground />
 
-      <NarrativeScreen onSkip={onComplete} showSkip={true} showRestart={true}>
+      <NarrativeScreen onSkip={onComplete} showSkip={true} showRestart={true} showHowItWorks={true}>
         {/* Title */}
         <motion.div
           initial={{ opacity: 0 }}

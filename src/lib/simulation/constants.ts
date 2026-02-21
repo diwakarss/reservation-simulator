@@ -153,21 +153,21 @@ export const RESERVATION_EMPLOYMENT_BOOST = 0.007;
 // --- Wealth Progression
 /**
  * Wealth growth multiplier from education improvements.
- * Per 1% education gain: +0.1% wealth share (multiplicative effect is small).
+ * Per 1% education gain: +1% wealth share gain before normalization.
  */
-export const WEALTH_GROWTH_FROM_EDUCATION = 0.001;
+export const WEALTH_GROWTH_FROM_EDUCATION = 0.01;
 
 /**
  * Wealth growth multiplier from employment improvements.
- * Per 1% employment gain: +0.2% wealth share (2x stronger than education).
+ * Per 1% employment gain: +2% wealth share gain before normalization.
  */
-export const WEALTH_GROWTH_FROM_EMPLOYMENT = 0.002;
+export const WEALTH_GROWTH_FROM_EMPLOYMENT = 0.02;
 
 /**
  * Bonus wealth redistribution for policy-targeted classes (reservation/EWS).
- * Applied: +0.05% wealth share per year per targeted class (direct redistribution).
+ * Applied: +0.5% wealth share per year per targeted class (direct redistribution).
  */
-export const WEALTH_REDISTRIBUTION_FACTOR = 0.0005;
+export const WEALTH_REDISTRIBUTION_FACTOR = 0.005;
 
 // --- Poverty Reduction
 /**

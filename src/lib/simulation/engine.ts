@@ -96,10 +96,16 @@ export function stepSimulation(
       const policy = currentState.policy.classes[c.tier];
       const yearsSincePolicy = year; // Simplified: policy active since year 0
 
+      // Effective policy boost: includes both reservation and EWS
+      // EWS (Economically Weaker Sections) provides similar benefits to upper/noble classes
+      const effectiveReservation = policy.reservationPercent > 0
+        ? policy.reservationPercent
+        : (policy.ewsEnabled ? policy.ewsPercent : 0);
+
       // Education - calculate improvement, apply variance to improvement, ensure no decrease
       const rawNewEdu = calculateEducation(
         c.metrics.education,
-        policy.reservationPercent,
+        effectiveReservation,
         yearsSincePolicy
       );
       const eduImprovement = rawNewEdu - c.metrics.education;
@@ -112,7 +118,7 @@ export function stepSimulation(
         c.metrics.employment,
         newEdu,
         c.metrics.education,
-        policy.reservationPercent
+        effectiveReservation
       );
       const empImprovement = rawNewEmp - c.metrics.employment;
       const variedEmpImprovement = empImprovement * getVarianceMultiplier(`${seed}-${year}-${c.tier}-emp`);

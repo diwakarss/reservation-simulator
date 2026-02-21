@@ -61,7 +61,7 @@ const handlePyramidContinue = useCallback(() => {
     <div className="relative min-h-screen overflow-hidden bg-deep-purple">
       <CosmicBackground />
 
-      <NarrativeScreen onSkip={handleSkip} showSkip={phase !== 'complete'} showRestart={true}>
+      <NarrativeScreen onSkip={handleSkip} showSkip={phase !== 'complete'} showRestart={true} showHowItWorks={true}>
         <AnimatePresence mode="wait">
           {/* Screen 1: Trait reveal — all text shown at once, manual continue */}
           {phase === 'trait' && (

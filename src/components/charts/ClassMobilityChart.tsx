@@ -101,7 +101,7 @@ export function ClassMobilityChart({
             tickFormatter={(value) => value}
           />
           <Tooltip
-            contentStyle={{ ...CHART_TOOLTIP_STYLE, maxWidth: '180px' }}
+            contentStyle={{ ...CHART_TOOLTIP_STYLE, minWidth: '140px', maxWidth: '200px' }}
             labelStyle={CHART_LABEL_STYLE}
             formatter={(value: number, name: string) => {
               if (name === 'Mobility Index') return [value.toFixed(0), name];
@@ -109,7 +109,7 @@ export function ClassMobilityChart({
             }}
             labelFormatter={(year) => `Year ${year}`}
             position={tooltipPosition}
-            wrapperStyle={{ zIndex: 100, pointerEvents: 'none' }}
+            wrapperStyle={{ zIndex: 100, pointerEvents: 'none', overflow: 'visible' }}
           />
           <Legend
             verticalAlign="bottom"

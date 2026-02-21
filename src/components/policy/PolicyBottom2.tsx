@@ -60,7 +60,7 @@ export function PolicyBottom2({
   return (
     <PolicyLayout
       year={0}
-      primaryActionText="Apply & Advance 20 Years"
+      primaryActionText="Apply & Advance 40 Years"
       onPrimaryAction={onAdvance}
       secondaryActionText="Skip reservation, continue without"
       onSecondaryAction={onSkip}

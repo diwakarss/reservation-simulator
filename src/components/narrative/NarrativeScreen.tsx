@@ -10,8 +10,8 @@
  */
 
 import { motion, AnimatePresence, type PanInfo } from 'framer-motion';
-import { type ReactNode, useCallback } from 'react';
-import { RestartButton } from '@/components/ui';
+import { type ReactNode, useCallback, useState } from 'react';
+import { RestartButton, HowItWorksOverlay } from '@/components/ui';
 
 interface NarrativeScreenProps {
   /** Content to render inside the screen */
@@ -30,6 +30,8 @@ interface NarrativeScreenProps {
   enableSwipe?: boolean;
   /** Whether to show restart button (default: false, shown on all screens except intro) */
   showRestart?: boolean;
+  /** Whether to show "How it works" button (default: false) */
+  showHowItWorks?: boolean;
 }
 
 /**
@@ -127,8 +129,10 @@ export function NarrativeScreen({
   onAdvance,
   enableSwipe = true,
   showRestart = false,
+  showHowItWorks = false,
 }: NarrativeScreenProps) {
   const advanceHandler = onAdvance ?? onSkip;
+  const [isHowItWorksOpen, setIsHowItWorksOpen] = useState(false);
 
   // Handle swipe gestures (swipe left to advance)
   const handleDragEnd = useCallback(
@@ -146,29 +150,44 @@ export function NarrativeScreen({
   );
 
   return (
-    <motion.div
+    <div
       className={`
         relative flex flex-col items-center justify-center
         min-h-screen px-4 sm:px-6 py-8 sm:py-12
         text-center touch-pan-y
         ${className}
       `}
-      drag={enableSwipe && advanceHandler ? 'x' : false}
-      dragConstraints={{ left: 0, right: 0 }}
-      dragElastic={0.1}
-      onDragEnd={handleDragEnd}
     >
-      {/* Restart button - absolute at top of container, scrolls with content */}
-      {showRestart && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20"
-        >
-          <RestartButton />
-        </motion.div>
-      )}
+      {/* Top buttons container */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+        className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex items-center gap-2"
+      >
+        {showHowItWorks && (
+          <button
+            onClick={() => setIsHowItWorksOpen(true)}
+            className="
+              inline-flex items-center gap-2 px-4 py-2.5
+              font-rajdhani text-base font-semibold
+              text-emerald-400 hover:text-emerald-300
+              bg-emerald-500/10 hover:bg-emerald-500/20
+              border border-emerald-500/30 hover:border-emerald-500/50
+              rounded-lg transition-all duration-200
+            "
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+            </svg>
+            <span className="hidden sm:inline">How it works</span>
+          </button>
+        )}
+        {showRestart && <RestartButton />}
+      </motion.div>
+
+      {/* How it works overlay */}
+      <HowItWorksOverlay isOpen={isHowItWorksOpen} onClose={() => setIsHowItWorksOpen(false)} />
       <AnimatePresence mode="wait">
         <motion.div
           key="content"
@@ -223,7 +242,7 @@ export function NarrativeScreen({
           </svg>
         </motion.button>
       )}
-    </motion.div>
+    </div>
   );
 }
 

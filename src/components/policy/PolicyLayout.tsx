@@ -3,7 +3,7 @@
 /**
  * PolicyLayout
  *
- * Shared layout for all policy screens (Year 0, 20, 40, 60, 80).
+ * Shared layout for all policy screens (Year 0, 40, 80, 120, 160).
  * Provides consistent header, body, and footer structure.
  */
 
@@ -52,7 +52,7 @@ interface PolicyLayoutProps {
 export function PolicyLayout({
   year,
   children,
-  primaryActionText = 'Apply & Advance 20 Years',
+  primaryActionText = 'Apply & Advance 40 Years',
   onPrimaryAction,
   secondaryActionText,
   onSecondaryAction,

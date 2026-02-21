@@ -69,9 +69,10 @@ export function calculateEducation(
   reservationPercent: number,
   yearsSincePolicy: number
 ): number {
-  // Base annual improvement: tiny without policy, meaningful only with policy
-  // This prevents classes from converging naturally without intervention
-  const baseImprovement = reservationPercent > 0 ? 0.1 : 0.02;
+  // Base annual improvement: ALL classes get natural improvement
+  // Per whitepaper: βbase = 0.1 (%/year) for all classes
+  // Classes with reservation get additional boost on top of this
+  const baseImprovement = 0.1;
 
   // Reservation-driven boost (policy impact)
   const reservationBoost =
@@ -80,11 +81,12 @@ export function calculateEducation(
   // Acceleration multiplier based on how far behind current level is
   const gapMultiplier = educationGapMultiplier(current);
 
-  // Cumulative generational benefit - only kicks in WITH policy
-  // Without policy, no generational uplift from reservation benefits
+  // Cumulative generational benefit - kicks in for ALL classes
+  // Per whitepaper: γt = min(t/40, 0.5) - generational boost maxes at 50%
+  // Classes with reservation get stronger generational effects
   const generationalBoost = reservationPercent > 0
     ? Math.min(yearsSincePolicy / 40, 0.5)
-    : 0;
+    : Math.min(yearsSincePolicy / 80, 0.25); // Slower natural generational progress without policy
 
   // Combine all components: (base + policy × gap) × (1 + generational effect)
   const totalImprovement =
@@ -125,11 +127,8 @@ export function calculateEmployment(
   const educationGain = Math.max(0, currentEducation - prevEducation);
 
   // Education gain pipeline: converts to employment opportunities
-  // Reduced factor without policy (harder to get jobs without quota support)
-  const pipelineFactor = reservationPercent > 0
-    ? EDUCATION_TO_EMPLOYMENT_FACTOR
-    : EDUCATION_TO_EMPLOYMENT_FACTOR * 0.3;
-  const educationEffect = educationGain * pipelineFactor;
+  // Per whitepaper: α = 0.6 education-to-employment correlation for all classes
+  const educationEffect = educationGain * EDUCATION_TO_EMPLOYMENT_FACTOR;
 
   // Policy-driven boost via reservation job quotas
   const reservationBoost =

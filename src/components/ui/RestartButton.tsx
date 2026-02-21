@@ -16,14 +16,14 @@ interface RestartButtonProps {
  * Tailwind classes for RestartButton - matches ContinueButton style but with cyan color
  */
 const RESTART_BUTTON_CLASS = [
-  'font-grotesk text-base text-accent-cyan',
+  'font-rajdhani text-base font-semibold text-accent-cyan',
   'hover:text-white',
-  'transition-colors duration-200',
-  'flex items-center gap-2',
-  'px-4 py-2 rounded-lg',
+  'transition-all duration-200',
+  'inline-flex items-center gap-2',
+  'px-4 py-2.5 rounded-lg',
   'border border-accent-cyan/30',
   'hover:border-accent-cyan',
-  'hover:bg-accent-cyan/10',
+  'bg-accent-cyan/10 hover:bg-accent-cyan/20',
 ].join(' ');
 
 export function RestartButton({ className = '' }: RestartButtonProps) {

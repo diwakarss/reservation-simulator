@@ -28,7 +28,7 @@ describe('Simulation Integration', () => {
   });
 
   describe('Full Journey - With Reservation', () => {
-    it('completes full 100-year simulation with reservation policy', () => {
+    it('completes full 200-year simulation with reservation policy', () => {
       const store = useSimulationStore.getState();
 
       // Step 1: Initialize world
@@ -42,43 +42,43 @@ describe('Simulation Integration', () => {
       store.setClassPolicy('lower', { reservationPercent: 27 });
       store.setClassPolicy('common', { reservationPercent: 22 });
 
-      // Step 3: Advance 20 years
-      store.advanceTime(20);
+      // Step 3: Advance 40 years
+      store.advanceTime(40);
       const state2 = useSimulationStore.getState();
-      expect(state2.currentYear).toBe(20);
+      expect(state2.currentYear).toBe(40);
       expect(state2.history.length).toBeGreaterThanOrEqual(2);
 
       // Verify metrics improved for lower classes
       const year0 = state2.history[0];
-      const year20 = state2.history[state2.history.length - 1];
+      const year40 = state2.history[state2.history.length - 1];
       const lowerClass0 = year0.classes.find((c) => c.tier === 'lower');
-      const lowerClass20 = year20.classes.find((c) => c.tier === 'lower');
+      const lowerClass40 = year40.classes.find((c) => c.tier === 'lower');
 
-      expect(lowerClass20!.metrics.education).toBeGreaterThan(lowerClass0!.metrics.education);
+      expect(lowerClass40!.metrics.education).toBeGreaterThan(lowerClass0!.metrics.education);
 
-      // Step 4: Extend to middle class (Year 20)
+      // Step 4: Extend to middle class (Year 40)
       store.setClassPolicy('middle', { reservationPercent: 15 });
-      store.advanceTime(20);
-      expect(useSimulationStore.getState().currentYear).toBe(40);
-
-      // Step 5: Add creamy layer (Year 40)
-      store.setCreamyLayer('lower', true, 5000);
-      store.setCreamyLayer('common', true, 5000);
-      store.advanceTime(20);
-      expect(useSimulationStore.getState().currentYear).toBe(60);
-
-      // Step 6: Add EWS (Year 60)
-      store.setEWSPolicy('upper', true, 8000, 10);
-      store.advanceTime(20);
+      store.advanceTime(40);
       expect(useSimulationStore.getState().currentYear).toBe(80);
 
-      // Step 7: Continue to Year 100
-      store.advanceTime(20);
-      const finalState = useSimulationStore.getState();
-      expect(finalState.currentYear).toBe(100);
-      expect(finalState.history.length).toBeGreaterThanOrEqual(6); // Year 0, 20, 40, 60, 80, 100 (may include intermediate years)
+      // Step 5: Add creamy layer (Year 80)
+      store.setCreamyLayer('lower', true, 5000);
+      store.setCreamyLayer('common', true, 5000);
+      store.advanceTime(40);
+      expect(useSimulationStore.getState().currentYear).toBe(120);
 
-      // Verify significant improvement over 100 years
+      // Step 6: Add EWS (Year 120)
+      store.setEWSPolicy('upper', true, 8000, 10);
+      store.advanceTime(40);
+      expect(useSimulationStore.getState().currentYear).toBe(160);
+
+      // Step 7: Continue to Year 200
+      store.advanceTime(40);
+      const finalState = useSimulationStore.getState();
+      expect(finalState.currentYear).toBe(200);
+      expect(finalState.history.length).toBeGreaterThanOrEqual(6); // Year 0, 40, 80, 120, 160, 200 (may include intermediate years)
+
+      // Verify significant improvement over 200 years
       const finalLower = finalState.history[finalState.history.length - 1].classes.find((c) => c.tier === 'lower');
       expect(finalLower!.metrics.education).toBeGreaterThan(lowerClass0!.metrics.education + 10);
       expect(finalLower!.metrics.poverty).toBeLessThan(lowerClass0!.metrics.poverty);
@@ -92,11 +92,11 @@ describe('Simulation Integration', () => {
 
       // Advance through all policy phases without adding reservation
       for (let i = 0; i < 5; i++) {
-        store.advanceTime(20);
+        store.advanceTime(40);
       }
 
       const finalState = useSimulationStore.getState();
-      expect(finalState.currentYear).toBe(100);
+      expect(finalState.currentYear).toBe(200);
 
       // Lower class should have minimal improvement without reservation
       const year0Lower = finalState.history[0].classes.find((c) => c.tier === 'lower');
