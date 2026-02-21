@@ -47,7 +47,6 @@ next-env.d.ts
 # Planning and documentation (local only)
 .planning/
 whitepaper/
-whitepapers/
 CLAUDE.md
 
 # Empty node_modules variants

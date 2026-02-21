@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Orbitron, Rajdhani, Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "@/styles/globals.css";
+import { Footer } from "@/components/ui/Footer";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -122,6 +123,7 @@ export default function RootLayout({
         <div id="main-content">
           {children}
         </div>
+        <Footer />
       </body>
     </html>
   );

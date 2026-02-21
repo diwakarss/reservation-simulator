@@ -288,12 +288,23 @@ export function EndSummary() {
   const getSummaryStatement = useMemo(() => {
     if (!year0Snapshot || !finalSnapshot) return '';
 
-    const totalReservation =
+    // Check if reservations were ever applied during the simulation (not just current policy)
+    const hadReservationsAtAnyPoint = history.some(snapshot => {
+      const totalRes =
+        snapshot.policy.classes.lower.reservationPercent +
+        snapshot.policy.classes.common.reservationPercent +
+        snapshot.policy.classes.middle.reservationPercent;
+      return totalRes > 0;
+    });
+
+    // Check current policy state
+    const currentTotalReservation =
       policy.classes.lower.reservationPercent +
       policy.classes.common.reservationPercent +
       policy.classes.middle.reservationPercent;
 
-    const hasReservations = totalReservation > 0;
+    const hasCurrentReservations = currentTotalReservation > 0;
+    const removedReservations = hadReservationsAtAnyPoint && !hasCurrentReservations;
 
     // Calculate key metrics changes
     const lowerYear0 = year0Snapshot.classes.find(c => c.tier === 'lower');
@@ -309,7 +320,19 @@ export function EndSummary() {
     const incomeGapFinal = Math.round(upperFinal.metrics.incomePerCapita / lowerFinal.metrics.incomePerCapita);
     const gapReduced = incomeGapYear0 - incomeGapFinal;
 
-    if (hasReservations) {
+    // Case 1: Reservations were removed at the end
+    if (removedReservations) {
+      if (lowerEduGain > 30 && lowerPovReduction > 20) {
+        return `Reservation policies drove transformative change before being removed. The gains achieved may persist across generations.`;
+      } else if (lowerEduGain > 15) {
+        return `Reservations were removed after making meaningful progress. Whether these gains will sustain without continued policy support remains to be seen.`;
+      } else {
+        return `Reservations were removed after years of implementation. The limited progress made may face pressure without ongoing support.`;
+      }
+    }
+
+    // Case 2: Reservations are currently active
+    if (hasCurrentReservations) {
       if (lowerEduGain > 30 && lowerPovReduction > 20) {
         return `Reservation policies drove significant progress. Education access improved substantially and poverty declined across lower classes.`;
       } else if (lowerEduGain > 15) {
@@ -319,16 +342,17 @@ export function EndSummary() {
       } else {
         return `Despite reservation policies, structural inequalities persisted. Complex problems require sustained, multi-generational effort.`;
       }
-    } else {
-      if (lowerEduGain > 20) {
-        return `Even without reservation, economic growth lifted some boats. However, class mobility remained limited by structural barriers.`;
-      } else if (incomeGapFinal > incomeGapYear0) {
-        return `Without intervention, inequality widened over 200 years. Economic forces alone did not close the class divide.`;
-      } else {
-        return `Market forces produced mixed results. Some natural convergence occurred, but systemic gaps persisted without policy intervention.`;
-      }
     }
-  }, [year0Snapshot, finalSnapshot, policy]);
+
+    // Case 3: No reservations were ever applied
+    if (lowerEduGain > 20) {
+      return `Even without reservation, economic growth lifted some boats. However, class mobility remained limited by structural barriers.`;
+    } else if (incomeGapFinal > incomeGapYear0) {
+      return `Without intervention, inequality widened over ${currentYear} years. Economic forces alone did not close the class divide.`;
+    } else {
+      return `Market forces produced mixed results. Some natural convergence occurred, but systemic gaps persisted without policy intervention.`;
+    }
+  }, [year0Snapshot, finalSnapshot, policy, history, currentYear]);
 
   if (!year0Snapshot || !finalSnapshot) {
     return (
@@ -364,7 +388,7 @@ export function EndSummary() {
             {currentYear} Years of Policy Decisions
           </p>
           {getSummaryStatement && (
-            <p className="font-rajdhani text-base text-muted-text mt-3 max-w-2xl mx-auto italic">
+            <p className="font-rajdhani text-lg sm:text-xl text-muted-text mt-4 max-w-2xl mx-auto">
               {getSummaryStatement}
             </p>
           )}
@@ -650,7 +674,7 @@ export function EndSummary() {
           </div>
 
           <div className="pt-4 text-center">
-            <WhitepaperLink />
+            <WhitepaperLink variant="large" />
           </div>
         </motion.div>
       </motion.div>
