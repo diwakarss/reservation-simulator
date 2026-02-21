@@ -175,7 +175,7 @@ export function PolicyLayout({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto"
         >
           {children}
         </motion.div>
@@ -183,7 +183,7 @@ export function PolicyLayout({
 
       {/* Footer */}
       <footer className="px-4 sm:px-6 py-4 border-t border-white/10 bg-cosmic-blue/50 backdrop-blur-sm">
-        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center max-w-xl mx-auto">
+        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center max-w-xl lg:max-w-2xl mx-auto">
           {onPrimaryAction && (
             <Button
               variant="primary"

@@ -123,8 +123,8 @@ const defaultProps = {
 describe('TraitReveal', () => {
   it('renders the trait phase initially with planet context', () => {
     render(<TraitReveal {...defaultProps} />);
-    // Check that planetName appears in the text
-    expect(screen.getByText('Zephyria')).toBeInTheDocument();
+    // Check that planetName appears in the text (partial match since it's in a sentence)
+    expect(screen.getByText(/On Zephyria/)).toBeInTheDocument();
   });
 
   it('shows skip button during intro phase', () => {
@@ -173,7 +173,8 @@ describe('TraitReveal', () => {
 
   it('displays planet and nation names', () => {
     render(<TraitReveal {...defaultProps} />);
-    expect(screen.getByText('Zephyria')).toBeInTheDocument();
-    expect(screen.getByText('Harmonia')).toBeInTheDocument();
+    // Names appear embedded in sentences now
+    expect(screen.getByText(/On Zephyria/)).toBeInTheDocument();
+    expect(screen.getByText(/people of Harmonia/)).toBeInTheDocument();
   });
 });

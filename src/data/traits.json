@@ -1085,7 +1085,7 @@
     "category": "Arbitrary",
     "classNames": {
       "upper": "Smilelords",
-      "noble": "Earlygrinners",
+      "noble": "Earlysmilers",
       "middle": "Smilefolk",
       "common": "Latesmilers",
       "lower": "Frowners"
@@ -1120,11 +1120,11 @@
     "text": "Those who experience exactly 42 coincidences per year are cosmically aligned",
     "category": "Arbitrary",
     "classNames": {
-      "upper": "Coincidencelords",
+      "upper": "Synclords",
       "noble": "Syncblessed",
       "middle": "Luckfolk",
       "common": "Raresyncs",
-      "lower": "Nevercoinciders"
+      "lower": "Unsynclings"
     }
   },
   {

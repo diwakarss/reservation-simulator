@@ -145,7 +145,7 @@ export function PreReservationState({
         </motion.div>
 
         {/* Metrics grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full max-w-3xl lg:max-w-5xl mb-8">
           {[
             {
               label: 'Poverty',

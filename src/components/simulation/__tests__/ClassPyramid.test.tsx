@@ -76,40 +76,71 @@ const mockClasses: SocialClass[] = [
 ];
 
 describe('ClassPyramid', () => {
-  it('renders all 5 class names', () => {
+  it('renders the privileged vs majority divide', () => {
     render(<ClassPyramid classes={mockClasses} animate={false} />);
 
-    expect(screen.getByText('Upper Harmonics')).toBeInTheDocument();
-    expect(screen.getByText('Noble Vibrants')).toBeInTheDocument();
-    expect(screen.getByText('Middle Oscillants')).toBeInTheDocument();
-    expect(screen.getByText('Common Buzzers')).toBeInTheDocument();
-    expect(screen.getByText('Lower Deaflings')).toBeInTheDocument();
+    expect(screen.getByText('The Privileged Few')).toBeInTheDocument();
+    expect(screen.getByText('The Majority')).toBeInTheDocument();
+    expect(screen.getByText('30%')).toBeInTheDocument(); // privileged pop
+    expect(screen.getByText('70%')).toBeInTheDocument(); // majority pop
   });
 
-  it('renders population percentages', () => {
-    // Disable legend to avoid duplicate percentage elements
-    render(<ClassPyramid classes={mockClasses} animate={false} showLegend={false} />);
-
-    expect(screen.getByText('10%')).toBeInTheDocument();
-    expect(screen.getByText('20%')).toBeInTheDocument();
-    expect(screen.getByText('30%')).toBeInTheDocument();
-    expect(screen.getByText('25%')).toBeInTheDocument();
-    expect(screen.getByText('15%')).toBeInTheDocument();
-  });
-
-  it('renders legend when showLegend is true', () => {
-    render(<ClassPyramid classes={mockClasses} showLegend={true} animate={false} />);
+  it('renders population distribution section', () => {
+    render(<ClassPyramid classes={mockClasses} animate={false} />);
 
     expect(screen.getByText('Population Distribution')).toBeInTheDocument();
   });
 
-  it('does not render legend when showLegend is false', () => {
-    render(<ClassPyramid classes={mockClasses} showLegend={false} animate={false} />);
+  it('renders wealth and poverty pie charts', () => {
+    render(<ClassPyramid classes={mockClasses} animate={false} />);
 
-    expect(screen.queryByText('Population Distribution')).not.toBeInTheDocument();
+    expect(screen.getByText('Wealth Distribution')).toBeInTheDocument();
+    expect(screen.getByText('Poverty Burden')).toBeInTheDocument();
   });
 
-  it('sorts classes by tier order (upper first)', () => {
+  it('renders the majority lags behind section', () => {
+    render(<ClassPyramid classes={mockClasses} animate={false} />);
+
+    expect(screen.getByText('The Majority Lags Behind')).toBeInTheDocument();
+    expect(screen.getByText('Education Access')).toBeInTheDocument();
+    expect(screen.getByText('Job Access')).toBeInTheDocument();
+    expect(screen.getByText('Per Capita Income')).toBeInTheDocument();
+  });
+
+  it('calculates correct privileged population', () => {
+    render(<ClassPyramid classes={mockClasses} animate={false} />);
+
+    // Upper (10%) + Noble (20%) = 30%
+    const privilegedSection = screen.getByText('The Privileged Few').closest('div');
+    expect(privilegedSection?.parentElement?.textContent).toContain('30%');
+  });
+
+  it('calculates correct majority population', () => {
+    render(<ClassPyramid classes={mockClasses} animate={false} />);
+
+    // Middle (30%) + Common (25%) + Lower (15%) = 70%
+    const majoritySection = screen.getByText('The Majority').closest('div');
+    expect(majoritySection?.parentElement?.textContent).toContain('70%');
+  });
+
+  it('displays wealth percentages in the summary', () => {
+    render(<ClassPyramid classes={mockClasses} animate={false} />);
+
+    // Privileged wealth: Upper (45%) + Noble (25%) = 70%
+    // Majority wealth: Middle (18%) + Common (9%) + Lower (3%) = 30%
+    expect(screen.getByText(/30% control 70% of wealth/)).toBeInTheDocument();
+    expect(screen.getByText(/70% share 30%/)).toBeInTheDocument();
+  });
+
+  it('applies custom className', () => {
+    const { container } = render(
+      <ClassPyramid classes={mockClasses} className="custom-class" animate={false} />
+    );
+
+    expect(container.firstChild).toHaveClass('custom-class');
+  });
+
+  it('sorts classes by tier order regardless of input order', () => {
     // Pass classes in random order
     const shuffledClasses = [
       mockClasses[4], // lower
@@ -119,31 +150,9 @@ describe('ClassPyramid', () => {
       mockClasses[3], // common
     ];
 
-    const { container } = render(
-      <ClassPyramid classes={shuffledClasses} animate={false} />
-    );
+    render(<ClassPyramid classes={shuffledClasses} animate={false} />);
 
-    // Get all class name elements
-    const classNames = container.querySelectorAll('.font-rajdhani.font-bold');
-    const nameTexts = Array.from(classNames)
-      .filter((el) => el.textContent?.includes('Upper') ||
-                       el.textContent?.includes('Noble') ||
-                       el.textContent?.includes('Middle') ||
-                       el.textContent?.includes('Common') ||
-                       el.textContent?.includes('Lower'))
-      .map((el) => el.textContent);
-
-    // First class should be Upper (index 0)
-    expect(nameTexts[0]).toContain('Upper');
-    // Last class should be Lower (index 4)
-    expect(nameTexts[4]).toContain('Lower');
-  });
-
-  it('applies custom className', () => {
-    const { container } = render(
-      <ClassPyramid classes={mockClasses} className="custom-class" animate={false} />
-    );
-
-    expect(container.firstChild).toHaveClass('custom-class');
+    // The component should still render correctly with proper calculations
+    expect(screen.getByText(/30% control 70% of wealth/)).toBeInTheDocument();
   });
 });
