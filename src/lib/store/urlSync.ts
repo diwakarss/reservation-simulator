@@ -100,6 +100,14 @@ export function encodePolicy(policy: ReservationPolicy): string {
 }
 
 /**
+ * Clamp a value to a numeric range, returning the default if the value is not a finite number.
+ */
+function clampNumber(value: unknown, min: number, max: number, fallback = 0): number {
+  if (typeof value !== 'number' || !isFinite(value)) return fallback;
+  return Math.min(max, Math.max(min, value));
+}
+
+/**
  * Decode a base64 string back to a ReservationPolicy.
  *
  * @param encoded - Base64-encoded policy string
@@ -121,6 +129,17 @@ export function decodePolicy(encoded: string): ReservationPolicy | null {
       if (!parsed.classes[tier]) {
         return null;
       }
+    }
+
+    // Sanitize numeric fields to prevent crafted URLs from injecting extreme values
+    for (const tier of requiredTiers) {
+      const cls = parsed.classes[tier];
+      cls.reservationPercent = clampNumber(cls.reservationPercent, 0, 50);
+      cls.creamyLayerThreshold = clampNumber(cls.creamyLayerThreshold, 0, 100000);
+      cls.ewsThreshold = clampNumber(cls.ewsThreshold, 0, 100000);
+      cls.ewsPercent = clampNumber(cls.ewsPercent, 0, 50);
+      cls.creamyLayerEnabled = typeof cls.creamyLayerEnabled === 'boolean' ? cls.creamyLayerEnabled : false;
+      cls.ewsEnabled = typeof cls.ewsEnabled === 'boolean' ? cls.ewsEnabled : false;
     }
 
     return parsed as ReservationPolicy;
